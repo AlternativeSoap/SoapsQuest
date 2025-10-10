@@ -407,7 +407,7 @@ SoapsQuest is licensed under a Commercial License - see [LICENSE.md](LICENSE.md)
 
 ## Version Information
 
-- **Current Version**: 1.0.2
+- **Current Version**: 1.0.0
 - **Minecraft Version**: 1.21.8+
 - **Java Version**: 21+
 - **Release Date**: October 2025

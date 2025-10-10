@@ -1,6 +1,6 @@
 # 📜 SoapsQuest
 
-[![Version](https://img.shields.io/badge/Version-1.0.2-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://www.spigotmc.org/)
 [![Paper API](https://img.shields.io/badge/Paper%20API-1.21.8-blue.svg)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
@@ -73,7 +73,7 @@ A powerful and flexible quest plugin for Minecraft Paper servers featuring physi
 
 ## 📥 Installation
 
-1. Download `SoapsQuest-1.0.2.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+1. Download `SoapsQuest-1.0.0.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
 2. Place the JAR file in your server's `plugins/` folder
 3. Restart your server (do not use plugin managers for first install)
 4. Configure quests in `plugins/SoapsQuest/quests.yml`
@@ -165,7 +165,7 @@ This project is licensed under a Commercial License - see [LICENSE.md](LICENSE.m
 ## 🙏 Credits
 
 **Author**: AlternativeSoap  
-**Version**: 1.0.2  
+**Version**: 1.0.0  
 **Release Date**: October 2025  
 **Repository**: [github.com/AlternativeSoap/SoapsQuest](https://github.com/AlternativeSoap/SoapsQuest)
 
