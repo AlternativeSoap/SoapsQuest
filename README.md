@@ -1,88 +1,174 @@
-# 📜 SoapsQuest
+# 📜 SoapsQuest# 📜 SoapsQuest
 
-[![Version](https://img.shields.io/badge/Version-1.0.2-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://www.spigotmc.org/)
-[![Paper API](https://img.shields.io/badge/Paper%20API-1.21.8-blue.svg)](https://papermc.io/)
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-Commercial-red.svg)](LICENSE.md)
-[![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)](https://github.com/AlternativeSoap/SoapsQuest)
 
-A powerful and flexible quest plugin for Minecraft Paper servers featuring physical quest papers, dynamic objectives, and an intuitive clickable interface.
 
-> ⚠️ **Beta Release**: This is a beta version. While extensively tested, please report any issues on [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues).
+[![Version](https://img.shields.io/badge/Version-1.0.2-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)[![Version](https://img.shields.io/badge/Version-1.0.2-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
 
----
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://www.spigotmc.org/)[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://www.spigotmc.org/)
 
-## 🌟 Features
+[![Paper API](https://img.shields.io/badge/Paper%20API-1.21.8-blue.svg)](https://papermc.io/)[![Paper API](https://img.shields.io/badge/Paper%20API-1.21.8-blue.svg)](https://papermc.io/)
 
-### 🎯 **Quest System**
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
+
+[![License](https://img.shields.io/badge/License-Commercial-red.svg)](SoapsQuest/LICENSE.md)[![License](https://img.shields.io/badge/License-Commercial-red.svg)](LICENSE.md)
+
+[![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)](https://github.com/AlternativeSoap/SoapsQuest)[![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)](https://github.com/AlternativeSoap/SoapsQuest)
+
+
+
+A powerful and flexible quest plugin for Minecraft Paper servers featuring physical quest papers, dynamic objectives, and an intuitive clickable interface.A powerful and flexible quest plugin for Minecraft Paper servers featuring physical quest papers, dynamic objectives, and an intuitive clickable interface.
+
+
+
+> ⚠️ **Beta Release**: This is a beta version. While extensively tested, please report any issues on [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues).> ⚠️ **Beta Release**: This is a beta version. While extensively tested, please report any issues on [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues).
+
+
+
+------
+
+
+
+## 📚 Documentation## 🌟 Features
+
+
+
+Complete documentation is available in the [SoapsQuest](SoapsQuest/) directory:### 🎯 **Quest System**
+
 - **Physical Quest Papers** - Quests exist as tangible items in player inventories
-- **33+ Objective Types** - Combat, building, collection, survival, movement, leveling, and more
-- **Multi-Objective Quests** - Complete multiple tasks in one quest
-- **Sequential Objectives** - Force objectives to be completed in order
-- **Progress Tracking** - Real-time BossBar, action-bar or chat progress display with customizable colors
 
-### 🎨 **Customization**
-- **Tier System** - Common, Rare, Epic, Legendary (fully customizable)
-- **Difficulty Levels** - Easy, Normal, Hard, Nightmare (fully customizable)
+- **[📖 Main README](SoapsQuest/README.md)** - Complete plugin overview and features- **33+ Objective Types** - Combat, building, collection, survival, movement, leveling, and more
+
+- **[📚 Wiki](SoapsQuest/WIKI.md)** - Complete documentation hub- **Multi-Objective Quests** - Complete multiple tasks in one quest
+
+- **[⚙️ Configuration](SoapsQuest/CONFIGURATION.md)** - Config.yml setup and customization- **Sequential Objectives** - Force objectives to be completed in order
+
+- **[🎯 Quest Creation](SoapsQuest/QUEST-CREATION.md)** - Create custom quests with examples- **Progress Tracking** - Real-time BossBar, action-bar or chat progress display with customizable colors
+
+- **[🎲 Random Generator](SoapsQuest/RANDOM-GENERATOR.md)** - Generate procedural quests
+
+- **[💻 Commands](SoapsQuest/COMMANDS.md)** - Command reference### 🎨 **Customization**
+
+- **[🔐 Permissions](SoapsQuest/PERMISSIONS.md)** - Permission nodes- **Tier System** - Common, Rare, Epic, Legendary (fully customizable)
+
+- **[📝 Changelog](SoapsQuest/CHANGELOG.md)** - Version history- **Difficulty Levels** - Easy, Normal, Hard, Nightmare (fully customizable)
+
 - **Custom Quest Papers** - Set custom materials, names, lore, and enchantments
-- **Milestone Notifications** - Alert players at custom progress percentages
+
+---- **Milestone Notifications** - Alert players at custom progress percentages
+
 - **Color Coded Messages** - Full color code support throughout
 
+## 🚀 Quick Start
+
 ### 🎁 **Rewards**
-- **Multiple Reward Types** - XP, Money (Vault), Items, Commands
+
+### Installation- **Multiple Reward Types** - XP, Money (Vault), Items, Commands
+
 - **Custom Items** - Add custom names, lore, and enchantments to rewards
-- **Chance-Based Rewards** - Set drop rates for individual rewards (0-100%)
-- **Command Execution** - Run any console command as a reward
 
-### 🔒 **Conditions & Requirements**
+1. Download `SoapsQuest-1.0.2.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)- **Chance-Based Rewards** - Set drop rates for individual rewards (0-100%)
+
+2. Place the JAR file in your server's `plugins/` folder- **Command Execution** - Run any console command as a reward
+
+3. Restart your server
+
+4. Configure quests in `plugins/SoapsQuest/quests.yml`### 🔒 **Conditions & Requirements**
+
 - **12 Condition Types** - Level, money, world, gamemode, time, permissions, and more
-- **Quest Locking** - Require money or items to unlock quests
+
+### Requirements- **Quest Locking** - Require money or items to unlock quests
+
 - **Active Limits** - Restrict concurrent quests per player
-- **PlaceholderAPI Support** - Use PAPI expressions as conditions
 
-### 💻 **User Interface**
+- **Minecraft Server**: Paper 1.21.8+ (or Spigot/Bukkit with Adventure API)- **PlaceholderAPI Support** - Use PAPI expressions as conditions
+
+- **Java**: Java 21 or higher
+
+- **Optional**: Vault, PlaceholderAPI, MythicMobs### 💻 **User Interface**
+
 - **Clickable Quest List** - `/sq list` shows all quests with hover tooltips
-- **Interactive Quest Papers** - Right-click to complete quests
+
+**[View Complete Installation Guide →](SoapsQuest/README.md#-installation)**- **Interactive Quest Papers** - Right-click to complete quests
+
 - **Hover Tooltips** - View quest details before accepting
-- **Click-to-Accept** - One-click quest acceptance from list
 
-### 🔌 **Integrations**
+---- **Click-to-Accept** - One-click quest acceptance from list
+
+
+
+## ✨ Key Features### 🔌 **Integrations**
+
 - **Vault** - Economy support for money rewards and costs
-- **PlaceholderAPI** - Use placeholders in conditions and messages
-- **MythicMobs** - Kill MythicMobs as quest objectives
 
-### ⚡ **Performance**
-- **Zero Idle CPU Usage** - Optimized event-driven architecture
-- **Memory Efficient** - <50 MB RAM usage with automatic cleanup
-- **Async Data Saving** - Non-blocking autosave system
+- 🎯 **Physical Quest Papers** - Quests exist as tangible items- **PlaceholderAPI** - Use placeholders in conditions and messages
+
+- 📋 **33+ Objective Types** - Combat, building, collection, survival, and more- **MythicMobs** - Kill MythicMobs as quest objectives
+
+- 🎁 **Multiple Reward Types** - XP, Money, Items, Commands
+
+- 🔒 **12 Condition Types** - Control quest access and requirements### ⚡ **Performance**
+
+- 💻 **Interactive UI** - Clickable quest list with hover tooltips- **Zero Idle CPU Usage** - Optimized event-driven architecture
+
+- 🔌 **Plugin Integration** - Vault, PlaceholderAPI, MythicMobs- **Memory Efficient** - <50 MB RAM usage with automatic cleanup
+
+- ⚡ **High Performance** - Zero idle CPU usage, <50 MB RAM- **Async Data Saving** - Non-blocking autosave system
+
 - **Production Ready** - Comprehensive stability testing (100/100 score)
+
+**[View All Features →](SoapsQuest/README.md#-features)**
+
+---
 
 ---
 
 ## 📋 Requirements
 
+## 🤝 Support
+
 - **Minecraft Server**: Paper 1.21.8+ (or Spigot/Bukkit with Adventure API)
-- **Java**: Java 21 or higher
-- **Optional Dependencies**:
-  - Vault (for economy features)
+
+- **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)- **Java**: Java 21 or higher
+
+- **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)- **Optional Dependencies**:
+
+- **Documentation**: [Wiki](SoapsQuest/WIKI.md)  - Vault (for economy features)
+
   - PlaceholderAPI (for placeholder conditions)
-  - MythicMobs (for MythicMobs kill objectives)
 
----
+---  - MythicMobs (for MythicMobs kill objectives)
 
-## 📥 Installation
 
-1. Download `SoapsQuest-1.0.2.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+
+## 📝 License---
+
+
+
+This project is licensed under a Commercial License - see [LICENSE.md](SoapsQuest/LICENSE.md) for details.## 📥 Installation
+
+
+
+**Summary**: Single server license, no redistribution, no decompilation.1. Download `SoapsQuest-1.0.2.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+
 2. Place the JAR file in your server's `plugins/` folder
-3. Restart your server (do not use plugin managers for first install)
+
+---3. Restart your server (do not use plugin managers for first install)
+
 4. Configure quests in `plugins/SoapsQuest/quests.yml`
-5. Customize messages in `plugins/SoapsQuest/messages.yml`
+
+<div align="center">5. Customize messages in `plugins/SoapsQuest/messages.yml`
+
 6. Adjust settings in `plugins/SoapsQuest/config.yml`
+
+**Made with ❤️ for the Minecraft community**
 
 > 💡 **First Time Setup**: Default configuration includes 10 example quests. Test these before creating custom quests.
 
+[⭐ Star this repo](https://github.com/AlternativeSoap/SoapsQuest) • [🐛 Report Bug](https://github.com/AlternativeSoap/SoapsQuest/issues) • [💡 Request Feature](https://github.com/AlternativeSoap/SoapsQuest/issues)
+
 ---
+
+</div>
 
 ## 🚀 Quick Start
 

@@ -286,7 +286,7 @@ See [PERMISSIONS.md](PERMISSIONS.md) for complete permission documentation.
 
 - [**PERMISSIONS.md**](PERMISSIONS.md) - Complete permission reference
 - [**README.md**](README.md) - Plugin overview and features
-- [**CHANGELOGS.md**](CHANGELOGS.md) - Version history
+- [**CHANGELOG.md**](CHANGELOG.md) - Version history
 
 ---
 
