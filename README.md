@@ -134,6 +134,7 @@ Players can use:
 - **[Permissions](PERMISSIONS.md)** - Permission nodes
 - **[Configuration](CONFIGURATION.md)** - Config.yml setup and customization
 - **[Quest Creation](QUEST-CREATION.md)** - Create custom quests with examples
+- **[Random Generator](RANDOM-GENERATOR.md)** - Generate procedural quests dynamically
 
 ### Feature Overview
 - **33+ Objective Types** - Combat, building, collection, survival, movement, and more
@@ -152,21 +153,6 @@ Players can use:
 
 ---
 
-## 📊 Performance & Stability
-
-SoapsQuest has been rigorously tested for production use:
-
-| Category | Score | Status |
-|----------|-------|--------|
-| Memory Management | 100/100 | ✅ No leaks detected |
-| CPU Usage | 100/100 | ✅ 0% idle usage |
-| Thread Safety | 100/100 | ✅ All checks passed |
-| Error Handling | 100/100 | ✅ Comprehensive coverage |
-| Resource Cleanup | 100/100 | ✅ Automatic cleanup |
-| **Overall Score** | **100/100** | ✅ **Production Ready** |
-
----
-
 ## 📝 License
 
 This project is licensed under a Commercial License - see [LICENSE.md](LICENSE.md) for details.
@@ -182,14 +168,6 @@ This project is licensed under a Commercial License - see [LICENSE.md](LICENSE.m
 **Release Date**: October 2025  
 **Repository**: [github.com/AlternativeSoap/SoapsQuest](https://github.com/AlternativeSoap/SoapsQuest)
 
----
-
-## ⚠️ Beta Testing Information
-
-### What is Beta?
-
-This is a **public beta release** of SoapsQuest. The plugin is feature-complete and has passed extensive stability testing (100/100 score), but we need real-world server testing to ensure production readiness.
-
 ### How to Help
 
 1. **Install and Test**: Use SoapsQuest on your test server
@@ -199,64 +177,8 @@ This is a **public beta release** of SoapsQuest. The plugin is feature-complete 
 
 ---
 
-## 🔄 Changelog
-
-### Version 1.0.0-BETA (October 2025)
-
-**Initial Beta Release**
-
-✨ **Core Features**:
-- Physical quest paper system
-- 33 objective types (combat, building, collection, survival, movement, leveling, misc)
-- 12 condition types for quest requirements
-- Multi-objective and sequential quest support
-- BossBar progress tracking with customizable colors
-
-🎨 **Customization**:
-- Fully customizable tier system (common, rare, epic, legendary)
-- Fully customizable difficulty system (easy, normal, hard, nightmare)
-- Custom quest papers with materials, names, lore, enchantments
-- Milestone notifications at custom percentages
-- Complete color code support
-
-🎁 **Rewards**:
-- Multiple reward types: XP, Money (Vault), Items, Commands
-- Custom item rewards with names, lore, and enchantments
-- Chance-based reward system (0-100% drop rates)
-- Console command execution as rewards
-
-💻 **User Interface**:
-- Interactive clickable quest list (`/sq list`)
-- Hover tooltips showing quest details
-- Click-to-accept quest system
-- Right-click quest papers to complete
-
-🔌 **Integrations**:
-- Vault support for economy features
-- PlaceholderAPI support for conditions
-- MythicMobs support for custom mob objectives
-
-⚡ **Performance**:
-- Zero idle CPU usage (event-driven architecture)
-- <50 MB RAM usage with automatic cleanup
-- Async data saving (non-blocking autosave)
-- Production-ready stability (100/100 score)
-
-📝 **Documentation**:
-- Complete README.md with feature overview
-- COMMANDS.md with full command reference
-- PERMISSIONS.md with permission documentation
-- Inline YAML documentation in all config files
-- 10 example quests included
-
-See [CHANGELOG.md](CHANGELOG.md) for detailed version history and upgrade notes.
-
----
-
 <div align="center">
 
 **Made with ❤️ for the Minecraft community**
-
-[⭐ Star this repo](https://github.com/AlternativeSoap/SoapsQuest) • [🐛 Report Bug](https://github.com/AlternativeSoap/SoapsQuest/issues) • [💡 Request Feature](https://github.com/AlternativeSoap/SoapsQuest/issues)
 
 </div>

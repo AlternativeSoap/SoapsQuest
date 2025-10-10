@@ -18,6 +18,7 @@ Complete documentation hub for SoapsQuest plugin.
 
 - **[Configuration Guide](CONFIGURATION.md)** - Complete config.yml, messages.yml, and settings reference
 - **[Quest Creation Guide](QUEST-CREATION.md)** - Learn how to create custom quests with examples
+- **[Random Generator Guide](RANDOM-GENERATOR.md)** - Generate procedural quests with customizable pools
 - **[Commands Reference](COMMANDS.md)** - All available commands and their usage
 - **[Permissions Reference](PERMISSIONS.md)** - Complete permission nodes documentation
 
@@ -317,7 +318,7 @@ Quest definitions:
 ### random-generator.yml
 Random quest generation settings (optional feature)
 
-**[View Generator Configuration →](CONFIGURATION.md#random-generatoryml)**
+**[View Random Generator Guide →](RANDOM-GENERATOR.md)**
 
 ---
 
