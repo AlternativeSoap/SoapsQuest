@@ -1,8 +1,8 @@
 # 📜 SoapsQuest
 
-[![Version](https://img.shields.io/badge/Version-1.0.0--BETA-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.4-brightgreen.svg)](https://www.spigotmc.org/)
-[![Paper API](https://img.shields.io/badge/Paper%20API-1.20.4-blue.svg)](https://papermc.io/)
+[![Version](https://img.shields.io/badge/Version-1.0.2-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://www.spigotmc.org/)
+[![Paper API](https://img.shields.io/badge/Paper%20API-1.21.8-blue.svg)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-Commercial-red.svg)](LICENSE.md)
 [![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)](https://github.com/AlternativeSoap/SoapsQuest)
@@ -10,8 +10,6 @@
 A powerful and flexible quest plugin for Minecraft Paper servers featuring physical quest papers, dynamic objectives, and an intuitive clickable interface.
 
 > ⚠️ **Beta Release**: This is a beta version. While extensively tested, please report any issues on [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues).
-
-![SoapsQuest Banner](https://via.placeholder.com/800x200/4a90e2/ffffff?text=SoapsQuest+-+Physical+Quest+System)
 
 ---
 
@@ -22,7 +20,7 @@ A powerful and flexible quest plugin for Minecraft Paper servers featuring physi
 - **33+ Objective Types** - Combat, building, collection, survival, movement, leveling, and more
 - **Multi-Objective Quests** - Complete multiple tasks in one quest
 - **Sequential Objectives** - Force objectives to be completed in order
-- **Progress Tracking** - Real-time BossBar progress display with customizable colors
+- **Progress Tracking** - Real-time BossBar, action-bar or chat progress display with customizable colors
 
 ### 🎨 **Customization**
 - **Tier System** - Common, Rare, Epic, Legendary (fully customizable)
@@ -64,7 +62,7 @@ A powerful and flexible quest plugin for Minecraft Paper servers featuring physi
 
 ## 📋 Requirements
 
-- **Minecraft Server**: Paper 1.20.4+ (or Spigot/Bukkit with Adventure API)
+- **Minecraft Server**: Paper 1.21.8+ (or Spigot/Bukkit with Adventure API)
 - **Java**: Java 21 or higher
 - **Optional Dependencies**:
   - Vault (for economy features)
@@ -75,7 +73,7 @@ A powerful and flexible quest plugin for Minecraft Paper servers featuring physi
 
 ## 📥 Installation
 
-1. Download `SoapsQuest-1.0.0-BETA.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+1. Download `SoapsQuest-1.0.2.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
 2. Place the JAR file in your server's `plugins/` folder
 3. Restart your server (do not use plugin managers for first install)
 4. Configure quests in `plugins/SoapsQuest/quests.yml`
@@ -130,127 +128,19 @@ Players can use:
 
 ## 📚 Documentation
 
-- **[Commands](COMMANDS.md)** - Complete command reference
-- **[Permissions](PERMISSIONS.md)** - All permission nodes explained
-- **[Wiki](https://github.com/AlternativeSoap/SoapsQuest/wiki)** - Detailed guides and tutorials
-- **[Configuration](https://github.com/AlternativeSoap/SoapsQuest/wiki/Configuration)** - Config file explanations
-- **[Quest Creation](https://github.com/AlternativeSoap/SoapsQuest/wiki/Quest-Creation)** - How to create custom quests
+### Quick Links
+- **[Wiki](WIKI.md)** - Complete documentation hub
+- **[Commands](COMMANDS.md)** - Command reference
+- **[Permissions](PERMISSIONS.md)** - Permission nodes
+- **[Configuration](CONFIGURATION.md)** - Config.yml setup and customization
+- **[Quest Creation](QUEST-CREATION.md)** - Create custom quests with examples
 
----
+### Feature Overview
+- **33+ Objective Types** - Combat, building, collection, survival, movement, and more
+- **12 Condition Types** - Control quest access and progression requirements
+- **4 Reward Types** - XP, money, items, and commands with full customization
 
-## 🎯 Objective Types
-
-<details>
-<summary>Click to expand all 33 objective types</summary>
-
-### Combat Objectives
-- `kill` - Kill entities (ANY, HOSTILE, PASSIVE, or specific)
-- `kill_mythicmob` - Kill MythicMobs creatures
-- `damage` - Deal damage to entities
-- `death` - Die (for hardcore challenges)
-- `bowshoot` - Shoot arrows
-- `projectile` - Launch projectiles
-
-### Building Objectives
-- `break_block` - Break blocks
-- `place_block` - Place blocks
-- `interact` - Interact with blocks
-
-### Collection Objectives
-- `collect` - Pick up items
-- `craft` - Craft items
-- `smelt` - Smelt items in furnaces
-- `fish` - Catch fish
-- `brew` - Brew potions
-- `enchant` - Enchant items
-- `drop` - Drop items
-
-### Survival Objectives
-- `consume` - Eat or drink items
-- `tame` - Tame animals
-- `trade` - Trade with villagers
-- `shear` - Shear sheep
-- `sleep` - Sleep in beds
-- `heal` - Regenerate health
-
-### Movement Objectives
-- `move` - Walk/run distance
-- `jump` - Jump
-- `vehicle` - Travel in vehicles
-
-### Leveling Objectives
-- `level` - Reach experience levels
-- `gainlevel` - Gain experience levels
-- `reachlevel` - Reach specific level
-
-### Miscellaneous Objectives
-- `chat` - Send chat messages
-- `firework` - Launch fireworks
-- `command` - Execute commands
-- `placeholder` - PlaceholderAPI expressions
-
-</details>
-
----
-
-## 🔒 Condition Types
-
-<details>
-<summary>Click to expand all 12 condition types</summary>
-
-### Progress Conditions (checked during objective tracking)
-- `min-level` - Minimum player XP level
-- `max-level` - Maximum player XP level
-- `world` - Only progress in specified worlds
-- `min-money` - Minimum balance required (Vault)
-- `gamemode` - Only progress in specified gamemodes
-- `placeholder` - PlaceholderAPI expression (PAPI)
-- `time` - Only progress during DAY or NIGHT
-
-### Locking Conditions (quest starts locked, unlock via right-click)
-- `cost` - Money required to unlock (Vault)
-- `item` - Items required to unlock
-- `consume-item` - Whether to consume unlock items
-
-### Permission & Limit Conditions
-- `permission` - Required permission node
-- `active-limit` - Max concurrent quests with this ID
-
-</details>
-
----
-
-## 🎨 Configuration Examples
-
-### Tier Configuration (config.yml)
-```yaml
-tiers:
-  common:
-    prefix: "&7[Common]"
-    color: "&7"
-  rare:
-    prefix: "&9[Rare]"
-    color: "&9"
-  epic:
-    prefix: "&5[Epic]"
-    color: "&5"
-  legendary:
-    prefix: "&6[Legendary]"
-    color: "&6"
-```
-
-### Difficulty Configuration (config.yml)
-```yaml
-difficulties:
-  easy:
-    color: "&a"
-  normal:
-    color: "&e"
-  hard:
-    color: "&c"
-  nightmare:
-    color: "&4"
-```
+**[View All Features in Wiki →](WIKI.md)**
 
 ---
 
@@ -258,7 +148,7 @@ difficulties:
 
 - **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
 - **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
-- **Wiki**: [GitHub Wiki](https://github.com/AlternativeSoap/SoapsQuest/wiki)
+- **Documentation**: [Wiki](WIKI.md)
 
 ---
 
@@ -288,7 +178,7 @@ This project is licensed under a Commercial License - see [LICENSE.md](LICENSE.m
 ## 🙏 Credits
 
 **Author**: AlternativeSoap  
-**Version**: 1.0.0-BETA  
+**Version**: 1.0.2  
 **Release Date**: October 2025  
 **Repository**: [github.com/AlternativeSoap/SoapsQuest](https://github.com/AlternativeSoap/SoapsQuest)
 
@@ -300,34 +190,12 @@ This project is licensed under a Commercial License - see [LICENSE.md](LICENSE.m
 
 This is a **public beta release** of SoapsQuest. The plugin is feature-complete and has passed extensive stability testing (100/100 score), but we need real-world server testing to ensure production readiness.
 
-### Beta Testing Checklist
-
-✅ **What's Ready**:
-- All core features implemented and tested
-- Zero memory leaks detected
-- 0% idle CPU usage verified
-- Comprehensive error handling in place
-- Complete documentation
-- 10 example quests included
-
-⚠️ **What to Watch For**:
-- Edge cases in multi-player environments
-- Compatibility with other plugins
-- Performance on larger servers (100+ players)
-- Feature requests and feedback
-
 ### How to Help
 
 1. **Install and Test**: Use SoapsQuest on your test server
 2. **Try All Features**: Test commands, objectives, rewards, conditions
 3. **Report Issues**: Open [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues) for bugs
 4. **Share Feedback**: Join [Discord](https://discord.gg/soapsuniverse) to discuss
-
-### Beta to Stable Timeline
-
-- **Beta Phase**: October-November 2025 (4-6 weeks)
-- **Release Candidate**: After community testing and bug fixes
-- **Stable 1.0.0**: When no critical issues remain
 
 ---
 
@@ -380,11 +248,6 @@ This is a **public beta release** of SoapsQuest. The plugin is feature-complete 
 - PERMISSIONS.md with permission documentation
 - Inline YAML documentation in all config files
 - 10 example quests included
-
-🐛 **Known Beta Limitations**:
-- Quest creation GUI not yet implemented (planned for v1.1.0)
-- Quest progress export/import not available (planned for v1.2.0)
-- Quest chains/dependencies not yet supported (planned for v1.3.0)
 
 See [CHANGELOG.md](CHANGELOG.md) for detailed version history and upgrade notes.
 

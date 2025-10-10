@@ -2,7 +2,7 @@
 
 A lightweight Minecraft quest plugin for Paper servers using physical quest papers to track progress.
 
-## ✨ v1.1.0 - Interactive Quest List
+## ✨ v1.0.0 - Interactive Quest List
 
 **NEW:** Click any quest in `/sq list` to instantly claim it! Hover for rich tooltips showing objectives, rewards, and requirements. See [CHANGELOGS.md](CHANGELOGS.md) for details.
 
