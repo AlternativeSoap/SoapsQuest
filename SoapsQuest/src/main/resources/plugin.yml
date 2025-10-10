@@ -3,9 +3,9 @@ version: '${project.version}'
 main: com.soaps.quest.SoapsQuest
 api-version: '1.20'
 author: AlternativeSoap
-description: Minecraft quest system using paper items
-website: www.soapsuniverse.com
-softdepend: [Vault, PlaceholderAPI]
+description: Physical quest paper system for Minecraft Paper servers (BETA)
+website: https://github.com/AlternativeSoap/SoapsQuest
+softdepend: [Vault, PlaceholderAPI, MythicMobs]
 
 commands:
   soapsquest:

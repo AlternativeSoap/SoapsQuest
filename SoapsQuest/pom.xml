@@ -6,10 +6,11 @@
 
     <groupId>com.soaps.quest</groupId>
     <artifactId>SoapsQuest</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-BETA</version>
     
     <name>SoapsQuest</name>
-    <url>www.soapsuniverse.com</url>
+    <description>Physical quest paper system for Minecraft Paper servers</description>
+    <url>https://github.com/AlternativeSoap/SoapsQuest</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

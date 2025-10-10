@@ -158,8 +158,9 @@ public class SoapsQuest extends JavaPlugin {
         dataManager.startAutosave();
         
         // Display startup message
-        getLogger().info("SoapsQuest v1.1.0 by AlternativeSoap - Enabled!");
+        getLogger().info("SoapsQuest v1.0.0-BETA by AlternativeSoap - Enabled!");
         getLogger().info("Support: discord.gg/soapsuniverse");
+        getLogger().warning("This is a BETA version - Please report issues on GitHub!");
     }
 
     @Override
