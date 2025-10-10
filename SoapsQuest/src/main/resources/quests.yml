@@ -1,0 +1,329 @@
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║                          SOAPSQUEST - QUESTS                               ║
+# ║  Commands: /sq give <player> <quest> | /sq list (clickable)               ║
+# ║  Progress: Tracked automatically | Complete: Right-click quest paper      ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+#
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST STRUCTURE REFERENCE
+# ════════════════════════════════════════════════════════════════════════════
+#
+# quest_id:
+#   display: "&aQuest Name"                    # REQUIRED: Display name with color codes
+#   tier: common                               # OPTIONAL: Tier name (customizable in config.yml)
+#   difficulty: easy                           # OPTIONAL: Difficulty name (customizable in config.yml)
+#   material: PAPER                            # OPTIONAL: Quest paper item (default: PAPER)
+#   sequential: false                          # OPTIONAL: Complete objectives in order
+#   lock-to-player: false                      # OPTIONAL: Bind to first player (true) or tradeable (false)
+#   milestones: [25, 50, 75]                   # OPTIONAL: Show progress messages at these percentages
+#   lore:                                      # OPTIONAL: Custom quest paper lore (supports color codes)
+#     - "&7Line 1"
+#     - "&7Line 2"
+#
+#   objectives:                                # REQUIRED: At least 1 objective (see OBJECTIVE TYPES)
+#     - type: kill                             # See OBJECTIVE TYPES below
+#       entity: ZOMBIE                         # Filters: ANY, HOSTILE, PASSIVE, or specific
+#       amount: 10
+#     - type: break_block
+#       block: DIAMOND_ORE                     # Filters: ANY or specific block/item
+#       amount: 5
+#
+#   reward:                                    # REQUIRED: At least one reward type (xp/money/items/commands)
+#     xp: 100                                  # Experience points
+#     money: 50                                # Money (requires Vault plugin)
+#     items:
+#       - material: DIAMOND_SWORD              # Bukkit material name
+#         name: "&aReward Sword"               # Custom name (supports color codes)
+#         lore:
+#           - "&7A powerful weapon"            # Custom lore (supports color codes)
+#         enchantments:
+#           - "SHARPNESS:3"                    # Format: "ENCHANTMENT:LEVEL"
+#           - "UNBREAKING:2"
+#         amount: 1                            # Item stack size (default: 1)
+#         chance: 100                          # Drop rate 0-100% (default: 100)
+#     commands:
+#       - "broadcast {player} completed quest!" # Execute as console (use {player} placeholder)
+#       - "give {player} minecraft:apple 5"
+#
+#   conditions:                                # OPTIONAL: Quest requirements (all must be met)
+#     min-level: 10                            # Minimum player level (XP level)
+#     max-level: 50                            # Maximum player level (XP level)
+#     world: ["world", "world_nether"]         # Only progress in these worlds (world names)
+#     min-money: 1000                          # Minimum balance required (requires Vault)
+#     gamemode: ["SURVIVAL", "ADVENTURE"]      # Only progress in these gamemodes
+#     placeholder: "%player_health% >= 10"     # PlaceholderAPI expression (requires PAPI)
+#     time: DAY                                # Only progress during DAY or NIGHT
+#     cost: 500                                # Money cost to unlock quest (requires Vault)
+#     item: "DIAMOND:10,EMERALD:5"             # Required items to unlock (MATERIAL:AMOUNT)
+#     consume-item: true                       # Consume items when unlocking (true/false)
+#     permission: "soapsquest.vip"             # Required permission node to start quest
+#     active-limit: 3                          # Max concurrent active quests with this ID
+#
+# ════════════════════════════════════════════════════════════════════════════
+# OBJECTIVE TYPES (33 Total) - Use in objectives.type field
+# ════════════════════════════════════════════════════════════════════════════
+# Combat:       kill, kill_mythicmob, damage, death, bowshoot, projectile
+# Building:     break_block, place_block, interact
+# Collection:   collect, craft, smelt, fish, brew, enchant, drop
+# Survival:     consume, tame, trade, shear, sleep, heal
+# Movement:     move, jump, vehicle
+# Leveling:     level, gainlevel, reachlevel
+# Misc:         chat, firework, command, placeholder
+#
+# NOTE: kill_mythicmob requires MythicMobs plugin installed
+#
+# ════════════════════════════════════════════════════════════════════════════
+# PLACEHOLDERS (Internal SoapsQuest) - Use in messages.yml
+# ════════════════════════════════════════════════════════════════════════════
+# Core:         <player> <quest> <objective> <progress> <amount> <type>
+# Tier:         <tier> <tier_prefix> <tier_color>
+# Difficulty:   <difficulty> <difficulty_color>
+# Objective:    <entity> <block> <item> <mob>
+# Special:      <progress_unit> (" objectives" for multi/sequential quests)
+#
+# NOTE: For PlaceholderAPI placeholders, use %soapsquest_<placeholder>%
+#
+# ════════════════════════════════════════════════════════════════════════════
+
+quests:
+  zombie_slayer:
+    display: "&aZombie Slayer"
+    tier: common
+    difficulty: easy
+    objectives:
+      - type: kill
+        entity: ZOMBIE
+        amount: 15
+    reward:
+      xp: 150
+      money: 75
+      items:
+        - material: IRON_SWORD
+          name: "&aSlayer's Blade"
+          enchantments:
+            - "SHARPNESS:1"
+          chance: 100
+
+  diamond_collector:
+    display: "&bDiamond Collector"
+    tier: rare
+    difficulty: normal
+    objectives:
+      - type: break_block
+        block: DIAMOND_ORE
+        amount: 10
+      - type: break_block
+        block: DEEPSLATE_DIAMOND_ORE
+        amount: 10
+    reward:
+      xp: 500
+      money: 300
+      items:
+        - material: DIAMOND_PICKAXE
+          name: "&bCollector's Pick"
+          enchantments:
+            - "EFFICIENCY:4"
+            - "FORTUNE:3"
+          chance: 100
+    conditions:
+      min-level: 20
+      world: ["world"]
+      gamemode: ["SURVIVAL"]
+
+  master_baker:
+    display: "&eMaster Baker"
+    tier: common
+    difficulty: easy
+    objectives:
+      - type: craft
+        item: BREAD
+        amount: 32
+      - type: craft
+        item: CAKE
+        amount: 5
+    reward:
+      xp: 200
+      money: 100
+      items:
+        - material: GOLDEN_APPLE
+          amount: 3
+          chance: 100
+
+  master_angler:
+    display: "&3Master Angler"
+    tier: rare
+    difficulty: normal
+    objectives:
+      - type: fish
+        item: COD
+        amount: 25
+      - type: fish
+        item: SALMON
+        amount: 15
+    reward:
+      xp: 400
+      money: 250
+      items:
+        - material: FISHING_ROD
+          name: "&3Lucky Rod"
+          enchantments:
+            - "LUCK_OF_THE_SEA:3"
+            - "LURE:2"
+            - "UNBREAKING:3"
+          chance: 100
+    conditions:
+      time: DAY
+
+  merchant_master:
+    display: "&5Merchant Master"
+    tier: epic
+    difficulty: hard
+    objectives:
+      - type: trade
+        entity: VILLAGER
+        amount: 20
+    reward:
+      xp: 750
+      money: 500
+      items:
+        - material: EMERALD
+          amount: 16
+          chance: 100
+        - material: ENCHANTED_BOOK
+          name: "&5Merchant's Guide"
+          enchantments:
+            - "MENDING:1"
+          chance: 50
+    conditions:
+      cost: 200
+      min-level: 25
+
+  farm_harvest:
+    display: "&2Farm Harvest"
+    tier: common
+    difficulty: easy
+    objectives:
+      - type: break_block
+        block: WHEAT
+        amount: 64
+      - type: break_block
+        block: CARROTS
+        amount: 32
+      - type: break_block
+        block: POTATOES
+        amount: 32
+    reward:
+      xp: 250
+      money: 150
+      commands:
+        - "give {player} minecraft:golden_hoe 1"
+    conditions:
+      world: ["world"]
+
+  dragon_slayer:
+    display: "&dDragon Slayer"
+    tier: legendary
+    difficulty: nightmare
+    objectives:
+      - type: kill
+        entity: ENDER_DRAGON
+        amount: 1
+    reward:
+      xp: 5000
+      money: 2000
+      items:
+        - material: ELYTRA
+          name: "&dDragon Wings"
+          enchantments:
+            - "UNBREAKING:3"
+          chance: 100
+        - material: DRAGON_HEAD
+          name: "&dTrophy of Victory"
+          chance: 100
+      commands:
+        - "broadcast &d{player} has slain the Ender Dragon!"
+    conditions:
+      item: "ENDER_PEARL:16"
+      consume-item: true
+      min-level: 50
+      permission: "soapsquest.legendary"
+
+  enchanter_apprentice:
+    display: "&bEnchanter Apprentice"
+    tier: rare
+    difficulty: normal
+    objectives:
+      - type: enchant
+        amount: 10
+    reward:
+      xp: 600
+      money: 350
+      items:
+        - material: ENCHANTING_TABLE
+          name: "&bMaster's Table"
+          chance: 100
+        - material: EXPERIENCE_BOTTLE
+          amount: 32
+          chance: 100
+    conditions:
+      min-level: 15
+      min-money: 500
+
+  nether_explorer:
+    display: "&cNether Explorer"
+    tier: epic
+    difficulty: hard
+    objectives:
+      - type: kill
+        entity: BLAZE
+        amount: 20
+      - type: kill
+        entity: WITHER_SKELETON
+        amount: 10
+      - type: break_block
+        block: ANCIENT_DEBRIS
+        amount: 5
+    reward:
+      xp: 1200
+      money: 800
+      items:
+        - material: NETHERITE_INGOT
+          amount: 2
+          chance: 100
+        - material: FIRE_CHARGE
+          amount: 16
+          chance: 100
+    conditions:
+      world: ["world_nether"]
+      cost: 300
+
+  cave_explorer:
+    display: "&7Cave Explorer"
+    tier: rare
+    difficulty: normal
+    objectives:
+      - type: move
+        block: STONE
+        amount: 1000
+      - type: break_block
+        block: IRON_ORE
+        amount: 32
+      - type: break_block
+        block: DEEPSLATE_IRON_ORE
+        amount: 16
+    reward:
+      xp: 450
+      money: 275
+      items:
+        - material: IRON_PICKAXE
+          name: "&7Explorer's Pick"
+          enchantments:
+            - "EFFICIENCY:3"
+            - "UNBREAKING:2"
+          chance: 100
+        - material: TORCH
+          amount: 64
+          chance: 100
+    conditions:
+      active-limit: 5
+      gamemode: ["SURVIVAL"]
