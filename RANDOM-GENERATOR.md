@@ -2,36 +2,39 @@
 
 Complete guide to using and configuring the SoapsQuest random quest generation system.
 
+> ⚠️ **IMPORTANT:** This document has been updated to reflect the **actual implementation** in the plugin. Previous versions of this documentation contained examples that don't match the plugin code.
+
 ---
 
 ## Table of Contents
 
 1. [Overview](#overview)
 2. [Using the Generator](#using-the-generator)
-3. [Configuration](#configuration)
-4. [Objective Pools](#objective-pools)
-5. [Reward Pools](#reward-pools)
-6. [Advanced Settings](#advanced-settings)
-7. [Examples](#examples)
+3. [Available Objectives](#available-objectives)
+4. [Configuration Format](#configuration-format)
+5. [Common Mistakes](#common-mistakes)
+6. [Examples](#examples)
+7. [Troubleshooting](#troubleshooting)
 
 ---
 
 ## Overview
 
-The Random Quest Generator allows you to create procedurally generated quests with randomized objectives, rewards, tiers, and difficulties. This is perfect for:
+The Random Quest Generator allows you to create procedurally generated quests with randomized objectives, rewards, and quest types. This is perfect for:
 
-- **Daily/Weekly Quests** - Generate fresh quests automatically
-- **Player-Specific Challenges** - Create unique quests per player
 - **Testing** - Quickly generate quests for development
-- **Dynamic Content** - Keep your server fresh with new quests
+- **Dynamic Content** - Create unique quest variations
+- **Quest Templates** - Generate base quests that can be distributed
 
 ### How It Works
 
-1. Admin runs `/sq generate <player> [tier] [difficulty]`
-2. Plugin selects random objective type from configured pools
-3. Generates appropriate amounts based on min/max ranges
-4. Selects rewards from reward pools
-5. Creates and gives quest paper to player
+1. Admin runs `/sq generate [type]` (e.g., `/sq generate single`)
+2. Plugin selects random objective from configured pools in `random-generator.yml`
+3. Generates appropriate amounts based on difficulty scaling
+4. Selects rewards from tier-based reward pools
+5. Saves the quest to `plugins/SoapsQuest/generated.yml`
+6. Displays the generated quest ID in chat
+7. Admin can then use `/sq give <player> <questId>` to distribute the quest
 
 ---
 
@@ -40,40 +43,42 @@ The Random Quest Generator allows you to create procedurally generated quests wi
 ### Basic Command
 
 ```
-/sq generate <player>
+/sq generate
 ```
 
-Generates a quest with random tier and difficulty.
-
-**Example:**
-```
-/sq generate Steve
-```
-
-### Specify Tier
-
-```
-/sq generate <player> <tier>
-```
-
-**Available Tiers:** `common`, `rare`, `epic`, `legendary`
+Generates a random quest type (single, multi, or sequence).
 
 **Example:**
 ```
-/sq generate Steve legendary
+/sq generate
 ```
 
-### Specify Tier and Difficulty
+### Specify Quest Type
 
 ```
-/sq generate <player> <tier> <difficulty>
+/sq generate <type>
 ```
 
-**Available Difficulties:** `easy`, `normal`, `hard`, `nightmare`
+**Available Types:** `single`, `multi`, `sequence`
 
 **Example:**
 ```
-/sq generate Steve epic hard
+/sq generate single    # Single objective quest
+/sq generate multi     # Multiple objectives (any order)
+/sq generate sequence  # Multiple objectives (must complete in order)
+```
+
+### After Generation
+
+The command will output the generated quest ID in chat. Example:
+```
+[SoapsQuest] Generated quest: quest_common_kill_12345
+Use /sq give <player> quest_common_kill_12345
+```
+
+Use the `/sq give` command to distribute:
+```
+/sq give <player> quest_common_kill_12345
 ```
 
 ### Permissions
@@ -85,166 +90,248 @@ Generates a quest with random tier and difficulty.
 
 ---
 
-## Configuration
+## Available Objectives
+
+These are the **actual** objective types registered in the plugin (from `ObjectiveRegistry.java`):
+
+### Combat Objectives (6 types)
+- `kill` - Kill entities (supports ANY, HOSTILE, PASSIVE, or specific entity)
+- `kill_mythicmob` - Kill MythicMobs (requires MythicMobs plugin)
+- `damage` - Deal damage to entities
+- `death` - Die a certain number of times
+- `bowshoot` / `shoot_bow` - Shoot arrows with a bow
+- `projectile` - Launch projectiles (snowballs, eggs, etc.)
+
+### Building Objectives (3 types)
+- `break` - Break blocks (supports ANY or specific block)
+- `place` - Place blocks (supports ANY or specific block)
+- `interact` - Interact with blocks (right-click)
+
+### Collection Objectives (7 types)
+- `collect` - Pick up items from ground
+- `craft` - Craft items
+- `smelt` - Smelt items in furnace
+- `fish` - Catch fish
+- `brew` - Brew potions
+- `enchant` - Enchant items (**requires `item` field**)
+- `drop` - Drop items
+
+### Survival Objectives (6 types)
+- `consume` - Eat or drink items
+- `tame` - Tame animals
+- `trade` - Trade with villagers (**requires `item` field**)
+- `shear` - Shear animals
+- `sleep` - Sleep in beds
+- `heal` - Regenerate health
+
+### Movement Objectives (3 types)
+- `move` - Walk/run distance (in blocks)
+- `jump` - Jump a number of times
+- `vehicle` / `ride_vehicle` - Travel in vehicles
+
+### Leveling Objectives (3 types)
+- `level` - Gain experience levels
+- `gainlevel` - Gain experience levels (same as level)
+- `reachlevel` - Reach a specific level (**uses `level` field, not `amount`**)
+
+### Miscellaneous Objectives (4 types)
+- `chat` - Send chat messages
+- `firework` / `launch_firework` - Launch fireworks
+- `command` - Execute commands
+- `placeholder` - PlaceholderAPI expressions
+
+**Total: 33 objective types**
+
+---
+
+## Configuration Format
 
 Configuration is stored in `plugins/SoapsQuest/random-generator.yml`
 
-### Basic Structure
+### Actual Structure (from the plugin)
 
 ```yaml
-generator:
+random-generator:
   enabled: true
+  save-generated-quests: true
+  allowed-types: [single, multi, sequence]
   
-  # Naming
-  naming:
-    prefixes:
-      - "Legendary"
-      - "Epic"
-      - "Heroic"
-    suffixes:
-      - "Challenge"
-      - "Quest"
-      - "Trial"
-  
-  # Objective pools
+  # How objectives are defined (use 'objective', not 'type')
   objectives:
-    # ... objective configurations
+    objective_name:
+      objective: kill    # The objective type
+      entities: [ZOMBIE, SKELETON]
+      amount: [10, 50]   # Or amount-by-difficulty
   
-  # Reward pools
-  rewards:
-    # ... reward configurations
+  # How rewards are defined
+  reward-pool:
+    xp:
+      common: [25, 100]
+      rare: [100, 250]
+    money:
+      common: [10, 100]
+      rare: [100, 400]
 ```
+
+---
+
+## Common Mistakes
+
+### ❌ Wrong Objective Type Names
+
+**Don't use:**
+- `break_block` → Use `break`
+- `place_block` → Use `place`
+
+**Example:**
+```yaml
+# ❌ WRONG
+objectives:
+  mine_stone:
+    objective: break_block  # Will fail validation
+    blocks: [STONE]
+    amount: [50, 200]
+
+# ✅ CORRECT
+objectives:
+  mine_stone:
+    objective: break        # Correct type name
+    blocks: [STONE]
+    amount: [50, 200]
+```
+
+### ❌ Missing Required Fields
+
+**Trade and Enchant need `item` field:**
+
+```yaml
+# ❌ WRONG
+objectives:
+  trade_quest:
+    objective: trade
+    amount: [5, 20]  # Missing 'item' field!
+
+# ✅ CORRECT
+objectives:
+  trade_quest:
+    objective: trade
+    items: [ANY]     # Or specific item
+    amount: [5, 20]
+```
+
+### ❌ Wrong Field Names
+
+**The config uses specific field names:**
+
+```yaml
+# ❌ WRONG - using 'materials' for break objective
+objectives:
+  break_stone:
+    objective: break
+    materials: [STONE]  # Wrong field name!
+
+# ✅ CORRECT - use 'blocks' for break/place
+objectives:
+  break_stone:
+    objective: break
+    blocks: [STONE]     # Correct field name
+```
+
+**Field name guide:**
+- Break/Place: use `blocks:`
+- Collect/Craft/Fish/Smelt/Enchant/Trade/Brew: use `items:`
+- Kill/Tame/Shear: use `entities:`
 
 ---
 
 ## Objective Pools
 
-### Combat Objectives
+### Available Objective Types in SoapsQuest
 
-#### Kill Entities
+The following objective types are actually registered and available in the plugin:
+
+#### Combat Objectives
+- `kill` - Kill entities (ANY, HOSTILE, PASSIVE, or specific entity)
+- `kill_mythicmob` - Kill MythicMobs (requires MythicMobs plugin)
+- `damage` - Deal damage to entities
+- `death` - Die a certain number of times
+- `bowshoot` / `shoot_bow` - Shoot arrows with a bow
+- `projectile` - Launch projectiles (snowballs, eggs, etc.)
+
+#### Building Objectives
+- `break` - Break blocks (ANY or specific block)
+- `place` - Place blocks (ANY or specific block)
+- `interact` - Interact with blocks (right-click)
+
+#### Collection Objectives
+- `collect` - Pick up items from ground (ANY or specific item)
+- `craft` - Craft items (ANY or specific item)
+- `smelt` - Smelt items in furnace
+- `fish` - Catch fish (ANY or specific fish type)
+- `brew` - Brew potions (ANY or specific potion)
+- `enchant` - Enchant items at enchanting table (ANY or specific item)
+- `drop` - Drop items (ANY or specific item)
+
+#### Survival Objectives
+- `consume` - Eat or drink items
+- `tame` - Tame animals (ANY or specific entity)
+- `trade` - Trade with villagers (ANY or specific item)
+- `shear` - Shear animals (ANY or specific entity)
+- `sleep` - Sleep in beds
+- `heal` - Regenerate health (ANY or specific reason)
+
+#### Movement Objectives
+- `move` - Walk/run distance (in blocks)
+- `jump` - Jump a number of times
+- `vehicle` / `ride_vehicle` - Travel in vehicles (ANY or specific vehicle)
+
+#### Leveling Objectives
+- `level` - Gain experience levels
+- `gainlevel` - Gain experience levels (same as level)
+- `reachlevel` - Reach a specific level
+
+#### Miscellaneous Objectives
+- `chat` - Send chat messages
+- `firework` / `launch_firework` - Launch fireworks
+- `command` - Execute commands
+- `placeholder` - PlaceholderAPI expressions (requires PlaceholderAPI)
+
+---
+
+### Example Configurations
+
+#### Kill Objective
 
 ```yaml
 objectives:
-  kill:
-    enabled: true
-    weight: 10  # Higher = more likely to be selected
-    
-    entities:
-      - ZOMBIE
-      - SKELETON
-      - CREEPER
-      - SPIDER
-      - ENDERMAN
-      - BLAZE
-      - WITHER_SKELETON
-    
-    # Amount ranges
-    min-amount: 5
-    max-amount: 50
-    
-    # Scaling by difficulty
-    difficulty-multipliers:
-      easy: 0.5    # 50% of base amount
-      normal: 1.0  # 100% (no change)
-      hard: 1.5    # 150% of base amount
-      nightmare: 2.0  # 200% of base amount
+  kill_hostile:
+    objective: kill
+    entities: [ZOMBIE, SKELETON, CREEPER, SPIDER]
+    amount-by-difficulty:
+      easy: [10, 25]
+      normal: [20, 40]
+      hard: [40, 75]
+      nightmare: [75, 150]
 ```
 
-**How it works:**
-- Random entity selected from list
-- Random amount between min/max
-- Multiplied by difficulty multiplier
-
-**Example Results:**
-- Easy: Kill 3-25 Zombies
-- Normal: Kill 5-50 Zombies
-- Hard: Kill 8-75 Zombies
-- Nightmare: Kill 10-100 Zombies
-
-#### Damage Dealt
+#### Break Objective (use 'break', not 'break_block')
 
 ```yaml
 objectives:
-  damage:
-    enabled: true
-    weight: 5
-    
-    entities:
-      - ANY
-      - ZOMBIE
-      - SKELETON
-      - ENDER_DRAGON
-    
-    min-amount: 50  # Half-hearts
-    max-amount: 500
-    
-    difficulty-multipliers:
-      easy: 0.5
-      normal: 1.0
-      hard: 1.5
-      nightmare: 2.0
+  break_stone:
+    objective: break
+    blocks: [STONE, COBBLESTONE, ANDESITE, DIORITE]
+    amount: [50, 200]
 ```
 
-### Building Objectives
-
-#### Break Blocks
+#### Place Objective (use 'place', not 'place_block')
 
 ```yaml
 objectives:
-  break_block:
-    enabled: true
-    weight: 8
-    
-    materials:
-      - STONE
-      - COBBLESTONE
-      - DIRT
-      - OAK_LOG
-      - BIRCH_LOG
-      - SPRUCE_LOG
-      - IRON_ORE
-      - COAL_ORE
-      - DIAMOND_ORE
-    
-    min-amount: 10
-    max-amount: 200
-    
-    difficulty-multipliers:
-      easy: 0.5
-      normal: 1.0
-      hard: 1.5
-      nightmare: 2.0
-    
-    # Material-specific multipliers
-    material-multipliers:
-      DIAMOND_ORE: 0.1   # Very rare, reduce amount
-      IRON_ORE: 0.5      # Rare, reduce amount
-      STONE: 2.0         # Common, increase amount
-```
-
-#### Place Blocks
-
-```yaml
-objectives:
-  place_block:
-    enabled: true
-    weight: 6
-    
-    materials:
-      - COBBLESTONE
-      - STONE_BRICKS
-      - OAK_PLANKS
-      - GLASS
-      - WOOL
-    
-    min-amount: 20
-    max-amount: 500
-    
-    difficulty-multipliers:
-      easy: 0.5
-      normal: 1.0
-      hard: 1.5
-      nightmare: 2.0
+  place_blocks:
+    objective: place
+    blocks: [OAK_PLANKS, STONE_BRICKS, COBBLESTONE]
+    amount: [20, 100]
 ```
 
 ### Collection Objectives
@@ -668,119 +755,144 @@ conditions:
 
 ---
 
-## Examples
+## Important: Actual Configuration Format
 
-### Example Configuration
+The examples above were simplified for documentation. The **actual** `random-generator.yml` file uses a different format. Here's what's actually implemented:
+
+### Real Configuration Structure
 
 ```yaml
-generator:
+random-generator:
   enabled: true
+  save-generated-quests: true
+  allowed-types: [single, multi, sequence]
   
-  naming:
-    enabled: true
-    prefixes:
-      common: ["Simple", "Basic"]
-      rare: ["Skilled", "Advanced"]
-      epic: ["Master", "Elite"]
-      legendary: ["Legendary", "Divine"]
-    
-    objective-names:
-      kill: "Slayer"
-      break_block: "Miner"
-      collect: "Collector"
-    
-    suffixes: ["Challenge", "Quest"]
+  # Quest naming
+  internal-name-formats:
+    single: "quest_<tier>_<objective>_<id>"
+    multi: "multi_<tier>_<id>"
+    sequence: "seq_<tier>_<counter>"
   
-  objectives:
+  # Display templates (for quest names)
+  display-templates:
     kill:
-      enabled: true
-      weight: 10
-      entities: [ZOMBIE, SKELETON, CREEPER]
-      min-amount: 5
-      max-amount: 50
-      difficulty-multipliers:
-        easy: 0.5
-        normal: 1.0
-        hard: 1.5
-        nightmare: 2.0
+      - "&c<entity> Slayer"
+      - "&4Hunt &f<amount> &4<entity>s"
     
-    break_block:
-      enabled: true
-      weight: 8
-      materials: [STONE, OAK_LOG, IRON_ORE]
-      min-amount: 10
-      max-amount: 200
-      difficulty-multipliers:
-        easy: 0.5
-        normal: 1.0
-        hard: 1.5
-        nightmare: 2.0
+    break:
+      - "&8<block> Breaker"
+      - "&7Mine &f<amount> &7<block>"
+    
+    collect:
+      - "&e<item> Collector"
+      - "&6Gather &f<amount> &6<item>s"
   
-  rewards:
+  # Objectives (actual format from random-generator.yml)
+  objectives:
+    # Combat objectives
+    kill_hostile:
+      objective: kill
+      entities: [ZOMBIE, SKELETON, CREEPER, SPIDER]
+      amount-by-difficulty:
+        easy: [10, 25]
+        normal: [20, 40]
+        hard: [40, 75]
+        nightmare: [75, 150]
+    
+    # Building objectives (use 'break', not 'break_block')
+    break_stone:
+      objective: break
+      blocks: [STONE, COBBLESTONE, ANDESITE, DIORITE]
+      amount: [50, 200]
+    
+    # Collection objectives
+    collect_resources:
+      objective: collect
+      items: [WHEAT, CARROT, POTATO]
+      amount: [10, 64]
+    
+    # Crafting objectives
+    craft_tools:
+      objective: craft
+      items: [WOODEN_PICKAXE, STONE_PICKAXE, IRON_PICKAXE]
+      amount: [3, 10]
+    
+    # Fishing objectives
+    catch_fish:
+      objective: fish
+      items: [COD, SALMON, TROPICAL_FISH, PUFFERFISH]
+      amount: [10, 50]
+    
+    # Enchanting (MUST include item field, use ANY for any item)
+    enchant_items:
+      objective: enchant
+      items: [ANY]
+      amount: [5, 20]
+    
+    # Trading (MUST include item field, use ANY for any trade)
+    trade_villagers:
+      objective: trade
+      items: [ANY]
+      amount: [5, 20]
+  
+  # Reward pool (actual format)
+  reward-pool:
     xp:
-      enabled: true
-      chance: 90
-      min-amount: 50
-      max-amount: 1000
-      tier-multipliers:
-        common: 1.0
-        rare: 1.5
-        epic: 2.0
-        legendary: 3.0
+      common: [25, 100]
+      rare: [100, 250]
+      epic: [250, 400]
+      legendary: [400, 500]
     
     money:
-      enabled: true
-      chance: 80
-      min-amount: 10
-      max-amount: 1000
-      tier-multipliers:
-        common: 1.0
-        rare: 1.5
-        epic: 2.5
-        legendary: 5.0
+      common: [10, 100]
+      rare: [100, 400]
+      epic: [400, 750]
+      legendary: [750, 1000]
 ```
 
 ### Generated Quest Examples
 
+When you use `/sq generate single`, the plugin will create quests based on your `random-generator.yml` config. Here are examples of what gets generated:
+
 #### Common Easy Quest
 ```yaml
-simple_slayer_challenge:
-  display: "&7Simple Slayer Challenge"
+quest_common_kill_12345:
+  display: "&cZombie Slayer"
   tier: common
   difficulty: easy
   objectives:
     - type: kill
       entity: ZOMBIE
-      amount: 3
+      amount: 15
   reward:
     xp: 75
-    money: 25
+    money: 50
 ```
 
 #### Legendary Nightmare Quest
 ```yaml
-divine_miner_quest:
-  display: "&6Divine Miner Quest"
+quest_legendary_break_67890:
+  display: "&8Diamond Miner"
   tier: legendary
   difficulty: nightmare
   objectives:
-    - type: break_block
-      material: DIAMOND_ORE
+    - type: break
+      block: DIAMOND_ORE
       amount: 40
   reward:
     xp: 4500
     money: 8000
     items:
-      - material: NETHERITE_PICKAXE
+      - material: DIAMOND_PICKAXE
         name: "&6Divine Pickaxe"
         enchantments:
           - "EFFICIENCY:5"
           - "FORTUNE:3"
           - "UNBREAKING:3"
-  conditions:
-    min-level: 50
-    cost: 10000
+        chance: 100
 ```
+
+**Note:** Generated quests are saved to `plugins/SoapsQuest/generated.yml` by default.
 
 ---
 
@@ -816,31 +928,73 @@ divine_miner_quest:
 
 ---
 
+## Key Differences: Documentation vs Implementation
+
+### Objective Type Names
+| Documentation Says | Plugin Actually Uses |
+|-------------------|---------------------|
+| `break_block` | `break` |
+| `place_block` | `place` |
+| `shoot_bow` | `bowshoot` (or `shoot_bow` as alias) |
+| `launch_firework` | `firework` (or `launch_firework` as alias) |
+| `ride_vehicle` | `vehicle` (or `ride_vehicle` as alias) |
+
+### Required Fields
+| Objective Type | Required Fields |
+|---------------|----------------|
+| `break`, `place` | `block`, `amount` |
+| `kill`, `tame`, `shear` | `entity`, `amount` |
+| `collect`, `craft`, `smelt`, `fish` | `item`, `amount` |
+| `enchant`, `trade`, `brew` | `item`, `amount` (use `ANY` if not specific) |
+| `damage`, `heal`, `drop`, `projectile` | `amount` (entity/item/reason optional) |
+| `move`, `jump`, `bowshoot`, `firework`, `chat`, `interact` | `amount` |
+| `reachlevel` | `level` |
+| `gainlevel`, `level` | `amount` |
+| `kill_mythicmob` | `mob`, `amount` |
+
+### Config Field Names
+| random-generator.yml uses | Not what you might expect |
+|--------------------------|---------------------------|
+| `objective:` | (not `type:`) |
+| `blocks:` | (not `materials:` for break/place) |
+| `items:` | (not `materials:` for collect/craft) |
+| `entities:` | (for kill objectives) |
+
 ## Troubleshooting
 
 ### No Quests Generated
 
 **Check:**
-- `enabled: true` in config
-- At least one objective type enabled
-- Weight values are > 0
-- Min/max amounts are valid
+- `enabled: true` in random-generator.yml
+- At least one objective configured in `objectives:` section
+- Objective names match format: `objective_name:` not `type:`
+- Use correct field names (`blocks` not `materials` for break/place)
 
-### Unbalanced Quests
+### Quest Validation Errors
+
+**Common Issues:**
+```
+Unknown objective type: 'break_block'
+```
+**Fix:** Use `break` instead of `break_block`
+
+```
+Missing required fields for 'trade' objective: item
+```
+**Fix:** Add `item: ANY` or specific item to trade objective
+
+```
+Missing required fields for 'enchant' objective: item
+```
+**Fix:** Add `item: ANY` or specific item to enchant objective
+
+### Quests Not Working
 
 **Solutions:**
-- Adjust difficulty multipliers
-- Modify tier multipliers for rewards
-- Add material-specific multipliers
-- Review min/max ranges
-
-### Too Easy/Hard
-
-**Adjust:**
-- Difficulty multipliers
-- Amount ranges (min/max)
-- Material multipliers
-- Reward scaling
+1. Check console for validation warnings
+2. Verify objective types match registered types (see ObjectiveRegistry)
+3. Ensure required fields are present
+4. Use uppercase for material/entity names (e.g., `DIAMOND_ORE` not `diamond_ore`)
 
 ---
 
