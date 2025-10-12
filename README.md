@@ -4,12 +4,10 @@
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://www.spigotmc.org/)
 [![Paper API](https://img.shields.io/badge/Paper%20API-1.21.8-blue.svg)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-Commercial-red.svg)](LICENSE.md)
-[![Status](https://img.shields.io/badge/Status-Beta-yellow.svg)](https://github.com/AlternativeSoap/SoapsQuest)
+[![License](https://img.shields.io/badge/License-Premium-red.svg)](LICENSE.md)
+[![Status](https://img.shields.io/badge/Status-Premium%20Beta-yellow.svg)](https://github.com/AlternativeSoap/SoapsQuest)
 
 A powerful and flexible quest plugin for Minecraft Paper servers featuring physical quest papers, dynamic objectives, and an intuitive clickable interface.
-
-> ⚠️ **Beta Release**: This is a beta version. While extensively tested, please report any issues on [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues).
 
 ---
 

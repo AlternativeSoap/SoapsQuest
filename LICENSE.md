@@ -1,8 +1,8 @@
-SoapsQuests License
+SoapsQuest Premium License
 
 Copyright (c) 2025 AlternativeSoap. All rights reserved.
 
-This software is a commercial product developed and distributed by AlternativeSoap.
+This software is a premium product developed and distributed by AlternativeSoap.
 
 LICENSING TERMS:
 
