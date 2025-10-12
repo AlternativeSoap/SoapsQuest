@@ -1,258 +1,192 @@
-# 📝 Configuration Guide
+# 📝 Configuration
 
-Complete guide to configuring SoapsQuest for your server.
-
----
-
-## Table of Contents
-
-1. [Config Files Overview](#config-files-overview)
-2. [config.yml](#configyml)
-3. [messages.yml](#messagesyml)
-4. [quests.yml](#questsyml)
-5. [random-generator.yml](#random-generatoryml)
+Complete configuration guide for SoapsQuest.
 
 ---
 
-## Config Files Overview
+## Configuration Files
 
-SoapsQuest uses four main configuration files located in `plugins/SoapsQuest/`:
+SoapsQuest uses four configuration files in `plugins/SoapsQuest/`:
 
 | File | Purpose |
 |------|---------|
-| `config.yml` | Main plugin settings, tiers, difficulties, progress display |
-| `messages.yml` | All player-facing messages and translations |
-| `quests.yml` | Quest definitions with objectives, rewards, and conditions |
+| `config.yml` | Core settings, tiers, difficulties, progress display |
+| `messages.yml` | All messages and translations |
+| `quests.yml` | Quest definitions |
 | `random-generator.yml` | Random quest generation settings |
 
 ---
 
 ## config.yml
 
-### Basic Settings
+### Core Settings
 
 ```yaml
-# Plugin Settings
-settings:
-  # Auto-save interval in minutes (0 to disable)
-  autosave-interval: 5
-  
-  # Debug mode for troubleshooting
-  debug: false
-  
-  # Language file to use
-  language: "en_US"
+# Autosave interval for player progress (minutes)
+autosave-interval: 5
+
+# Max attempts to generate random quests
+max-generation-retries: 5
 ```
 
-### Tier Configuration
+### Tiers (Rarity)
 
-Define quest rarity tiers with custom prefixes and colors:
+Fully customizable quest rarity levels:
 
 ```yaml
 tiers:
   common:
-    prefix: "&7[Common]"
-    color: "&7"
-    
+    display: "&fCommon"
+    prefix: "&7[COMMON]"
+    color: "&f"
+    weight: 40        # Random generation weight
+  
   rare:
-    prefix: "&9[Rare]"
+    display: "&9Rare"
+    prefix: "&9[RARE]"
     color: "&9"
-    
+    weight: 30
+  
   epic:
-    prefix: "&5[Epic]"
+    display: "&5Epic"
+    prefix: "&5[EPIC]"
     color: "&5"
-    
+    weight: 20
+  
   legendary:
-    prefix: "&6[Legendary]"
+    display: "&6Legendary"
+    prefix: "&6[LEGENDARY]"
     color: "&6"
+    weight: 10
 ```
 
-**Add Custom Tiers:**
-```yaml
-tiers:
-  mythic:
-    prefix: "&c&l[MYTHIC]"
-    color: "&c"
-```
+**Add custom tiers** (mythic, divine, etc.) by copying the format.
 
-### Difficulty Configuration
+### Difficulties
 
-Define quest difficulty levels with colors:
+Fully customizable difficulty levels with multipliers:
 
 ```yaml
 difficulties:
   easy:
-    color: "&a"
-    
+    display: "&aEasy"
+    weight: 50
+    multiplier:
+      objective-amount: 0.8   # 20% fewer objectives
+      reward: 0.8             # 20% fewer rewards
+  
   normal:
-    color: "&e"
-    
+    display: "&eNormal"
+    weight: 35
+    multiplier:
+      objective-amount: 1.0   # Normal
+      reward: 1.0
+  
   hard:
-    color: "&c"
-    
+    display: "&cHard"
+    weight: 15
+    multiplier:
+      objective-amount: 1.5   # 50% more objectives
+      reward: 1.5             # 50% more rewards
+  
   nightmare:
-    color: "&4"
+    display: "&4&lNightmare"
+    weight: 5
+    multiplier:
+      objective-amount: 2.0   # 2x objectives
+      reward: 2.5             # 2.5x rewards
 ```
 
-**Add Custom Difficulties:**
-```yaml
-difficulties:
-  impossible:
-    color: "&4&l"
-```
+**Multipliers scale objectives and rewards** based on difficulty.
 
 ### Progress Display
 
-Configure how quest progress is shown to players:
-
 ```yaml
-progress:
-  # Display type: BOSSBAR, ACTIONBAR, or CHAT
-  type: BOSSBAR
+progress-display:
+  mode: "actionbar"    # actionbar, chat, bossbar, none
   
-  # BossBar settings (if type is BOSSBAR)
+  # Chat mode: Show every X updates
+  interval: 5
+  
+  # Bossbar mode settings
   bossbar:
-    color: YELLOW
-    style: PROGRESS
-    
-  # Update frequency in ticks (20 ticks = 1 second)
-  update-interval: 20
+    color: "GREEN"             # PINK, BLUE, RED, GREEN, YELLOW, PURPLE, WHITE
+    style: "SEGMENTED_10"      # SOLID, SEGMENTED_6, SEGMENTED_10, SEGMENTED_12, SEGMENTED_20
+    duration: 5                # Seconds to display
 ```
-
-**BossBar Colors:**
-- `BLUE`, `GREEN`, `PINK`, `PURPLE`, `RED`, `WHITE`, `YELLOW`
-
-**BossBar Styles:**
-- `PROGRESS` - Solid bar
-- `NOTCHED_6` - 6 notches
-- `NOTCHED_10` - 10 notches
-- `NOTCHED_12` - 12 notches
-- `NOTCHED_20` - 20 notches
 
 ### Milestone Notifications
 
-Alert players at specific progress percentages:
+Sound effect when reaching quest milestones (25%, 50%, 75%):
 
 ```yaml
-milestones:
-  enabled: true
-  percentages:
-    - 25
-    - 50
-    - 75
+milestone-sound: "ENTITY_PLAYER_LEVELUP"    # Use "none" to disable
+milestone-sound-volume: 1.0                 # 0.0 to 1.0
+milestone-sound-pitch: 1.0                  # 0.5 to 2.0
 ```
 
-### Quest Limits
-
-Control how many quests players can have active:
-
+Configure per-quest milestones in `quests.yml`:
 ```yaml
-limits:
-  # Max active quests per player (-1 for unlimited)
-  max-active-quests: 5
-  
-  # Max quests in history per player
-  max-quest-history: 100
+milestones: [25, 50, 75]
 ```
 
 ---
 
 ## messages.yml
 
-### Message Structure
-
-All messages support color codes (`&a`, `&b`, etc.) and placeholders:
-
-```yaml
-messages:
-  quest-accepted: "&aYou have accepted quest: &e{quest_name}"
-  quest-completed: "&6✓ Quest Complete: &e{quest_name}"
-  quest-abandoned: "&cYou have abandoned: &e{quest_name}"
-```
+All messages support color codes (`&a`, `&b`, etc.) and placeholders.
 
 ### Available Placeholders
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
-| `{quest_name}` | Quest display name | "Kill 10 Zombies" |
-| `{quest_id}` | Quest identifier | "zombie_slayer" |
-| `{tier}` | Quest tier | "Rare" |
-| `{difficulty}` | Quest difficulty | "Hard" |
-| `{progress}` | Current progress | "7" |
-| `{required}` | Required amount | "10" |
-| `{percentage}` | Progress percentage | "70" |
-| `{player}` | Player name | "Steve" |
-| `{objective_type}` | Objective type | "kill" |
+| Placeholder | Description |
+|-------------|-------------|
+| `{quest_name}` | Quest display name |
+| `{quest_id}` | Quest ID |
+| `{tier}` | Quest tier |
+| `{difficulty}` | Quest difficulty |
+| `{progress}` | Current progress |
+| `{required}` | Required amount |
+| `{percentage}` | Progress percentage |
+| `{player}` | Player name |
 
-### Message Categories
+### Example Messages
 
-**Quest Actions:**
 ```yaml
-quest-accepted: "&aQuest accepted: &e{quest_name}"
-quest-completed: "&6✓ Completed: &e{quest_name}"
-quest-abandoned: "&cAbandoned: &e{quest_name}"
-quest-already-active: "&cYou already have this quest active!"
-quest-already-completed: "&cYou have already completed this quest!"
-```
-
-**Progress Messages:**
-```yaml
+quest-received: "&aYou received quest: &e{quest_name}"
+quest-completed: "&6✓ Quest Complete: &e{quest_name}"
 progress-update: "&e{quest_name} &7- &a{progress}/{required}"
-milestone-reached: "&6Milestone! &e{percentage}% &7complete"
-objective-completed: "&a✓ Objective complete!"
+milestone-reached: "&6Milestone! &e{percentage}% complete"
+quest-not-found: "&cQuest not found: &e{quest_id}"
+no-permission: "&cYou don't have permission!"
 ```
 
-**Error Messages:**
-```yaml
-quest-not-found: "&cQuest not found: &e{quest_id}"
-quest-limit-reached: "&cYou have reached the maximum active quest limit!"
-conditions-not-met: "&cYou do not meet the requirements for this quest."
-insufficient-funds: "&cYou need &e{cost} &cto unlock this quest!"
-```
+Messages auto-regenerate if deleted.
 
 ---
 
 ## quests.yml
 
-See [QUEST-CREATION.md](QUEST-CREATION.md) for detailed quest configuration examples.
+See [QUEST-CREATION.md](QUEST-CREATION.md) for detailed examples.
 
 ### Basic Quest Structure
 
 ```yaml
 quest_id:
-  # Display name (supports color codes)
   display: "&aQuest Name"
-  
-  # Quest tier (from config.yml)
   tier: common
-  
-  # Quest difficulty (from config.yml)
   difficulty: easy
-  
-  # Quest description (optional)
-  description:
-    - "&7Complete tasks to earn rewards!"
-    - "&7Line 2 of description"
-  
-  # Objectives (list of tasks)
   objectives:
     - type: kill
       entity: ZOMBIE
       amount: 10
-  
-  # Rewards
   reward:
     xp: 100
     money: 50
-  
-  # Conditions (optional)
   conditions:
     min-level: 10
 ```
 
 ### Quest Paper Customization
-
-Customize the physical quest item:
 
 ```yaml
 quest_paper:
@@ -261,8 +195,6 @@ quest_paper:
   lore:
     - "&7Tier: {tier}"
     - "&7Difficulty: {difficulty}"
-    - ""
-    - "&eRight-click to complete!"
   enchantments:
     - "DURABILITY:1"
   hide-enchants: true
@@ -272,55 +204,34 @@ quest_paper:
 
 ## random-generator.yml
 
-Configure random quest generation (if using `/sq generate`):
+See [RANDOM-GENERATOR.md](RANDOM-GENERATOR.md) for full documentation.
 
 ```yaml
 generator:
-  # Enable random quest generation
   enabled: true
-  
-  # Objective pools
   objectives:
     kill:
-      entities:
-        - ZOMBIE
-        - SKELETON
-        - CREEPER
+      entities: [ZOMBIE, SKELETON, CREEPER]
       min-amount: 5
       max-amount: 50
-      
-    break_block:
-      blocks:
-        - STONE
-        - DIRT
-        - OAK_LOG
-      min-amount: 10
-      max-amount: 100
-  
-  # Reward ranges
   rewards:
     xp:
       min: 50
       max: 500
-    money:
-      min: 10
-      max: 200
 ```
 
 ---
 
-## Color Codes Reference
-
-### Standard Minecraft Color Codes
+## Color Codes
 
 | Code | Color | Code | Format |
 |------|-------|------|--------|
-| `&0` | Black | `&k` | Obfuscated |
-| `&1` | Dark Blue | `&l` | **Bold** |
-| `&2` | Dark Green | `&m` | ~~Strikethrough~~ |
-| `&3` | Dark Aqua | `&n` | Underline |
-| `&4` | Dark Red | `&o` | *Italic* |
-| `&5` | Dark Purple | `&r` | Reset |
+| `&0` | Black | `&l` | **Bold** |
+| `&1` | Dark Blue | `&m` | ~~Strike~~ |
+| `&2` | Dark Green | `&n` | Underline |
+| `&3` | Dark Aqua | `&o` | *Italic* |
+| `&4` | Dark Red | `&r` | Reset |
+| `&5` | Dark Purple | | |
 | `&6` | Gold | | |
 | `&7` | Gray | | |
 | `&8` | Dark Gray | | |
@@ -332,137 +243,8 @@ generator:
 | `&e` | Yellow | | |
 | `&f` | White | | |
 
-### Hex Colors (1.16+)
-
-Use hex colors with `&#RRGGBB` format:
-```yaml
-display: "&#FF5733My Quest"
-```
+**Hex colors (1.16+)**: `&#RRGGBB`
 
 ---
 
-## Best Practices
-
-### Performance
-
-1. **Autosave Interval**: 5-10 minutes for most servers
-2. **Progress Updates**: Default (20 ticks) is optimal
-3. **Quest Limits**: Set reasonable limits (5-10 active quests)
-
-### Customization
-
-1. **Color Consistency**: Use consistent colors for tiers/difficulties
-2. **Clear Messages**: Keep messages concise and informative
-3. **Balanced Rewards**: Scale rewards with difficulty
-
-### Localization
-
-1. **Multiple Languages**: Copy `messages.yml` to `messages_es.yml` for Spanish, etc.
-2. **Character Support**: Use UTF-8 encoding for special characters
-3. **Testing**: Test all messages in-game before deploying
-
----
-
-## Troubleshooting
-
-### Config Not Loading
-
-1. Check for YAML syntax errors (use [YAML validator](https://www.yamllint.com/))
-2. Ensure proper indentation (2 spaces, no tabs)
-3. Check server console for error messages
-
-### Messages Not Showing
-
-1. Verify placeholder names are correct
-2. Check color code formatting
-3. Ensure message key exists in `messages.yml`
-
-### Quests Not Working
-
-1. Validate quest structure in `quests.yml`
-2. Check objective types are valid
-3. Verify material/entity names are correct (uppercase)
-
----
-
-## Example Configurations
-
-### Minimal Setup
-
-```yaml
-# config.yml
-settings:
-  autosave-interval: 5
-
-tiers:
-  common:
-    prefix: "&7[Common]"
-    color: "&7"
-
-difficulties:
-  easy:
-    color: "&a"
-
-progress:
-  type: BOSSBAR
-```
-
-### Advanced Setup
-
-```yaml
-# config.yml
-settings:
-  autosave-interval: 5
-  debug: false
-
-tiers:
-  common:
-    prefix: "&7[Common]"
-    color: "&7"
-  rare:
-    prefix: "&9[Rare]"
-    color: "&9"
-  epic:
-    prefix: "&5[Epic]"
-    color: "&5"
-  legendary:
-    prefix: "&6[Legendary]"
-    color: "&6"
-
-difficulties:
-  easy:
-    color: "&a"
-  normal:
-    color: "&e"
-  hard:
-    color: "&c"
-  nightmare:
-    color: "&4"
-
-progress:
-  type: BOSSBAR
-  bossbar:
-    color: YELLOW
-    style: PROGRESS
-  update-interval: 20
-
-milestones:
-  enabled: true
-  percentages: [25, 50, 75]
-
-limits:
-  max-active-quests: 5
-  max-quest-history: 100
-```
-
----
-
-## Need Help?
-
-- **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
-- **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
-- **Wiki**: [GitHub Wiki](https://github.com/AlternativeSoap/SoapsQuest/wiki)
-
----
-
-[← Back to README](README.md) | [Quest Creation Guide →](QUEST-CREATION.md)
+**[← Back to README](README.md)** | **[Quest Creation →](QUEST-CREATION.md)**

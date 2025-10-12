@@ -2,8 +2,6 @@
 
 Complete guide to using and configuring the SoapsQuest random quest generation system.
 
-> ⚠️ **IMPORTANT:** This document has been updated to reflect the **actual implementation** in the plugin. Previous versions of this documentation contained examples that don't match the plugin code.
-
 ---
 
 ## Table of Contents
@@ -12,8 +10,6 @@ Complete guide to using and configuring the SoapsQuest random quest generation s
 2. [Using the Generator](#using-the-generator)
 3. [Available Objectives](#available-objectives)
 4. [Configuration Format](#configuration-format)
-5. [Common Mistakes](#common-mistakes)
-6. [Examples](#examples)
 7. [Troubleshooting](#troubleshooting)
 
 ---
@@ -717,40 +713,131 @@ multi-objective:
 
 ### Conditions
 
-Add random conditions to generated quests:
+**✅ NOW IMPLEMENTED** - Add random conditions to generated quests:
 
 ```yaml
 conditions:
   enabled: true
   
-  level-requirement:
+  # Progress conditions (checked during quest)
+  min-level:
     enabled: true
-    chance: 50  # 50% chance
-    
-    min-level-by-tier:
+    chance: 40          # 40% of quests will have min-level requirement
+    by-tier:            # Tier-based values
       common: 0
       rare: 10
       epic: 25
       legendary: 50
+    by-difficulty:      # Difficulty-based values (higher priority than tier)
+      easy: 0
+      normal: 5
+      hard: 15
+      nightmare: 30
   
-  money-cost:
+  max-level:
+    enabled: false
+    chance: 10
+    default: 100
+  
+  min-money:
     enabled: true
-    chance: 20  # 20% chance
-    
-    cost-by-tier:
+    chance: 25          # 25% of quests require minimum balance
+    by-tier:
       common: 100
       rare: 500
       epic: 2000
       legendary: 10000
   
-  world-restriction:
-    enabled: true
-    chance: 15  # 15% chance
-    
-    worlds:
+  world:
+    enabled: false
+    chance: 15
+    allowed-worlds:
       - world
       - world_nether
       - world_the_end
+  
+  gamemode:
+    enabled: false
+    chance: 20
+    allowed-modes:
+      - SURVIVAL
+      - ADVENTURE
+  
+  time:
+    enabled: false
+    chance: 10
+    options:
+      - DAY
+      - NIGHT
+  
+  permission:
+    enabled: false
+    chance: 30
+    by-tier:
+      common: "soapsquest.tier.common"
+      rare: "soapsquest.tier.rare"
+      epic: "soapsquest.tier.epic"
+      legendary: "soapsquest.tier.legendary"
+  
+  # Locking conditions (consume resources to unlock)
+  cost:
+    enabled: true
+    chance: 20          # 20% of quests cost money to unlock
+    by-tier:
+      common: 50
+      rare: 250
+      epic: 1000
+      legendary: 5000
+  
+  item:
+    enabled: false
+    chance: 15
+    consume-item: true
+    by-tier:
+      common: "IRON_INGOT:5"
+      rare: "GOLD_INGOT:3"
+      epic: "DIAMOND:2"
+      legendary: "NETHERITE_INGOT:1"
+  
+  # Limits
+  active-limit:
+    enabled: false
+    chance: 5
+    default: 3
+  
+  # PlaceholderAPI conditions
+  placeholder:
+    enabled: false
+    chance: 10
+    expressions:
+      - "%player_health% >= 15"
+      - "%player_food_level% >= 10"
+      - "%vault_eco_balance% >= 1000"
+```
+
+**How It Works:**
+1. Each condition has an `enabled` flag and a `chance` percentage
+2. When generating a quest, the plugin rolls for each enabled condition
+3. If the roll succeeds, that condition is added to the quest
+4. Values are selected from `by-tier` or `by-difficulty` maps
+5. `by-difficulty` takes priority over `by-tier` when both exist
+
+**Example Generated Quest with Conditions:**
+```yaml
+quest_rare_kill_12345:
+  display: "&9Elite Zombie Slayer"
+  tier: rare
+  difficulty: normal
+  objectives:
+    - type: kill
+      entity: ZOMBIE
+      amount: 25
+  reward:
+    xp: 175
+    money: 250
+  conditions:         # ← Randomly added based on configuration
+    min-level: 10     # From min-level.by-tier.rare
+    cost: 250         # From cost.by-tier.rare (must pay $250 to unlock)
 ```
 
 ---
@@ -969,24 +1056,6 @@ quest_legendary_break_67890:
 - At least one objective configured in `objectives:` section
 - Objective names match format: `objective_name:` not `type:`
 - Use correct field names (`blocks` not `materials` for break/place)
-
-### Quest Validation Errors
-
-**Common Issues:**
-```
-Unknown objective type: 'break_block'
-```
-**Fix:** Use `break` instead of `break_block`
-
-```
-Missing required fields for 'trade' objective: item
-```
-**Fix:** Add `item: ANY` or specific item to trade objective
-
-```
-Missing required fields for 'enchant' objective: item
-```
-**Fix:** Add `item: ANY` or specific item to enchant objective
 
 ### Quests Not Working
 

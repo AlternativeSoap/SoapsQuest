@@ -11,7 +11,8 @@ Learn how to create custom quests for SoapsQuest with detailed examples and expl
 3. [Reward System](#reward-system)
 4. [Conditions & Requirements](#conditions--requirements)
 5. [Advanced Features](#advanced-features)
-6. [Example Quests](#example-quests)
+6. [Random Quest Generation](#random-quest-generation)
+7. [Example Quests](#example-quests)
 
 ---
 
@@ -36,8 +37,6 @@ quest_id:
 | Field | Type | Description |
 |-------|------|-------------|
 | `display` | String | Quest name shown to players (supports color codes) |
-| `tier` | String | Quest rarity tier (from config.yml) |
-| `difficulty` | String | Quest difficulty (from config.yml) |
 | `objectives` | List | List of objectives to complete |
 | `reward` | Object | Rewards given on completion |
 
@@ -45,10 +44,13 @@ quest_id:
 
 | Field | Type | Description |
 |-------|------|-------------|
+| `tier` | String | Quest rarity tier (affects random generation) |
+| `difficulty` | String | Quest difficulty (scales objectives/rewards) |
 | `description` | List | Multi-line description |
-| `sequential` | Boolean | Force objectives to be completed in order |
-| `conditions` | Object | Requirements to accept/progress quest |
-| `quest_paper` | Object | Customize the physical quest item |
+| `sequential` | Boolean | Complete objectives in order |
+| `lock-to-player` | Boolean | Bind quest to first player who progresses |
+| `milestones` | List | Progress percentages for notifications |
+| `quest_paper` | Object | Customize physical quest item |
 
 ---
 
@@ -57,34 +59,14 @@ quest_id:
 ### Combat Objectives
 
 #### Kill Entities
-
-Kill specific entities or entity types:
-
 ```yaml
 objectives:
   - type: kill
-    entity: ZOMBIE  # Specific entity
+    entity: ZOMBIE  # ZOMBIE, SKELETON, CREEPER, ANY, HOSTILE, PASSIVE
     amount: 10
 ```
 
-**Entity Options:**
-- Specific: `ZOMBIE`, `SKELETON`, `CREEPER`, `COW`, etc.
-- Any: `ANY` - Any entity
-- Category: `HOSTILE` - Hostile mobs only
-- Category: `PASSIVE` - Passive mobs only
-
-**Example - Kill Any Hostile:**
-```yaml
-objectives:
-  - type: kill
-    entity: HOSTILE
-    amount: 20
-```
-
-#### Kill MythicMobs
-
-Requires MythicMobs plugin:
-
+#### Kill MythicMobs (requires MythicMobs plugin)
 ```yaml
 objectives:
   - type: kill_mythicmob
@@ -93,20 +75,14 @@ objectives:
 ```
 
 #### Deal Damage
-
-Deal a specific amount of damage:
-
 ```yaml
 objectives:
   - type: damage
-    entity: ZOMBIE  # Optional: specific entity
-    amount: 100  # Damage in half-hearts
+    entity: ZOMBIE  # Optional filter
+    amount: 100  # Half-hearts
 ```
 
-#### Death Objective
-
-Die a certain number of times (for hardcore challenges):
-
+#### Death Count
 ```yaml
 objectives:
   - type: death
@@ -114,63 +90,42 @@ objectives:
 ```
 
 #### Ranged Combat
-
-Shoot arrows or projectiles:
-
 ```yaml
 objectives:
   - type: bowshoot
     amount: 50
-```
-
-```yaml
-objectives:
   - type: projectile
-    projectile: SNOWBALL  # Optional: specific projectile
+    projectile: SNOWBALL  # Optional: SNOWBALL, EGG, ENDER_PEARL
     amount: 25
 ```
-
----
 
 ### Building Objectives
 
 #### Break Blocks
-
-Break specific blocks:
-
 ```yaml
 objectives:
-  - type: break_block
-    material: STONE
+  - type: break
+    material: STONE  # Single material
     amount: 100
 ```
-
-**Material Lists:**
 ```yaml
 objectives:
-  - type: break_block
-    material:
-      - OAK_LOG
-      - BIRCH_LOG
-      - SPRUCE_LOG
+  - type: break
+    material:  # Multiple materials
+      - STONE
+      - COBBLESTONE
     amount: 50
 ```
 
 #### Place Blocks
-
-Place specific blocks:
-
 ```yaml
 objectives:
-  - type: place_block
+  - type: place
     material: COBBLESTONE
     amount: 200
 ```
 
 #### Interact with Blocks
-
-Right-click specific blocks:
-
 ```yaml
 objectives:
   - type: interact
@@ -178,14 +133,9 @@ objectives:
     amount: 5
 ```
 
----
-
 ### Collection Objectives
 
 #### Collect Items
-
-Pick up items from the ground:
-
 ```yaml
 objectives:
   - type: collect
@@ -194,9 +144,6 @@ objectives:
 ```
 
 #### Craft Items
-
-Craft specific items:
-
 ```yaml
 objectives:
   - type: craft
@@ -205,9 +152,6 @@ objectives:
 ```
 
 #### Smelt Items
-
-Smelt items in a furnace:
-
 ```yaml
 objectives:
   - type: smelt
@@ -216,31 +160,22 @@ objectives:
 ```
 
 #### Fish
-
-Catch fish or treasures:
-
 ```yaml
 objectives:
   - type: fish
-    material: COD  # Optional: specific catch
+    material: COD  # Optional: COD, SALMON, etc.
     amount: 20
 ```
 
 #### Brew Potions
-
-Brew potions:
-
 ```yaml
 objectives:
   - type: brew
-    potion: STRENGTH  # Optional: specific potion type
+    potion: STRENGTH  # Optional potion type
     amount: 3
 ```
 
 #### Enchant Items
-
-Enchant items at an enchanting table:
-
 ```yaml
 objectives:
   - type: enchant
@@ -248,9 +183,6 @@ objectives:
 ```
 
 #### Drop Items
-
-Drop specific items:
-
 ```yaml
 objectives:
   - type: drop
@@ -258,14 +190,9 @@ objectives:
     amount: 64
 ```
 
----
-
 ### Survival Objectives
 
 #### Consume Items
-
-Eat or drink items:
-
 ```yaml
 objectives:
   - type: consume
@@ -274,9 +201,6 @@ objectives:
 ```
 
 #### Tame Animals
-
-Tame tameable mobs:
-
 ```yaml
 objectives:
   - type: tame
@@ -285,9 +209,6 @@ objectives:
 ```
 
 #### Trade with Villagers
-
-Trade with villagers:
-
 ```yaml
 objectives:
   - type: trade
@@ -295,9 +216,6 @@ objectives:
 ```
 
 #### Shear Sheep
-
-Shear sheep:
-
 ```yaml
 objectives:
   - type: shear
@@ -305,9 +223,6 @@ objectives:
 ```
 
 #### Sleep in Bed
-
-Sleep in a bed:
-
 ```yaml
 objectives:
   - type: sleep
@@ -315,23 +230,15 @@ objectives:
 ```
 
 #### Heal Health
-
-Regenerate health:
-
 ```yaml
 objectives:
   - type: heal
     amount: 20  # Half-hearts
 ```
 
----
-
 ### Movement Objectives
 
 #### Walk/Run Distance
-
-Travel a specific distance:
-
 ```yaml
 objectives:
   - type: move
@@ -339,9 +246,6 @@ objectives:
 ```
 
 #### Jump
-
-Jump a number of times:
-
 ```yaml
 objectives:
   - type: jump
@@ -349,24 +253,16 @@ objectives:
 ```
 
 #### Use Vehicles
-
-Travel in boats, minecarts, or horses:
-
 ```yaml
 objectives:
   - type: vehicle
-    vehicle: BOAT  # Optional: specific vehicle
-    distance: 500  # Blocks
+    vehicle: BOAT  # Optional: BOAT, MINECART, HORSE
+    distance: 500
 ```
-
----
 
 ### Leveling Objectives
 
 #### Reach Level
-
-Reach a specific XP level:
-
 ```yaml
 objectives:
   - type: reachlevel
@@ -374,44 +270,23 @@ objectives:
 ```
 
 #### Gain Levels
-
-Gain a number of levels:
-
 ```yaml
 objectives:
   - type: gainlevel
     amount: 5
 ```
 
-#### Generic Level
-
-Alternative level objective:
-
-```yaml
-objectives:
-  - type: level
-    amount: 10
-```
-
----
-
 ### Miscellaneous Objectives
 
 #### Send Chat Messages
-
-Send messages in chat:
-
 ```yaml
 objectives:
   - type: chat
-    message: "Hello World"  # Optional: specific message
+    message: "Hello World"  # Optional specific message
     amount: 5
 ```
 
 #### Launch Fireworks
-
-Launch fireworks:
-
 ```yaml
 objectives:
   - type: firework
@@ -419,9 +294,6 @@ objectives:
 ```
 
 #### Execute Commands
-
-Run specific commands:
-
 ```yaml
 objectives:
   - type: command
@@ -429,10 +301,7 @@ objectives:
     amount: 1
 ```
 
-#### PlaceholderAPI
-
-Use PAPI placeholders as objectives:
-
+#### PlaceholderAPI (requires PlaceholderAPI)
 ```yaml
 objectives:
   - type: placeholder
@@ -445,18 +314,12 @@ objectives:
 ## Reward System
 
 ### XP Rewards
-
-Give experience points:
-
 ```yaml
 reward:
   xp: 100
 ```
 
-### Money Rewards
-
-Give economy money (requires Vault):
-
+### Money Rewards (requires Vault)
 ```yaml
 reward:
   money: 500
@@ -464,8 +327,7 @@ reward:
 
 ### Item Rewards
 
-#### Simple Items
-
+#### Basic Items
 ```yaml
 reward:
   items:
@@ -473,8 +335,7 @@ reward:
       amount: 5
 ```
 
-#### Custom Items
-
+#### Advanced Items
 ```yaml
 reward:
   items:
@@ -482,90 +343,60 @@ reward:
       amount: 1
       name: "&6Legendary Blade"
       lore:
-        - "&7A powerful weapon"
         - "&7Forged by heroes"
+        - "&7Unbreakable weapon"
       enchantments:
         - "SHARPNESS:5"
         - "UNBREAKING:3"
+      flags:  # Item flags
+        - "HIDE_ENCHANTS"
+      unbreakable: true  # Makes item unbreakable
+      chance: 100  # Drop chance 0-100%
 ```
 
 #### Chance-Based Rewards
-
 ```yaml
 reward:
   items:
     - material: DIAMOND
       amount: 3
       chance: 100  # Always drops
-      
     - material: NETHERITE_INGOT
       amount: 1
       chance: 50  # 50% chance
-      
-    - material: DRAGON_EGG
-      amount: 1
-      chance: 1  # 1% chance (rare)
 ```
 
 ### Command Rewards
-
-Execute console commands:
-
 ```yaml
 reward:
   commands:
     - "give {player} minecraft:elytra 1"
     - "tp {player} 0 100 0"
+    - "broadcast {player} completed quest!"
 ```
 
-**Available Placeholders:**
-- `{player}` - Player name
-- `{quest_id}` - Quest identifier
-- `{quest_name}` - Quest display name
-
-### Combined Rewards
-
-```yaml
-reward:
-  xp: 500
-  money: 1000
-  items:
-    - material: DIAMOND_SWORD
-      name: "&aReward Sword"
-      chance: 100
-  commands:
-    - "give {player} minecraft:golden_apple 5"
-```
+**Placeholders:** `{player}`, `{quest_id}`, `{quest_name}`
 
 ---
 
 ## Conditions & Requirements
 
-### Progress Conditions
-
-These are checked while progressing objectives:
+### Progress Conditions (checked during gameplay)
 
 #### Level Requirements
-
 ```yaml
 conditions:
-  min-level: 10  # Minimum level
-  max-level: 30  # Maximum level
+  min-level: 10
+  max-level: 30
 ```
 
-#### Money Requirements
-
-Requires Vault:
-
+#### Money Requirements (requires Vault)
 ```yaml
 conditions:
-  min-money: 1000  # Minimum balance
+  min-money: 1000
 ```
 
 #### World Restrictions
-
-Only progress in specific worlds:
-
 ```yaml
 conditions:
   world:
@@ -574,7 +405,6 @@ conditions:
 ```
 
 #### Gamemode Restrictions
-
 ```yaml
 conditions:
   gamemode:
@@ -583,23 +413,18 @@ conditions:
 ```
 
 #### Time Restrictions
-
 ```yaml
 conditions:
   time: DAY  # DAY or NIGHT
 ```
 
 #### Permission Requirements
-
 ```yaml
 conditions:
   permission: "quests.vip"
 ```
 
-#### PlaceholderAPI Conditions
-
-Requires PlaceholderAPI:
-
+#### PlaceholderAPI Conditions (requires PlaceholderAPI)
 ```yaml
 conditions:
   placeholder:
@@ -607,38 +432,25 @@ conditions:
     value: ">=50"  # Operators: ==, !=, >, <, >=, <=
 ```
 
-### Locking Conditions
+### Locking Conditions (consume resources to unlock)
 
-These lock the quest until paid/unlocked:
-
-#### Money Cost
-
-Pay to unlock quest:
-
+#### Money Cost (requires Vault)
 ```yaml
 conditions:
-  cost: 5000  # Money required
+  cost: 5000
 ```
 
 #### Item Cost
-
-Consume items to unlock:
-
 ```yaml
 conditions:
-  item:
-    - material: DIAMOND
-      amount: 10
+  item: "DIAMOND:10,EMERALD:5"  # MATERIAL:AMOUNT
   consume-item: true  # Remove items when unlocking
 ```
 
 ### Active Quest Limits
-
-Limit concurrent quests with same ID:
-
 ```yaml
 conditions:
-  active-limit: 1  # Only 1 quest with this ID can be active
+  active-limit: 1  # Max concurrent quests with this ID
 ```
 
 ---
@@ -646,15 +458,11 @@ conditions:
 ## Advanced Features
 
 ### Sequential Objectives
-
-Force objectives to be completed in order:
-
+Complete objectives in order (one at a time):
 ```yaml
-my_quest:
-  display: "&aOrdered Quest"
-  tier: rare
-  difficulty: normal
-  sequential: true  # Enable sequential mode
+sequential_quest:
+  display: "&aApprentice Training"
+  sequential: true
   objectives:
     - type: collect
       material: OAK_LOG
@@ -665,63 +473,145 @@ my_quest:
     - type: craft
       material: WOODEN_PICKAXE
       amount: 1
-  reward:
-    xp: 100
 ```
 
 ### Multi-Objective Quests
-
 Complete multiple objectives (any order):
-
 ```yaml
-gathering_quest:
+multi_quest:
   display: "&eGatherer"
-  tier: common
-  difficulty: easy
   objectives:
-    - type: break_block
+    - type: break
       material: STONE
       amount: 100
-    - type: break_block
-      material: OAK_LOG
-      amount: 50
     - type: collect
       material: WHEAT
       amount: 32
-  reward:
-    money: 500
 ```
 
-### Custom Quest Papers
-
-Customize the physical quest item:
-
+### Lock-to-Player System
+Bind quest to first player who makes progress:
 ```yaml
-my_quest:
-  display: "&cSpecial Quest"
-  tier: legendary
-  difficulty: hard
-  quest_paper:
-    material: ENCHANTED_BOOK
-    name: "&6&l✦ {quest_name} ✦"
-    lore:
-      - "&7Tier: {tier}"
-      - "&7Difficulty: {difficulty}"
-      - ""
-      - "&e&lOBJECTIVES:"
-      - "&7- Complete all tasks"
-      - ""
-      - "&aRight-click to complete!"
-    enchantments:
-      - "DURABILITY:1"
-    hide-enchants: true
-    glowing: true
+personal_quest:
+  display: "&cPersonal Challenge"
+  lock-to-player: true  # Quest becomes non-tradeable
   objectives:
     - type: kill
       entity: ENDER_DRAGON
       amount: 1
-  reward:
-    xp: 10000
+```
+
+### Custom Quest Papers
+Override default PAPER material and appearance:
+```yaml
+special_quest:
+  display: "&5Legendary Quest"
+  quest_paper:
+    material: ENCHANTED_BOOK
+    name: "&6✦ {quest_name} ✦"
+    lore:
+      - "&7Tier: {tier}"
+      - "&7Difficulty: {difficulty}"
+      - "&eRight-click to complete!"
+    enchantments:
+      - "DURABILITY:1"
+    glowing: true  # Makes item glow
+    hide-enchants: true
+```
+
+### Milestone Notifications
+Show progress messages at specific percentages:
+```yaml
+milestone_quest:
+  display: "&aProgress Quest"
+  milestones: [25, 50, 75]  # Notify at 25%, 50%, 75% complete
+  objectives:
+    - type: break
+      material: STONE
+      amount: 1000
+```
+
+### Difficulty Scaling
+Quests automatically scale based on difficulty (configured in config.yml):
+- **Easy**: 80% objective amount, 80% rewards
+- **Normal**: 100% objective amount, 100% rewards  
+- **Hard**: 150% objective amount, 150% rewards
+- **Nightmare**: 200% objective amount, 250% rewards
+
+---
+
+## Random Quest Generation
+
+Generate quests automatically with `/sq generate [type]`:
+
+### Generation Types
+- **single**: One objective
+- **multi**: 2-4 objectives (any order)
+- **sequence**: 2-4 objectives (in order)
+
+### Configuration (random-generator.yml)
+
+#### Objective Weights
+Control how often objectives appear:
+```yaml
+objective-weights:
+  kill: 40      # Most common
+  break: 30
+  collect: 15
+  craft: 15
+  move: 10      # Less common
+  firework: 3   # Rare
+```
+
+#### Difficulty Scaling
+Different amounts per difficulty:
+```yaml
+objectives:
+  kill_zombies:
+    objective: kill
+    entities: [ZOMBIE]
+    amount-by-difficulty:
+      easy: [10, 25]
+      normal: [20, 40]
+      hard: [40, 75]
+      nightmare: [75, 150]
+```
+
+#### Reward Pools
+Weighted random rewards:
+```yaml
+reward-pool:
+  items:
+    selection-mode: "weighted"
+    pool:
+      - material: IRON_INGOT
+        amount: [1, 5]
+        tiers: [common, rare]
+        weight: 50
+      - material: DIAMOND
+        amount: [1, 2]
+        tiers: [epic, legendary]
+        weight: 15
+```
+
+#### Conditions
+Add requirements automatically:
+```yaml
+conditions:
+  min-level:
+    enabled: true
+    chance: 40  # 40% of quests get level requirements
+    by-tier:
+      common: 0
+      rare: 10
+      epic: 25
+      legendary: 50
+```
+
+### Generated Quest Saving
+```yaml
+save-generated-quests: true
+save-location: "generated.yml"  # Saved to plugins/SoapsQuest/generated.yml
 ```
 
 ---
