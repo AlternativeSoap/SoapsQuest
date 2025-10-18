@@ -1,31 +1,37 @@
-# 🔒 Permissions
+# Permissions
 
-Complete permission reference for SoapsQuest.
+Permission reference for SoapsQuest.
 
 ---
 
 ## Permission Nodes
 
-### Player Permissions (Default: True)
+### Player Permissions
 
-| Permission | Description |
-|------------|-------------|
-| `soapsquest.use` | Access to basic commands |
-| `soapsquest.list` | View quest list |
-| `soapsquest.list.click` | Click to accept quests from list |
+| Permission | Default | Description |
+|------------|---------|-------------|
+| `soapsquest.use` | ✅ All | Basic command access |
+| `soapsquest.list` | ✅ All | View quest list |
+| `soapsquest.list.click` | ✅ All | Click to accept quests from list |
+| `soapsquest.browse` | ✅ All | Open quest browser GUI |
+| `soapsquest.statistics` | ✅ All | View quest statistics |
+| `soapsquest.leaderboard` | ✅ All | View quest leaderboard |
 
-### Admin Permissions (Default: Op)
+### Admin Permissions
 
-| Permission | Description | Command |
-|------------|-------------|---------|
-| `soapsquest.give` | Give quests to players | `/sq give` |
-| `soapsquest.reload` | Reload configuration | `/sq reload` |
-| `soapsquest.generate` | Generate random quests | `/sq generate` |
-| `soapsquest.addreward` | Add rewards to quests | `/sq addreward` |
-| `soapsquest.removereward` | Remove rewards from quests | `/sq removereward` |
-| `soapsquest.admin` | Access to listreward | `/sq listreward` |
+| Permission | Default | Description |
+|------------|---------|-------------|
+| `soapsquest.give` | ❌ Op | Give quests to players |
+| `soapsquest.editor` | ❌ Op | Open quest editor GUI |
+| `soapsquest.reload` | ❌ Op | Reload configuration |
+| `soapsquest.debug` | ❌ Op | Toggle debug mode |
+| `soapsquest.generate` | ❌ Op | Generate random quests |
+| `soapsquest.remove` | ❌ Op | Delete quests |
+| `soapsquest.addreward` | ❌ Op | Add rewards to quests |
+| `soapsquest.removereward` | ❌ Op | Remove rewards from quests |
+| `soapsquest.admin` | ❌ Op | List quest rewards |
 
-### Wildcard Permissions
+### Wildcard
 
 | Permission | Description |
 |------------|-------------|
@@ -35,13 +41,11 @@ Complete permission reference for SoapsQuest.
 
 ## Custom Quest Permissions
 
-Add permission requirements to individual quests:
+Restrict quest access using permission requirements:
 
 ```yaml
 vip_quest:
   display: "&6VIP Quest"
-  tier: epic
-  difficulty: hard
   conditions:
     permission: "soapsquest.vip"
   # ...
@@ -52,70 +56,27 @@ Only players with `soapsquest.vip` can:
 - Accept the quest
 - Progress through it
 
-### Examples
-
-```yaml
-# VIP-only quest
-vip_quest:
-  conditions:
-    permission: "soapsquest.vip"
-
-# Donor-only quest
-donor_quest:
-  conditions:
-    permission: "soapsquest.donor"
-
-# Use any permission name
-custom_quest:
-  conditions:
-    permission: "myserver.customrank"
-```
-
----
-
-## Permission Setup
-
-### LuckPerms
-
-```bash
-# Give all permissions to admin group
-/lp group admin permission set soapsquest.* true
-
-# Give quest giving to moderators
-/lp group moderator permission set soapsquest.give true
-
-# Give VIP quest access
-/lp group vip permission set soapsquest.vip true
-```
-
-### PermissionsEx
-
-```bash
-# Admin permissions
-/pex group admin add soapsquest.*
-
-# Moderator permissions
-/pex group moderator add soapsquest.give
-
-# VIP quest access
-/pex group vip add soapsquest.vip
-```
-
 ---
 
 ## Permission Matrix
 
-| Action | Permission | Admin | Moderator | Player |
-|--------|------------|-------|-----------|--------|
-| View commands | `soapsquest.use` | ✅ | ✅ | ✅ |
-| List quests | `soapsquest.list` | ✅ | ✅ | ✅ |
-| Click to accept | `soapsquest.list.click` | ✅ | ✅ | ✅ |
-| Give quests | `soapsquest.give` | ✅ | ✅ | ❌ |
-| Reload config | `soapsquest.reload` | ✅ | ❌ | ❌ |
-| Generate quests | `soapsquest.generate` | ✅ | ❌ | ❌ |
-| Manage rewards | `soapsquest.addreward` | ✅ | ❌ | ❌ |
-| All permissions | `soapsquest.*` | ✅ | ❌ | ❌ |
+| Action | Permission | Admin | Player |
+|--------|------------|-------|--------|
+| View commands | `soapsquest.use` | ✅ | ✅ |
+| List quests | `soapsquest.list` | ✅ | ✅ |
+| Click to accept | `soapsquest.list.click` | ✅ | ✅ |
+| Browse GUI | `soapsquest.browse` | ✅ | ✅ |
+| View statistics | `soapsquest.statistics` | ✅ | ✅ |
+| View leaderboard | `soapsquest.leaderboard` | ✅ | ✅ |
+| Give quests | `soapsquest.give` | ✅ | ❌ |
+| Quest editor | `soapsquest.editor` | ✅ | ❌ |
+| Reload config | `soapsquest.reload` | ✅ | ❌ |
+| Debug mode | `soapsquest.debug` | ✅ | ❌ |
+| Generate quests | `soapsquest.generate` | ✅ | ❌ |
+| Delete quests | `soapsquest.remove` | ✅ | ❌ |
+| Manage rewards | `soapsquest.addreward` | ✅ | ❌ |
+| All permissions | `soapsquest.*` | ✅ | ❌ |
 
 ---
 
-**[⬅️ Back to README](README.md)**
+**[← Back to README](README.md)** | **[Commands →](COMMANDS.md)**

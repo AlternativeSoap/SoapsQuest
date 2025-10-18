@@ -1,63 +1,118 @@
-# 📚 Wiki
+# Wiki
 
-Complete documentation hub for SoapsQuest.
+Documentation hub for SoapsQuest.
 
 ---
 
 ## Getting Started
 
-- [Installation](README.md#-installation)
-- [Quick Start](README.md#-quick-start)
-- [Requirements](README.md#-requirements)
+| Topic | Description |
+|-------|-------------|
+| [Installation](#installation) | How to install SoapsQuest |
+| [Quick Start](#quick-start) | Create and give your first quest |
+| [Requirements](#requirements) | Server and dependency requirements |
+
+## Core Documentation
+
+| Guide | Description |
+|-------|-------------|
+| **[Commands](COMMANDS.md)** | All available commands |
+| **[Permissions](PERMISSIONS.md)** | Permission nodes and access control |
+| **[Configuration](CONFIGURATION.md)** | Complete configuration guide |
+| **[Quest Creation](QUEST-CREATION.md)** | Create custom quests |
+| **[Random Generator](RANDOM-GENERATOR.md)** | Random quest generation |
+| **[PlaceholderAPI](PLACEHOLDERAPI.md)** | Placeholder reference |
+| **[Changelog](CHANGELOG.md)** | Version history |
 
 ---
 
-## Documentation
+## Installation
 
-### Core Guides
+1. Download `SoapsQuest-1.0.0-BETA.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+2. Place in `plugins/` folder  
+3. Restart server
+4. Edit quest configurations
+5. Give quests to players
 
-- **[Commands](COMMANDS.md)** - All available commands
-- **[Permissions](PERMISSIONS.md)** - Permission nodes and setup
-- **[Configuration](CONFIGURATION.md)** - Config files and settings
-- **[Quest Creation](QUEST-CREATION.md)** - Create custom quests with examples
-- **[Random Generator](RANDOM-GENERATOR.md)** - Random quest generation
+## Quick Start
 
-### Additional
+### Create a Quest
 
-- **[Changelog](CHANGELOG.md)** - Version history
+Edit `plugins/SoapsQuest/quests.yml`:
+
+```yaml
+my_quest:
+  display: "&aZombie Slayer"
+  tier: common
+  difficulty: easy
+  objectives:
+    - type: kill
+      target: ZOMBIE
+      amount: 10
+  reward:
+    xp: 100
+    money: 50
+```
+
+### Give to Player
+
+```
+/sq give <player> my_quest
+```
+
+### Players Accept Quests
+
+```
+/sq list
+```
+
+Click to accept.
+
+## Requirements
+
+### Required
+- **Server**: Paper 1.21.8+
+- **Java**: 21+
+
+### Optional
+- **Vault** - Economy
+- **PlaceholderAPI** - Placeholders and leaderboards  
+- **MythicMobs** - MythicMobs objectives
 
 ---
 
-## Features Overview
+## Features
 
 ### Quest System
-- **Physical Quest Papers** - Quests as tangible items in inventories
-- **33+ Objective Types** - Combat, building, collection, survival, movement, leveling
-- **Multi-Objective Quests** - Multiple tasks per quest with sequential support
-- **Real-time Progress Tracking** - BossBar, action bar, or chat notifications
+- Physical quest papers
+- 31 objective types
+- Multi-objective support
+- Sequential quest support
+- Progress tracking (BossBar/ActionBar/Chat)
 
 ### Customization
-- **Tier System** - Common, Rare, Epic, Legendary (fully customizable)
-- **Difficulty Levels** - Easy, Normal, Hard, Nightmare with multipliers
-- **Custom Quest Papers** - Materials, names, lore, enchantments
-- **Milestone Notifications** - Alerts at custom progress percentages
+- Tier system (fully customizable)
+- Difficulty levels (fully customizable)
+- Custom quest papers
+- Milestone notifications
 
 ### Rewards & Conditions
-- **4 Reward Types** - XP, money (Vault), items, commands
-- **12 Condition Types** - Level, money, world, permissions, PlaceholderAPI
-- **Quest Locking** - Money or item requirements to unlock
-- **Active Limits** - Restrict concurrent quests per player
+- XP, money, items, commands
+- Level, money, world, gamemode, time, permission requirements
+- PlaceholderAPI conditions
+- Quest locking (money/item costs)
+- Active quest limits
 
 ### Integrations
-- **Vault** - Economy support
-- **PlaceholderAPI** - Dynamic placeholders
-- **MythicMobs** - Custom mob kill objectives
+- **Vault** - Economy
+- **PlaceholderAPI** - Placeholders and leaderboards
+- **MythicMobs** - Custom mob objectives
 
 ### Performance
-- Zero idle CPU usage
-- <50 MB RAM with automatic cleanup
-- Async data saving
-- Production-ready stability
+- Async processing
+- Batch save system
+- Thread-safe operations
+- Optimized for 100+ players
 
 ---
 
@@ -67,9 +122,5 @@ Complete documentation hub for SoapsQuest.
 - **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
 
 ---
-
-**Version**: 1.0.0 (Beta)  
-**Minecraft**: 1.21.8+  
-**Java**: 21+
 
 **[← Back to README](README.md)**

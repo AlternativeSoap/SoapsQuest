@@ -1,104 +1,431 @@
-# 🎲 Random Quest Generator Guide
+# Random Quest Generator
 
-Complete guide to using and configuring the SoapsQuest random quest generation system.
-
----
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Using the Generator](#using-the-generator)
-3. [Available Objectives](#available-objectives)
-4. [Configuration Format](#configuration-format)
-7. [Troubleshooting](#troubleshooting)
+Guide to random quest generation in SoapsQuest.
 
 ---
 
 ## Overview
 
-The Random Quest Generator allows you to create procedurally generated quests with randomized objectives, rewards, and quest types. This is perfect for:
+Generate procedural quests with randomized objectives and rewards.
 
-- **Testing** - Quickly generate quests for development
-- **Dynamic Content** - Create unique quest variations
-- **Quest Templates** - Generate base quests that can be distributed
+**Use cases:**
+- Testing and development
+- Dynamic quest content
+- Quick quest templates
 
-### How It Works
-
-1. Admin runs `/sq generate [type]` (e.g., `/sq generate single`)
-2. Plugin selects random objective from configured pools in `random-generator.yml`
-3. Generates appropriate amounts based on difficulty scaling
-4. Selects rewards from tier-based reward pools
-5. Saves the quest to `plugins/SoapsQuest/generated.yml`
-6. Displays the generated quest ID in chat
-7. Admin can then use `/sq give <player> <questId>` to distribute the quest
+**How it works:**
+1. Run `/sq generate [type]`
+2. Plugin selects random objectives from `random-generator.yml`
+3. Generates amounts based on difficulty
+4. Selects rewards from tier-based pools
+5. Saves to `generated.yml`
+6. Returns quest ID for distribution
 
 ---
 
-## Using the Generator
+## Commands
 
-### Basic Command
-
-```
-/sq generate
-```
-
-Generates a random quest type (single, multi, or sequence).
-
-**Example:**
-```
-/sq generate
-```
-
-### Specify Quest Type
+### Generate Random Quest
 
 ```
-/sq generate <type>
+/sq generate [type]
 ```
 
-**Available Types:** `single`, `multi`, `sequence`
+**Types:** `single`, `multi`, `sequence`
 
-**Example:**
+**Permission:** `soapsquest.generate` (op)
+
+**Examples:**
 ```
-/sq generate single    # Single objective quest
-/sq generate multi     # Multiple objectives (any order)
-/sq generate sequence  # Multiple objectives (must complete in order)
+/sq generate              # Random type
+/sq generate single       # Single objective
+/sq generate multi        # Multiple objectives (any order)
+/sq generate sequence     # Sequential objectives
 ```
 
 ### After Generation
 
-The command will output the generated quest ID in chat. Example:
+Output example:
 ```
 [SoapsQuest] Generated quest: quest_common_kill_12345
 Use /sq give <player> quest_common_kill_12345
 ```
 
-Use the `/sq give` command to distribute:
+Give to player:
 ```
-/sq give <player> quest_common_kill_12345
+/sq give Steve quest_common_kill_12345
 ```
-
-### Permissions
-
-| Permission | Description |
-|-----------|-------------|
-| `soapsquest.generate` | Use the generate command (default: op) |
-| `soapsquest.admin` | Full admin access including generation |
 
 ---
 
-## Available Objectives
+## Configuration
 
-These are the **actual** objective types registered in the plugin (from `ObjectiveRegistry.java`):
+Edit `plugins/SoapsQuest/random-generator.yml`
 
-### Combat Objectives (6 types)
-- `kill` - Kill entities (supports ANY, HOSTILE, PASSIVE, or specific entity)
-- `kill_mythicmob` - Kill MythicMobs (requires MythicMobs plugin)
-- `damage` - Deal damage to entities
-- `death` - Die a certain number of times
-- `bowshoot` / `shoot_bow` - Shoot arrows with a bow
-- `projectile` - Launch projectiles (snowballs, eggs, etc.)
+### Basic Settings
 
-### Building Objectives (3 types)
+```yaml
+random-generator:
+  enabled: true
+  save-generated-quests: true
+  allowed-types: [single, multi, sequence]
+  save-location: "generated.yml"
+```
+
+### Objective Configuration
+
+All objectives use the universal `target` field:
+
+```yaml
+objectives:
+  kill_zombies:
+    objective: kill
+    target: [ZOMBIE]            # Entity types
+    amount: [15, 40]            # [min, max]
+  
+  break_stone:
+    objective: break
+    target: [STONE, COBBLESTONE]  # Block types
+    amount: [50, 200]
+  
+  collect_valuables:
+    objective: collect
+    target: [IRON_INGOT, GOLD_INGOT]  # Item types
+    amount: [5, 15]
+```
+
+### Amount Scaling by Difficulty
+
+```yaml
+objectives:
+  kill_hostile:
+    objective: kill
+    target: [ZOMBIE, SKELETON, CREEPER]
+    amount-by-difficulty:
+      easy: [10, 25]
+      normal: [20, 40]
+      hard: [40, 75]
+      nightmare: [75, 150]
+```
+
+### Objective Weights
+
+Control how often objectives appear:
+
+```yaml
+objective-weights:
+  kill: 40              # Most common
+  break: 30
+  collect: 15
+  craft: 15
+  fish: 10
+  place: 20
+  # ... etc
+  death: 2              # Least common
+```
+
+Higher weight = more likely to be selected.
+
+### Reward Pools
+
+#### XP Rewards
+
+```yaml
+reward-pool:
+  xp:
+    common: [25, 100]
+    rare: [100, 250]
+    epic: [250, 400]
+    legendary: [400, 500]
+```
+
+#### Money Rewards
+
+```yaml
+  money:
+    common: [10, 100]
+    rare: [100, 400]
+    epic: [400, 750]
+    legendary: [750, 1000]
+```
+
+#### Item Rewards
+
+```yaml
+  items:
+    selection-mode: "weighted"
+    min-items: 1
+    max-items: 3
+    
+    pool:
+      - material: IRON_INGOT
+        amount: [1, 5]
+        tiers: [common, rare]
+        weight: 50
+      
+      - material: DIAMOND
+        amount: [1, 2]
+        tiers: [epic, legendary]
+        weight: 15
+        min-difficulty: hard
+```
+
+**Fields:**
+- **material:** Item type
+- **amount:** [min, max] or single number
+- **tiers:** Which tiers can receive this reward
+- **weight:** Selection probability
+- **min-difficulty:** Minimum difficulty required
+
+### Display Templates
+
+Quest names based on objective type:
+
+```yaml
+display-templates:
+  kill:
+    - "&c<target> Slayer"
+    - "&4Hunt &f<amount> &4<target>s"
+    - "&cEliminate &f<amount> &c<target>"
+  
+  break:
+    - "&8<target> Breaker"
+    - "&7Mine &f<amount> &7<target>"
+  
+  collect:
+    - "&e<target> Collector"
+    - "&6Gather &f<amount> &6<target>s"
+```
+
+**Placeholders:**
+- `<target>` - Entity/block/item name
+- `<amount>` - Required amount
+- `<tier>` - Quest tier
+- `<difficulty>` - Quest difficulty
+
+### Lore Structure
+
+```yaml
+lore-structure:
+  header:
+    mode: "random"
+    entries:
+      - "<tier_color>═══════════════════════════"
+      - "<tier_color>╔═══════════════════════════╗"
+  
+  quest-info:
+    mode: "tier-based"
+    common:
+      - "&7Tier: <tier> &8| &7Type: &f<type>"
+      - "&7Task: &f<objective>"
+    legendary:
+      - "<tier_color>&l  <tier> <type> Quest"
+      - "&7Task: &f<objective>"
+      - "<tier_color>&l  ⚔ LEGENDARY TASK ⚔"
+```
+
+### Conditions
+
+Add random requirements to quests:
+
+```yaml
+conditions:
+  enabled: true
+  
+  min-level:
+    enabled: true
+    chance: 40              # 40% chance to add
+    by-tier:
+      common: 0
+      rare: 10
+      epic: 25
+      legendary: 50
+  
+  cost:
+    enabled: true
+    chance: 20
+    by-tier:
+      common: 50
+      rare: 250
+      epic: 1000
+      legendary: 5000
+```
+
+### Quest Paper Material
+
+```yaml
+quest-paper-material:
+  selection-mode: "random"      # or "tier-based"
+  default-material: "PAPER"
+  random-pool:
+    - material: PAPER
+      weight: 50
+    - material: ENCHANTED_BOOK
+      weight: 10
+```
+
+---
+
+## Available Objective Types
+
+**Total: 31 types**
+
+### Combat (6)
+- `kill` - Kill entities
+- `kill_mythicmob` - Kill MythicMobs
+- `damage` - Deal damage
+- `death` - Die X times
+- `bowshoot` - Shoot arrows
+- `projectile` - Launch projectiles
+
+### Building (3)
+- `break` - Break blocks
+- `place` - Place blocks
+- `interact` - Interact with blocks
+
+### Collection (7)
+- `collect` - Pick up items
+- `craft` - Craft items
+- `smelt` - Smelt items
+- `fish` - Catch fish
+- `brew` - Brew potions
+- `enchant` - Enchant items
+- `drop` - Drop items
+
+### Survival (6)
+- `consume` - Eat/drink items
+- `tame` - Tame animals
+- `trade` - Trade with villagers
+- `shear` - Shear animals
+- `sleep` - Sleep in bed
+- `heal` - Regenerate health
+
+### Movement (3)
+- `move` - Walk/run distance
+- `jump` - Jump X times
+- `vehicle` - Travel in vehicle
+
+### Leveling (3)
+- `level` - Gain XP levels
+- `gainlevel` - Gain XP levels
+- `reachlevel` - Reach specific level
+
+### Misc (4)
+- `chat` - Send messages
+- `firework` - Launch fireworks
+- `command` - Execute commands
+- `placeholder` - PlaceholderAPI conditions
+
+---
+
+## Example Configuration
+
+### Simple Kill Quest Pool
+
+```yaml
+objectives:
+  kill_zombies:
+    objective: kill
+    target: [ZOMBIE]
+    amount: [10, 30]
+  
+  kill_skeletons:
+    objective: kill
+    target: [SKELETON]
+    amount: [10, 30]
+  
+  kill_hostile:
+    objective: kill
+    target: [HOSTILE]
+    amount-by-difficulty:
+      easy: [15, 25]
+      normal: [30, 50]
+      hard: [50, 100]
+```
+
+### Mining Quest Pool
+
+```yaml
+objectives:
+  mine_stone:
+    objective: break
+    target: [STONE, COBBLESTONE]
+    amount: [100, 300]
+  
+  mine_ores:
+    objective: break
+    target: [COAL_ORE, IRON_ORE, GOLD_ORE]
+    amount: [20, 50]
+  
+  mine_diamonds:
+    objective: break
+    target: [DIAMOND_ORE]
+    amount: [3, 10]
+```
+
+### Collection Quest Pool
+
+```yaml
+objectives:
+  gather_food:
+    objective: collect
+    target: [WHEAT, CARROT, POTATO]
+    amount: [32, 64]
+  
+  gather_valuables:
+    objective: collect
+    target: [IRON_INGOT, GOLD_INGOT, DIAMOND]
+    amount: [5, 20]
+```
+
+---
+
+## Tips
+
+### Balancing
+
+- **Weights:** Higher = more common (kill: 40, death: 2)
+- **Amounts:** Use `[min, max]` for variety
+- **Difficulty scaling:** Use `amount-by-difficulty` for proper progression
+- **Tier rewards:** Higher tiers = better rewards
+
+### Testing
+
+1. Enable generator: `enabled: true`
+2. Run `/sq generate single` multiple times
+3. Check `generated.yml` for results
+4. Adjust weights and amounts as needed
+5. Test with `/sq give <player> <quest_id>`
+
+### Common Mistakes
+
+❌ **Wrong field names:**
+- Don't use `entity` for break objectives
+- Don't use `blocks` for kill objectives
+- Always use `target` (universal field)
+
+❌ **Missing required fields:**
+- `enchant` needs `target: ANY`
+- `trade` needs `target: ANY`
+- `reachlevel` uses `level` not `amount`
+
+✅ **Correct usage:**
+```yaml
+objectives:
+  enchant_items:
+    objective: enchant
+    target: [ANY]         # Required!
+    amount: [5, 15]
+  
+  mine_blocks:
+    objective: break
+    target: [STONE]       # Use 'target' not 'blocks'
+    amount: [100, 200]
+```
+
+---
+
+**[← Back to README](README.md)** | **[Quest Creation →](QUEST-CREATION.md)** | **[Configuration →](CONFIGURATION.md)**
 - `break` - Break blocks (supports ANY or specific block)
 - `place` - Place blocks (supports ANY or specific block)
 - `interact` - Interact with blocks (right-click)
@@ -136,7 +463,7 @@ These are the **actual** objective types registered in the plugin (from `Objecti
 - `command` - Execute commands
 - `placeholder` - PlaceholderAPI expressions
 
-**Total: 33 objective types**
+**Total: 31 objective types**
 
 ---
 

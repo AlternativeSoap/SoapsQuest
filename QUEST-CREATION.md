@@ -1,287 +1,571 @@
-# 🎯 Quest Creation Guide
+# Quest Creation
 
-Learn how to create custom quests for SoapsQuest with detailed examples and explanations.
+Guide to creating custom quests for SoapsQuest.
 
 ---
 
 ## Table of Contents
 
-1. [Basic Quest Structure](#basic-quest-structure)
+1. [Basic Structure](#basic-structure)
 2. [Objective Types](#objective-types)
-3. [Reward System](#reward-system)
-4. [Conditions & Requirements](#conditions--requirements)
+3. [Rewards](#rewards)
+4. [Conditions](#conditions)
 5. [Advanced Features](#advanced-features)
-6. [Random Quest Generation](#random-quest-generation)
-7. [Example Quests](#example-quests)
+6. [Examples](#examples)
 
 ---
 
-## Basic Quest Structure
+## Basic Structure
 
-Every quest in `quests.yml` follows this structure:
+Every quest requires these fields:
 
 ```yaml
 quest_id:
-  display: "&aQuest Display Name"
-  tier: common
-  difficulty: easy
-  objectives:
-    - type: objective_type
-      # objective-specific settings
-  reward:
-    # reward types
+  display: "&aQuest Name"              # Required
+  tier: common                         # Optional
+  difficulty: easy                     # Optional
+  objectives:                          # Required (at least 1)
+    - type: kill
+      target: ZOMBIE
+      amount: 10
+  reward:                              # Required (at least 1)
+    xp: 100
 ```
 
 ### Required Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `display` | String | Quest name shown to players (supports color codes) |
-| `objectives` | List | List of objectives to complete |
-| `reward` | Object | Rewards given on completion |
+| Field | Description |
+|-------|-------------|
+| `display` | Quest name with color codes |
+| `objectives` | List of objectives (minimum 1) |
+| `reward` | Rewards (xp, money, items, or commands) |
 
 ### Optional Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `tier` | String | Quest rarity tier (affects random generation) |
-| `difficulty` | String | Quest difficulty (scales objectives/rewards) |
-| `description` | List | Multi-line description |
-| `sequential` | Boolean | Complete objectives in order |
-| `lock-to-player` | Boolean | Bind quest to first player who progresses |
-| `milestones` | List | Progress percentages for notifications |
-| `quest_paper` | Object | Customize physical quest item |
+| Field | Description |
+|-------|-------------|
+| `tier` | Rarity (common, rare, epic, legendary, or custom) |
+| `difficulty` | Difficulty (easy, normal, hard, nightmare, or custom) |
+| `material` | Quest paper item (default: PAPER) |
+| `sequential` | Complete objectives in order (true/false) |
+| `lock-to-player` | Bind to first player (true/false) |
+| `milestones` | Progress notifications `[25, 50, 75]` |
+| `lore` | Custom quest paper lore |
+| `conditions` | Requirements (see [Conditions](#conditions)) |
 
 ---
 
 ## Objective Types
 
-### Combat Objectives
+All objectives use the universal `target` field.
 
-#### Kill Entities
+### Combat Objectives (6 types)
+
+**kill** - Kill entities
 ```yaml
-objectives:
-  - type: kill
-    entity: ZOMBIE  # ZOMBIE, SKELETON, CREEPER, ANY, HOSTILE, PASSIVE
-    amount: 10
+- type: kill
+  target: ZOMBIE        # Specific entity
+  amount: 10
+
+- type: kill
+  target: HOSTILE       # Any hostile mob
+  amount: 20
+
+- type: kill
+  target: ANY           # Any entity
+  amount: 30
 ```
 
-#### Kill MythicMobs (requires MythicMobs plugin)
+**kill_mythicmob** - Kill MythicMobs (requires MythicMobs plugin)
 ```yaml
-objectives:
-  - type: kill_mythicmob
-    mob: "SkeletonKing"  # Internal MythicMob name
-    amount: 1
+- type: kill_mythicmob
+  target: SkeletonKing  # MythicMob internal name
+  amount: 1
 ```
 
-#### Deal Damage
+**damage** - Deal damage
 ```yaml
-objectives:
-  - type: damage
-    entity: ZOMBIE  # Optional filter
-    amount: 100  # Half-hearts
+- type: damage
+  target: ZOMBIE        # Optional filter
+  amount: 100           # Half-hearts
 ```
 
-#### Death Count
+**death** - Die X times
 ```yaml
-objectives:
-  - type: death
-    amount: 1
+- type: death
+  amount: 1
 ```
 
-#### Ranged Combat
+**bowshoot** - Shoot arrows
 ```yaml
-objectives:
-  - type: bowshoot
-    amount: 50
-  - type: projectile
-    projectile: SNOWBALL  # Optional: SNOWBALL, EGG, ENDER_PEARL
-    amount: 25
+- type: bowshoot
+  amount: 50
 ```
 
-### Building Objectives
-
-#### Break Blocks
+**projectile** - Launch projectiles
 ```yaml
-objectives:
-  - type: break
-    material: STONE  # Single material
-    amount: 100
-```
-```yaml
-objectives:
-  - type: break
-    material:  # Multiple materials
-      - STONE
-      - COBBLESTONE
-    amount: 50
+- type: projectile
+  target: SNOWBALL      # SNOWBALL, EGG, ENDER_PEARL, or ANY
+  amount: 25
 ```
 
-#### Place Blocks
+### Building Objectives (3 types)
+
+**break** - Break blocks
 ```yaml
-objectives:
-  - type: place
-    material: COBBLESTONE
-    amount: 200
+- type: break
+  target: STONE         # Specific block
+  amount: 100
+
+- type: break
+  target: ANY           # Any block
+  amount: 500
 ```
 
-#### Interact with Blocks
+**place** - Place blocks
 ```yaml
-objectives:
-  - type: interact
-    material: CHEST
-    amount: 5
+- type: place
+  target: COBBLESTONE
+  amount: 200
 ```
 
-### Collection Objectives
-
-#### Collect Items
+**interact** - Interact with blocks
 ```yaml
-objectives:
-  - type: collect
-    material: DIAMOND
-    amount: 5
+- type: interact
+  target: CHEST         # CHEST, FURNACE, etc.
+  amount: 5
 ```
 
-#### Craft Items
+### Collection Objectives (7 types)
+
+**collect** - Pick up items
 ```yaml
-objectives:
-  - type: craft
-    material: IRON_SWORD
-    amount: 1
+- type: collect
+  target: DIAMOND
+  amount: 5
 ```
 
-#### Smelt Items
+**craft** - Craft items
 ```yaml
-objectives:
-  - type: smelt
-    material: IRON_INGOT
-    amount: 10
+- type: craft
+  target: IRON_SWORD
+  amount: 3
 ```
 
-#### Fish
+**smelt** - Smelt items
 ```yaml
-objectives:
-  - type: fish
-    material: COD  # Optional: COD, SALMON, etc.
-    amount: 20
+- type: smelt
+  target: IRON_INGOT
+  amount: 32
 ```
 
-#### Brew Potions
+**fish** - Catch fish
 ```yaml
-objectives:
-  - type: brew
-    potion: STRENGTH  # Optional potion type
-    amount: 3
+- type: fish
+  target: COD           # COD, SALMON, or ANY
+  amount: 20
 ```
 
-#### Enchant Items
+**brew** - Brew potions
 ```yaml
-objectives:
-  - type: enchant
-    amount: 5
+- type: brew
+  target: ANY           # Any potion
+  amount: 5
 ```
 
-#### Drop Items
+**enchant** - Enchant items
 ```yaml
-objectives:
-  - type: drop
-    material: DIRT
-    amount: 64
+- type: enchant
+  target: ANY           # Required field
+  amount: 10
 ```
 
-### Survival Objectives
-
-#### Consume Items
+**drop** - Drop items
 ```yaml
-objectives:
-  - type: consume
-    material: BREAD
-    amount: 10
+- type: drop
+  target: DIRT
+  amount: 64
 ```
 
-#### Tame Animals
+### Survival Objectives (6 types)
+
+**consume** - Eat/drink items
 ```yaml
-objectives:
-  - type: tame
-    entity: WOLF
-    amount: 2
+- type: consume
+  target: APPLE
+  amount: 10
 ```
 
-#### Trade with Villagers
+**tame** - Tame animals
 ```yaml
-objectives:
-  - type: trade
-    amount: 5
+- type: tame
+  target: WOLF          # WOLF, CAT, HORSE
+  amount: 3
 ```
 
-#### Shear Sheep
+**trade** - Trade with villagers
 ```yaml
-objectives:
-  - type: shear
-    amount: 10
+- type: trade
+  target: ANY           # Required field
+  amount: 10
 ```
 
-#### Sleep in Bed
+**shear** - Shear animals
 ```yaml
-objectives:
-  - type: sleep
-    amount: 3
+- type: shear
+  target: SHEEP
+  amount: 20
 ```
 
-#### Heal Health
+**sleep** - Sleep in bed
 ```yaml
-objectives:
-  - type: heal
-    amount: 20  # Half-hearts
+- type: sleep
+  amount: 5
 ```
 
-### Movement Objectives
-
-#### Walk/Run Distance
+**heal** - Regenerate health
 ```yaml
-objectives:
-  - type: move
-    distance: 1000  # Blocks
+- type: heal
+  amount: 100           # Half-hearts
 ```
 
-#### Jump
+### Movement Objectives (3 types)
+
+**move** - Walk/run distance
 ```yaml
-objectives:
-  - type: jump
-    amount: 100
+- type: move
+  amount: 1000          # Blocks
 ```
 
-#### Use Vehicles
+**jump** - Jump X times
 ```yaml
-objectives:
-  - type: vehicle
-    vehicle: BOAT  # Optional: BOAT, MINECART, HORSE
-    distance: 500
+- type: jump
+  amount: 100
 ```
 
-### Leveling Objectives
-
-#### Reach Level
+**vehicle** - Travel in vehicle
 ```yaml
-objectives:
-  - type: reachlevel
-    level: 30
+- type: vehicle
+  amount: 500           # Blocks
 ```
 
-#### Gain Levels
+### Leveling Objectives (3 types)
+
+**level** / **gainlevel** - Gain XP levels
 ```yaml
-objectives:
-  - type: gainlevel
-    amount: 5
+- type: level
+  amount: 10            # Levels to gain
 ```
 
-### Miscellaneous Objectives
-
-#### Send Chat Messages
+**reachlevel** - Reach specific level
 ```yaml
-objectives:
-  - type: chat
+- type: reachlevel
+  level: 30             # Use 'level' field, not 'amount'
+```
+
+### Misc Objectives (4 types)
+
+**chat** - Send messages
+```yaml
+- type: chat
+  amount: 50
+```
+
+**firework** - Launch fireworks
+```yaml
+- type: firework
+  amount: 10
+```
+
+**command** - Execute commands
+```yaml
+- type: command
+  amount: 5
+```
+
+**placeholder** - PlaceholderAPI (requires PlaceholderAPI)
+```yaml
+- type: placeholder
+  placeholder: "%player_health%"
+  value: "20"
+  amount: 1
+```
+
+---
+
+## Rewards
+
+### XP Reward
+```yaml
+reward:
+  xp: 100
+```
+
+### Money Reward (requires Vault)
+```yaml
+reward:
+  money: 500
+```
+
+### Item Rewards
+
+**Basic item:**
+```yaml
+reward:
+  items:
+    - material: DIAMOND_SWORD
+      amount: 1
+```
+
+**Custom item:**
+```yaml
+reward:
+  items:
+    - material: DIAMOND_SWORD
+      name: "&aLegendary Blade"
+      lore:
+        - "&7A powerful weapon"
+        - "&7From the quest masters"
+      enchantments:
+        - "SHARPNESS:5"
+        - "UNBREAKING:3"
+      amount: 1
+      chance: 100           # 0-100% drop rate
+```
+
+**Multiple items:**
+```yaml
+reward:
+  items:
+    - material: DIAMOND
+      amount: 5
+      chance: 100
+    - material: EMERALD
+      amount: 3
+      chance: 50          # 50% chance
+```
+
+### Command Rewards
+```yaml
+reward:
+  commands:
+    - "give {player} minecraft:apple 5"
+    - "broadcast {player} completed a quest!"
+```
+
+**Placeholders:** `{player}`, `{quest_id}`, `{quest_name}`
+
+---
+
+## Conditions
+
+Requirements that must be met.
+
+### Progress Conditions
+
+Checked during quest progression:
+
+```yaml
+conditions:
+  min-level: 10                          # Minimum XP level
+  max-level: 50                          # Maximum XP level
+  min-money: 1000                        # Minimum balance (Vault)
+  world: ["world", "world_nether"]       # Allowed worlds
+  gamemode: ["SURVIVAL", "ADVENTURE"]    # Allowed gamemodes
+  time: DAY                              # DAY or NIGHT
+  permission: "soapsquest.vip"           # Required permission
+  placeholder: "%player_health% >= 10"   # PlaceholderAPI (requires PAPI)
+```
+
+### Locking Conditions
+
+Consume resources to unlock:
+
+```yaml
+conditions:
+  cost: 500                              # Money cost (Vault)
+  item: "DIAMOND:10,EMERALD:5"           # Required items
+  consume-item: true                     # Remove items when unlocking
+```
+
+### Active Quest Limit
+
+```yaml
+conditions:
+  active-limit: 3                        # Max concurrent quests with this ID
+```
+
+---
+
+## Advanced Features
+
+### Multi-Objective Quests
+
+Complete multiple objectives (any order):
+
+```yaml
+multi_quest:
+  display: "&eGatherer"
+  objectives:
+    - type: break
+      target: STONE
+      amount: 100
+    - type: collect
+      target: WHEAT
+      amount: 64
+    - type: craft
+      target: BREAD
+      amount: 32
+  reward:
+    xp: 300
+```
+
+### Sequential Quests
+
+Complete objectives in order (one at a time):
+
+```yaml
+sequential_quest:
+  display: "&aApprentice Training"
+  sequential: true
+  objectives:
+    - type: collect
+      target: WOOD
+      amount: 32
+    - type: craft
+      target: WOODEN_PICKAXE
+      amount: 1
+    - type: break
+      target: COBBLESTONE
+      amount: 64
+  reward:
+    xp: 200
+```
+
+### Lock-to-Player
+
+Bind quest to first player who makes progress:
+
+```yaml
+locked_quest:
+  display: "&cPersonal Challenge"
+  lock-to-player: true
+  objectives:
+    - type: kill
+      target: ZOMBIE
+      amount: 50
+  reward:
+    xp: 500
+```
+
+### Custom Quest Paper
+
+```yaml
+custom_quest:
+  display: "&5Epic Quest"
+  material: ENCHANTED_BOOK        # Quest paper material
+  lore:
+    - "&7A special quest"
+    - "&7Complete for rewards"
+  objectives:
+    - type: kill
+      target: ENDERMAN
+      amount: 10
+  reward:
+    xp: 1000
+```
+
+---
+
+## Examples
+
+### Simple Kill Quest
+```yaml
+zombie_slayer:
+  display: "&aZombie Slayer"
+  tier: common
+  difficulty: easy
+  objectives:
+    - type: kill
+      target: ZOMBIE
+      amount: 10
+  reward:
+    xp: 100
+    money: 50
+```
+
+### Mining Quest
+```yaml
+diamond_miner:
+  display: "&bDiamond Miner"
+  tier: rare
+  difficulty: normal
+  objectives:
+    - type: break
+      target: DIAMOND_ORE
+      amount: 5
+  reward:
+    xp: 500
+    items:
+      - material: DIAMOND_PICKAXE
+        name: "&bMiner's Pick"
+        enchantments:
+          - "EFFICIENCY:4"
+        chance: 100
+  conditions:
+    min-level: 20
+    world: ["world"]
+```
+
+### Multi-Objective Quest
+```yaml
+master_crafter:
+  display: "&eMaster Crafter"
+  tier: epic
+  difficulty: hard
+  objectives:
+    - type: craft
+      target: IRON_SWORD
+      amount: 5
+    - type: craft
+      target: IRON_PICKAXE
+      amount: 3
+    - type: enchant
+      target: ANY
+      amount: 10
+  reward:
+    xp: 750
+    money: 500
+    commands:
+      - "give {player} minecraft:anvil 1"
+```
+
+### VIP Quest with Requirements
+```yaml
+vip_challenge:
+  display: "&dVIP Challenge"
+  tier: legendary
+  difficulty: nightmare
+  objectives:
+    - type: kill
+      target: WITHER
+      amount: 1
+  reward:
+    xp: 5000
+    money: 2000
+    items:
+      - material: NETHER_STAR
+        name: "&dVIP Trophy"
+        chance: 100
+  conditions:
+    permission: "soapsquest.vip"
+    cost: 1000
+    min-level: 50
+```
+
+---
+
+**[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)** | **[Random Generator →](RANDOM-GENERATOR.md)**
     message: "Hello World"  # Optional specific message
     amount: 5
 ```
@@ -465,13 +749,13 @@ sequential_quest:
   sequential: true
   objectives:
     - type: collect
-      material: OAK_LOG
+      target: OAK_LOG
       amount: 10
     - type: craft
-      material: CRAFTING_TABLE
+      target: CRAFTING_TABLE
       amount: 1
     - type: craft
-      material: WOODEN_PICKAXE
+      target: WOODEN_PICKAXE
       amount: 1
 ```
 
@@ -482,10 +766,10 @@ multi_quest:
   display: "&eGatherer"
   objectives:
     - type: break
-      material: STONE
+      target: STONE
       amount: 100
     - type: collect
-      material: WHEAT
+      target: WHEAT
       amount: 32
 ```
 
@@ -497,7 +781,7 @@ personal_quest:
   lock-to-player: true  # Quest becomes non-tradeable
   objectives:
     - type: kill
-      entity: ENDER_DRAGON
+      target: ENDER_DRAGON
       amount: 1
 ```
 
@@ -527,7 +811,7 @@ milestone_quest:
   milestones: [25, 50, 75]  # Notify at 25%, 50%, 75% complete
   objectives:
     - type: break
-      material: STONE
+      target: STONE
       amount: 1000
 ```
 
@@ -628,11 +912,11 @@ starter_quest:
   description:
     - "&7Complete simple tasks to get started"
   objectives:
-    - type: break_block
-      material: OAK_LOG
+    - type: break
+      target: OAK_LOG
       amount: 10
     - type: craft
-      material: CRAFTING_TABLE
+      target: CRAFTING_TABLE
       amount: 1
   reward:
     xp: 50
@@ -654,7 +938,7 @@ zombie_slayer:
     - "&7Eliminate zombies threatening the village"
   objectives:
     - type: kill
-      entity: ZOMBIE
+      target: ZOMBIE
       amount: 50
   reward:
     xp: 500
@@ -680,14 +964,14 @@ master_miner:
   tier: epic
   difficulty: hard
   objectives:
-    - type: break_block
-      material: STONE
+    - type: break
+      target: STONE
       amount: 1000
-    - type: break_block
-      material: IRON_ORE
+    - type: break
+      target: IRON_ORE
       amount: 100
-    - type: break_block
-      material: DIAMOND_ORE
+    - type: break
+      target: DIAMOND_ORE
       amount: 20
   reward:
     xp: 2000
@@ -726,7 +1010,7 @@ dragon_slayer:
     glowing: true
   objectives:
     - type: kill
-      entity: ENDER_DRAGON
+      target: ENDER_DRAGON
       amount: 1
   reward:
     xp: 10000
@@ -774,16 +1058,16 @@ blacksmith_apprentice:
   sequential: true  # Must complete in order
   objectives:
     - type: collect
-      material: IRON_ORE
+      target: IRON_ORE
       amount: 20
     - type: smelt
-      material: IRON_INGOT
+      target: IRON_INGOT
       amount: 20
     - type: craft
-      material: IRON_SWORD
+      target: IRON_SWORD
       amount: 1
     - type: craft
-      material: IRON_CHESTPLATE
+      target: IRON_CHESTPLATE
       amount: 1
   reward:
     xp: 800
@@ -803,7 +1087,7 @@ blacksmith_apprentice:
 1. **Syntax Validation**
    - Verify YAML syntax is correct
    - Check indentation (2 spaces, no tabs)
-   - Validate material/entity names
+   - Validate target names (entities/blocks/items)
 
 2. **In-Game Testing**
    ```
@@ -830,19 +1114,34 @@ blacksmith_apprentice:
 
 ## Common Mistakes
 
-### ❌ Wrong Material Names
+### ❌ Wrong Field Names
+
+```yaml
+objectives:
+  - type: kill
+    entity: ZOMBIE  # ❌ Wrong (deprecated field name)
+```
+
+✅ **Correct:**
+```yaml
+objectives:
+  - type: kill
+    target: ZOMBIE  # ✅ Use 'target' for all objectives
+```
+
+### ❌ Wrong Target Names
 
 ```yaml
 objectives:
   - type: collect
-    material: diamond_ore  # ❌ Wrong (lowercase)
+    target: diamond_ore  # ❌ Wrong (lowercase)
 ```
 
 ✅ **Correct:**
 ```yaml
 objectives:
   - type: collect
-    material: DIAMOND_ORE  # ✅ Uppercase
+    target: DIAMOND_ORE  # ✅ Uppercase
 ```
 
 ### ❌ Missing Amount
@@ -850,14 +1149,14 @@ objectives:
 ```yaml
 objectives:
   - type: kill
-    entity: ZOMBIE  # ❌ No amount specified
+    target: ZOMBIE  # ❌ No amount specified
 ```
 
 ✅ **Correct:**
 ```yaml
 objectives:
   - type: kill
-    entity: ZOMBIE
+    target: ZOMBIE
     amount: 10  # ✅ Amount specified
 ```
 
