@@ -5,21 +5,22 @@
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-Premium-red.svg)](LICENSE.md)
 
-Physical quest paper system for Minecraft Paper servers with 31 objective types, multi-objective support, and dynamic progress tracking.
+Physical quest paper system for Minecraft servers with 31 objective types, multi-objective support, and progress tracking.
 
 ---
 
 ## Features
 
-- **Physical Quest Papers** - Quest items in player inventories
-- **31 Objective Types** - Combat, building, collection, survival, movement, leveling
-- **Multi-Objective Support** - Multiple tasks per quest (parallel or sequential)
-- **Progress Tracking** - BossBar, ActionBar, or chat modes
-- **Reward System** - XP, money (Vault), items, console commands
-- **Condition System** - Requirements and restrictions for quests
-- **Random Generation** - Procedural quest creation
-- **PlaceholderAPI** - Leaderboards and statistics integration
-- **Performance Optimized** - Async processing for high-load servers
+- Physical quest papers in player inventories
+- 31 objective types (combat, building, collection, survival, movement, leveling)
+- Multi-objective and sequential quest support
+- Progress tracking (BossBar, ActionBar, Chat)
+- Rewards: XP, money, items, commands
+- Conditions and requirements
+- Random quest generation
+- Quest loot system (chests and mobs)
+- PlaceholderAPI integration
+- GUI browser and editor
 
 ---
 
@@ -38,21 +39,15 @@ Physical quest paper system for Minecraft Paper servers with 31 objective types,
 
 ## Installation
 
-1. Download `SoapsQuest-1.0.0-BETA.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+1. Download from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
 2. Place in `plugins/` folder
 3. Restart server
-4. Edit `plugins/SoapsQuest/quests.yml` to create quests
-5. Use `/sq give <player> <quest>` to distribute quests
-
-> **Note**: Default configuration includes example quests for testing.
+4. Edit `plugins/SoapsQuest/quests.yml`
+5. Use `/sq give <player> <quest>`
 
 ---
 
 ## Quick Start
-
-### Create a Quest
-
-Edit `plugins/SoapsQuest/quests.yml`:
 
 ```yaml
 my_quest:
@@ -78,9 +73,7 @@ my_quest:
 
 ```
 /sq list
-```
-
-Click quest names to accept them.
+Players use `/sq list` to view and accept quests.
 
 ---
 
@@ -91,18 +84,18 @@ Click quest names to accept them.
 | **[Wiki](WIKI.md)** | Documentation hub |
 | **[Commands](COMMANDS.md)** | Command reference |
 | **[Permissions](PERMISSIONS.md)** | Permission nodes |
-| **[Configuration](CONFIGURATION.md)** | Complete configuration guide |
-| **[Quest Creation](QUEST-CREATION.md)** | Quest creation guide with examples |
+| **[Configuration](CONFIGURATION.md)** | Configuration guide |
+| **[Quest Creation](QUEST-CREATION.md)** | How to create quests |
+| **[Quest Loot System](QUEST-LOOT-SYSTEM.md)** | Chest loot and mob drops |
 | **[Random Generator](RANDOM-GENERATOR.md)** | Random quest generation |
 | **[PlaceholderAPI](PLACEHOLDERAPI.md)** | Placeholder reference |
-| **[Changelog](CHANGELOG.md)** | Version history |
 
 ---
 
 ## Support
 
-- **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
-- **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
+- Discord: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
+- Issues: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
 
 ---
 
@@ -110,10 +103,6 @@ Click quest names to accept them.
 
 Premium License - See [LICENSE.md](LICENSE.md)
 
-Single server license, no redistribution, no decompilation.
-
 ---
 
-**Author**: AlternativeSoap  
-**Version**: 1.0.0-BETA  
-**Repository**: [github.com/AlternativeSoap/SoapsQuest](https://github.com/AlternativeSoap/SoapsQuest)
+**Version**: 1.0.0-BETA
