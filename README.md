@@ -34,6 +34,7 @@ A physical quest paper system for Minecraft servers featuring 31 objective types
 - **[Vault](https://www.spigotmc.org/resources/vault.34315/)** – Economy rewards and costs
 - **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)** – Leaderboards and conditions
 - **[MythicMobs](https://www.spigotmc.org/resources/mythicmobs.5702/)** – Custom mob objectives
+- **[MMOItems](https://www.spigotmc.org/resources/mmoitems.39267/)** – Custom item rewards (use `material: HAND` while holding item)
 
 ---
 
@@ -107,4 +108,4 @@ Premium License – See [LICENSE.md](LICENSE.md)
 
 ---
 
-**Version 1.0.0** | Made with ❤️ by AlternativeSoap 04add69604c58e2a053a9ded65c7e0d9907e3022
+**Version 1.0.0** | Made with ❤️ by AlternativeSoap

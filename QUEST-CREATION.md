@@ -390,6 +390,39 @@ reward:
       chance: 50        # 50% chance
 ```
 
+**MMOItems & Custom Items:**
+
+To add MMOItems or any custom item with NBT data as rewards:
+
+**GUI Method:**
+1. Open Quest Editor → Quest Details → Edit Rewards
+2. Click "Add Reward"
+3. Select "Item Reward"
+4. Hold the MMOItem/custom item in your hand
+5. Type `hand` in chat
+6. The held item (with all NBT data) will be saved as a reward
+
+**Chat Input Alternative:**
+- Type `DIAMOND 5` for basic items
+- Type `hand` to use whatever you're holding (preserves NBT, enchantments, custom names, etc.)
+
+**YAML Representation:**
+
+When saved via the `hand` method, it stores as:
+```yaml
+reward:
+  items:
+    - material: HAND   # References the held item when saved
+      amount: 1
+      chance: 100
+```
+
+This works for:
+- MMOItems custom items
+- Heads with custom textures
+- Items with complex NBT data
+- Any custom plugin item
+
 ### Commands
 ```yaml
 reward:
