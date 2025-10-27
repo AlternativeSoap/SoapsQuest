@@ -62,17 +62,3 @@ my_quest:
     xp: 100
     money: 50
 ```
-
-### Give Quest to Player
-
-```
-/sq give <player> my_quest
-```
-
-### Players View Available Quests
-
-```
-/sq list
-Players use `/sq list` to view and accept quests.
-
----
