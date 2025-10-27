@@ -1,27 +1,27 @@
 # PlaceholderAPI
 
-PlaceholderAPI integration for SoapsQuest leaderboards and statistics.
+PlaceholderAPI integration for SoapsQuest.
 
 > **Requirement:** [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) must be installed.
 
 ---
 
-## Player Statistics
+## 📊 Player Statistics
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
 | `%soapsquest_player_quests%` | Total quests completed | `47` |
 | `%soapsquest_player_rank%` | Global rank position | `5` |
 | `%soapsquest_total_players%` | Total players with stats | `150` |
 
 ---
 
-## Tier Statistics
+## 🎯 Tier Statistics
 
 Shows quest completions per tier. Works with **any custom tier** from `config.yml`.
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
 | `%soapsquest_player_tier_<tier>%` | Quests completed in tier | `15` |
 
 **Examples:**
@@ -29,16 +29,16 @@ Shows quest completions per tier. Works with **any custom tier** from `config.ym
 - `%soapsquest_player_tier_rare%` → `18`
 - `%soapsquest_player_tier_epic%` → `8`
 - `%soapsquest_player_tier_legendary%` → `2`
-- `%soapsquest_player_tier_mythic%` → `5` (if you added a custom 'mythic' tier)
+- `%soapsquest_player_tier_mythic%` → `5` (if custom tier exists)
 
 ---
 
-## Difficulty Statistics
+## ⚔️ Difficulty Statistics
 
 Shows quest completions per difficulty. Works with **any custom difficulty** from `config.yml`.
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
 | `%soapsquest_player_difficulty_<difficulty>%` | Quests completed at difficulty | `12` |
 
 **Examples:**
@@ -46,35 +46,32 @@ Shows quest completions per difficulty. Works with **any custom difficulty** fro
 - `%soapsquest_player_difficulty_normal%` → `15`
 - `%soapsquest_player_difficulty_hard%` → `8`
 - `%soapsquest_player_difficulty_nightmare%` → `3`
-- `%soapsquest_player_difficulty_extreme%` → `1` (if you added a custom 'extreme' difficulty)
 
 ---
 
-## Global Leaderboard
+## 🏆 Global Leaderboard
 
-Top players by total quest completions.
+Top players by total quest completions (positions 1-50).
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
 | `%soapsquest_leaderboard_quests_<position>%` | Player name at position | `Notch` |
 | `%soapsquest_leaderboard_quests_<position>_score%` | Quest count at position | `142` |
-
-**Position:** 1-50 (configurable in `config.yml`)
 
 **Examples:**
 - `%soapsquest_leaderboard_quests_1%` → `Notch`
 - `%soapsquest_leaderboard_quests_1_score%` → `142`
-- `%soapsquest_leaderboard_quests_2%` → `jeb_`
-- `%soapsquest_leaderboard_quests_2_score%` → `98`
+- `%soapsquest_leaderboard_quests_10%` → `Steve`
+- `%soapsquest_leaderboard_quests_10_score%` → `87`
 
 ---
 
-## Tier Leaderboard
+## 🎨 Tier Leaderboard
 
 Top players per tier. Works with **any custom tier**.
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
 | `%soapsquest_leaderboard_tier_<tier>_<position>%` | Player name | `Notch` |
 | `%soapsquest_leaderboard_tier_<tier>_<position>_score%` | Quest count | `85` |
 
@@ -86,12 +83,12 @@ Top players per tier. Works with **any custom tier**.
 
 ---
 
-## Difficulty Leaderboard
+## ⚡ Difficulty Leaderboard
 
 Top players per difficulty. Works with **any custom difficulty**.
 
-| Placeholder | Description | Example |
-|-------------|-------------|---------|
+| Placeholder | Description | Example Output |
+|-------------|-------------|----------------|
 | `%soapsquest_leaderboard_difficulty_<difficulty>_<position>%` | Player name | `Notch` |
 | `%soapsquest_leaderboard_difficulty_<difficulty>_<position>_score%` | Quest count | `95` |
 
@@ -103,9 +100,9 @@ Top players per difficulty. Works with **any custom difficulty**.
 
 ---
 
-## Hologram Examples
+## 📋 Usage Examples
 
-### DecentHolograms - Global Leaderboard
+### Hologram - Global Leaderboard
 
 ```yaml
 - "&6&lTop Quest Completers"
@@ -114,7 +111,7 @@ Top players per difficulty. Works with **any custom difficulty**.
 - "&e3. &f%soapsquest_leaderboard_quests_3% &7- &a%soapsquest_leaderboard_quests_3_score%"
 ```
 
-### Tier-Specific Leaderboard
+### Hologram - Tier-Specific
 
 ```yaml
 - "&5&lTop Epic Quest Completers"
@@ -123,40 +120,17 @@ Top players per difficulty. Works with **any custom difficulty**.
 - "&e3. &f%soapsquest_leaderboard_tier_epic_3% &7- &d%soapsquest_leaderboard_tier_epic_3_score%"
 ```
 
-### Difficulty-Specific Leaderboard
-
-```yaml
-- "&4&lNightmare Difficulty Masters"
-- "&e1. &f%soapsquest_leaderboard_difficulty_nightmare_1% &7- &c%soapsquest_leaderboard_difficulty_nightmare_1_score%"
-- "&e2. &f%soapsquest_leaderboard_difficulty_nightmare_2% &7- &c%soapsquest_leaderboard_difficulty_nightmare_2_score%"
-```
-
-### Player Statistics
+### Scoreboard - Player Stats
 
 ```yaml
 - "&aYour Quest Stats"
-- "&7Total Completed: &f%soapsquest_player_quests%"
-- "&7Global Rank: &f#%soapsquest_player_rank%"
-- "&7Epic Tier: &f%soapsquest_player_tier_epic%"
+- "&7Total: &f%soapsquest_player_quests%"
+- "&7Rank: &f#%soapsquest_player_rank%"
+- "&7Epic: &f%soapsquest_player_tier_epic%"
+- "&7Hard: &f%soapsquest_player_difficulty_hard%"
 ```
-
----
-
-## Configuration
-
-Leaderboard settings in `config.yml`:
-
-```yaml
-placeholders:
-  max-leaderboard-size: 50
-  update-interval-minutes: 5
-  cache-refresh-interval: 5
-```
-
-- **max-leaderboard-size:** Maximum position (1-50)
-- **update-interval-minutes:** How often leaderboards refresh
-- **cache-refresh-interval:** Cache refresh in minutes
 
 ---
 
 **[← Back to README](README.md)** | **[Wiki →](WIKI.md)**
+

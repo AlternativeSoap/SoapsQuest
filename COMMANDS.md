@@ -4,178 +4,226 @@ Complete command reference for SoapsQuest.
 
 ---
 
-## Main Command
+## 📋 Player Commands
 
-| Command | Permission | Default | Description |
-|---------|------------|---------|-------------|
-| `/sq` | `soapsquest.use` | ✅ All | Show available commands |
-
----
-
-## Player Commands
-
-| Command | Permission | Default | Description |
-|---------|------------|---------|-------------|
-| `/sq list [page]` | `soapsquest.list` | ✅ All | View all quests (click to accept) |
-| `/sq browse` | `soapsquest.use` | ✅ All | Open quest browser GUI |
-| `/sq statistics [player]` | `soapsquest.use` | ✅ All | View quest statistics |
-| `/sq leaderboard [page]` | `soapsquest.use` | ✅ All | View quest leaderboard |
-| `/sq info` | `soapsquest.use` | ✅ All | Show plugin information |
-| `/sq help` | `soapsquest.use` | ✅ All | Show command help |
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/sq` | `soapsquest.use` | Show main help menu |
+| `/sq list [page]` | `soapsquest.list` | View all quests (click to accept) |
+| `/sq browse` | `soapsquest.use` | Open quest browser GUI |
+| `/sq statistics [player]` | `soapsquest.use` | View quest completion stats |
+| `/sq leaderboard [page]` | `soapsquest.use` | View top quest completers |
+| `/sq help` | `soapsquest.use` | Show command help |
+| `/sq info` | `soapsquest.use` | Show plugin information |
 
 ---
 
-## Admin Commands
+## 🔧 Admin Commands
 
-| Command | Permission | Default | Description |
-|---------|------------|---------|-------------|
-| `/sq give <player> <quest>` | `soapsquest.give` | ❌ Op | Give quest to player |
-| `/sq editor [quest]` | `soapsquest.editor` | ❌ Op | Open quest editor GUI |
-| `/sq reload` | `soapsquest.reload` | ❌ Op | Reload all configs |
-| `/sq debug` | `soapsquest.debug` | ❌ Op | Toggle debug mode |
-| `/sq generate [type]` | `soapsquest.generate` | ❌ Op | Generate random quest |
-| `/sq remove <questId>` | `soapsquest.remove` | ❌ Op | Delete a quest |
-| `/sq addreward <quest> <type> [args]` | `soapsquest.addreward` | ❌ Op | Add reward to quest |
-| `/sq removereward <quest> <index>` | `soapsquest.removereward` | ❌ Op | Remove reward from quest |
-| `/sq listreward <quest>` | `soapsquest.admin` | ❌ Op | List quest rewards |
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/sq give <player> <quest>` | `soapsquest.give` | Give quest paper to player |
+| `/sq editor [quest]` | `soapsquest.editor` | Open quest editor GUI |
+| `/sq generate [type]` | `soapsquest.generate` | Generate random quest |
+| `/sq reload` | `soapsquest.reload` | Reload all configuration files |
+| `/sq debug` | `soapsquest.debug` | Toggle debug mode |
+| `/sq remove <questId>` | `soapsquest.remove` | Delete a quest permanently |
+| `/sq addreward <quest> <type> [args]` | `soapsquest.addreward` | Add reward to quest |
+| `/sq removereward <quest> <index>` | `soapsquest.removereward` | Remove reward from quest |
+| `/sq listreward <quest>` | `soapsquest.admin` | List all quest rewards |
 
 ---
 
-## Command Details
+## 📖 Command Details
+
+## 📖 Command Details
 
 ### `/sq list [page]`
 
-View all available quests with pagination.
+View all available quests with pagination (10 per page).
 
-- Click quest names to accept them
-- Hover to see details
-- 10 quests per page
+- Click quest names to accept
+- Hover for quest details
+- Respects permission conditions
 
-**Example:**
+**Examples:**
 ```
 /sq list
 /sq list 2
 ```
 
+---
+
 ### `/sq browse`
 
-Open the interactive quest browser GUI. Browse all quests, view details, and accept quests through a visual interface.
+Open the interactive quest browser GUI.
 
-**Aliases:** `browser`, `gui`
+- Visual quest browsing
+- Filter by tier and difficulty
+- Click to view details and accept
 
 **Example:**
 ```
 /sq browse
 ```
 
+---
+
 ### `/sq statistics [player]`
 
-View quest completion statistics for yourself or another player. Shows total quests completed, tier breakdowns, and difficulty breakdowns.
+View quest completion statistics.
 
-**Aliases:** `stats`, `statistic`
+- Total quests completed
+- Tier breakdowns
+- Difficulty breakdowns
 
-**Example:**
+**Examples:**
 ```
 /sq statistics
 /sq statistics Notch
 ```
 
+---
+
 ### `/sq leaderboard [page]`
 
-View the global quest leaderboard showing top players by quest completions.
+View the global quest leaderboard.
 
-**Aliases:** `lb`, `top`
-
-**Example:**
+**Examples:**
 ```
 /sq leaderboard
 /sq leaderboard 2
 ```
 
+---
+
 ### `/sq give <player> <quest>`
 
 Give a quest paper to a player.
+
+**Permission:** `soapsquest.give`
 
 **Example:**
 ```
 /sq give Steve zombie_slayer
 ```
 
+---
+
 ### `/sq editor [quest]`
 
-Open the quest editor GUI. Create new quests or edit existing ones with a visual interface.
+Open the quest editor GUI.
 
-**Aliases:** `edit`
+- Create new quests
+- Edit existing quests
+- Configure objectives, rewards, and conditions
+- Delete quests
 
-**Example:**
+**Permission:** `soapsquest.editor`
+
+**Examples:**
 ```
 /sq editor
 /sq editor zombie_slayer
 ```
 
-### `/sq reload`
-
-Reload all configuration files:
-- config.yml
-- messages.yml  
-- quests.yml
-- random-generator.yml
-- quest-loot.yml
-
-Active quests and player progress are preserved.
-
-### `/sq debug`
-
-Toggle debug mode for troubleshooting. Shows detailed console output for quest events, loot generation, and system operations.
-
-**Example:**
-```
-/sq debug
-```
+---
 
 ### `/sq generate [type]`
 
-Generate a random quest (saves to `generated.yml`).
+Generate a random quest.
 
-**Types:** `single`, `multi`, `sequence`
+**Permission:** `soapsquest.generate`
 
-**Example:**
+**Types:**
+- `single` – One objective
+- `multi` – Multiple objectives (any order)
+- `sequence` – Sequential objectives
+
+**Examples:**
 ```
-/sq generate single
 /sq generate
+/sq generate single
+/sq generate multi
 ```
 
-Requires `random-generator.yml` to be configured.
+Generated quests are saved to `generated.yml`.
+
+---
+
+### `/sq reload`
+
+Reload all configuration files.
+
+**Permission:** `soapsquest.reload`
+
+Reloads:
+- `config.yml`
+- `messages.yml`
+- `quests.yml`
+- `random-generator.yml`
+- `quest-loot.yml`
+
+**Note:** Active quest progress is preserved.
+
+---
+
+### `/sq debug`
+
+Toggle debug mode for troubleshooting.
+
+**Permission:** `soapsquest.debug`
+
+Enables detailed console logging for:
+- Quest events
+- Loot generation
+- Progress tracking
+- System operations
+
+---
 
 ### `/sq remove <questId>`
 
-Permanently delete a quest from the configuration. Use with caution - this action cannot be undone.
+Permanently delete a quest.
+
+**Permission:** `soapsquest.remove`
+
+**Warning:** This action cannot be undone.
 
 **Example:**
 ```
 /sq remove old_quest
 ```
 
+---
+
 ### `/sq addreward <quest> <type> [args]`
 
 Add rewards to an existing quest.
 
-**Types:**
-- `item` - Hold item in hand, no args needed
-- `xp <amount>` - Add XP reward
-- `money <amount>` - Add money reward (Vault required)
-- `command <command>` - Add command reward
+**Permission:** `soapsquest.addreward`
 
-**Example:**
+**Types:**
+- `item` – Hold item in hand
+- `xp <amount>` – XP reward
+- `money <amount>` – Money reward (Vault)
+- `command <command>` – Command reward
+
+**Examples:**
 ```
 /sq addreward zombie_slayer xp 100
 /sq addreward zombie_slayer money 50
 /sq addreward zombie_slayer item
+/sq addreward zombie_slayer command give {player} diamond 1
 ```
+
+---
 
 ### `/sq removereward <quest> <index>`
 
-Remove a reward from a quest by index.
+Remove a reward from a quest.
+
+**Permission:** `soapsquest.removereward`
 
 Use `/sq listreward <quest>` to see indices.
 
@@ -184,9 +232,13 @@ Use `/sq listreward <quest>` to see indices.
 /sq removereward zombie_slayer 2
 ```
 
+---
+
 ### `/sq listreward <quest>`
 
-List all rewards configured for a quest.
+List all rewards for a quest.
+
+**Permission:** `soapsquest.admin`
 
 **Example:**
 ```
@@ -195,4 +247,4 @@ List all rewards configured for a quest.
 
 ---
 
-**[← Back to README](README.md)** | **[Permissions →](PERMISSIONS.md)**
+**[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)**

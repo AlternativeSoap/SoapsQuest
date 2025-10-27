@@ -1,49 +1,52 @@
-# Wiki
+# SoapsQuest Wiki
 
-Documentation hub for SoapsQuest.
-
----
-
-## Getting Started
-
-1. Download from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
-2. Place in `plugins/` folder
-3. Restart server
-4. Edit `plugins/SoapsQuest/quests.yml`
-5. Give quests with `/sq give <player> <quest>`
-
-## Documentation
-
-| Guide | Description |
-|-------|-------------|
-| **[Commands](COMMANDS.md)** | All available commands |
-| **[Permissions](PERMISSIONS.md)** | Permission nodes and access control |
-| **[Configuration](CONFIGURATION.md)** | Complete configuration guide |
-| **[Quest Creation](QUEST-CREATION.md)** | Create custom quests |
-| **[Random Generator](RANDOM-GENERATOR.md)** | Random quest generation |
-| **[PlaceholderAPI](PLACEHOLDERAPI.md)** | Placeholder reference |
-| **[Changelog](CHANGELOG.md)** | Version history |
+Central documentation hub for SoapsQuest.
 
 ---
 
-## Installation
+## 🚀 Quick Start
 
-1. Download `SoapsQuest-1.0.0-BETA.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
-2. Place in `plugins/` folder  
-3. Restart server
-4. Edit quest configurations
-5. Give quests to players
+1. [Download](https://github.com/AlternativeSoap/SoapsQuest/releases) and place in `plugins/` folder
+2. Restart server
+3. Edit `plugins/SoapsQuest/quests.yml`
+4. Give quests: `/sq give <player> <quest>`
+5. Players browse: `/sq list` or `/sq browse`
 
-## Quick Start
+---
 
-### Create a Quest
+## 📚 Documentation
 
-Edit `plugins/SoapsQuest/quests.yml`:
+### Core Documentation
 
-## Quick Example
+- **[README](README.md)** → Plugin overview and quick start
+- **[COMMANDS](COMMANDS.md)** → All available commands
+- **[CONFIGURATION](CONFIGURATION.md)** → Config files explained
+- **[QUEST CREATION](QUEST-CREATION.md)** → Create and manage quests
+- **[RANDOM GENERATOR](RANDOM-GENERATOR.md)** → Automatic quest generation
+- **[PLACEHOLDERAPI](PLACEHOLDERAPI.md)** → Placeholder list
+- **[CHANGELOG](CHANGELOG.md)** → Version updates
+
+---
+
+## ✨ Features
+
+- **Physical Quest Papers** – Quest items exist in inventories
+- **31 Objective Types** – Combat, building, collection, survival, movement, leveling
+- **Multi-Objective Quests** – Complete multiple tasks in any order or sequentially
+- **Real-Time Progress** – BossBar, ActionBar, or Chat tracking
+- **Flexible Rewards** – XP, money, items, commands
+- **Quest Conditions** – Level, money, permission, PlaceholderAPI requirements
+- **Random Generation** – Auto-generate infinite quests
+- **Quest Loot System** – Quests drop from chests and mobs
+- **Interactive GUIs** – Browse, create, and edit quests in-game
+- **Leaderboards** – PlaceholderAPI integration
+
+---
+
+## 🎯 Example Quest
 
 ```yaml
-my_quest:
+zombie_slayer:
   display: "&aZombie Slayer"
   tier: common
   difficulty: easy
@@ -53,33 +56,22 @@ my_quest:
       amount: 10
   reward:
     xp: 100
+    money: 50
 ```
 
 Give to player:
 ```
-/sq give <player> my_quest
+/sq give Steve zombie_slayer
 ```
 
 ---
 
-## Features
+## 💬 Support
 
-- Physical quest papers
-- 31 objective types
-- Multi-objective support
-- Progress tracking
-- Rewards and conditions
-- Random generation
-- Quest loot system
-- PlaceholderAPI integration
-
----
-
-## Support
-
-- Discord: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
-- Issues: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
+- **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
+- **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
 
 ---
 
 **[← Back to README](README.md)**
+

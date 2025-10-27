@@ -4,20 +4,22 @@ Complete configuration guide for SoapsQuest.
 
 ---
 
-## Configuration Files
+## 📁 Configuration Files
 
-SoapsQuest uses four configuration files in `plugins/SoapsQuest/`:
+SoapsQuest uses five configuration files located in `plugins/SoapsQuest/`:
 
 | File | Purpose |
 |------|---------|
-| `config.yml` | Core settings, tiers, difficulties, progress display |
+| `config.yml` | Core settings, tiers, difficulties, and progress display |
 | `messages.yml` | All messages and translations |
-| `quests.yml` | Quest definitions |
-| `random-generator.yml` | Random quest generation settings |
+| `quests.yml` | Quest definitions (see [QUEST-CREATION.md](QUEST-CREATION.md)) |
+| `random-generator.yml` | Random quest generation (see [RANDOM-GENERATOR.md](RANDOM-GENERATOR.md)) |
+| `quest-loot.yml` | Chest loot and mob drops |
+| `gui.yml` | GUI customization |
 
 ---
 
-## config.yml
+## ⚙️ config.yml
 
 ### Core Settings
 
@@ -25,13 +27,18 @@ SoapsQuest uses four configuration files in `plugins/SoapsQuest/`:
 # Autosave interval for player progress (minutes)
 autosave-interval: 5
 
-# Max attempts to generate random quests
+# Max attempts when generating random quests
 max-generation-retries: 5
 ```
 
-### Tiers (Rarity)
+- `autosave-interval` → Saves player progress every X minutes
+- `max-generation-retries` → Prevents infinite loops during generation
 
-Fully customizable quest rarity levels:
+---
+
+### Quest Tiers (Rarity)
+
+Define custom rarity levels with weights for random generation:
 
 ```yaml
 tiers:
@@ -39,7 +46,7 @@ tiers:
     display: "&fCommon"
     prefix: "&7[COMMON]"
     color: "&f"
-    weight: 40        # Random generation weight
+    weight: 40
   
   rare:
     display: "&9Rare"
@@ -60,11 +67,19 @@ tiers:
     weight: 10
 ```
 
-**Add custom tiers** (mythic, divine, etc.) by copying the format.
+**Fields:**
+- `display` → Tier name shown to players
+- `prefix` → Prefix in quest names
+- `color` → Default color code
+- `weight` → Random generation probability (higher = more common)
 
-### Difficulties
+**Add custom tiers** by copying the format (e.g., `mythic`, `divine`).
 
-Fully customizable difficulty levels with multipliers:
+---
+
+### Difficulty Levels
+
+Define difficulty levels with multipliers that scale objectives and rewards:
 
 ```yaml
 difficulties:
@@ -72,38 +87,46 @@ difficulties:
     display: "&aEasy"
     weight: 50
     multiplier:
-      objective-amount: 0.8   # 20% fewer objectives
-      reward: 0.8             # 20% fewer rewards
+      objective-amount: 0.8    # 20% fewer objectives
+      reward: 0.8              # 20% fewer rewards
   
   normal:
     display: "&eNormal"
     weight: 35
     multiplier:
-      objective-amount: 1.0   # Normal
+      objective-amount: 1.0
       reward: 1.0
   
   hard:
     display: "&cHard"
     weight: 15
     multiplier:
-      objective-amount: 1.5   # 50% more objectives
-      reward: 1.5             # 50% more rewards
+      objective-amount: 1.5    # 50% more objectives
+      reward: 1.5              # 50% more rewards
   
   nightmare:
     display: "&4&lNightmare"
     weight: 5
     multiplier:
-      objective-amount: 2.0   # 2x objectives
-      reward: 2.5             # 2.5x rewards
+      objective-amount: 2.0    # 2x objectives
+      reward: 2.5              # 2.5x rewards
 ```
 
-**Multipliers scale objectives and rewards** based on difficulty.
+**Fields:**
+- `display` → Difficulty name
+- `weight` → Random generation probability
+- `multiplier.objective-amount` → Scales objective requirements
+- `multiplier.reward` → Scales rewards
+
+---
 
 ### Progress Display
 
+Choose how players see quest progress:
+
 ```yaml
 progress-display:
-  mode: "actionbar"    # actionbar, chat, bossbar, none
+  mode: "actionbar"    # Options: actionbar, chat, bossbar, none
   
   # Chat mode: Show every X updates
   interval: 5
@@ -115,15 +138,25 @@ progress-display:
     duration: 5                # Seconds to display
 ```
 
+**Modes:**
+- `actionbar` → Above hotbar (recommended)
+- `chat` → Chat messages
+- `bossbar` → Boss health bar
+- `none` → Disable progress updates
+
+---
+
 ### Milestone Notifications
 
-Sound effect when reaching quest milestones (25%, 50%, 75%):
+Play sounds when reaching quest milestones:
 
 ```yaml
-milestone-sound: "ENTITY_PLAYER_LEVELUP"    # Use "none" to disable
-milestone-sound-volume: 1.0                 # 0.0 to 1.0
-milestone-sound-pitch: 1.0                  # 0.5 to 2.0
+milestone-sound: "ENTITY_PLAYER_LEVELUP"
+milestone-sound-volume: 1.0    # 0.0 to 1.0
+milestone-sound-pitch: 1.0     # 0.5 to 2.0
 ```
+
+Set `milestone-sound: "none"` to disable.
 
 Configure per-quest milestones in `quests.yml`:
 ```yaml
@@ -132,7 +165,7 @@ milestones: [25, 50, 75]
 
 ---
 
-## messages.yml
+## 💬 messages.yml
 
 All messages support color codes (`&a`, `&b`, etc.) and placeholders.
 
@@ -160,69 +193,58 @@ quest-not-found: "&cQuest not found: &e{quest_id}"
 no-permission: "&cYou don't have permission!"
 ```
 
-Messages auto-regenerate if deleted.
+Messages regenerate automatically if deleted.
 
 ---
 
-## quests.yml
+## 🎨 gui.yml
 
-See [QUEST-CREATION.md](QUEST-CREATION.md) for detailed examples.
-
-### Basic Quest Structure
-
-```yaml
-quest_id:
-  display: "&aQuest Name"
-  tier: common
-  difficulty: easy
-  objectives:
-    - type: kill
-      entity: ZOMBIE
-      amount: 10
-  reward:
-    xp: 100
-    money: 50
-  conditions:
-    min-level: 10
-```
-
-### Quest Paper Customization
-
-```yaml
-quest_paper:
-  material: PAPER
-  name: "&e{quest_name}"
-  lore:
-    - "&7Tier: {tier}"
-    - "&7Difficulty: {difficulty}"
-  enchantments:
-    - "DURABILITY:1"
-  hide-enchants: true
-```
+Customize GUI icons and appearance. See the file for full customization options.
 
 ---
 
-## random-generator.yml
+## 📦 quest-loot.yml
 
-See [RANDOM-GENERATOR.md](RANDOM-GENERATOR.md) for full documentation.
+Configure quest drops from chests and mobs:
 
 ```yaml
-generator:
+quest-loot:
   enabled: true
-  objectives:
-    kill:
-      entities: [ZOMBIE, SKELETON, CREEPER]
-      min-amount: 5
-      max-amount: 50
-  rewards:
-    xp:
-      min: 50
-      max: 500
+  
+  chest:
+    enabled: true
+    chance: 10              # 10% chance per chest
+    amount-min: 1
+    amount-max: 2
+    worlds: ["world", "world_nether"]
+    source-mode: "mixed"    # manual | random | mixed
+    quests:
+      - "starter_quest"
+      - "rare_treasure"
+  
+  mobs:
+    enabled: true
+    default-chance: 5
+    worlds: ["world"]
+    types:
+      ZOMBIE:
+        chance: 12
+        amount-min: 1
+        amount-max: 2
+      ENDER_DRAGON:
+        chance: 100
+        amount-min: 3
+        amount-max: 6
 ```
+
+**Source Modes:**
+- `manual` → Use specific quests from config
+- `random` → Generate new random quests
+- `mixed` → 50/50 mix
 
 ---
 
-## Color Codes
+## 🎨 Color Codes
 
 | Code | Color | Code | Format |
 |------|-------|------|--------|
@@ -231,17 +253,17 @@ generator:
 | `&2` | Dark Green | `&n` | Underline |
 | `&3` | Dark Aqua | `&o` | *Italic* |
 | `&4` | Dark Red | `&r` | Reset |
-| `&5` | Dark Purple | | |
-| `&6` | Gold | | |
-| `&7` | Gray | | |
-| `&8` | Dark Gray | | |
-| `&9` | Blue | | |
-| `&a` | Green | | |
-| `&b` | Aqua | | |
-| `&c` | Red | | |
-| `&d` | Light Purple | | |
-| `&e` | Yellow | | |
-| `&f` | White | | |
+| `&5` | Dark Purple |
+| `&6` | Gold |
+| `&7` | Gray |
+| `&8` | Dark Gray |
+| `&9` | Blue |
+| `&a` | Green |
+| `&b` | Aqua |
+| `&c` | Red |
+| `&d` | Light Purple |
+| `&e` | Yellow |
+| `&f` | White |
 
 **Hex colors (1.16+)**: `&#RRGGBB`
 

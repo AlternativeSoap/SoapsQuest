@@ -1,56 +1,58 @@
 # SoapsQuest
 
-[![Version](https://img.shields.io/badge/Version-1.0.0--BETA-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-Premium-red.svg)](LICENSE.md)
 
-Physical quest paper system for Minecraft servers with 31 objective types, multi-objective support, and progress tracking.
+A physical quest paper system for Minecraft servers featuring 31 objective types, dynamic quest generation, real-time progress tracking, and intuitive GUI management.
 
 ---
 
-## Features
+## ✨ Key Features
 
-- Physical quest papers in player inventories
-- 31 objective types (combat, building, collection, survival, movement, leveling)
-- Multi-objective and sequential quest support
-- Progress tracking (BossBar, ActionBar, Chat)
-- Rewards: XP, money, items, commands
-- Conditions and requirements
-- Random quest generation
-- Quest loot system (chests and mobs)
-- PlaceholderAPI integration
-- GUI browser and editor
+- **Physical Quest Papers** – Quest items exist in player inventories
+- **31 Objective Types** – Combat, building, collection, survival, movement, and more
+- **Multi-Objective Quests** – Complete multiple objectives in any order or sequentially
+- **Real-Time Progress** – BossBar, ActionBar, or Chat tracking
+- **Flexible Rewards** – XP, money, custom items, and command execution
+- **Quest Conditions** – Level requirements, costs, permissions, and PlaceholderAPI support
+- **Random Generation** – Auto-generate infinite quests with configurable templates
+- **Quest Loot System** – Quests drop from chests and mob kills
+- **Interactive GUIs** – Browse, create, and edit quests in-game
+- **Leaderboards** – Track player progress with PlaceholderAPI integration
 
 ---
 
-## Requirements
+## 📋 Requirements
 
-- **Server**: Paper 1.21.8+ (or Spigot/Bukkit with Adventure API)
+- **Server**: Paper 1.21.8+ (Spigot/Bukkit compatible)
 - **Java**: 21+
 
 ### Optional Dependencies
 
-- **Vault** - Economy features
-- **PlaceholderAPI** - Placeholders and leaderboards
-- **MythicMobs** - MythicMobs kill objectives
+- **[Vault](https://www.spigotmc.org/resources/vault.34315/)** – Economy rewards and costs
+- **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)** – Leaderboards and conditions
+- **[MythicMobs](https://www.spigotmc.org/resources/mythicmobs.5702/)** – Custom mob objectives
 
 ---
 
-## Installation
+## 🚀 Installation
 
-1. Download from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
-2. Place in `plugins/` folder
-3. Restart server
-4. Edit `plugins/SoapsQuest/quests.yml`
-5. Use `/sq give <player> <quest>`
+1. Download `SoapsQuest.jar` from [Releases](https://github.com/AlternativeSoap/SoapsQuest/releases)
+2. Place in your `plugins/` folder
+3. Restart the server
+4. Configure `plugins/SoapsQuest/quests.yml`
+5. Give quests with `/sq give <player> <quest>`
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
+
+Create your first quest in `plugins/SoapsQuest/quests.yml`:
 
 ```yaml
-my_quest:
+zombie_slayer:
   display: "&aZombie Slayer"
   tier: common
   difficulty: easy
@@ -63,46 +65,46 @@ my_quest:
     money: 50
 ```
 
-### Give Quest to Player
+Give it to a player:
 
 ```
-/sq give <player> my_quest
+/sq give Steve zombie_slayer
 ```
 
-### Players View Available Quests
+Players can also browse and accept quests:
 
 ```
 /sq list
-Players use `/sq list` to view and accept quests.
+/sq browse
+```
 
 ---
 
-## Documentation
+## 📚 Documentation
 
 | Guide | Description |
 |-------|-------------|
-| **[Wiki](WIKI.md)** | Documentation hub |
-| **[Commands](COMMANDS.md)** | Command reference |
-| **[Permissions](PERMISSIONS.md)** | Permission nodes |
-| **[Configuration](CONFIGURATION.md)** | Configuration guide |
-| **[Quest Creation](QUEST-CREATION.md)** | How to create quests |
-| **[Quest Loot System](QUEST-LOOT-SYSTEM.md)** | Chest loot and mob drops |
-| **[Random Generator](RANDOM-GENERATOR.md)** | Random quest generation |
-| **[PlaceholderAPI](PLACEHOLDERAPI.md)** | Placeholder reference |
+| **[WIKI](WIKI.md)** | Central documentation hub |
+| **[COMMANDS](COMMANDS.md)** | All available commands |
+| **[CONFIGURATION](CONFIGURATION.md)** | Config files explained |
+| **[QUEST CREATION](QUEST-CREATION.md)** | Create and manage quests |
+| **[RANDOM GENERATOR](RANDOM-GENERATOR.md)** | Automatic quest generation |
+| **[PLACEHOLDERAPI](PLACEHOLDERAPI.md)** | Placeholder list |
+| **[CHANGELOG](CHANGELOG.md)** | Version updates |
 
 ---
 
-## Support
+## 💬 Support
 
-- Discord: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
-- Issues: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
-
----
-
-## License
-
-Premium License - See [LICENSE.md](LICENSE.md)
+- **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
+- **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
 
 ---
 
-**Version**: 1.0.0-BETA
+## 📄 License
+
+Premium License – See [LICENSE.md](LICENSE.md)
+
+---
+
+**Version 1.0.0** | Made with ❤️ by AlternativeSoap

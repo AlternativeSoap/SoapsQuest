@@ -1,17 +1,83 @@
 # Quest Creation
 
-Guide to creating custom quests for SoapsQuest.
+Complete guide to creating and managing quests in SoapsQuest.
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
-1. [Basic Structure](#basic-structure)
-2. [Objective Types](#objective-types)
-3. [Rewards](#rewards)
-4. [Conditions](#conditions)
-5. [Advanced Features](#advanced-features)
-6. [Examples](#examples)
+1. [Creating Quests (GUI Method)](#-creating-quests-gui-method)
+2. [Creating Quests (YAML Method)](#-creating-quests-yaml-method)
+3. [Quest Types](#-quest-types)
+4. [Objective Types](#-objective-types)
+5. [Rewards](#-rewards)
+6. [Conditions](#-conditions)
+7. [Advanced Features](#-advanced-features)
+8. [Example Quests](#-example-quests)
+
+---
+
+## 🎨 Creating Quests (GUI Method)
+
+The easiest way to create quests is using the in-game editor.
+
+### Step 1: Open the Editor
+
+```
+/sq editor
+```
+
+### Step 2: Create New Quest
+
+1. Click **"Create Quest"** icon
+2. Enter a unique quest ID in chat (e.g., `zombie_slayer`)
+3. The editor opens with your new quest
+
+### Step 3: Configure Quest
+
+Click icons to edit:
+
+| Icon | Function |
+|------|----------|
+| **Name** | Set quest display name |
+| **Description** | Add lore lines |
+| **Tier** | Choose rarity (common, rare, epic, legendary) |
+| **Difficulty** | Choose difficulty (easy, normal, hard, nightmare) |
+| **Objectives** | Add/edit objectives |
+| **Rewards** | Add/edit rewards |
+| **Conditions** | Add requirements |
+| **Save** | Save and close |
+| **Delete** | Delete quest |
+
+### Step 4: Add Objectives
+
+1. Click **"Add Objective"**
+2. Choose objective type
+3. Configure target (entity, block, item)
+4. Set amount required
+5. Click **"Confirm"**
+
+### Step 5: Add Rewards
+
+1. Click **"Add Reward"**
+2. Choose reward type:
+   - **XP** – Enter amount in chat
+   - **Money** – Enter amount in chat (Vault required)
+   - **Item** – Hold item and click
+   - **Command** – Enter command in chat
+3. Confirm
+
+### Step 6: Save Quest
+
+Click **"Save Quest"** to save to `quests.yml`.
+
+---
+
+## 📝 Creating Quests (YAML Method)
+
+Edit `plugins/SoapsQuest/quests.yml` directly.
+
+### Basic Quest Structure
 
 ---
 
