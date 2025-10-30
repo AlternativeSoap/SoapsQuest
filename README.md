@@ -72,7 +72,7 @@ Give it to a player:
 /sq give Steve zombie_slayer
 ```
 
-Players can also browse and accept quests:
+Admins should use the browsing feature if they want to easily retrieve a quest:
 
 ```
 /sq list
