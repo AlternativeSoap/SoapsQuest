@@ -677,7 +677,304 @@ xp: 100              # Not indented
 
 ---
 
-## 🆘 Resources
+## � Random Quest Generation
+
+Generate procedural quests with randomized objectives and rewards.
+
+### Command Usage
+
+```
+/sq generate [type]
+```
+
+**Types:**
+- `single` – One objective
+- `multi` – Multiple objectives (any order)
+- `sequence` – Sequential objectives
+
+**Example:**
+```
+/sq generate single
+→ Generated quest: quest_common_kill_12345
+→ Use /sq give <player> quest_common_kill_12345
+```
+
+Generated quests are saved to `plugins/SoapsQuest/generated.yml`.
+
+---
+
+### Configuration
+
+Edit `plugins/SoapsQuest/random-generator.yml`
+
+**Basic Settings:**
+
+```yaml
+random-generator:
+  enabled: true
+  save-generated-quests: true
+  save-location: "generated.yml"
+  allowed-types: [single, multi, sequence]
+```
+
+---
+
+### Objective Pools
+
+Define objectives that can be randomly selected:
+
+```yaml
+objectives:
+  kill_zombies:
+    objective: kill
+    target: [ZOMBIE]
+    amount: [10, 30]
+  
+  break_stone:
+    objective: break
+    target: [STONE, COBBLESTONE]
+    amount: [50, 200]
+  
+  collect_items:
+    objective: collect
+    target: [IRON_INGOT, GOLD_INGOT]
+    amount: [5, 15]
+```
+
+**Amount Scaling by Difficulty:**
+
+```yaml
+objectives:
+  kill_hostile:
+    objective: kill
+    target: [ZOMBIE, SKELETON, CREEPER]
+    amount-by-difficulty:
+      easy: [10, 25]
+      normal: [20, 40]
+      hard: [40, 75]
+      nightmare: [75, 150]
+```
+
+---
+
+### Objective Weights
+
+Control how often objectives appear:
+
+```yaml
+objective-weights:
+  kill: 40              # Most common
+  break: 30
+  collect: 15
+  craft: 15
+  fish: 10
+  death: 2              # Least common
+```
+
+Higher weight = more likely to be selected.
+
+---
+
+### Reward Pools
+
+**XP Rewards:**
+```yaml
+reward-pool:
+  xp:
+    common: [25, 100]
+    rare: [100, 250]
+    epic: [250, 400]
+    legendary: [400, 500]
+```
+
+**Money Rewards:**
+```yaml
+  money:
+    common: [10, 100]
+    rare: [100, 400]
+    epic: [400, 750]
+    legendary: [750, 1000]
+```
+
+**Item Rewards:**
+```yaml
+  items:
+    selection-mode: "weighted"
+    min-items: 1
+    max-items: 3
+    
+    pool:
+      - material: IRON_INGOT
+        amount: [1, 5]
+        tiers: [common, rare]
+        weight: 50
+      
+      - material: DIAMOND
+        amount: [1, 2]
+        tiers: [epic, legendary]
+        weight: 15
+        min-difficulty: hard
+```
+
+---
+
+### Display Templates
+
+Quest names based on objective type:
+
+```yaml
+display-templates:
+  kill:
+    - "&c<target> Slayer"
+    - "&4Hunt &f<amount> &4<target>s"
+  
+  break:
+    - "&8<target> Breaker"
+    - "&7Mine &f<amount> &7<target>"
+  
+  collect:
+    - "&e<target> Collector"
+    - "&6Gather &f<amount> &6<target>s"
+```
+
+**Placeholders:**
+- `<target>` – Entity/block/item name
+- `<amount>` – Required amount
+- `<tier>` – Quest tier
+- `<difficulty>` – Quest difficulty
+
+---
+
+### Random Conditions
+
+Add random requirements to quests:
+
+```yaml
+conditions:
+  enabled: true
+  
+  min-level:
+    enabled: true
+    chance: 40          # 40% of quests require level
+    by-tier:
+      common: 0
+      rare: 10
+      epic: 25
+      legendary: 50
+  
+  cost:
+    enabled: true
+    chance: 20
+    by-tier:
+      common: 50
+      rare: 250
+      epic: 1000
+      legendary: 5000
+```
+
+---
+
+### Example Configurations
+
+**Simple Kill Quests:**
+```yaml
+objectives:
+  kill_zombies:
+    objective: kill
+    target: [ZOMBIE]
+    amount: [10, 30]
+  
+  kill_skeletons:
+    objective: kill
+    target: [SKELETON]
+    amount: [10, 30]
+```
+
+**Mining Quests:**
+```yaml
+objectives:
+  mine_stone:
+    objective: break
+    target: [STONE, COBBLESTONE]
+    amount: [100, 300]
+  
+  mine_ores:
+    objective: break
+    target: [COAL_ORE, IRON_ORE, GOLD_ORE]
+    amount: [20, 50]
+```
+
+**Collection Quests:**
+```yaml
+objectives:
+  gather_food:
+    objective: collect
+    target: [WHEAT, CARROT, POTATO]
+    amount: [32, 64]
+  
+  gather_valuables:
+    objective: collect
+    target: [IRON_INGOT, GOLD_INGOT, DIAMOND]
+    amount: [5, 20]
+```
+
+---
+
+### Testing Random Generation
+
+Enable debug mode:
+```
+/sq debug
+```
+
+Generate test quests:
+```
+/sq generate single
+/sq generate multi
+/sq generate sequence
+```
+
+Check generated quests in `plugins/SoapsQuest/generated.yml`.
+
+---
+
+### Balancing Tips
+
+- **Weights:** Higher = more common (kill: 40, death: 2)
+- **Amounts:** Use `[min, max]` for variety
+- **Difficulty Scaling:** Use `amount-by-difficulty` for progression
+- **Tier Rewards:** Higher tiers = better rewards
+- **Performance:** Don't enable too many objective types (5-10 optimal)
+- **Lists:** Keep material/entity lists reasonable (10-20 items)
+- **Max Items:** Limit max-items to 3-5 per quest
+
+---
+
+### Common Random Generation Mistakes
+
+**❌ Wrong objective type names:**
+```yaml
+objectives:
+  mine_stone:
+    objective: break_block  # Wrong name
+    blocks: [STONE]
+```
+
+✅ Use correct names: `objective: break` with `target: [STONE]`
+
+**❌ Missing required fields:**
+```yaml
+objectives:
+  enchant_items:
+    objective: enchant
+    amount: [5, 15]         # Missing target!
+```
+
+✅ Include target: `target: [ANY]`
+
+---
+
+## �🆘 Resources
 
 - **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
 - **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)
@@ -686,7 +983,7 @@ xp: 100              # Not indented
 
 ---
 
-**[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)** | **[Random Generator →](RANDOM-GENERATOR.md)**
+**[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)**
 
 ---
 

@@ -132,7 +132,7 @@ Top players per difficulty. Works with **any custom difficulty**.
 
 ---
 
-**[← Back to README](README.md)** | **[Wiki →](WIKI.md)**
+**[← Back to README](README.md)**
 
 ---
 

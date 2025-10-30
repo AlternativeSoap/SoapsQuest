@@ -85,15 +85,11 @@ Players can also browse and accept quests:
 
 | Guide | Description |
 |-------|-------------|
-| **[WIKI](WIKI.md)** | Central documentation hub |
-| **[COMMANDS](COMMANDS.md)** | All available commands |
-| **[PERMISSIONS](PERMISSIONS.md)** | Permission nodes |
-| **[CONFIGURATION](CONFIGURATION.md)** | Config files explained |
-| **[QUEST CREATION](QUEST-CREATION.md)** | Create and manage quests |
-| **[QUEST LOOT SYSTEM](QUEST-LOOT-SYSTEM.md)** | Chest and mob drops |
-| **[RANDOM GENERATOR](RANDOM-GENERATOR.md)** | Automatic quest generation |
-| **[PLACEHOLDERAPI](PLACEHOLDERAPI.md)** | Placeholder list |
-| **[CHANGELOG](CHANGELOG.md)** | Version updates |
+| **[COMMANDS & PERMISSIONS](COMMANDS.md)** | All commands and permission nodes |
+| **[CONFIGURATION](CONFIGURATION.md)** | All config files including quest loot |
+| **[QUEST CREATION](QUEST-CREATION.md)** | Create quests manually and randomly |
+| **[PLACEHOLDERAPI](PLACEHOLDERAPI.md)** | Placeholder integration |
+| **[CHANGELOG](CHANGELOG.md)** | Version history |
 
 ---
 

@@ -13,8 +13,8 @@ SoapsQuest uses five configuration files located in `plugins/SoapsQuest/`:
 | `config.yml` | Core settings, tiers, difficulties, and progress display |
 | `messages.yml` | All messages and translations |
 | `quests.yml` | Quest definitions (see [QUEST-CREATION.md](QUEST-CREATION.md)) |
-| `random-generator.yml` | Random quest generation (see [RANDOM-GENERATOR.md](RANDOM-GENERATOR.md)) |
-| `quest-loot.yml` | Chest loot and mob drops |
+| `random-generator.yml` | Random quest generation (see [QUEST-CREATION.md](QUEST-CREATION.md#-random-quest-generation)) |
+| `quest-loot.yml` | Chest loot and mob drops (see below) |
 | `gui.yml` | GUI customization |
 
 ---
@@ -205,12 +205,34 @@ Customize GUI icons and appearance. See the file for full customization options.
 
 ## 📦 quest-loot.yml
 
-Configure quest drops from chests and mobs:
+Quest papers can naturally appear in chest loot and mob drops. Players discover quests while exploring or fighting monsters.
+
+### Overview
+
+**Chest Loot** – Naturally generated chests have a chance to contain quest papers
+
+**Mob Drops** – Mobs can drop quest papers when killed
+
+**Quest Sources:**
+- `manual` – Use specific quests from your config
+- `random` – Generate new random quests on-the-fly
+- `mixed` – 50/50 mix of both
+
+---
+
+### Basic Setup
 
 ```yaml
 quest-loot:
   enabled: true
-  
+  debug-logs: false  # Enable for troubleshooting
+```
+
+---
+
+### Chest Loot Configuration
+
+```yaml
   chest:
     enabled: true
     chance: 10              # 10% chance per chest
@@ -219,28 +241,179 @@ quest-loot:
     worlds: ["world", "world_nether"]
     source-mode: "mixed"    # manual | random | mixed
     quests:
-      - "starter_quest"
-      - "rare_treasure"
-  
+      - "starter_adventure"
+      - "hidden_artifact"
+    structures:             # Optional filter
+      - "minecraft:ancient_city"
+      - "minecraft:desert_pyramid"
+```
+
+**Options:**
+- `chance` – Percentage chance per chest (0-100)
+- `amount-min/max` – Number of quest papers dropped
+- `worlds` – List of allowed worlds (empty = all worlds)
+- `source-mode` – How quests are selected
+- `quests` – Manual quest list (used when source-mode is `manual` or `mixed`)
+- `structures` – Filter by structure type (empty = all structures)
+
+---
+
+### Mob Drops Configuration
+
+```yaml
   mobs:
     enabled: true
-    default-chance: 5
+    default-chance: 5       # Default for unlisted mobs
     worlds: ["world"]
     types:
       ZOMBIE:
         chance: 12
         amount-min: 1
         amount-max: 2
+      SKELETON:
+        chance: 8
+        amount-min: 1
+        amount-max: 1
       ENDER_DRAGON:
         chance: 100
         amount-min: 3
         amount-max: 6
 ```
 
-**Source Modes:**
-- `manual` → Use specific quests from config
-- `random` → Generate new random quests
-- `mixed` → 50/50 mix
+**Options:**
+- `default-chance` – Chance for mobs not listed in `types`
+- `worlds` – List of allowed worlds (empty = all worlds)
+- `types` – Per-mob configuration with custom chances and amounts
+
+---
+
+### Source Modes
+
+**Manual Mode** – Uses specific quests you define:
+```yaml
+source-mode: "manual"
+quests:
+  - "zombie_slayer"
+  - "treasure_hunter"
+```
+
+**Random Mode** – Generates brand new quests using your random generator settings:
+```yaml
+source-mode: "random"
+```
+
+**Mixed Mode** – 50% chance for manual quests, 50% chance for random generation:
+```yaml
+source-mode: "mixed"
+quests:
+  - "epic_boss_quest"
+  - "legendary_item"
+```
+
+---
+
+### World & Structure Filtering
+
+Control which worlds can have quest loot:
+```yaml
+chest:
+  worlds: ["world", "world_nether"]
+
+mobs:
+  worlds: ["world"]
+```
+**Empty list = all worlds allowed**
+
+Only generate quests in specific structures (chests only):
+```yaml
+chest:
+  structures:
+    - "minecraft:ancient_city"
+    - "minecraft:desert_pyramid"
+    - "minecraft:jungle_temple"
+    - "minecraft:shipwreck"
+```
+**Empty list = all structures allowed**
+
+---
+
+### Example Configurations
+
+**Dungeon Treasure:**
+```yaml
+quest-loot:
+  chest:
+    enabled: true
+    chance: 25
+    source-mode: "manual"
+    quests:
+      - "dungeon_explorer"
+      - "treasure_hunt"
+    structures:
+      - "minecraft:dungeon"
+      - "minecraft:mineshaft"
+```
+
+**Boss Rewards:**
+```yaml
+quest-loot:
+  mobs:
+    enabled: true
+    types:
+      WITHER:
+        chance: 100
+        amount-min: 3
+        amount-max: 5
+      ENDER_DRAGON:
+        chance: 100
+        amount-min: 5
+        amount-max: 10
+```
+
+**Nether Quests:**
+```yaml
+quest-loot:
+  mobs:
+    enabled: true
+    worlds: ["world_nether"]
+    types:
+      PIGLIN:
+        chance: 10
+      BLAZE:
+        chance: 15
+      GHAST:
+        chance: 20
+```
+
+---
+
+### Testing & Troubleshooting
+
+**Enable Debug Mode:**
+```
+/sq debug
+```
+
+**Test Configuration** (set chances to 100% temporarily):
+```yaml
+chest:
+  chance: 100
+mobs:
+  types:
+    ZOMBIE:
+      chance: 100
+```
+
+**Reload Configuration:**
+```
+/sq reload
+```
+
+**If quests aren't dropping:**
+- Check `enabled: true` in quest-loot.yml
+- Verify world is in `worlds:` list
+- Check console for errors
+- Use `/sq debug` for detailed logging
 
 ---
 
