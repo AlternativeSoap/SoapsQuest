@@ -5,7 +5,7 @@
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
-A free and open-source physical quest system for Minecraft Paper 1.21.8+ featuring 33+ objective types, GUI editor, customizable rewards, and dynamic quest generation.
+A free physical quest system for Minecraft Paper 1.21.8+ featuring 33+ objective types, GUI editor, customizable rewards, and dynamic quest generation.
 
 ---
 
