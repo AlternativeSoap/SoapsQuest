@@ -90,3 +90,6 @@ Only players with `soapsquest.vip` can:
 
 **[← Back to README](README.md)** | **[Commands →](COMMANDS.md)**
 
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap

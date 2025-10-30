@@ -1,21 +1,21 @@
 # SoapsQuest
 
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.0--BETA-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-Premium-red.svg)](LICENSE.md)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
 
-A physical quest paper system for Minecraft servers featuring 31 objective types, dynamic quest generation, real-time progress tracking, and intuitive GUI management.
+A free and open-source physical quest system for Minecraft Paper 1.21.8+ featuring 33+ objective types, GUI editor, customizable rewards, and dynamic quest generation.
 
 ---
 
 ## ✨ Key Features
 
 - **Physical Quest Papers** – Quest items exist in player inventories
-- **31 Objective Types** – Combat, building, collection, survival, movement, and more
+- **33+ Objective Types** – Combat, building, collection, survival, movement, and more
 - **Multi-Objective Quests** – Complete multiple objectives in any order or sequentially
 - **Real-Time Progress** – BossBar, ActionBar, or Chat tracking
-- **Flexible Rewards** – XP, money, custom items, and command execution
+- **Flexible Rewards** – XP, money, custom items, command execution, and quest rewards
 - **Quest Conditions** – Level requirements, costs, permissions, and PlaceholderAPI support
 - **Random Generation** – Auto-generate infinite quests with configurable templates
 - **Quest Loot System** – Quests drop from chests and mob kills
@@ -87,8 +87,10 @@ Players can also browse and accept quests:
 |-------|-------------|
 | **[WIKI](WIKI.md)** | Central documentation hub |
 | **[COMMANDS](COMMANDS.md)** | All available commands |
+| **[PERMISSIONS](PERMISSIONS.md)** | Permission nodes |
 | **[CONFIGURATION](CONFIGURATION.md)** | Config files explained |
 | **[QUEST CREATION](QUEST-CREATION.md)** | Create and manage quests |
+| **[QUEST LOOT SYSTEM](QUEST-LOOT-SYSTEM.md)** | Chest and mob drops |
 | **[RANDOM GENERATOR](RANDOM-GENERATOR.md)** | Automatic quest generation |
 | **[PLACEHOLDERAPI](PLACEHOLDERAPI.md)** | Placeholder list |
 | **[CHANGELOG](CHANGELOG.md)** | Version updates |
@@ -104,8 +106,11 @@ Players can also browse and accept quests:
 
 ## 📄 License
 
-Premium License – See [LICENSE.md](LICENSE.md)
+Licensed under the MIT License © 2025 AlternativeSoap  
+Free for all personal and commercial servers.
+
+See [LICENSE.md](LICENSE.md) for full details.
 
 ---
 
-**Version 1.0.0** | Made with ❤️ by AlternativeSoap
+Licensed under the MIT License © 2025 AlternativeSoap

@@ -248,3 +248,7 @@ List all rewards for a quest.
 ---
 
 **[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)**
+
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap

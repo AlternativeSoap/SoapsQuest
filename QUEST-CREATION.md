@@ -106,7 +106,9 @@ sequential_quest:
 
 ## ⚔️ Objective Types
 
-All objectives use the `target` field.
+**Total: 33+ objective types**
+
+All objectives use the unified `<amount>` field and `<target>` where applicable.
 
 ### Combat (6)
 
@@ -433,6 +435,40 @@ reward:
 
 Placeholders: `{player}`, `{quest_id}`, `{quest_name}`
 
+### Quest Rewards
+
+Give another quest as a reward:
+
+```yaml
+reward:
+  quest: "follow_up_quest"
+```
+
+**Example Chain:**
+```yaml
+starter_quest:
+  display: "&aBeginning"
+  objectives:
+    - type: break
+      target: OAK_LOG
+      amount: 10
+  reward:
+    xp: 50
+    quest: "intermediate_quest"
+
+intermediate_quest:
+  display: "&eNext Step"
+  objectives:
+    - type: kill
+      target: ZOMBIE
+      amount: 20
+  reward:
+    xp: 200
+    quest: "final_quest"
+```
+
+When a player completes `starter_quest`, they automatically receive `intermediate_quest`.
+
 ---
 
 ## 🔒 Conditions
@@ -651,3 +687,7 @@ xp: 100              # Not indented
 ---
 
 **[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)** | **[Random Generator →](RANDOM-GENERATOR.md)**
+
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap

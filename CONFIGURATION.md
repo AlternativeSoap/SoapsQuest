@@ -270,3 +270,7 @@ quest-loot:
 ---
 
 **[← Back to README](README.md)** | **[Quest Creation →](QUEST-CREATION.md)**
+
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap

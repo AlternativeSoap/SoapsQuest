@@ -4,15 +4,19 @@ All notable changes to SoapsQuest.
 
 ---
 
-## v1.0.0 - 2025-10-27
+## [1.0.0-BETA] – 2025-10-28
 
-### Initial Production Release
+### Initial Free Open-Source Release
+
+**Conversion & Licensing**
+- Converted SoapsQuest to MIT-licensed free edition
+- Open-sourced documentation and configuration
+- Prepared repository for public release
 
 **Core Features**
 - Physical quest paper system
-- 31 objective types (combat, building, collection, survival, movement, leveling, misc)
+- 33+ objective types (combat, building, collection, survival, movement, leveling, misc)
 - Multi-objective and sequential quest support
-- Single, multi, and sequential quest types
 - Quest browser GUI (`/sq browse`)
 - Quest editor GUI (`/sq editor`)
 - Interactive `/sq list` with click-to-accept
@@ -24,7 +28,9 @@ All notable changes to SoapsQuest.
 
 **Rewards & Conditions**
 - XP, money, item, and command rewards
-- 12 condition types (level, money, world, gamemode, time, permission, etc.)
+- Quest reward type for quest chains
+- Unified `<amount>` field across all objectives
+- Condition system (level, money, world, gamemode, time, permission, etc.)
 - Lock-to-player system
 - Active quest limits
 
@@ -51,12 +57,18 @@ All notable changes to SoapsQuest.
 - Vault for economy features
 - PlaceholderAPI for placeholders and leaderboards
 - MythicMobs for custom mob objectives
+- MMOItems for custom item rewards
 
-**Performance**
-- Async quest progress processing
-- Batch save system
-- Thread-safe concurrent operations
-- Optimized for 100+ concurrent players
+**Documentation Overhaul**
+- Comprehensive README with quick start
+- Complete WIKI navigation hub
+- Detailed QUEST-CREATION guide
+- RANDOM-GENERATOR configuration guide
+- QUEST-LOOT-SYSTEM documentation
+- Full COMMANDS reference
+- PERMISSIONS matrix
+- CONFIGURATION examples
+- PLACEHOLDERAPI integration guide
 
 ---
 
@@ -65,6 +77,7 @@ All notable changes to SoapsQuest.
 - **Major (X.0.0)** – Breaking changes, major overhauls
 - **Minor (1.X.0)** – New features, non-breaking changes
 - **Patch (1.0.X)** – Bug fixes, minor improvements
+- **BETA** – Pre-release testing phase
 
 ---
 
@@ -79,4 +92,8 @@ Always backup before updating:
 ---
 
 **[← Back to README](README.md)**
+
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap
 

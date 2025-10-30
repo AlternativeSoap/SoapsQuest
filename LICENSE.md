@@ -1,42 +1,21 @@
-SoapsQuest Premium License
+MIT License
 
-Copyright (c) 2025 AlternativeSoap. All rights reserved.
+Copyright (c) 2025 AlternativeSoap
 
-This software is a premium product developed and distributed by AlternativeSoap.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-LICENSING TERMS:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-1. PURCHASE REQUIRED: This software requires a valid license purchased from the official vendor.
-
-2. PERMITTED USES:
-   - Installation and use on servers owned or operated by the licensee
-   - Backup copies for personal use
-   - Configuration modifications for personal server use
-
-3. RESTRICTIONS:
-   - Redistribution, resale, or sharing of this software is strictly prohibited
-   - Reverse engineering, decompilation, or disassembly is not permitted
-   - Modification of core plugin functionality is not allowed
-   - Commercial redistribution requires separate licensing agreement
-
-4. SUPPORT: 
-   - Support is provided to valid license holders only
-   - Updates and patches are provided through official channels
-   - License verification may be required for support services
-
-5. TERMINATION:
-   - License may be terminated for violation of these terms
-   - Upon termination, all copies must be removed from systems
-   - Refunds are subject to vendor's refund policy
-
-6. WARRANTY DISCLAIMER:
-   This software is provided "AS IS" without warranty of any kind, express or implied.
-   The author shall not be liable for any damages arising from the use of this software.
-
-7. CONTACT:
-   For licensing inquiries, support, or questions:
-   Website: www.soapsuniverse.com
-   Discord: https://discord.gg/8WyA8h75
-
-Unauthorized use, distribution, or modification of this software is strictly prohibited
-and may result in legal action.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

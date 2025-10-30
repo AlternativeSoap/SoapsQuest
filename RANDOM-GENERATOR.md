@@ -203,7 +203,7 @@ conditions:
 
 ## 🎯 Available Objective Types
 
-**Total: 31 types**
+**Total: 33+ types**
 
 ### Combat (6)
 - `kill` – Kill entities
@@ -384,3 +384,7 @@ Check generated quests in `plugins/SoapsQuest/generated.yml`.
 ---
 
 **[← Back to README](README.md)** | **[Quest Creation →](QUEST-CREATION.md)** | **[Configuration →](CONFIGURATION.md)**
+
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap

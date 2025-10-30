@@ -20,8 +20,10 @@ Central documentation hub for SoapsQuest.
 
 - **[README](README.md)** → Plugin overview and quick start
 - **[COMMANDS](COMMANDS.md)** → All available commands
+- **[PERMISSIONS](PERMISSIONS.md)** → Permission nodes
 - **[CONFIGURATION](CONFIGURATION.md)** → Config files explained
 - **[QUEST CREATION](QUEST-CREATION.md)** → Create and manage quests
+- **[QUEST LOOT SYSTEM](QUEST-LOOT-SYSTEM.md)** → Chest and mob drops
 - **[RANDOM GENERATOR](RANDOM-GENERATOR.md)** → Automatic quest generation
 - **[PLACEHOLDERAPI](PLACEHOLDERAPI.md)** → Placeholder list
 - **[CHANGELOG](CHANGELOG.md)** → Version updates
@@ -31,10 +33,10 @@ Central documentation hub for SoapsQuest.
 ## ✨ Features
 
 - **Physical Quest Papers** – Quest items exist in inventories
-- **31 Objective Types** – Combat, building, collection, survival, movement, leveling
+- **33+ Objective Types** – Combat, building, collection, survival, movement, leveling
 - **Multi-Objective Quests** – Complete multiple tasks in any order or sequentially
 - **Real-Time Progress** – BossBar, ActionBar, or Chat tracking
-- **Flexible Rewards** – XP, money, items, commands
+- **Flexible Rewards** – XP, money, items, commands, and quest rewards
 - **Quest Conditions** – Level, money, permission, PlaceholderAPI requirements
 - **Random Generation** – Auto-generate infinite quests
 - **Quest Loot System** – Quests drop from chests and mobs
@@ -75,3 +77,6 @@ Give to player:
 
 **[← Back to README](README.md)**
 
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap

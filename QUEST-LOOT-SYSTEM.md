@@ -363,3 +363,7 @@ chance: 25  # Increase
 ---
 
 **[← Back to README](README.md)** | **[Configuration →](CONFIGURATION.md)**
+
+---
+
+Licensed under the MIT License © 2025 AlternativeSoap
