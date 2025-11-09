@@ -1,6 +1,6 @@
 # SoapsQuest
 
-[![Version](https://img.shields.io/badge/Version-1.0.0--BETA-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
+[![Version](https://img.shields.io/badge/Version-1.0.1-blue.svg)](https://github.com/AlternativeSoap/SoapsQuest/releases)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.8-brightgreen.svg)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
@@ -16,6 +16,7 @@ A free physical quest system for Minecraft Paper 1.21.8+ featuring 33+ objective
 - **Multi-Objective Quests** – Complete multiple objectives in any order or sequentially
 - **Real-Time Progress** – BossBar, ActionBar, or Chat tracking
 - **Flexible Rewards** – XP, money, custom items, command execution, and quest rewards
+- **Multi-Plugin Item Support** – EcoItems, MMOItems, Oraxen, ItemsAdder integration with namespace detection
 - **Quest Conditions** – Level requirements, costs, permissions, and PlaceholderAPI support
 - **Random Generation** – Auto-generate infinite quests with configurable templates
 - **Quest Loot System** – Quests drop from chests and mob kills
@@ -34,7 +35,15 @@ A free physical quest system for Minecraft Paper 1.21.8+ featuring 33+ objective
 - **[Vault](https://www.spigotmc.org/resources/vault.34315/)** – Economy rewards and costs
 - **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)** – Leaderboards and conditions
 - **[MythicMobs](https://www.spigotmc.org/resources/mythicmobs.5702/)** – Custom mob objectives
-- **[MMOItems](https://www.spigotmc.org/resources/mmoitems.39267/)** – Custom item rewards (use `material: HAND` while holding item)
+
+### Item Plugin Integrations (v1.0.1+)
+
+- **[EcoItems](https://www.spigotmc.org/resources/ecoitems.94233/)** (5.66.0+) – `eco:item_id` format
+- **[MMOItems](https://www.spigotmc.org/resources/mmoitems.39267/)** (6.10+) – `mmoitems:TYPE:ID` format  
+- **[Oraxen](https://www.spigotmc.org/resources/oraxen.72448/)** (1.181.0+) – `oraxen:item_id` format
+- **[ItemsAdder](https://www.spigotmc.org/resources/itemsadder.73355/)** (3.6.3+) – `itemsadder:namespace:item_id` format
+
+Use namespace format in rewards or type `HAND` while holding item to auto-detect plugin type.
 
 ---
 

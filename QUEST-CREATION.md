@@ -357,19 +357,21 @@ reward:
 
 ### Items
 
+#### Vanilla Items
+
 **Basic:**
 ```yaml
 reward:
   items:
-    - material: DIAMOND_SWORD
+    - target: DIAMOND_SWORD
       amount: 1
 ```
 
-**Custom:**
+**With Metadata:**
 ```yaml
 reward:
   items:
-    - material: DIAMOND_SWORD
+    - target: DIAMOND_SWORD
       name: "&aLegendary Blade"
       lore:
         - "&7A powerful weapon"
@@ -380,50 +382,63 @@ reward:
       chance: 100       # 0-100%
 ```
 
-**Multiple:**
+**Multiple Items:**
 ```yaml
 reward:
   items:
-    - material: DIAMOND
+    - target: DIAMOND
       amount: 5
       chance: 100       # Always
-    - material: EMERALD
+    - target: EMERALD
       amount: 3
       chance: 50        # 50% chance
 ```
 
-**MMOItems & Custom Items:**
+#### Plugin Items (v1.0.1+)
 
-To add MMOItems or any custom item with NBT data as rewards:
+SoapsQuest supports custom items from **EcoItems**, **MMOItems**, **Oraxen**, and **ItemsAdder** using namespace format:
+
+**Namespace Format:**
+```yaml
+reward:
+  items:
+    - target: eco:legendary_sword        # EcoItems
+      amount: 1
+    - target: mmoitems:SWORD:EXCALIBUR   # MMOItems TYPE:ID
+      amount: 1
+    - target: oraxen:ruby_sword          # Oraxen
+      amount: 1
+    - target: itemsadder:custom_sword    # ItemsAdder
+      amount: 1
+```
+
+**Interactive Chat Input:**
+
+When using `/sq addreward <quest> item`, you can:
+- Type `HAND` to use your held item
+- Type `<MATERIAL> <amount>` for vanilla items (e.g., `DIAMOND 5`)
+- Type `<namespace:id>` for plugin items (e.g., `eco:legendary_sword`)
+
+The system automatically detects plugin items and saves only the `target` identifier, while vanilla items save full metadata (name, lore, enchantments).
 
 **GUI Method:**
 1. Open Quest Editor → Quest Details → Edit Rewards
 2. Click "Add Reward"
 3. Select "Item Reward"
-4. Hold the MMOItem/custom item in your hand
+4. Hold the item in your hand (plugin or vanilla)
 5. Type `hand` in chat
-6. The held item (with all NBT data) will be saved as a reward
+6. Plugin items are detected automatically via PDC keys
 
-**Chat Input Alternative:**
-- Type `DIAMOND 5` for basic items
-- Type `hand` to use whatever you're holding (preserves NBT, enchantments, custom names, etc.)
+**How It Works:**
+- **Plugin Items**: Only `target` and `amount` are stored (e.g., `target: eco:legendary_sword`)
+- **Vanilla Items**: Full metadata is stored (name, lore, enchantments, flags, unbreakable)
+- **Backward Compatibility**: Legacy `material` field still supported (auto-converts to `target`)
 
-**YAML Representation:**
-
-When saved via the `hand` method, it stores as:
-```yaml
-reward:
-  items:
-    - material: HAND   # References the held item when saved
-      amount: 1
-      chance: 100
-```
-
-This works for:
-- MMOItems custom items
-- Heads with custom textures
-- Items with complex NBT data
-- Any custom plugin item
+**Supported Plugins:**
+- **EcoItems** (5.66.0+) – Format: `eco:item_id`
+- **MMOItems** (6.10+) – Format: `mmoitems:TYPE:ID`
+- **Oraxen** (1.181.0+) – Format: `oraxen:item_id`
+- **ItemsAdder** (3.6.3+) – Format: `itemsadder:namespace:item_id`
 
 ### Commands
 ```yaml
@@ -499,6 +514,64 @@ conditions:
 ```yaml
 conditions:
   active-limit: 3              # Max concurrent with this ID
+```
+
+### Quest Dependencies (v1.0.2+)
+
+Require players to complete other quests first:
+
+```yaml
+conditions:
+  require-completed-quests: 5                    # Must complete 5 total quests
+  require-quest-completed:                        # Must complete specific quests
+    - "zombie_hunter"
+    - "nether_conqueror"
+```
+
+**Use Cases:**
+- Quest chains and story progression
+- Unlock elite quests after basics
+- Create tiered quest systems
+- Ensure proper progression path
+
+**Example - Elite Quest:**
+```yaml
+elite_hunter:
+  display: "&cElite Hunter"
+  tier: legendary
+  difficulty: nightmare
+  objectives:
+    - type: kill
+      target: ENDER_DRAGON
+      amount: 1
+  reward:
+    xp: 5000
+    money: 2500
+  conditions:
+    require-completed-quests: 5
+    require-quest-completed:
+      - "zombie_hunter"
+      - "nether_conqueror"
+```
+
+**Error Messages:**
+
+When requirements aren't met, players see:
+```
+&cYou must complete &eZombie Hunter &cand &eNether Conqueror &cbefore unlocking this quest.
+```
+
+Or for total quest requirements:
+```
+&cYou must complete at least &e5 quests &cbefore unlocking this quest.
+```
+
+**GUI Display:**
+
+In the quest browser and editor, dependency conditions appear as:
+```
+Requires Completed Quests: 5
+Requires Quests: Zombie Hunter, Nether Conqueror
 ```
 
 ---
@@ -651,33 +724,7 @@ daily_fishing:
     active-limit: 1
 ```
 
----
-
-## ⚠️ Common Mistakes
-
-**❌ Wrong target names:**
-```yaml
-target: diamond_ore  # Wrong (lowercase)
-```
-✅ Use uppercase: `target: DIAMOND_ORE`
-
-**❌ Missing amount:**
-```yaml
-- type: kill
-  target: ZOMBIE     # No amount!
-```
-✅ Always include: `amount: 10`
-
-**❌ Invalid indentation:**
-```yaml
-reward:
-xp: 100              # Not indented
-```
-✅ Use 2 spaces: `  xp: 100`
-
----
-
-## � Random Quest Generation
+## Random Quest Generation
 
 Generate procedural quests with randomized objectives and rewards.
 
@@ -950,31 +997,11 @@ Check generated quests in `plugins/SoapsQuest/generated.yml`.
 
 ---
 
-### Common Random Generation Mistakes
-
-**❌ Wrong objective type names:**
-```yaml
-objectives:
-  mine_stone:
-    objective: break_block  # Wrong name
-    blocks: [STONE]
-```
-
-✅ Use correct names: `objective: break` with `target: [STONE]`
-
-**❌ Missing required fields:**
-```yaml
-objectives:
-  enchant_items:
-    objective: enchant
-    amount: [5, 15]         # Missing target!
-```
-
 ✅ Include target: `target: [ANY]`
 
 ---
 
-## �🆘 Resources
+## 🆘 Resources
 
 - **Discord**: [discord.gg/soapsuniverse](https://discord.gg/soapsuniverse)
 - **Issues**: [GitHub Issues](https://github.com/AlternativeSoap/SoapsQuest/issues)

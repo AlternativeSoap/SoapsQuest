@@ -36,8 +36,6 @@ Complete command and permission reference for SoapsQuest.
 
 ## 📖 Command Details
 
-## 📖 Command Details
-
 ### `/sq list [page]`
 
 View all available quests with pagination (10 per page).
@@ -188,8 +186,6 @@ Permanently delete a quest.
 
 **Permission:** `soapsquest.remove`
 
-**Warning:** This action cannot be undone.
-
 **Example:**
 ```
 /sq remove old_quest
@@ -204,16 +200,61 @@ Add rewards to an existing quest.
 **Permission:** `soapsquest.addreward`
 
 **Types:**
-- `item` – Hold item in hand
+- `item` – Add item reward (see Item Reward Formats below)
 - `xp <amount>` – XP reward
 - `money <amount>` – Money reward (Vault)
 - `command <command>` – Command reward
+
+**Item Reward Formats:**
+
+When you run `/sq addreward <quest> item`, you'll be prompted to enter the item:
+
+1. **HAND** – Use the item you're currently holding
+   ```
+   HAND
+   ```
+
+2. **Vanilla Material** – Specify material name and amount
+   ```
+   DIAMOND_SWORD 1
+   IRON_INGOT 5
+   ENCHANTED_BOOK 3
+   ```
+
+3. **Plugin Items (Namespace Format):**
+   - **EcoItems:** `eco:item_id` or `ecoitems:item_id`
+     ```
+     eco:mythic_sword
+     ```
+   
+   - **MMOItems:** `mmoitems:TYPE:ID`
+     ```
+     mmoitems:SWORD:DRAGON_SLAYER
+     mmoitems:ARMOR:HEROIC_CHESTPLATE
+     ```
+   
+   - **Oraxen:** `oraxen:item_id`
+     ```
+     oraxen:ruby_sword
+     ```
+   
+   - **ItemsAdder:** `itemsadder:namespace:item_id`
+     ```
+     itemsadder:custom:magic_wand
+     ```
+
+**How It Works:**
+- **Vanilla items**: Stored with full metadata (name, lore, enchantments, etc.)
+- **Plugin items**: Stored as namespace:id only (preserves plugin-specific properties)
 
 **Examples:**
 ```
 /sq addreward zombie_slayer xp 100
 /sq addreward zombie_slayer money 50
 /sq addreward zombie_slayer item
+  → Type: HAND (if holding Diamond Sword)
+  → Type: DIAMOND 3
+  → Type: eco:mythic_sword
 /sq addreward zombie_slayer command give {player} diamond 1
 ```
 

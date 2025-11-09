@@ -36,6 +36,38 @@ max-generation-retries: 5
 
 ---
 
+### Structured Logging
+
+Configure JSON-formatted logs for quest events (v1.0.2+):
+
+```yaml
+logging:
+  structured: true              # Enable JSON-formatted logs
+  log-completions: true         # Log quest completions
+  log-acceptances: true         # Log quest acceptances
+  log-generations: true         # Log random quest generations
+  log-edits: false              # Log quest edits (can be verbose)
+```
+
+**Benefits:**
+- Easy to parse with external tools
+- Human-readable JSON format
+- Track quest analytics and player progress
+- Monitor quest generation patterns
+
+**Example Log Output:**
+```json
+[SoapsQuest] QuestCompleted {
+  "player": "Soap_",
+  "quest": "zombie_hunter",
+  "tier": "epic",
+  "rewards": ["xp:250", "money:500"],
+  "timestamp": "2025-11-05T17:30:14Z"
+}
+```
+
+---
+
 ### Quest Tiers (Rarity)
 
 Define custom rarity levels with weights for random generation:
