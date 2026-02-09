@@ -1,6 +1,6 @@
 # Daily and Weekly Quests
 
-SoapsQuest can automatically distribute quests on a schedule — daily, weekly, or both. Set up a pool of quests, pick a reset time, and the plugin handles everything.
+SoapsQuest can automatically distribute quests on a schedule - daily, weekly, or both. Set up a pool of quests, pick a reset time, and the plugin handles everything.
 
 ---
 
@@ -135,5 +135,5 @@ recurring-quest-received-weekly
 
 ## Next Steps
 
-- [Quest Loot System](Quest-Loot-System) — Quest papers from mob kills and chests
-- [Random Quest Generator](Random-Quest-Generator) — Generate quests for the rotation pool
+- [Quest Loot System](Quest-Loot-System) - Quest papers from mob kills and chests
+- [Random Quest Generator](Random-Quest-Generator) - Generate quests for the rotation pool

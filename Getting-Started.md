@@ -31,7 +31,7 @@ That's it. The plugin comes with several pre-built quests so you can test immedi
 2. Click the **green emerald block** ("Create New Quest")
 3. Type a quest ID in chat (e.g., `my_first_quest`)
 4. Edit the display name, objectives, and rewards using the GUI
-5. Click **Close** — changes save automatically
+5. Click **Close** - changes save automatically
 
 ### Option B: Give a Pre-Built Quest
 
@@ -41,7 +41,7 @@ The plugin ships with example quests. Try:
 /sq give YourName lumberjack
 ```
 
-You'll receive a quest paper. Check your inventory — it's right there. Break 20 oak logs to complete it, then right-click the paper to claim rewards.
+You'll receive a quest paper. Check your inventory - it's right there. Break 20 oak logs to complete it, then right-click the paper to claim rewards.
 
 ### Option C: Browse Available Quests
 
@@ -57,16 +57,16 @@ Opens the quest browser GUI. Click any quest to receive its paper.
 
 Run `/sq list` to see all loaded quests. You should see the default quests:
 
-- **Lumberjack** — Break 20 oak logs
-- **Zombie Slayer** — Kill 15 zombies
-- **Gone Fishing** — Catch 10 fish
-- **Iron Miner** — Mine 30 iron ore, smelt 20 iron ingots
-- **Mob Hunter** — Kill zombies, skeletons, and spiders
-- **Baker** — Break wheat, craft bread
-- **Shepherd** — Shear 15 sheep
-- **Diamond Rush** — Mine diamonds, craft a diamond pickaxe
-- **Nether Explorer** — Kill blazes, collect nether wart, brew potions
-- **Master Builder** — Sequential building quest
+- **Lumberjack** - Break 20 oak logs
+- **Zombie Slayer** - Kill 15 zombies
+- **Gone Fishing** - Catch 10 fish
+- **Iron Miner** - Mine 30 iron ore, smelt 20 iron ingots
+- **Mob Hunter** - Kill zombies, skeletons, and spiders
+- **Baker** - Break wheat, craft bread
+- **Shepherd** - Shear 15 sheep
+- **Diamond Rush** - Mine diamonds, craft a diamond pickaxe
+- **Nether Explorer** - Kill blazes, collect nether wart, brew potions
+- **Master Builder** - Sequential building quest
 
 ---
 
@@ -96,9 +96,9 @@ Receive quest paper → Paper appears in inventory
 |:------|:-------------|
 | **Active** | Currently tracking progress |
 | **Queued** | Waiting behind another quest of the same type |
-| **Claimable** | All objectives done — right-click to claim |
+| **Claimable** | All objectives done - right-click to claim |
 | **Redeemed** | Rewards already claimed |
-| **Locked** | Has a cost/requirement — right-click to unlock first |
+| **Locked** | Has a cost/requirement - right-click to unlock first |
 
 ---
 
@@ -122,9 +122,9 @@ After first launch, you'll find these files in `plugins/SoapsQuest/`:
 
 | File | Purpose |
 |:-----|:--------|
-| `config.yml` | Core settings — progress display, sounds, performance, behavior |
+| `config.yml` | Core settings - progress display, sounds, performance, behavior |
 | `quests.yml` | All your quest definitions |
-| `messages.yml` | Every message the plugin sends — fully customizable |
+| `messages.yml` | Every message the plugin sends - fully customizable |
 | `gui.yml` | GUI layout and item configuration |
 | `tiers.yml` | Tier/rarity definitions |
 | `difficulties.yml` | Difficulty levels and scaling multipliers |
@@ -136,6 +136,6 @@ After first launch, you'll find these files in `plugins/SoapsQuest/`:
 
 ## Next Steps
 
-- [Creating Quests](Creating-Quests) — Learn how to build your own quests
-- [Commands & Permissions](Commands-and-Permissions) — Full command and permission reference
-- [Default Configs](Default-Configs) — See every config file with all options
+- [Creating Quests](Creating-Quests) - Learn how to build your own quests
+- [Commands & Permissions](Commands-and-Permissions) - Full command and permission reference
+- [Default Configs](Default-Configs) - See every config file with all options

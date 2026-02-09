@@ -12,7 +12,7 @@ Common questions and troubleshooting for SoapsQuest.
 - Make sure the jar file is in the `plugins/` folder and the server was restarted (not just reloaded with `/reload`).
 
 ### How do I update the plugin?
-Replace the old jar with the new one and restart the server. Your config files are preserved — the plugin only generates defaults for missing files.
+Replace the old jar with the new one and restart the server. Your config files are preserved - the plugin only generates defaults for missing files.
 
 ### Does SoapsQuest support Spigot?
 No, only Paper 1.21+ is supported.
@@ -24,11 +24,11 @@ No, only Paper 1.21+ is supported.
 ### Players can't see any quests
 - Run `/sq list` as an operator to check if quests are loaded
 - If the list is empty, check your `quests.yml` for YAML syntax errors
-- Run `/sq reload` — if there are config errors, the plugin will tell you what's wrong
+- Run `/sq reload` - if there are config errors, the plugin will tell you what's wrong
 
 ### The quest paper isn't tracking progress
 - Make sure the quest paper is in the player's inventory (not in a chest)
-- Check if the quest is the **active** one — only the first paper of each quest type tracks progress
+- Check if the quest is the **active** one - only the first paper of each quest type tracks progress
 - If the quest has conditions (like a world or level requirement), make sure they're met
 - If `lock-to-player` is enabled, only the original owner can progress
 
@@ -36,13 +36,13 @@ No, only Paper 1.21+ is supported.
 Right-click the quest paper when all objectives are complete. The paper lore updates to show "COMPLETE!" and clicking it gives the rewards.
 
 ### Can players have multiple quests at once?
-Yes. Players can have as many different quest papers as they want. Each quest type tracks independently. If they have multiple papers of the *same* quest, only the first one is active — the rest are queued.
+Yes. Players can have as many different quest papers as they want. Each quest type tracks independently. If they have multiple papers of the *same* quest, only the first one is active - the rest are queued.
 
 ### What happens when a player drops a quest paper?
-By default (`abandon-on-drop: true`), dropping a quest paper abandons it — progress is reset and the paper becomes unbound. You can change this in `config.yml`.
+By default (`abandon-on-drop: true`), dropping a quest paper abandons it - progress is reset and the paper becomes unbound. You can change this in `config.yml`.
 
 ### What happens when a quest paper goes into a chest?
-Same as dropping — if `abandon-on-container-store: true`, storing a quest paper in any container resets it.
+Same as dropping - if `abandon-on-container-store: true`, storing a quest paper in any container resets it.
 
 ### Can other players pick up quest papers?
 Yes, unless `lock-to-player: true` is set on the quest. Locked quest papers can only be used by the original owner.
@@ -70,7 +70,7 @@ Use `/sq remove <quest_id>` to delete them. Generated quests are stored in `gene
 
 ### Daily quests aren't working
 1. Make sure `enabled: true` in `daily.yml`
-2. Add quest IDs to the `quests` list — they must match IDs in `quests.yml`
+2. Add quest IDs to the `quests` list - they must match IDs in `quests.yml`
 3. The reset time uses server timezone in 24-hour format
 
 ### Players didn't receive daily quests
@@ -81,7 +81,7 @@ Players who were offline during reset get their quests on next login. Make sure 
 ## Rewards
 
 ### Money rewards aren't working
-You need **Vault** and an economy plugin installed (EssentialsX, CMI, etc.). Just having Vault alone isn't enough — it needs an economy backend.
+You need **Vault** and an economy plugin installed (EssentialsX, CMI, etc.). Just having Vault alone isn't enough - it needs an economy backend.
 
 ### Items aren't being given
 Check if the player's inventory is full. If the inventory is full, some plugins handle overflow differently. Also verify the `material` name is a valid Minecraft item type.
@@ -99,7 +99,7 @@ Check if the player's inventory is full. If the inventory is full, some plugins 
 Run `/sq reload` to refresh the GUI configuration. If items are missing, check `gui.yml` for valid material names.
 
 ### Players can't open the browser
-They need the `soapsquest.gui.browser` permission. By default, everyone has this — but if you're using a permission plugin that removes defaults, you'll need to add it explicitly.
+They need the `soapsquest.gui.browser` permission. By default, everyone has this - but if you're using a permission plugin that removes defaults, you'll need to add it explicitly.
 
 ### The editor button doesn't show
 The editor button only appears for players with `soapsquest.gui.editor` permission.
@@ -129,8 +129,8 @@ data-cleanup:
 
 ### Placeholders aren't working
 1. Make sure PlaceholderAPI is installed and loaded
-2. SoapsQuest registers its expansion automatically — no `/papi ecloud` command needed
-3. The identifier is `soapsquest` — use `%soapsquest_player_quests%` etc.
+2. SoapsQuest registers its expansion automatically - no `/papi ecloud` command needed
+3. The identifier is `soapsquest` - use `%soapsquest_player_quests%` etc.
 4. Try `/papi parse me %soapsquest_player_quests%` to test
 
 ---

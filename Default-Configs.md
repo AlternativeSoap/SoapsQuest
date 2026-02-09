@@ -533,7 +533,7 @@ quests:
 <details>
 <summary>Click to expand</summary>
 
-> This file is large. Showing the key sections — the actual file contains all customizable messages for the plugin.
+> This file is large. Showing the key sections - the actual file contains all customizable messages for the plugin.
 
 ```yaml
 prefix: "<dark_gray>[<gradient:#FF8C00:#FFD700>SoapsQuest</gradient><dark_gray>]"
@@ -569,7 +569,7 @@ quest-complete: "<prefix> <#55FF55>✓ <gradient:#55FF55:#55FFFF>Quest Complete:
 quest-claimable: "<prefix> <#55FF55>✓ <gradient:#55FF55:#55FFFF>Quest Complete!</gradient> '<#FFFFFF><quest><#55FF55>' <#FFD700>Right-click to claim rewards."
 
 # Milestones
-quest-milestone: "<prefix> <gradient:#FFAA00:#FFD700>★ Milestone:</gradient> <#FFFFFF><quest> <#AAAAAA>— <gradient:#FFAA00:#FFD700><milestone>% complete</gradient>"
+quest-milestone: "<prefix> <gradient:#FFAA00:#FFD700>★ Milestone:</gradient> <#FFFFFF><quest> <#AAAAAA>- <gradient:#FFAA00:#FFD700><milestone>% complete</gradient>"
 
 # Quest Ownership
 quest-not-yours: "<prefix> <#FF5555>⚠ This quest is bound to another player."
@@ -1007,7 +1007,7 @@ quest-loot:
 <details>
 <summary>Click to expand</summary>
 
-> This file is very large (1400+ lines). Showing the structure — the full file ships with the plugin and contains objective pools, reward pools, name templates, lore styles, and condition generation settings.
+> This file is very large (1400+ lines). Showing the structure - the full file ships with the plugin and contains objective pools, reward pools, name templates, lore styles, and condition generation settings.
 
 ```yaml
 random-generator:

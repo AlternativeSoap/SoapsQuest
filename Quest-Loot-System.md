@@ -1,6 +1,6 @@
 # Quest Loot System
 
-Quest papers can drop naturally from mobs and appear in chests throughout the world. This turns quests into discoverable loot — players find them while playing, not just from commands.
+Quest papers can drop naturally from mobs and appear in chests throughout the world. This turns quests into discoverable loot - players find them while playing, not just from commands.
 
 ---
 
@@ -69,7 +69,7 @@ Quest papers can appear when players open naturally generated chests (dungeon ch
 
 | Mode | Description |
 |:-----|:-----------|
-| `manual` | Picks from the `quests` list—specific quest IDs you've defined |
+| `manual` | Picks from the `quests` list-specific quest IDs you've defined |
 | `random` | Generates new quests using the random quest generator |
 | `mixed` | 50/50 between manual and random |
 
@@ -121,7 +121,7 @@ Mobs not listed use the `default-chance` value.
 
 ## Unbound Quest Papers
 
-Quest papers from the loot system drop as **unbound** — they don't belong to any player yet. When a player picks one up:
+Quest papers from the loot system drop as **unbound** - they don't belong to any player yet. When a player picks one up:
 
 1. The paper automatically binds to that player
 2. The quest activates (or queues behind an existing quest)
@@ -148,5 +148,5 @@ quest-loot:
 
 ## Next Steps
 
-- [GUI System](GUI-System) — Quest browser and editor
-- [Random Quest Generator](Random-Quest-Generator) — Used for `random` source mode
+- [GUI System](GUI-System) - Quest browser and editor
+- [Random Quest Generator](Random-Quest-Generator) - Used for `random` source mode

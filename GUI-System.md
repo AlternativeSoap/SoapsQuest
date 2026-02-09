@@ -39,7 +39,7 @@ The browser uses a 54-slot inventory (6 rows) with:
 **Command:** `/sq editor` or `/sq editor <questId>`
 **Permission:** `soapsquest.gui.editor`
 
-The editor lets you create and modify quests entirely from the game — no config editing needed. Changes save instantly.
+The editor lets you create and modify quests entirely from the game - no config editing needed. Changes save instantly.
 
 ### Editor Flow
 
@@ -73,7 +73,7 @@ Quest Details
 3. Type a unique quest ID in chat
 4. The quest details editor opens with default values
 5. Click each button to configure the quest
-6. Click **Close** when done — everything saves automatically
+6. Click **Close** when done - everything saves automatically
 
 ### Editing Objectives
 
@@ -110,13 +110,13 @@ Click **Edit Conditions** in the quest details:
 
 Edit `gui.yml` to change the appearance of any GUI. You can customize:
 
-- **Title** — the text at the top of the inventory
-- **Size** — inventory row count (multiples of 9, up to 54)
-- **Filler items** — background items in empty slots
-- **Button materials** — what items the buttons look like
-- **Button names and lore** — text on each button
-- **Button positions** — which slot each button occupies
-- **Quest item layout** — which slots display quest items
+- **Title** - the text at the top of the inventory
+- **Size** - inventory row count (multiples of 9, up to 54)
+- **Filler items** - background items in empty slots
+- **Button materials** - what items the buttons look like
+- **Button names and lore** - text on each button
+- **Button positions** - which slot each button occupies
+- **Quest item layout** - which slots display quest items
 
 ### Example: Changing the Browser Title
 
@@ -161,5 +161,5 @@ quest-browser:
 
 ## Next Steps
 
-- [Placeholders](Placeholders) — PlaceholderAPI integration
-- [Commands & Permissions](Commands-and-Permissions) — GUI-related commands and permissions
+- [Placeholders](Placeholders) - PlaceholderAPI integration
+- [Commands & Permissions](Commands-and-Permissions) - GUI-related commands and permissions

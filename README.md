@@ -6,23 +6,23 @@
 
 # 🏠 SoapsQuest Wiki
 
-Welcome to the official SoapsQuest wiki — the go-to place for everything you need to set up, configure, and run quests on your Minecraft server.
+Welcome to the official SoapsQuest wiki - the go-to place for everything you need to set up, configure, and run quests on your Minecraft server.
 
 ---
 
 ## What is SoapsQuest?
 
-SoapsQuest is a quest plugin for Paper 1.21+ servers. Players receive **physical quest papers** — actual items they hold in their inventory — and complete objectives to earn rewards. No abstract menus or invisible trackers. The quest is right there in the player's hand.
+SoapsQuest is a quest plugin for Paper 1.21+ servers. Players receive **physical quest papers** - actual items they hold in their inventory - and complete objectives to earn rewards. No abstract menus or invisible trackers. The quest is right there in the player's hand.
 
 **Key highlights:**
-- 🗡️ **30+ objective types** — Kill mobs, mine blocks, fish, brew, enchant, travel, and much more
-- 📜 **Physical quest papers** — Quests are real items in the player's inventory
-- 🎲 **Random quest generator** — Generate unlimited unique quests from templates
-- 📅 **Daily & weekly quests** — Automatic recurring quest rotation
-- 💎 **Tier & difficulty system** — Common through Mythic rarity, Easy through Nightmare difficulty
-- 🖥️ **In-game GUI editor** — Create and edit quests without touching config files
-- 🎁 **Loot system** — Quest papers drop from mobs and spawn in chests
-- 📊 **Player statistics** — Track completions, rewards claimed, and more
+- 🗡️ **30+ objective types** - Kill mobs, mine blocks, fish, brew, enchant, travel, and much more
+- 📜 **Physical quest papers** - Quests are real items in the player's inventory
+- 🎲 **Random quest generator** - Generate unlimited unique quests from templates
+- 📅 **Daily & weekly quests** - Automatic recurring quest rotation
+- 💎 **Tier & difficulty system** - Common through Mythic rarity, Easy through Nightmare difficulty
+- 🖥️ **In-game GUI editor** - Create and edit quests without touching config files
+- 🎁 **Loot system** - Quest papers drop from mobs and spawn in chests
+- 📊 **Player statistics** - Track completions, rewards claimed, and more
 
 ---
 

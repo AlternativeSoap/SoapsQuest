@@ -4,7 +4,7 @@ Ready-to-use quest configurations you can paste directly into your `quests.yml`.
 
 ---
 
-## Beginner Quest — Simple Kill Quest
+## Beginner Quest - Simple Kill Quest
 
 A single-objective quest with basic rewards.
 
@@ -37,7 +37,7 @@ A single-objective quest with basic rewards.
 
 ---
 
-## Farming Quest — Multi-Objective
+## Farming Quest - Multi-Objective
 
 Multiple objectives that can be done in any order.
 
@@ -79,7 +79,7 @@ Multiple objectives that can be done in any order.
 
 ---
 
-## Sequential Quest — Step by Step
+## Sequential Quest - Step by Step
 
 Objectives must be completed in order.
 
@@ -130,7 +130,7 @@ Objectives must be completed in order.
 
 ---
 
-## Locked Quest — With Conditions
+## Locked Quest - With Conditions
 
 A quest that requires payment and a minimum level to unlock.
 
@@ -184,7 +184,7 @@ A quest that requires payment and a minimum level to unlock.
 
 ---
 
-## Quest Chain — Quest as Reward
+## Quest Chain - Quest as Reward
 
 Completing one quest gives the player the next one.
 
@@ -261,7 +261,7 @@ Completing one quest gives the player the next one.
 
 ---
 
-## VIP Quest — Permission Locked
+## VIP Quest - Permission Locked
 
 Only players with a specific permission can use this quest.
 
@@ -338,12 +338,12 @@ A quest where not all rewards are guaranteed.
           chance: 15           # 15% chance
         - material: NETHERITE_SCRAP
           amount: 1
-          chance: 5            # 5% chance — jackpot!
+          chance: 5            # 5% chance - jackpot!
 ```
 
 ---
 
-## Nether Adventure — World Restricted
+## Nether Adventure - World Restricted
 
 A quest that only works in the Nether.
 
@@ -399,7 +399,7 @@ A quest that only works in the Nether.
 
 ## Next Steps
 
-- [Creating Quests](Creating-Quests) — Full creation guide
-- [Objectives](Objectives) — All objective types
-- [Rewards](Rewards) — All reward types
-- [Conditions](Conditions) — All condition types
+- [Creating Quests](Creating-Quests) - Full creation guide
+- [Objectives](Objectives) - All objective types
+- [Rewards](Rewards) - All reward types
+- [Conditions](Conditions) - All condition types

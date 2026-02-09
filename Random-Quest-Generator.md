@@ -1,6 +1,6 @@
 # Random Quest Generator
 
-The random quest generator creates unique quests on the fly from configurable templates. Instead of writing hundreds of quests by hand, you set up objective pools, reward ranges, and name templates — and the generator does the rest.
+The random quest generator creates unique quests on the fly from configurable templates. Instead of writing hundreds of quests by hand, you set up objective pools, reward ranges, and name templates - and the generator does the rest.
 
 ---
 
@@ -28,16 +28,16 @@ The random quest generator creates unique quests on the fly from configurable te
 
 When you generate a quest, the plugin:
 
-1. **Picks a tier** — weighted random from the tier pool
-2. **Picks a difficulty** — weighted random from the difficulty pool
-3. **Selects objectives** — weighted random from the objective pool
-4. **Picks random targets and amounts** — from configured ranges
-5. **Generates a display name** — from name templates
-6. **Generates lore** — based on the chosen lore style
-7. **Creates rewards** — XP, money, and items based on tier ranges
-8. **Applies conditions** — optionally adds level/money/cost requirements
-9. **Sets milestones** — based on tier
-10. **Saves the quest** — to `generated.yml`
+1. **Picks a tier** - weighted random from the tier pool
+2. **Picks a difficulty** - weighted random from the difficulty pool
+3. **Selects objectives** - weighted random from the objective pool
+4. **Picks random targets and amounts** - from configured ranges
+5. **Generates a display name** - from name templates
+6. **Generates lore** - based on the chosen lore style
+7. **Creates rewards** - XP, money, and items based on tier ranges
+8. **Applies conditions** - optionally adds level/money/cost requirements
+9. **Sets milestones** - based on tier
+10. **Saves the quest** - to `generated.yml`
 
 The generated quest immediately appears in `/sq list` and the quest browser.
 
@@ -112,11 +112,11 @@ objectives:
       nightmare: [300, 800]
 ```
 
-**`amount: [min, max]`** — random number in range.
+**`amount: [min, max]`** - random number in range.
 
-**`amount-by-difficulty`** — different ranges per difficulty level.
+**`amount-by-difficulty`** - different ranges per difficulty level.
 
-**`target: [LIST]`** — one is randomly chosen.
+**`target: [LIST]`** - one is randomly chosen.
 
 ---
 
@@ -150,9 +150,9 @@ display:
   lore-style: "detailed"     # Options: simple, detailed, fancy
 ```
 
-- **simple** — minimal info, just the task
-- **detailed** — bordered with tier and difficulty info
-- **fancy** — different layout per tier (common gets simple, legendary gets decorative)
+- **simple** - minimal info, just the task
+- **detailed** - bordered with tier and difficulty info
+- **fancy** - different layout per tier (common gets simple, legendary gets decorative)
 
 ---
 
@@ -316,5 +316,5 @@ mythicmobs:
 
 ## Next Steps
 
-- [Daily & Weekly Quests](Daily-and-Weekly-Quests) — Automatic quest rotation
-- [Quest Loot System](Quest-Loot-System) — Quest papers from mobs and chests
+- [Daily & Weekly Quests](Daily-and-Weekly-Quests) - Automatic quest rotation
+- [Quest Loot System](Quest-Loot-System) - Quest papers from mobs and chests

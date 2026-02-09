@@ -73,5 +73,5 @@ Top Questers
 
 ## Next Steps
 
-- [Default Configs](Default-Configs) — See all config files
-- [FAQ](FAQ) — Common questions
+- [Default Configs](Default-Configs) - See all config files
+- [FAQ](FAQ) - Common questions

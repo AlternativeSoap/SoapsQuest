@@ -123,7 +123,7 @@ reward:
     - "give {player} diamond 10"
 ```
 
-Commands run from console with full permissions — so anything goes.
+Commands run from console with full permissions - so anything goes.
 
 ---
 
@@ -230,5 +230,5 @@ A quest with `xp: 100` on **Hard** difficulty gives `150 XP`.
 
 ## Next Steps
 
-- [Conditions](Conditions) — Quest requirements and unlock costs
-- [Creating Quests](Creating-Quests) — Full quest creation guide
+- [Conditions](Conditions) - Quest requirements and unlock costs
+- [Creating Quests](Creating-Quests) - Full quest creation guide

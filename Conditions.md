@@ -13,13 +13,13 @@ When a quest has a **cost** or **item cost** condition:
 3. The cost is deducted (money removed, items consumed)
 4. The quest activates and starts tracking progress
 
-Conditions without costs (level, world, gamemode) are checked continuously — the quest won't progress until the condition is met.
+Conditions without costs (level, world, gamemode) are checked continuously - the quest won't progress until the condition is met.
 
 ---
 
 ## Condition Types
 
-### `min-level` — Minimum XP Level
+### `min-level` - Minimum XP Level
 
 Player must be at least this XP level.
 
@@ -30,7 +30,7 @@ conditions:
 
 ---
 
-### `cost` — Money Cost
+### `cost` - Money Cost
 
 Deducts money when the player unlocks the quest. **Requires Vault.**
 
@@ -43,7 +43,7 @@ The quest paper is locked until the player right-clicks and pays 500.
 
 ---
 
-### `item` — Item Requirement / Cost
+### `item` - Item Requirement / Cost
 
 Requires the player to have specific items. Add `consume-item: true` to take the items when unlocking.
 
@@ -66,7 +66,7 @@ Format is `MATERIAL:amount`.
 
 ---
 
-### `permission` — Permission Node
+### `permission` - Permission Node
 
 Requires a specific permission.
 
@@ -79,7 +79,7 @@ Players without this permission can't activate or progress the quest.
 
 ---
 
-### `world` — World Restriction
+### `world` - World Restriction
 
 Quest can only be done in specific worlds.
 
@@ -90,7 +90,7 @@ conditions:
 
 ---
 
-### `gamemode` — Gamemode Restriction
+### `gamemode` - Gamemode Restriction
 
 Player must be in a specific gamemode.
 
@@ -103,7 +103,7 @@ Valid values: `SURVIVAL`, `ADVENTURE`, `CREATIVE`, `SPECTATOR`.
 
 ---
 
-### `active-limit` — Maximum Active Quests
+### `active-limit` - Maximum Active Quests
 
 Limits how many quests of this type a player can have active at once.
 
@@ -160,5 +160,5 @@ This appearance is customizable in `messages.yml` under `quest-locked-lore`.
 
 ## Next Steps
 
-- [Tiers & Difficulties](Tiers-and-Difficulties) — Rarity and scaling system
-- [Creating Quests](Creating-Quests) — Full quest creation guide
+- [Tiers & Difficulties](Tiers-and-Difficulties) - Rarity and scaling system
+- [Creating Quests](Creating-Quests) - Full quest creation guide

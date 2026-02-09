@@ -11,7 +11,7 @@ Every objective follows this structure:
 ```yaml
 objectives:
   - type: kill          # The objective type
-    target: ZOMBIE      # What to target (entity, block, item — depends on type)
+    target: ZOMBIE      # What to target (entity, block, item - depends on type)
     amount: 10          # How many
 ```
 
@@ -21,7 +21,7 @@ Some objectives only need `type` and `amount` (no target). Some support `ANY` as
 
 ## Combat Objectives
 
-### `kill` — Kill Entities
+### `kill` - Kill Entities
 Kill a specific type of mob.
 
 ```yaml
@@ -30,10 +30,10 @@ Kill a specific type of mob.
   amount: 20
 ```
 
-**Target:** Any valid Minecraft entity type — `ZOMBIE`, `SKELETON`, `CREEPER`, `BLAZE`, `ENDER_DRAGON`, etc.
+**Target:** Any valid Minecraft entity type - `ZOMBIE`, `SKELETON`, `CREEPER`, `BLAZE`, `ENDER_DRAGON`, etc.
 **Special targets:** `ANY` (any mob), `HOSTILE` (any hostile mob), `PASSIVE` (any passive mob).
 
-### `damage` — Deal Damage
+### `damage` - Deal Damage
 Deal a total amount of damage.
 
 ```yaml
@@ -43,7 +43,7 @@ Deal a total amount of damage.
 
 **Target:** Optional. If set, only counts damage to that entity type.
 
-### `bowshoot` — Shoot Arrows
+### `bowshoot` - Shoot Arrows
 Shoot arrows with a bow.
 
 ```yaml
@@ -51,7 +51,7 @@ Shoot arrows with a bow.
   amount: 50
 ```
 
-### `projectile` — Launch Projectiles
+### `projectile` - Launch Projectiles
 Launch any projectile.
 
 ```yaml
@@ -62,7 +62,7 @@ Launch any projectile.
 
 **Target:** `SNOWBALL`, `EGG`, `ENDER_PEARL`, `ARROW`, or `ANY`.
 
-### `death` — Die
+### `death` - Die
 Die a certain number of times. Yes, really.
 
 ```yaml
@@ -74,7 +74,7 @@ Die a certain number of times. Yes, really.
 
 ## Mining & Building Objectives
 
-### `break` — Break Blocks
+### `break` - Break Blocks
 Break/mine blocks.
 
 ```yaml
@@ -83,9 +83,9 @@ Break/mine blocks.
   amount: 10
 ```
 
-**Target:** Any block material — `STONE`, `IRON_ORE`, `OAK_LOG`, `WHEAT`, etc. Use `ANY` for any block.
+**Target:** Any block material - `STONE`, `IRON_ORE`, `OAK_LOG`, `WHEAT`, etc. Use `ANY` for any block.
 
-### `place` — Place Blocks
+### `place` - Place Blocks
 Place blocks in the world.
 
 ```yaml
@@ -94,7 +94,7 @@ Place blocks in the world.
   amount: 100
 ```
 
-### `interact` — Interact with Blocks
+### `interact` - Interact with Blocks
 Right-click on specific blocks.
 
 ```yaml
@@ -109,7 +109,7 @@ Right-click on specific blocks.
 
 ## Collection & Crafting Objectives
 
-### `collect` — Collect Items
+### `collect` - Collect Items
 Pick up items from the ground.
 
 ```yaml
@@ -118,7 +118,7 @@ Pick up items from the ground.
   amount: 10
 ```
 
-### `craft` — Craft Items
+### `craft` - Craft Items
 Craft items at a crafting table.
 
 ```yaml
@@ -127,7 +127,7 @@ Craft items at a crafting table.
   amount: 5
 ```
 
-### `smelt` — Smelt Items
+### `smelt` - Smelt Items
 Smelt items in a furnace, blast furnace, or smoker.
 
 ```yaml
@@ -136,7 +136,7 @@ Smelt items in a furnace, blast furnace, or smoker.
   amount: 32
 ```
 
-### `enchant` — Enchant Items
+### `enchant` - Enchant Items
 Enchant items at an enchanting table.
 
 ```yaml
@@ -145,7 +145,7 @@ Enchant items at an enchanting table.
   amount: 5
 ```
 
-### `brew` — Brew Potions
+### `brew` - Brew Potions
 Brew potions in a brewing stand.
 
 ```yaml
@@ -154,7 +154,7 @@ Brew potions in a brewing stand.
   amount: 10
 ```
 
-### `drop` — Drop Items
+### `drop` - Drop Items
 Drop items from your inventory.
 
 ```yaml
@@ -167,7 +167,7 @@ Drop items from your inventory.
 
 ## Fishing
 
-### `fish` — Catch Fish
+### `fish` - Catch Fish
 Catch items with a fishing rod.
 
 ```yaml
@@ -182,7 +182,7 @@ Catch items with a fishing rod.
 
 ## Farming & Animals
 
-### `breed` — Breed Animals
+### `breed` - Breed Animals
 Breed two animals together.
 
 ```yaml
@@ -193,7 +193,7 @@ Breed two animals together.
 
 **Target:** `COW`, `SHEEP`, `PIG`, `CHICKEN`, `HORSE`, `WOLF`, or `ANY`.
 
-### `tame` — Tame Animals
+### `tame` - Tame Animals
 Tame a wild animal.
 
 ```yaml
@@ -204,7 +204,7 @@ Tame a wild animal.
 
 **Target:** `WOLF`, `CAT`, `HORSE`, `PARROT`, or `ANY`.
 
-### `shear` — Shear Entities
+### `shear` - Shear Entities
 Shear sheep or mooshrooms.
 
 ```yaml
@@ -213,7 +213,7 @@ Shear sheep or mooshrooms.
   amount: 15
 ```
 
-### `trade` — Trade with Villagers
+### `trade` - Trade with Villagers
 Complete trades with villagers.
 
 ```yaml
@@ -226,7 +226,7 @@ Complete trades with villagers.
 
 ## Survival Objectives
 
-### `consume` — Eat or Drink
+### `consume` - Eat or Drink
 Consume food or potions.
 
 ```yaml
@@ -235,7 +235,7 @@ Consume food or potions.
   amount: 5
 ```
 
-### `sleep` — Sleep in Beds
+### `sleep` - Sleep in Beds
 Sleep in a bed.
 
 ```yaml
@@ -243,7 +243,7 @@ Sleep in a bed.
   amount: 5
 ```
 
-### `heal` — Regenerate Health
+### `heal` - Regenerate Health
 Heal a total amount of HP.
 
 ```yaml
@@ -255,7 +255,7 @@ Heal a total amount of HP.
 
 ## Movement Objectives
 
-### `move` — Travel Distance
+### `move` - Travel Distance
 Walk, run, or sprint a distance in blocks.
 
 ```yaml
@@ -263,7 +263,7 @@ Walk, run, or sprint a distance in blocks.
   amount: 5000
 ```
 
-### `jump` — Jump
+### `jump` - Jump
 Jump a number of times.
 
 ```yaml
@@ -271,7 +271,7 @@ Jump a number of times.
   amount: 200
 ```
 
-### `vehicle` — Ride Vehicles
+### `vehicle` - Ride Vehicles
 Travel distance while riding a vehicle or entity.
 
 ```yaml
@@ -283,7 +283,7 @@ Travel distance while riding a vehicle or entity.
 
 ## Leveling Objectives
 
-### `reachlevel` — Reach a Level
+### `reachlevel` - Reach a Level
 Reach a specific XP level.
 
 ```yaml
@@ -291,7 +291,7 @@ Reach a specific XP level.
   amount: 30
 ```
 
-### `gainlevel` — Gain Levels
+### `gainlevel` - Gain Levels
 Gain a number of XP levels (doesn't matter what you start from).
 
 ```yaml
@@ -303,7 +303,7 @@ Gain a number of XP levels (doesn't matter what you start from).
 
 ## Miscellaneous Objectives
 
-### `chat` — Send Chat Messages
+### `chat` - Send Chat Messages
 Send messages in chat.
 
 ```yaml
@@ -311,7 +311,7 @@ Send messages in chat.
   amount: 50
 ```
 
-### `firework` — Launch Fireworks
+### `firework` - Launch Fireworks
 Launch firework rockets.
 
 ```yaml
@@ -319,7 +319,7 @@ Launch firework rockets.
   amount: 10
 ```
 
-### `kill_mythicmob` — Kill MythicMobs
+### `kill_mythicmob` - Kill MythicMobs
 Kill custom MythicMobs mobs. **Requires MythicMobs plugin.**
 
 ```yaml
@@ -391,23 +391,23 @@ The player must finish breaking logs before crafting unlocks.
 | `interact` | Block type | Right-click blocks |
 | `kill_mythicmob` | MythicMob ID | Kill MythicMobs mobs |
 | `damage` | _(optional)_ | Deal damage |
-| `death` | — | Die X times |
-| `sleep` | — | Sleep in beds |
-| `heal` | — | Regenerate HP |
+| `death` | - | Die X times |
+| `sleep` | - | Sleep in beds |
+| `heal` | - | Regenerate HP |
 | `drop` | Item type | Drop items |
-| `move` | — | Travel blocks |
-| `jump` | — | Jump X times |
-| `chat` | — | Send messages |
-| `bowshoot` | — | Shoot arrows |
+| `move` | - | Travel blocks |
+| `jump` | - | Jump X times |
+| `chat` | - | Send messages |
+| `bowshoot` | - | Shoot arrows |
 | `projectile` | Projectile type | Launch projectiles |
-| `firework` | — | Launch fireworks |
-| `vehicle` | — | Ride vehicles |
-| `reachlevel` | — | Reach XP level |
-| `gainlevel` | — | Gain XP levels |
+| `firework` | - | Launch fireworks |
+| `vehicle` | - | Ride vehicles |
+| `reachlevel` | - | Reach XP level |
+| `gainlevel` | - | Gain XP levels |
 
 ---
 
 ## Next Steps
 
-- [Rewards](Rewards) — What players get when they finish
-- [Conditions](Conditions) — Requirements before a quest can start
+- [Rewards](Rewards) - What players get when they finish
+- [Conditions](Conditions) - Requirements before a quest can start

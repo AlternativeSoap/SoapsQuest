@@ -4,16 +4,16 @@ All notable changes to SoapsQuest.
 
 ---
 
-## v1.0.0 — Initial Release
+## v1.0.0 - Initial Release
 
 The first public release of SoapsQuest.
 
 ### Quests
-- Over **30 objective types** — kill, mine, craft, fish, brew, enchant, tame, breed, trade, and many more
-- **Multi-objective quests** — combine multiple goals into a single quest
-- **Sequential objectives** — force players to complete goals in a specific order
-- **Quest chaining** — link quests together so completing one unlocks the next
-- **Quest paper system** — physical items players hold, with real-time progress updates in the item lore
+- Over **30 objective types** - kill, mine, craft, fish, brew, enchant, tame, breed, trade, and many more
+- **Multi-objective quests** - combine multiple goals into a single quest
+- **Sequential objectives** - force players to complete goals in a specific order
+- **Quest chaining** - link quests together so completing one unlocks the next
+- **Quest paper system** - physical items players hold, with real-time progress updates in the item lore
 
 ### Rewards
 - XP, money (via Vault), items, and command-based rewards
@@ -27,8 +27,8 @@ The first public release of SoapsQuest.
 - Combine multiple conditions per quest
 
 ### Tiers & Difficulties
-- **6 default tiers** — Common, Uncommon, Rare, Epic, Legendary, Mythic
-- **5 default difficulties** — Easy, Normal, Hard, Very Hard, Extreme
+- **6 default tiers** - Common, Uncommon, Rare, Epic, Legendary, Mythic
+- **5 default difficulties** - Easy, Normal, Hard, Very Hard, Extreme
 - Both are fully customizable with configurable weights and multipliers
 
 ### Random Quest Generator
@@ -47,8 +47,8 @@ The first public release of SoapsQuest.
 - Per-mob and per-chest configuration with adjustable drop rates
 
 ### GUI
-- Full **in-game quest browser** — players can browse, view details, and claim quests from a chest GUI
-- Full **in-game quest editor** — create and edit quests, objectives, rewards, and conditions without touching config files
+- Full **in-game quest browser** - players can browse, view details, and claim quests from a chest GUI
+- Full **in-game quest editor** - create and edit quests, objectives, rewards, and conditions without touching config files
 - Customizable GUI layout, titles, buttons, and items through `gui.yml`
 
 ### Quality of Life
@@ -63,7 +63,7 @@ The first public release of SoapsQuest.
 - MiniMessage and legacy color code support
 
 ### Commands
-- `/sq` — Main command hub with help, list, give, remove, reload, stats, and more
-- `/sq generate` — Random quest generation
-- `/sq reward` — Manual reward management
+- `/sq` - Main command hub with help, list, give, remove, reload, stats, and more
+- `/sq generate` - Random quest generation
+- `/sq reward` - Manual reward management
 - Built-in permission system with sensible defaults

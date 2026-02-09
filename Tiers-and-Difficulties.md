@@ -210,5 +210,5 @@ Quests without an explicit tier or difficulty use these values.
 
 ## Next Steps
 
-- [Random Quest Generator](Random-Quest-Generator) — Tiers and difficulties are central to generation
-- [Creating Quests](Creating-Quests) — Use tiers and difficulties in your quests
+- [Random Quest Generator](Random-Quest-Generator) - Tiers and difficulties are central to generation
+- [Creating Quests](Creating-Quests) - Use tiers and difficulties in your quests
