@@ -30,23 +30,23 @@ SoapsQuest is a quest plugin for Paper 1.21+ servers. Players receive **physical
 
 | Page | What you'll find |
 |:-----|:-----------------|
-| [Introduction](Introduction) | Full feature overview and how the plugin works |
-| [Getting Started](Getting-Started) | Installation, first quest, and basic setup |
-| [Commands & Permissions](Commands-and-Permissions) | Every command and permission node listed |
-| [Creating Quests](Creating-Quests) | Step-by-step quest creation guide |
-| [Objectives](Objectives) | All 30+ objective types explained |
-| [Rewards](Rewards) | XP, money, items, commands, and quest chain rewards |
-| [Conditions](Conditions) | Quest requirements and unlock costs |
-| [Tiers & Difficulties](Tiers-and-Difficulties) | Rarity tiers and difficulty scaling |
-| [Random Quest Generator](Random-Quest-Generator) | Auto-generate quests from weighted templates |
-| [Daily & Weekly Quests](Daily-and-Weekly-Quests) | Recurring quest rotation setup |
-| [Quest Loot System](Quest-Loot-System) | Mob drops and chest loot configuration |
-| [GUI System](GUI-System) | Quest browser and in-game editor |
-| [Placeholders](Placeholders) | PlaceholderAPI support |
-| [Default Configs](Default-Configs) | Every default config file, ready to copy |
-| [Examples](Examples) | Real quest examples you can paste right in |
-| [FAQ](FAQ) | Common questions and troubleshooting |
-| [Changelog](Changelog) | Version history and updates |
+| [Introduction](Introduction.md) | Full feature overview and how the plugin works |
+| [Getting Started](Getting-Started.md) | Installation, first quest, and basic setup |
+| [Commands & Permissions](Commands-and-Permissions.md) | Every command and permission node listed |
+| [Creating Quests](Creating-Quests.md) | Step-by-step quest creation guide |
+| [Objectives](Objectives.md) | All 30+ objective types explained |
+| [Rewards](Rewards.md) | XP, money, items, commands, and quest chain rewards |
+| [Conditions](Conditions.md) | Quest requirements and unlock costs |
+| [Tiers & Difficulties](Tiers-and-Difficulties.md) | Rarity tiers and difficulty scaling |
+| [Random Quest Generator](Random-Quest-Generator.md) | Auto-generate quests from weighted templates |
+| [Daily & Weekly Quests](Daily-and-Weekly-Quests.md) | Recurring quest rotation setup |
+| [Quest Loot System](Quest-Loot-System.md) | Mob drops and chest loot configuration |
+| [GUI System](GUI-System.md) | Quest browser and in-game editor |
+| [Placeholders](Placeholders.md) | PlaceholderAPI support |
+| [Default Configs](Default-Configs.md) | Every default config file, ready to copy |
+| [Examples](Examples.md) | Real quest examples you can paste right in |
+| [FAQ](FAQ.md) | Common questions and troubleshooting |
+| [Changelog](Changelog.md) | Version history and updates |
 
 ---
 

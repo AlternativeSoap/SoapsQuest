@@ -409,5 +409,5 @@ The player must finish breaking logs before crafting unlocks.
 
 ## Next Steps
 
-- [Rewards](Rewards) - What players get when they finish
-- [Conditions](Conditions) - Requirements before a quest can start
+- [Rewards](Rewards.md) - What players get when they finish
+- [Conditions](Conditions.md) - Requirements before a quest can start

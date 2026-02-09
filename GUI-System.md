@@ -161,5 +161,5 @@ quest-browser:
 
 ## Next Steps
 
-- [Placeholders](Placeholders) - PlaceholderAPI integration
-- [Commands & Permissions](Commands-and-Permissions) - GUI-related commands and permissions
+- [Placeholders](Placeholders.md) - PlaceholderAPI integration
+- [Commands & Permissions](Commands-and-Permissions.md) - GUI-related commands and permissions

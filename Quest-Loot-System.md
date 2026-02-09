@@ -148,5 +148,5 @@ quest-loot:
 
 ## Next Steps
 
-- [GUI System](GUI-System) - Quest browser and editor
-- [Random Quest Generator](Random-Quest-Generator) - Used for `random` source mode
+- [GUI System](GUI-System.md) - Quest browser and editor
+- [Random Quest Generator](Random-Quest-Generator.md) - Used for `random` source mode

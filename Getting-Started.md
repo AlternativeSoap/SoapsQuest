@@ -136,6 +136,6 @@ After first launch, you'll find these files in `plugins/SoapsQuest/`:
 
 ## Next Steps
 
-- [Creating Quests](Creating-Quests) - Learn how to build your own quests
-- [Commands & Permissions](Commands-and-Permissions) - Full command and permission reference
-- [Default Configs](Default-Configs) - See every config file with all options
+- [Creating Quests](Creating-Quests.md) - Learn how to build your own quests
+- [Commands & Permissions](Commands-and-Permissions.md) - Full command and permission reference
+- [Default Configs](Default-Configs.md) - See every config file with all options

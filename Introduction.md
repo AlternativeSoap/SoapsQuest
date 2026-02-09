@@ -127,4 +127,4 @@ None of these are required. SoapsQuest works fully standalone.
 
 ## Next Steps
 
-→ [Getting Started](Getting-Started) - Install the plugin and set up your first quest
+→ [Getting Started](Getting-Started.md) - Install the plugin and set up your first quest

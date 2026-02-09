@@ -135,5 +135,5 @@ recurring-quest-received-weekly
 
 ## Next Steps
 
-- [Quest Loot System](Quest-Loot-System) - Quest papers from mob kills and chests
-- [Random Quest Generator](Random-Quest-Generator) - Generate quests for the rotation pool
+- [Quest Loot System](Quest-Loot-System.md) - Quest papers from mob kills and chests
+- [Random Quest Generator](Random-Quest-Generator.md) - Generate quests for the rotation pool

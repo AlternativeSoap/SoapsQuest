@@ -316,5 +316,5 @@ mythicmobs:
 
 ## Next Steps
 
-- [Daily & Weekly Quests](Daily-and-Weekly-Quests) - Automatic quest rotation
-- [Quest Loot System](Quest-Loot-System) - Quest papers from mobs and chests
+- [Daily & Weekly Quests](Daily-and-Weekly-Quests.md) - Automatic quest rotation
+- [Quest Loot System](Quest-Loot-System.md) - Quest papers from mobs and chests

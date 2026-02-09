@@ -399,7 +399,7 @@ A quest that only works in the Nether.
 
 ## Next Steps
 
-- [Creating Quests](Creating-Quests) - Full creation guide
-- [Objectives](Objectives) - All objective types
-- [Rewards](Rewards) - All reward types
-- [Conditions](Conditions) - All condition types
+- [Creating Quests](Creating-Quests.md) - Full creation guide
+- [Objectives](Objectives.md) - All objective types
+- [Rewards](Rewards.md) - All reward types
+- [Conditions](Conditions.md) - All condition types

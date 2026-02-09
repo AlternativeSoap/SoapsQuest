@@ -230,5 +230,5 @@ A quest with `xp: 100` on **Hard** difficulty gives `150 XP`.
 
 ## Next Steps
 
-- [Conditions](Conditions) - Quest requirements and unlock costs
-- [Creating Quests](Creating-Quests) - Full quest creation guide
+- [Conditions](Conditions.md) - Quest requirements and unlock costs
+- [Creating Quests](Creating-Quests.md) - Full quest creation guide

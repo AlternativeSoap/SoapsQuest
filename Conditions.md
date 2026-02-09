@@ -160,5 +160,5 @@ This appearance is customizable in `messages.yml` under `quest-locked-lore`.
 
 ## Next Steps
 
-- [Tiers & Difficulties](Tiers-and-Difficulties) - Rarity and scaling system
-- [Creating Quests](Creating-Quests) - Full quest creation guide
+- [Tiers & Difficulties](Tiers-and-Difficulties.md) - Rarity and scaling system
+- [Creating Quests](Creating-Quests.md) - Full quest creation guide

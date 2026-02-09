@@ -94,10 +94,10 @@ The name shown to players. Supports both legacy color codes (`&a`, `&6`) and Min
 What item the quest paper looks like in the inventory. Default is `PAPER`. Can be any valid Minecraft item - `BOOK`, `MAP`, `DIAMOND`, `ENCHANTED_BOOK`, etc.
 
 ### `tier`
-Rarity level. Affects the display prefix and random generation weight. See [Tiers & Difficulties](Tiers-and-Difficulties).
+Rarity level. Affects the display prefix and random generation weight. See [Tiers & Difficulties](Tiers-and-Difficulties.md).
 
 ### `difficulty`
-Scales objective amounts and reward values through multipliers. See [Tiers & Difficulties](Tiers-and-Difficulties).
+Scales objective amounts and reward values through multipliers. See [Tiers & Difficulties](Tiers-and-Difficulties.md).
 
 ### `sequential`
 - `false` (default) - All objectives can be worked on simultaneously
@@ -181,7 +181,7 @@ Test your quest:
 
 ## Next Steps
 
-- [Objectives](Objectives) - All 30+ objective types
-- [Rewards](Rewards) - Reward configuration in depth
-- [Conditions](Conditions) - Requirements, costs, and locks
-- [Examples](Examples) - Ready-to-use quest configs
+- [Objectives](Objectives.md) - All 30+ objective types
+- [Rewards](Rewards.md) - Reward configuration in depth
+- [Conditions](Conditions.md) - Requirements, costs, and locks
+- [Examples](Examples.md) - Ready-to-use quest configs

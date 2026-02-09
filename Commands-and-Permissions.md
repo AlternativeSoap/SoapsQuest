@@ -123,5 +123,5 @@ Players without `quest.vip.exclusive` won't be able to activate or progress that
 
 ## Next Steps
 
-- [Creating Quests](Creating-Quests) - Build your first quest
-- [Rewards](Rewards) - All reward types explained
+- [Creating Quests](Creating-Quests.md) - Build your first quest
+- [Rewards](Rewards.md) - All reward types explained
