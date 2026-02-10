@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/Paper-Supported-blue?style=for-the-badge" alt="Paper"/>
 </p>
 
-# 🏠 SoapsQuest Wiki
+# SoapsQuest Wiki
 
 Welcome to the official SoapsQuest wiki - the go-to place for everything you need to set up, configure, and run quests on your Minecraft server.
 
