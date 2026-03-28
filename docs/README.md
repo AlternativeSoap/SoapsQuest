@@ -73,7 +73,6 @@ See the [Getting Started](Getting-Started.md) guide for a full walkthrough.
 | [Examples](Examples.md) | Copy-paste quest examples |
 | [FAQ](FAQ.md) | Common questions and answers |
 | [Default Configs](Default-Configs.md) | Default config file contents |
-| [Changelog](Changelog.md) | Version history |
 
 ---
 
