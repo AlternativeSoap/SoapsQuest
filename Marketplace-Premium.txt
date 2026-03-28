@@ -1,0 +1,202 @@
+SoapsQuest Premium - Marketplace Page
+
+
+SHORT DESCRIPTION
+
+Hold a quest in your hand - everything in the free version plus Random Quest Generator, Daily/Weekly Quests, Quest Loot System, and an In-Game Quest Editor.
+
+
+WHAT IS SOAPSQUEST PREMIUM?
+
+SoapsQuest Premium is the complete version of SoapsQuest, a physical quest paper plugin for Paper 1.21+. It includes every feature from the free version - 37 objective types, quest chains, conditions, tiers, difficulties, GUI browser, MiniMessage formatting, and full admin tools - plus four major premium systems:
+
+Random Quest Generator - Generate quests automatically from configurable templates. Define objective pools, name patterns, reward ranges, and rarity weights. Creates unique quests on demand or on a schedule.
+
+Daily and Weekly Quests - Automatically distribute rotating quests on a schedule. Configure reset times, quest pools, quests per cycle, and notification style. Offline players receive theirs on next login.
+
+Quest Loot System - Quest papers drop from mobs and appear in loot chests. Configure per-mob drop chances, quest pools, and level requirements. Works with vanilla loot tables.
+
+In-Game Quest Editor GUI - Create and edit quests from an in-game GUI. No YAML editing required. Add objectives, rewards, and conditions by clicking through menus. Saves directly to config.
+
+
+CORE CONTENT
+
+Everything included in SoapsQuest Premium:
+
+All Free Features:
+
+- 37 Objective Types - Kill, mine, place, craft, smelt, fish, tame, brew, enchant, trade, breed, harvest, shear, explore biomes, gain levels, collect XP, travel, elytra fly, ride vehicles, shoot arrows, launch projectiles, repair anvils, interact with blocks, and more
+- Physical Quest Papers - Quests are real inventory items. Hover for progress, right-click to claim rewards
+- Quest Browser GUI - In-game menu to browse and pick up available quests
+- Active Quests GUI - View all current active quests in a dedicated GUI
+- Flexible Rewards - XP, items (custom names, lore, enchantments), money (Vault), commands, or quest chains
+- Condition System - Lock quests behind level, world, permission, money cost, item cost, gamemode, or active quest limits
+- Tiers and Difficulties - Customizable tier categories and difficulty levels with reward multipliers
+- Sequential Objectives - Force objectives to complete in order
+- Milestones - Notify players at configurable progress percentages
+- MiniMessage Formatting - Gradients, hex colors, bold, italic, hover/click events in all text
+- Full Admin Tools - Give, remove, reset, complete, copy, reload, statistics, and debug commands
+- PlaceholderAPI, Vault, and MythicMobs Support - Optional integrations for placeholders, economy, and custom mobs
+- Customizable Messages and Sounds - Every message and sound is configurable
+- Config Validation and Data Cleanup - Automatic error checking and stale data removal
+
+Premium: Random Quest Generator
+
+- Generate unique quests from weighted templates on demand or automatically
+- Define objective pools with types, targets, and amount ranges
+- Configure name templates with randomized elements
+- Set reward ranges for XP, money, and items
+- Multi-objective generated quests supported
+- Rarity weighting for quest type frequency
+- MythicMobs support in generated kill objectives
+- Milestone auto-generation for longer quests
+- Give generated quests with /sq generate <player>
+
+Premium: Daily and Weekly Quests
+
+- Auto-distribute quest papers on a daily or weekly schedule
+- Configure exact reset times (24-hour format)
+- Define quest pools - the plugin picks from the list each cycle
+- Randomize selection or cycle in order
+- Configure how many quests per reset
+- Offline players receive quests on next login
+- No duplicates until the full pool has cycled
+- Notification modes: title screen, action bar, chat, or any combination
+
+Premium: Quest Loot System
+
+- Quest papers drop from mobs as loot
+- Per-mob drop chances and quest-to-mob mappings
+- Quest papers appear in dungeon and structure loot chests
+- Works with vanilla loot tables and specific chest types
+- Configurable min/max player level requirements for drops
+- Weight-based quest selection from loot pools
+
+Premium: In-Game Quest Editor GUI
+
+- Create new quests from a point-and-click GUI
+- Edit existing quests without touching YAML
+- Add, remove, and modify objectives, rewards, and conditions
+- Set name, tier, difficulty, material, lore, and all options
+- Saves directly to quests.yml
+- Requires soapsquest.gui.editor permission
+
+
+INSTALLATION
+
+1. Download SoapsQuest-Premium.jar
+2. Place it in your server's plugins/ folder
+3. Restart your server (a full restart, not /reload)
+4. Edit quests in plugins/SoapsQuest/quests.yml or use /sq editor in-game
+5. Run /sq reload to apply config changes
+6. Give a quest to yourself: /sq give <yourname> lumberjack
+
+The plugin ships with 10 ready-to-use example quests so you can see how everything works immediately.
+
+
+FILES
+
+After first run, these files are generated in plugins/SoapsQuest/:
+
+config.yml           - Core plugin settings (progress display, autosave, sounds, quest limits)
+quests.yml           - All quest definitions
+messages.yml         - Every plugin message, fully customizable
+tiers.yml            - Quest tier names, colors, and item icons
+difficulties.yml     - Difficulty levels and reward multipliers
+gui.yml              - Quest browser, active quests, and editor GUI layout and appearance
+daily.yml            - Daily and weekly quest schedules and settings
+quest-loot.yml       - Mob drop and chest loot quest paper settings
+random-generator.yml - Random quest generation templates and pools
+
+
+COMMANDS
+
+All free commands plus premium additions:
+
+/sq help - Show available commands
+/sq info - Show plugin version and details
+/sq give <player> <questid> - Give a quest paper to a player
+/sq list - List all available quest IDs
+/sq browse - Open the quest browser GUI
+/sq active - Open your active quests GUI
+/sq abandon <questid> - Abandon an active quest
+/sq reload - Reload all config files
+/sq addreward <quest> <type> <value> - Add a reward to a quest
+/sq removereward <quest> <type> - Remove a reward from a quest
+/sq listreward <quest> - List rewards on a quest
+/sq remove <player> <questid> - Remove a quest from a player
+/sq reset <player> <questid> - Reset a player's quest progress
+/sq complete <player> <questid> - Force-complete a quest for a player
+/sq copy <from> <to> <questid> - Copy a quest from one player to another
+/sq statistic [player] - View quest completion statistics
+/sq debug - Show debug information
+/sq generate <player> - Generate a random quest for a player (Premium)
+/sq editor [questid] - Open the quest editor GUI (Premium)
+
+
+PERMISSIONS
+
+All free permissions plus premium additions:
+
+Permission - Description - Default
+soapsquest.use - Basic plugin access - All players
+soapsquest.gui.browser - Open the quest browser GUI - All players
+soapsquest.gui.myquests - Open the active quests GUI - All players
+soapsquest.progress - See your own quest progress - All players
+soapsquest.progress.others - See other players' quest progress - OP
+soapsquest.abandon - Abandon active quests - All players
+soapsquest.give - Give quests to players - OP
+soapsquest.list - List all quest IDs - OP
+soapsquest.list.click - Click quest IDs in the list to give - OP
+soapsquest.reload - Reload plugin configs - OP
+soapsquest.remove - Remove quests from players - OP
+soapsquest.reset - Reset player quest progress - OP
+soapsquest.complete - Force-complete quests - OP
+soapsquest.copy - Copy quests between players - OP
+soapsquest.addreward - Add rewards to quests - OP
+soapsquest.removereward - Remove rewards from quests - OP
+soapsquest.listreward - List rewards on a quest - OP
+soapsquest.statistic - View quest statistics - OP
+soapsquest.debug - Use the debug command - OP
+soapsquest.generate - Generate random quests (Premium) - OP
+soapsquest.gui.editor - Use the quest editor GUI (Premium) - OP
+soapsquest.admin - Full access to all admin commands - OP
+soapsquest.* - All permissions - OP
+
+
+SUPPORTED PLUGINS
+
+SoapsQuest Premium works standalone with no required dependencies. These optional plugins add extra features:
+
+Vault              - Money rewards and money-cost conditions
+PlaceholderAPI     - Quest completion placeholders for scoreboards, holograms, tab lists
+MythicMobs         - Custom mob kill objectives using MythicMobs creatures
+
+
+OPTIONAL
+
+- Vault + an economy plugin (like EssentialsX) for money rewards
+- PlaceholderAPI for quest placeholders in other plugins
+- MythicMobs for custom mob kill tracking
+
+
+REQUIREMENTS
+
+- Paper 1.21+ (or a Paper fork like Purpur)
+- Java 21+
+
+
+MEDIA SUGGESTIONS
+
+1. Quest Paper in Inventory - Screenshot of a quest paper with the lore tooltip visible (progress, objectives, tier)
+2. Quest Browser GUI - Screenshot of the browser menu showing quests with tier colors and difficulty labels
+3. Active Quests GUI - Screenshot of the active quests menu showing in-progress quests
+4. Quest Completion - Screenshot or GIF of right-clicking a completed quest paper and receiving rewards
+5. Quest Editor GUI - Screenshot of the in-game quest editor (Premium highlight)
+6. Daily Quest Notification - Screenshot of the daily quest notification on login (Premium highlight)
+7. Random Quest Generation - Screenshot or GIF of /sq generate and the resulting quest paper (Premium highlight)
+8. Mob Dropping Quest Paper - Screenshot of a quest paper dropping from a mob (Premium highlight)
+9. Progress Notification - Screenshot of the action bar showing quest progress updating
+10. Quest Chain - Screenshot showing two linked quest papers
+11. Config Example - Screenshot of a quest definition in quests.yml
+12. Multiple Tiers - Screenshot of quests with different tier colors in the browser GUI

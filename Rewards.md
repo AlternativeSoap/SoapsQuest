@@ -176,11 +176,9 @@ You can add or remove rewards from existing quests using commands, without editi
 
 | Command | What It Does |
 |---------|-------------|
-| `/sq reward list <questid>` | Lists all current rewards on a quest |
-| `/sq reward add <questid> xp <amount>` | Adds an XP reward |
-| `/sq reward add <questid> money <amount>` | Adds a money reward |
-| `/sq reward add <questid> command <cmd>` | Adds a command reward |
-| `/sq reward remove <questid> <number>` | Removes a reward by its position in the list |
+| `/sq listreward <questid>` | Lists all current rewards on a quest |
+| `/sq addreward <questid> <type> <value>` | Adds a reward (type: xp, money, command, item) |
+| `/sq removereward <questid> <type>` | Removes a reward by type |
 
 ---
 

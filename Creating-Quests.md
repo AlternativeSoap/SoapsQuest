@@ -124,7 +124,7 @@ objectives:
   - type: kill
     target: ZOMBIE
     amount: 10
-  - type: mine
+  - type: break
     target: DIAMOND_ORE
     amount: 5
 ```

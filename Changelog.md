@@ -15,7 +15,7 @@ Initial release of SoapsQuest.
 
 ### Objectives
 
-- 30+ built-in objective types covering combat, mining, crafting, farming, fishing, exploration, trading, taming, and more.
+- 37 built-in objective types covering combat, mining, crafting, farming, fishing, exploration, trading, taming, and more.
 - MythicMobs integration for custom mob kill objectives (requires MythicMobs).
 - Each objective supports a target and a required amount.
 
@@ -24,7 +24,7 @@ Initial release of SoapsQuest.
 - XP rewards (Minecraft experience points).
 - Money rewards via Vault (requires Vault and an economy plugin).
 - Item rewards with support for custom names, lore, and enchantments.
-- Command rewards with support for the `%player%` placeholder.
+- Command rewards with support for the `{player}` placeholder.
 - Quest chain rewards: give the player a new quest paper upon completion.
 - Difficulty multipliers for XP and money rewards.
 
@@ -87,6 +87,6 @@ Initial release of SoapsQuest.
 
 ### Commands
 
-- `/sq` and `/soapsquest` with full subcommand support.
+- `/sq` (alias for `/soapsquest`) with full subcommand support.
 - Per-quest permission nodes for locking quest access by permission.
 - Admin-only commands protected by the `soapsquest.admin` permission.

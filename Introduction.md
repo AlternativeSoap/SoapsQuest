@@ -1,102 +1,94 @@
-# Introduction to SoapsQuest
+# Introduction
 
-SoapsQuest adds a physical quest system to your Minecraft server. Instead of typed commands or popup menus, players receive actual items called quest papers. These papers sit in the player inventory and track progress automatically as players play normally.
-
----
-
-## How It Works
-
-Here is the basic flow from start to finish:
-
-1. **A player receives a quest paper.** This can happen through a command, by picking it up off the ground after killing a mob, or by opening a chest that contains one.
-2. **The paper goes in their inventory.** Progress is tracked automatically. Players do not need to do anything special except play normally and do what the quest asks.
-3. **When all tasks are done, the paper glows.** The plugin sends a message telling the player to right-click the paper to collect their rewards.
-4. **The player right-clicks the paper in their hand.** Rewards are given, and the paper disappears.
-
-That is the whole system. Players just carry the paper and play. Everything else happens in the background.
+SoapsQuest is a quest plugin for Paper 1.21+ servers. It uses physical quest paper items in player inventories to track progress — no NPCs, no abstract menus, no invisible state. Players hold their quests, and right-click them to complete or claim rewards.
 
 ---
 
-## Feature Overview
+## Key Concepts
 
-**Quest Papers**
+### Quest Papers
 
-Quests are physical item stacks. The item tooltip shows the quest name, what needs to be done, and the current progress. Players always know what they are working on just by hovering over the item.
+Every quest is a physical paper item in the player's inventory. When a player receives a quest, they get an item they can hover over to see progress, and right-click to claim rewards when complete. Lost papers can be re-given by an admin.
 
-**30+ Objective Types**
+### Objectives
 
-Players can be asked to do nearly anything. Kill mobs, mine blocks, break crops, craft items, smelt ore, fish, brew potions, tame animals, breed animals, ride vehicles, travel distances, reach an experience level, gain levels, eat food, sleep in a bed, and more.
+Each quest has one or more objectives — the tasks players need to complete. There are **37 objective types** covering combat, mining, building, crafting, farming, movement, exploration, leveling, and more. See the [Objectives](Objectives.md) page for the full list.
 
-**Multiple Objectives**
+### Rewards
 
-A single quest can require several different tasks. You can also make objectives go in order (called a sequential quest), so the second task only unlocks after the first one is finished. This lets you build quests with a story-like structure.
+When all objectives are done, players right-click their quest paper to claim rewards. Rewards include commands, items, money (via Vault), experience, and quest chains (giving another quest as a reward). See the [Rewards](Rewards.md) page.
 
-**Milestones**
+### Conditions
 
-Quests can alert players when they hit certain progress points (like 25%, 50%, or 75% complete). This keeps players engaged on longer quests so they know they are making progress.
+Quests can have conditions that control when or where they can be started or progressed. Conditions include world restrictions, permission checks, time-of-day, weather, biome, and more. See the [Conditions](Conditions.md) page.
 
-**Tier System**
+### Tiers and Difficulties
 
-Every quest has a rarity tier, such as Common, Rare, or Legendary. Tiers are cosmetic labels by default, but they also control things like how often a tier shows up when using the random generator and how much rewards scale.
-
-**Difficulty System**
-
-Every quest also has a difficulty level, such as Easy, Hard, or Nightmare. Difficulty uses multipliers to automatically scale how much players need to do and how much they earn as rewards.
-
-**Conditions and Locking**
-
-You can put requirements on any quest. A quest can require a minimum player level, a set amount of money, a specific item in the player inventory, a permission node, a specific world, or a specific game mode. Quests with unmet conditions appear as locked papers in the browser, and the player cannot start them until they qualify.
-
-**Rewards**
-
-Players can earn experience points, money (requires Vault), specific items with names and enchantments, command outputs (like running a console command when a quest finishes), and even the next quest paper in a series to create quest chains.
-
-**Statistics**
-
-The plugin tracks how many quests each player has completed. Players and admins can check these numbers using a command.
-
-**Progress Display**
-
-Quest progress is shown to the player as they work. You can choose between showing progress in the action bar (just above the hotbar), as a boss bar at the top of the screen, or in chat.
-
-**Quest Browser**
-
-Players can open an in-game GUI to browse all available quests, see what conditions are required, and pick up quest papers directly from the menu. No commands needed from the player side.
-
-**In-Game Quest Editor (Premium)**
-
-> **[PREMIUM]** This feature requires the SoapsQuest Premium version. Get it at [SoapsUniverse.com](https://SoapsUniverse.com)
-
-Admins can create and fully edit quests through a point-and-click in-game GUI. No file editing required.
-
-**Random Quest Generator (Premium)**
-
-> **[PREMIUM]** This feature requires the SoapsQuest Premium version.
-
-The plugin can automatically create quests on demand using pools of objectives, name templates, and reward tables that you configure. Great for servers that want fresh content without hand-crafting every single quest.
-
-**Daily and Weekly Quests (Premium)**
-
-> **[PREMIUM]** This feature requires the SoapsQuest Premium version.
-
-Set specific quests to distribute to players on a timed schedule. Daily quests reset every day at a time you choose. Weekly quests reset once a week. Players receive their papers automatically when they log in.
-
-**Quest Loot System (Premium)**
-
-> **[PREMIUM]** This feature requires the SoapsQuest Premium version.
-
-Quest papers can drop from mobs when players kill them, or appear inside chests when players open them. This turns quest discovery into a natural part of gameplay rather than something players have to seek out.
+Organize quests into tiers (like "Beginner", "Advanced") and assign difficulty levels that affect how quests appear in GUIs and messages. See the [Tiers and Difficulties](Tiers-and-Difficulties.md) page.
 
 ---
 
-## Optional Add-ons
+## Features
 
-SoapsQuest works on its own, but installing these plugins enables extra features:
+### Core (Free)
 
-| Plugin | What It Enables |
-|--------|-----------------|
-| Vault | Money as a reward or as a cost condition to unlock quests |
-| PlaceholderAPI | Use SoapsQuest data in scoreboards, holograms, tab lists, and other plugins |
-| MythicMobs | The "kill mythic mob" objective type for custom boss quests |
+- **37 Objective Types** — kill, break, place, craft, fish, tame, move, enchant, brew, trade, breed, shear, harvest, explore biomes, and many more
+- **Physical Quest Papers** — quests live in inventory as items with progress info on hover
+- **Flexible Reward System** — commands, items, money, XP, and quest chains
+- **Condition System** — restrict quests by world, permission, biome, time, weather, level, and more
+- **Tiers and Difficulties** — organize and label quests with custom categories
+- **Quest Browser GUI** — players browse and pick up available quests from an in-game menu
+- **Active Quests GUI** — players view their current active quests
+- **Sequential Objectives** — force objectives to complete in order within a quest
+- **MiniMessage Formatting** — full MiniMessage support for all display text (gradients, hex colors, hover/click events)
+- **PlaceholderAPI Support** — expose quest data for scoreboards, holograms, and other plugins
+- **MythicMobs Support** — track kills of custom MythicMobs creatures
+- **Vault Integration** — use money as a reward type
+- **Multiple Quests** — players can hold multiple active quests at once (configurable limit)
+- **Admin Commands** — give, remove, reset, complete, copy, and manage quests from the command line
+- **Player Commands** — abandon quests, view active quests, browse available quests
+- **Statistics Tracking** — track quests completed per player
+- **Config Validation** — warns on load if quest configs have errors
+- **Data Cleanup** — automatic removal of stale player data
+- **Prevent Workstation Exploits** — optional setting to prevent cartography table use on quest papers
 
-None of these are required. The plugin works fine without them.
+### Premium
+
+- **Random Quest Generator** — generate random quests from configurable templates, weighted pools, and rarity settings
+- **Daily and Weekly Quests** — quests that automatically rotate on a schedule, with configurable reset times
+- **Quest Loot System** — quest papers drop from mobs and appear in loot chests
+- **In-Game Quest Editor GUI** — create and edit quests directly from a GUI inside the game
+
+---
+
+## Requirements
+
+- **Paper 1.21+** (or any Paper fork like Purpur)
+- **Java 21+**
+
+### Optional Dependencies
+
+- **Vault** — required for money rewards
+- **PlaceholderAPI** — required for quest placeholders and the `placeholder` objective type
+- **MythicMobs** — required for the `kill_mythicmob` objective type
+
+---
+
+## Quick Links
+
+- [Getting Started](Getting-Started.md)
+- [Creating Quests](Creating-Quests.md)
+- [Objectives](Objectives.md)
+- [Rewards](Rewards.md)
+- [Conditions](Conditions.md)
+- [Commands and Permissions](Commands-and-Permissions.md)
+- [GUI System](GUI-System.md)
+- [Tiers and Difficulties](Tiers-and-Difficulties.md)
+- [Placeholders](Placeholders.md)
+- [Daily and Weekly Quests](Daily-and-Weekly-Quests.md) *(Premium)*
+- [Random Quest Generator](Random-Quest-Generator.md) *(Premium)*
+- [Quest Loot System](Quest-Loot-System.md) *(Premium)*
+- [Examples](Examples.md)
+- [FAQ](FAQ.md)
+- [Default Configs](Default-Configs.md)
+- [Changelog](Changelog.md)

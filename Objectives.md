@@ -6,7 +6,7 @@ Objectives are the tasks players need to complete to finish a quest. Each quest 
 
 ## How to Add Objectives
 
-Objectives go in the `objectives` section of your quest, as a list. Each item in the list needs a `type`, a `target`, and an `amount`:
+Objectives go in the `objectives` section of your quest, as a list. Each item in the list needs a `type`, a `target` (for most types), and an `amount`:
 
 ```yaml
 objectives:
@@ -22,7 +22,7 @@ objectives:
   - type: kill
     target: ZOMBIE
     amount: 10
-  - type: mine
+  - type: break
     target: DIAMOND_ORE
     amount: 5
 ```
@@ -45,7 +45,11 @@ Kill a specific type of mob.
 
 The `target` is a Minecraft entity type name in uppercase (like `ZOMBIE`, `SKELETON`, `CREEPER`, `BLAZE`, `ENDER_DRAGON`).
 
-Use `ANY` to count kills of any mob type:
+Special filters:
+
+- `ANY` — counts kills of any mob
+- `HOSTILE` — counts kills of hostile mobs only
+- `PASSIVE` — counts kills of passive mobs only
 
 ```yaml
 - type: kill
@@ -67,38 +71,40 @@ Kill a custom mob defined in MythicMobs.
 
 The `target` is the MythicMobs internal mob name (case-sensitive, exactly as defined in your MythicMobs config).
 
-### kill_player
+### damage
 
-Kill another player.
-
-```yaml
-- type: kill_player
-  amount: 5
-```
-
-This counts player versus player kills. No `target` is needed.
-
-### bow_kill
-
-Kill a mob using a bow.
+Deal a certain amount of damage to entities.
 
 ```yaml
-- type: bow_kill
-  target: SKELETON
-  amount: 10
+- type: damage
+  target: ZOMBIE
+  amount: 100
 ```
 
-Only bow kills count. Any other weapon does not progress this objective.
+The `amount` is total damage dealt (in half-hearts). Use a specific entity type or omit the target to count damage dealt to anything.
 
-### tnt_kill
+### bowshoot
 
-Kill a mob with TNT (the explosion must kill it).
+Shoot arrows with a bow a certain number of times.
 
 ```yaml
-- type: tnt_kill
-  target: ANY
-  amount: 3
+- type: bowshoot
+  amount: 100
 ```
+
+Counts each arrow shot, not kills.
+
+### projectile
+
+Launch projectiles of a specific type.
+
+```yaml
+- type: projectile
+  target: ARROW
+  amount: 50
+```
+
+Includes arrows, snowballs, ender pearls, tridents, and more. Use `ANY` to count all projectile launches.
 
 ---
 
@@ -114,17 +120,7 @@ Break a specific block.
   amount: 10
 ```
 
-The `target` is a Minecraft block name in uppercase. Players need to actually break the block with a tool.
-
-### mine
-
-Same as break, but specifically for mining ores and stone-type blocks.
-
-```yaml
-- type: mine
-  target: IRON_ORE
-  amount: 30
-```
+The `target` is a Minecraft block material name in uppercase. Use `ANY` to count any block broken.
 
 ### place
 
@@ -136,6 +132,8 @@ Place a specific block.
   amount: 50
 ```
 
+Use `ANY` to count any block placed.
+
 ### smelt
 
 Smelt a specific item in a furnace, blast furnace, or smoker.
@@ -146,7 +144,7 @@ Smelt a specific item in a furnace, blast furnace, or smoker.
   amount: 20
 ```
 
-The `target` is what comes out of the furnace (the product, not the raw material).
+The `target` is what comes out of the furnace (the product, not the raw material). Use `ANY` to count any smelted item.
 
 ### craft
 
@@ -157,6 +155,32 @@ Craft a specific item using a crafting table or inventory crafting.
   target: BREAD
   amount: 10
 ```
+
+Use `ANY` to count any item crafted.
+
+### enchant
+
+Enchant an item at an enchanting table.
+
+```yaml
+- type: enchant
+  target: DIAMOND_SWORD
+  amount: 5
+```
+
+Use `ANY` to count any item enchanted.
+
+### anvil_repair
+
+Repair an item on an anvil.
+
+```yaml
+- type: anvil_repair
+  target: DIAMOND_SWORD
+  amount: 5
+```
+
+Use `ANY` to count any item repaired on an anvil. Target is optional.
 
 ---
 
@@ -172,15 +196,7 @@ Pick up a specific item from the ground or collect it from breaking a block.
   amount: 16
 ```
 
-### pickup
-
-Pick up a specific item from the ground (dropped items only).
-
-```yaml
-- type: pickup
-  target: BONE
-  amount: 20
-```
+Use `ANY` to count any item collected.
 
 ### consume
 
@@ -192,7 +208,19 @@ Eat or drink a specific item.
   amount: 10
 ```
 
-Drinking potions also counts if the target is the correct potion item name.
+Drinking potions also counts if the target is the correct potion item name. Use `ANY` to count any food or drink consumed.
+
+### drop
+
+Drop a specific item from the inventory.
+
+```yaml
+- type: drop
+  target: STICK
+  amount: 5
+```
+
+Use `ANY` to count any item dropped.
 
 ---
 
@@ -224,7 +252,7 @@ Harvest a fully grown crop.
   amount: 30
 ```
 
-This only counts crops that were fully grown when broken.
+This only counts crops that were fully grown when broken. Target is optional — omit it or use `ANY` to count any crop harvest.
 
 ### breed
 
@@ -248,11 +276,11 @@ Tame a tameable animal.
   amount: 3
 ```
 
-Tameable mobs include `WOLF`, `CAT`, `HORSE`, `LLAMA`, and others.
+Tameable mobs include `WOLF`, `CAT`, `HORSE`, `LLAMA`, and others. Use `ANY` to count any taming.
 
 ### shear
 
-Shear a sheep.
+Shear an entity (typically sheep).
 
 ```yaml
 - type: shear
@@ -260,26 +288,18 @@ Shear a sheep.
   amount: 15
 ```
 
-### milk
-
-Milk a cow with a bucket.
-
-```yaml
-- type: milk
-  target: COW
-  amount: 5
-```
+Use `ANY` to count shearing any entity.
 
 ---
 
 ## Survival Objectives
 
-### die
+### death
 
 Die a certain number of times.
 
 ```yaml
-- type: die
+- type: death
   amount: 3
 ```
 
@@ -294,19 +314,18 @@ Sleep in a bed.
   amount: 5
 ```
 
-Counts each time the player sleeps through the night.
+Counts each time the player enters a bed.
 
-### eat
+### heal
 
-Eat any food item.
+Regenerate a certain amount of health.
 
 ```yaml
-- type: eat
-  target: ANY
+- type: heal
   amount: 20
 ```
 
-You can specify a food type like `COOKED_BEEF` or use `ANY`.
+The `amount` is total health regenerated (in half-hearts). Target is optional — you can filter by heal reason or leave blank for any healing.
 
 ### brew
 
@@ -318,116 +337,112 @@ Brew a potion in a brewing stand.
   amount: 5
 ```
 
-Counts each completed brew cycle. Use `ANY` to count any potion.
-
-### enchant
-
-Enchant an item at an enchanting table.
-
-```yaml
-- type: enchant
-  target: ANY
-  amount: 5
-```
-
-Use `ANY` to count any item enchanted.
+Counts each completed brew cycle. Use `ANY` to count any potion brewed.
 
 ---
 
 ## Movement Objectives
 
-### travel
+### move
 
 Travel a certain distance in blocks.
 
 ```yaml
-- type: travel
+- type: move
   amount: 1000
 ```
 
-All movement counts: walking, swimming, flying, riding. The number is in blocks.
+All movement counts: walking, swimming, flying, riding. The `amount` is in blocks (distance).
 
-### swim
-
-Swim a certain distance.
-
-```yaml
-- type: swim
-  amount: 200
-```
-
-Only swimming movement counts.
-
-### sprint
-
-Sprint a certain distance.
-
-```yaml
-- type: sprint
-  amount: 500
-```
-
-Only sprinting movement counts.
-
-### sneak
-
-Sneak (crouch) a certain distance while holding the sneak key.
-
-```yaml
-- type: sneak
-  amount: 100
-```
-
-### ride_vehicle
+### ride_vehicle / vehicle
 
 Ride a vehicle or mount for a certain distance.
 
 ```yaml
-- type: ride_vehicle
+- type: vehicle
   target: ANY
   amount: 500
 ```
 
 Vehicles include horses, minecarts, boats, pigs, and striders. Use a specific entity type to limit it to one kind, or `ANY` to count all.
 
+### elytra_fly
+
+Glide a certain distance using an elytra.
+
+```yaml
+- type: elytra_fly
+  amount: 500
+```
+
+Only elytra flight distance counts. The `amount` is in blocks.
+
+---
+
+## Exploration Objectives
+
+### explore_biome
+
+Enter a specific biome (or discover any new biome).
+
+```yaml
+- type: explore_biome
+  target: JUNGLE
+  amount: 3
+```
+
+Use a specific biome name (uppercase, matching Minecraft biome names like `JUNGLE`, `DESERT`, `DEEP_OCEAN`) or omit the target / use `ANY` to count entering any biome.
+
 ---
 
 ## Leveling Objectives
 
-### reach_level
+### reachlevel
 
-Reach a specific experience level. Progress counts up as the player gains levels.
+Reach a specific experience level.
 
 ```yaml
-- type: reach_level
-  amount: 30
+- type: reachlevel
+  level: 30
 ```
 
-The `amount` is the target level. Progress is tracked as the player levels up toward it.
+Note: this type uses `level` instead of `amount`. Progress is tracked as the player levels up toward the target.
 
-### gain_levels
+### gainlevel
 
 Gain a certain number of experience levels, regardless of current level.
 
 ```yaml
-- type: gain_levels
+- type: gainlevel
   amount: 10
 ```
 
 This counts levels gained during the quest, not total levels.
 
-### gain_xp
+### xp_pickup
 
-Gain a certain amount of raw experience points.
+Collect a certain amount of raw experience points from orbs.
 
 ```yaml
-- type: gain_xp
+- type: xp_pickup
   amount: 5000
 ```
 
 ---
 
-## Miscellaneous Objectives
+## Interaction Objectives
+
+### interact
+
+Interact with (right-click) a specific block type.
+
+```yaml
+- type: interact
+  target: LEVER
+  amount: 10
+```
+
+Use `ANY` to count any block interaction.
 
 ### trade
 
@@ -441,26 +456,63 @@ Complete a villager trade a certain number of times.
 
 You can use `ANY` to count all trades, or specify a material to only count trades that produce that item (like `EMERALD`).
 
-### open_chest
+---
 
-Open a chest a certain number of times.
+## Miscellaneous Objectives
+
+### jump
+
+Jump a certain number of times.
 
 ```yaml
-- type: open_chest
-  target: CHEST
-  amount: 20
+- type: jump
+  amount: 100
 ```
 
-Target options: `CHEST`, `BARREL`, `SHULKER_BOX`, `TRAPPED_CHEST`, or `ANY`.
+### chat
 
-### drop_item
-
-Drop a specific item from the inventory.
+Send a certain number of chat messages.
 
 ```yaml
-- type: drop_item
-  target: STICK
+- type: chat
+  amount: 50
+```
+
+You can optionally require a specific message text in the `target` field, or leave it blank for any chat message.
+
+### command
+
+Execute a specific command a certain number of times.
+
+```yaml
+- type: command
+  command: "/help"
   amount: 5
+```
+
+Note: this type uses `command` instead of `target` to specify which command to track.
+
+### placeholder
+
+Check a PlaceholderAPI value.
+
+> **Note:** This objective requires PlaceholderAPI to be installed on your server.
+
+```yaml
+- type: placeholder
+  placeholder: "%player_level%"
+  amount: 30
+```
+
+Note: this type uses `placeholder` instead of `target`.
+
+### firework
+
+Launch firework rockets.
+
+```yaml
+- type: firework
+  amount: 20
 ```
 
 ---
@@ -469,38 +521,40 @@ Drop a specific item from the inventory.
 
 | Type | What Players Need to Do | `target` Examples |
 |------|------------------------|------------------|
-| `kill` | Kill mobs | `ZOMBIE`, `SKELETON`, `ANY` |
+| `kill` | Kill mobs | `ZOMBIE`, `SKELETON`, `ANY`, `HOSTILE`, `PASSIVE` |
 | `kill_mythicmob` | Kill a MythicMobs mob | MythicMobs mob name |
-| `kill_player` | Kill players | (none needed) |
-| `bow_kill` | Kill mobs with a bow | `SKELETON`, `ANY` |
-| `tnt_kill` | Kill mobs with TNT | `CREEPER`, `ANY` |
-| `break` | Break blocks | `DIRT`, `OAK_LOG`, `STONE` |
-| `mine` | Mine ores or stone | `IRON_ORE`, `DIAMOND_ORE` |
-| `place` | Place blocks | `COBBLESTONE`, `OAK_LOG` |
-| `smelt` | Smelt items in a furnace | `IRON_INGOT`, `COOKED_BEEF` |
-| `craft` | Craft items | `BREAD`, `IRON_SWORD` |
-| `collect` | Collect items | `NETHER_WART`, `WHEAT` |
-| `pickup` | Pick up dropped items | `BONE`, `ARROW` |
-| `consume` | Eat or drink | `BREAD`, `COOKED_COD` |
+| `damage` | Deal damage to entities | `ZOMBIE`, `ANY` (optional) |
+| `bowshoot` | Shoot arrows with a bow | (none needed) |
+| `projectile` | Launch projectiles | `ARROW`, `SNOWBALL`, `ANY` |
+| `break` | Break blocks | `DIAMOND_ORE`, `OAK_LOG`, `ANY` |
+| `place` | Place blocks | `COBBLESTONE`, `OAK_LOG`, `ANY` |
+| `smelt` | Smelt items in a furnace | `IRON_INGOT`, `COOKED_BEEF`, `ANY` |
+| `craft` | Craft items | `BREAD`, `IRON_SWORD`, `ANY` |
+| `enchant` | Enchant items | `DIAMOND_SWORD`, `ANY` |
+| `anvil_repair` | Repair items on an anvil | `DIAMOND_SWORD`, `ANY` (optional) |
+| `collect` | Collect items | `NETHER_WART`, `WHEAT`, `ANY` |
+| `consume` | Eat or drink | `BREAD`, `COOKED_COD`, `ANY` |
+| `drop` | Drop items | `STICK`, `DIRT`, `ANY` |
 | `fish` | Fish with a rod | `COD`, `SALMON`, `ANY` |
-| `harvest` | Harvest grown crops | `WHEAT`, `CARROTS` |
+| `harvest` | Harvest grown crops | `WHEAT`, `CARROTS`, `ANY` (optional) |
 | `breed` | Breed animals | `COW`, `SHEEP`, `ANY` |
-| `tame` | Tame animals | `WOLF`, `CAT`, `HORSE` |
-| `shear` | Shear sheep | `SHEEP` |
-| `milk` | Milk cows | `COW` |
-| `die` | Die | (none needed) |
+| `tame` | Tame animals | `WOLF`, `CAT`, `HORSE`, `ANY` |
+| `shear` | Shear entities | `SHEEP`, `ANY` |
+| `death` | Die | (none needed) |
 | `sleep` | Sleep in a bed | (none needed) |
-| `eat` | Eat food | `BREAD`, `ANY` |
+| `heal` | Regenerate health | (optional) |
 | `brew` | Brew potions | `ANY` |
-| `enchant` | Enchant items | `ANY` |
-| `travel` | Travel any distance | (none needed) |
-| `swim` | Swim a distance | (none needed) |
-| `sprint` | Sprint a distance | (none needed) |
-| `sneak` | Sneak a distance | (none needed) |
-| `ride_vehicle` | Ride a mount or vehicle | `HORSE`, `MINECART`, `ANY` |
-| `reach_level` | Reach an XP level | (none needed) |
-| `gain_levels` | Gain XP levels | (none needed) |
-| `gain_xp` | Gain experience points | (none needed) |
-| `trade` | Trade with a villager | `ANY` |
-| `open_chest` | Open containers | `CHEST`, `BARREL`, `ANY` |
-| `drop_item` | Drop an item | `STICK`, `DIRT` |
+| `move` | Travel any distance | (none needed) |
+| `vehicle` | Ride a mount or vehicle | `HORSE`, `MINECART`, `ANY` |
+| `elytra_fly` | Glide with an elytra | (none needed) |
+| `explore_biome` | Enter a biome | `JUNGLE`, `DESERT`, `ANY` (optional) |
+| `reachlevel` | Reach an XP level | uses `level` field |
+| `gainlevel` | Gain XP levels | (none needed) |
+| `xp_pickup` | Collect XP from orbs | (none needed) |
+| `interact` | Interact with blocks | `LEVER`, `OAK_BUTTON`, `ANY` |
+| `trade` | Trade with villagers | `EMERALD`, `ANY` |
+| `jump` | Jump | (none needed) |
+| `chat` | Send chat messages | (optional text) |
+| `command` | Execute commands | uses `command` field |
+| `placeholder` | Check PAPI values | uses `placeholder` field |
+| `firework` | Launch fireworks | (none needed) |

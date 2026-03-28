@@ -1,153 +1,197 @@
-# Frequently Asked Questions
+# FAQ
 
-If you run into an issue or have a question, check below before asking for help. Most common problems are answered here.
-
-Need more help? Join the Discord or visit the website:
-- **Discord:** [discord.gg/SoapsUniverse](https://discord.gg/SoapsUniverse)
-- **Website:** [SoapsUniverse.com](https://SoapsUniverse.com)
+Frequently asked questions about SoapsQuest.
 
 ---
 
 ## General
 
-**The plugin is not loading. What is wrong?**
+### What server software does SoapsQuest support?
 
-Make sure your server is running Paper 1.21 or newer. SoapsQuest does not support Spigot or older Paper versions. Check your server console for any error messages when starting up.
+SoapsQuest requires **Paper 1.21+** or any Paper fork (like Purpur). It does not run on Spigot or CraftBukkit because it uses Paper-specific APIs.
 
-**I updated the plugin and things are broken.**
+### What Java version do I need?
 
-After updating, reload the plugin with `/sq reload`. If the issue continues, check the changelog for any breaking changes. If you still have problems, ask in the Discord.
+Java 21 or newer.
 
-**Does SoapsQuest work on Spigot?**
+### Does SoapsQuest need a database?
 
-No. SoapsQuest requires Paper 1.21 or newer. Spigot is not supported.
+No. All data is stored in flat YAML files inside the plugin folder. No external database setup is required.
+
+### How do quest papers work?
+
+Every quest is a physical paper item in the player's inventory. Players can hover over it to see their progress, and right-click it when all objectives are done to claim the reward. If a player loses their paper, an admin can re-give it with `/sq give <player> <questid>`.
+
+---
+
+## Setup and Configuration
+
+### How do I install SoapsQuest?
+
+1. Drop `SoapsQuest.jar` into your server's `plugins/` folder
+2. Start (or restart) the server
+3. Edit `plugins/SoapsQuest/quests.yml` to define quests
+4. Run `/sq reload`
+
+See the [Getting Started](Getting-Started.md) guide for more detail.
+
+### How do I create a quest?
+
+Define quests in `plugins/SoapsQuest/quests.yml`. Each quest needs a unique ID, at least one objective, and a reward. See [Creating Quests](Creating-Quests.md) and [Examples](Examples.md).
+
+### How do I reload changes?
+
+Use `/sq reload`. This reloads all config files without restarting the server.
+
+### Can I use hex colors and gradients?
+
+Yes. SoapsQuest supports MiniMessage formatting in display names, lore, and item names. Examples:
+
+- Hex color: `<#FF5555>Red text`
+- Gradient: `<gradient:#55FF55:#55FFFF>Gradient text</gradient>`
+- Bold: `<bold>Bold text</bold>`
+
+Legacy `&` color codes also work.
 
 ---
 
 ## Quests
 
-**Players cannot see any quests in the quest browser.**
+### Can players hold multiple quests at once?
 
-Make sure you have at least one quest defined in `quests.yml` that does not have conditions blocking that player. Also check that the player has the `soapsquest.quest` permission.
+Yes. The maximum number of active quests per player is configurable in `config.yml` under `max-active-quests`.
 
-**The quest paper is not tracking progress.**
+### Can I chain quests together?
 
-The player must be holding the quest paper in their hand or have it in their inventory while completing objectives. If progress is still not tracking, check that the objective type and target match what the player is doing. For example, a `kill_mob` objective needs the exact mob type in lowercase.
+Yes. Add `quest: next_quest_id` in the reward section. When the player completes the first quest, they automatically receive the next one.
 
-**The player completed the quest but cannot claim the reward.**
+### What happens if a player loses their quest paper?
 
-The player needs to right-click the quest paper to open the reward claim screen. Make sure the quest paper is still in their inventory and has not been thrown away. If the paper shows the quest as complete, the reward should be claimable.
+An admin can re-give it with `/sq give <player> <questid>`. Progress is saved — the player keeps their existing progress.
 
-**Can players have more than one quest at a time?**
+### Can I lock a quest to one player?
 
-Yes. By default players can hold as many quest papers as they want. You can limit this using the `active-limit` condition on your quests. See the Conditions page for details.
+Yes. Set `lock-to-player: true` in the quest config. The quest paper will bind to the first player who receives it.
 
-**Players are dropping quest papers and losing them.**
+### Can objectives be done in a specific order?
 
-This is intentional. Quest papers are physical items. You can make the paper harder to lose by adding lore or a custom name so players know what it is. You can also enable settings in `config.yml` to prevent papers from being placed in chests or picked up by other players.
+Yes. Set `sequential: true` in the quest config. Objectives will be tracked one at a time in the order they're listed.
 
-**Another player picked up someone else's quest paper.**
+### How do milestone notifications work?
 
-Enable the `prevent-other-pickup` option in `config.yml` to stop other players from picking up quest papers that do not belong to them.
-
-**Can quest papers be placed in chests?**
-
-By default, yes. You can disable this using the `prevent-chest-storage` option in `config.yml` if you do not want players storing quest papers.
-
----
-
-## Random Quest Generator
-
-**The random quest generator is not working.**
-
-The Random Quest Generator is a premium feature. Make sure you have the premium version installed. Check that `enabled: true` is set in `random-generator.yml`.
-
-**Generated quests have weird names.**
-
-Check the `name-templates` section in `random-generator.yml`. Make sure the placeholders are spelled correctly and that your template list is not empty.
-
-**How do I remove old generated quests from players?**
-
-Generated quests automatically expire when the player completes or abandons them. There is no bulk removal command. If needed, you can reset player data from the database using the admin commands.
-
----
-
-## Daily and Weekly Quests
-
-**Daily and weekly quests are not working.**
-
-Daily and weekly quests are a premium feature. Make sure you have the premium version installed. Check that `enabled: true` is set in the `daily.yml` file under both the `daily` and `weekly` sections.
-
-**Players did not receive their daily quest.**
-
-Make sure the player was online at the time the daily quest was assigned, or that your notification mode is set to `on-join` so they receive it when they log in. Check `daily.yml` to confirm the assign-time and notification settings are correct.
+Add `milestones: [25, 50, 75]` to a quest. Players will get a message when they reach those percentage thresholds of overall quest completion.
 
 ---
 
 ## Rewards
 
-**Money rewards are not working.**
+### What reward types are available?
 
-Money rewards require Vault and a compatible economy plugin (like EssentialsX) to be installed. Without Vault, the money reward type will not function. Check that Vault is installed and that your economy plugin is set up correctly.
+- `xp:` — experience points
+- `money:` — Vault economy money (requires Vault)
+- `items:` — item rewards with optional enchantments and drop chance
+- `commands:` — server commands (use `{player}` for the player name)
+- `quest:` — give another quest as a chain reward
 
-**Items are not being given to the player.**
+### How do I add or remove rewards in-game?
 
-Check the item definition in your quest reward. The `material` field must be a valid Minecraft item name in uppercase, for example `DIAMOND` or `IRON_SWORD`. If the item has custom NBT, make sure the format is correct.
+Use these commands:
+- `/sq addreward <quest> <type> <value>` — add a reward
+- `/sq removereward <quest> <type>` — remove a reward
+- `/sq listreward <quest>` — view rewards on a quest
 
-**Commands in rewards are not running.**
+### Do item rewards support enchantments?
 
-Make sure the command does not start with a `/`. For example, use `give %player% diamond 1` not `/give %player% diamond 1`. The `%player%` placeholder is replaced with the player's username when the command runs.
+Yes. Add an `enchantments` list to the item:
 
----
+```yaml
+items:
+  - material: DIAMOND_SWORD
+    name: "<#55FFFF>Cool Sword"
+    enchantments:
+      - "SHARPNESS:3"
+      - "UNBREAKING:2"
+    chance: 100
+```
 
-## GUI
+### What does the `chance` field do on item rewards?
 
-**The quest browser GUI is broken or shows the wrong items.**
-
-Try running `/sq reload` to reload the plugin. If items in the GUI look wrong, check your `gui.yml` file for any formatting errors. Remove any extra spaces or tabs that might be causing YAML parsing problems.
-
-**Players cannot open the quest browser.**
-
-Make sure the player has the `soapsquest.quest` permission. Check your permissions plugin to confirm it is set up correctly.
-
-**The quest editor button is not showing in the GUI.**
-
-The quest editor is a premium feature. If you have the premium version, make sure the player or group has the `soapsquest.admin` permission.
-
----
-
-## Performance
-
-**The plugin is causing lag or slowdowns.**
-
-Check your `config.yml` for the performance settings. You can lower the progress update frequency and disable some visual features to improve performance. If you have a large number of quests or players, consider increasing your server resources.
-
-**Can I clean up old player data?**
-
-Currently, player data is stored per UUID. Old data from players who have not joined in a long time does not automatically get removed. A cleanup feature may be added in a future update.
+It's a percentage (1-100) controlling the drop chance. Use `100` for a guaranteed reward.
 
 ---
 
-## PlaceholderAPI
+## Permissions
 
-**Placeholders are not working.**
+### What permission do players need to use the Quest Browser GUI?
 
-Make sure PlaceholderAPI is installed on your server. Then run `/papi parse <yourname> %soapsquest_player_quests%` to see if it returns a value. If it returns the placeholder text unchanged, PlaceholderAPI may not be detecting SoapsQuest. Try reloading both plugins.
+`soapsquest.gui.browser` — this lets players open the quest browser with `/sq browse`.
 
-**What placeholders are available?**
+### What permission do players need to see their active quests?
 
-See the [Placeholders](Placeholders.md) page for the full list.
+`soapsquest.gui.myquests` — this lets players use `/sq active` to open the active quests GUI.
+
+### What's the admin permission?
+
+`soapsquest.admin` grants full access to all admin commands (give, remove, reset, complete, copy, reload, etc).
+
+### Where can I see all permissions?
+
+See the full list on the [Commands and Permissions](Commands-and-Permissions.md) page.
 
 ---
 
-## Still Need Help?
+## Integrations
 
-If your question is not answered here, join the Discord community. Please include the following when asking for help:
+### How do I set up Vault money rewards?
 
-- Your server version (Paper 1.21.x)
-- Your SoapsQuest version
-- Any error messages from your console
-- What you were doing when the problem happened
+1. Install [Vault](https://www.spigotmc.org/resources/vault.34315/) and an economy plugin (like EssentialsX)
+2. Add `money: <amount>` in your quest reward section
 
-**Discord:** [discord.gg/SoapsUniverse](https://discord.gg/SoapsUniverse)
-**Website:** [SoapsUniverse.com](https://SoapsUniverse.com)
+### How do I use PlaceholderAPI?
+
+1. Install [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)
+2. SoapsQuest will automatically register its placeholders
+3. See the [Placeholders](Placeholders.md) page for all available placeholders
+
+### How do I use MythicMobs objectives?
+
+1. Install [MythicMobs](https://www.spigotmc.org/resources/mythicmobs.5702/)
+2. Use the `kill_mythicmob` objective type with the MythicMob's internal name as the target:
+
+```yaml
+objectives:
+  - type: kill_mythicmob
+    target: SkeletonKing
+    amount: 1
+```
+
+The target name must match the MythicMobs mob name exactly (case-sensitive).
+
+---
+
+## Troubleshooting
+
+### My quest doesn't seem to be tracking progress
+
+- Check the console for config errors on reload — SoapsQuest validates quest configs and warns about issues
+- Make sure the objective type and target are correct (see [Objectives](Objectives.md))
+- Make sure the player has the quest paper in their inventory
+- Check if conditions are preventing progress (e.g. wrong world, wrong gamemode)
+
+### Players can't open the Quest Browser
+
+Make sure they have the `soapsquest.gui.browser` permission. Check with `/sq debug` if you have admin permissions.
+
+### The quest paper disappeared
+
+Quest papers are normal inventory items. If a player dies and doesn't recover their items, the paper is gone. An admin can re-give it with `/sq give <player> <questid>`. Consider using a keep-inventory plugin or the `lock-to-player` option.
+
+### Commands aren't working
+
+- Make sure you're using `/sq` (the only alias)
+- Check that you have the correct permissions
+- Run `/sq help` to see available commands for your permission level
+
+### How do I check my plugin version?
+
+Run `/sq info` to see the current version and plugin details.

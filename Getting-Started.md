@@ -8,7 +8,7 @@ This page walks you through installing SoapsQuest and setting up your first ques
 
 Before installing, make sure your server meets these requirements:
 
-- **Paper or Spigot 1.21 or newer** (SoapsQuest will not load on older versions)
+- **Paper 1.21 or newer** (or a Paper fork like Purpur — Spigot and CraftBukkit are not supported)
 - **Java 21 or newer**
 
 Optional plugins that add extra features:
