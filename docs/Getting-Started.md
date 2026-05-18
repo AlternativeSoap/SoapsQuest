@@ -1,137 +1,107 @@
 # Getting Started
 
-This page walks you through installing SoapsQuest and setting up your first quest.
-
----
+How to install SoapsQuest and run your first quest.
 
 ## Requirements
 
-Before installing, make sure your server meets these requirements:
+- **Paper 1.21+** (Purpur is fine; Spigot/CraftBukkit are not supported)
+- **Java 21+**
 
-- **Paper 1.21 or newer** (or a Paper fork like Purpur — Spigot and CraftBukkit are not supported)
-- **Java 21 or newer**
+Optional:
 
-Optional plugins that add extra features:
-
-- **Vault** (for money rewards and costs)
-- **PlaceholderAPI** (for placeholders in other plugins)
-- **MythicMobs** (for the kill mythic mob objective)
-
----
+- **Vault** for money rewards
+- **PlaceholderAPI** for placeholders and the `placeholder` objective
+- **MythicMobs** for `kill_mythicmob`
 
 ## Installation
 
-1. Install **SoapsCommon** (required dependency — get it from [SoapsUniverse.com](https://soapsuniverse.com) or [MythicCraft.io](https://mythiccraft.io)).
-2. Download **SoapsQuest** (Free or Premium edition) from the same place. Choose Premium if you want the random generator, daily/weekly quests, loot system, and in-game editor.
-3. Place the SoapsQuest jar in your server `plugins` folder.
-4. **Restart** the server. Do not use `/reload` for the first install.
-5. SoapsQuest creates `plugins/SoapsQuest/` with default configs and example quests.
+1. Install **SoapsCommon** from https://soapsuniverse.com or https://mythiccraft.io
+2. Download **SoapsQuest** (Free or Premium) from the same site
+3. Put both jars in your `plugins` folder
+4. **Restart** the server (skip `/reload` on first install)
+5. Check `plugins/SoapsQuest/` for the default configs and example quests
 
-> **Tip:** Use the `showcase_<type>` quests in `quests.yml` (for example `showcase_command`, `showcase_kill`) to test each objective type quickly with `/sq give <player> showcase_command`.
+**Premium** adds the random generator, daily/weekly quests, loot drops, and `/sq editor`. **Free** has everything else, including all 37 objectives.
 
-That is it. The plugin is now running with example quests included.
+**Tip:** In `quests.yml` there are `showcase_*` quests (e.g. `showcase_kill`, `showcase_command`) you can give with `/sq give <player> showcase_kill` to test one objective type at a time.
 
----
+## Your first quest
 
-## Your First Quest
-
-SoapsQuest comes with several example quests already set up so you can see how it works right away.
-
-**Option 1: Give a quest using a command**
+**Give a quest by command**
 
 ```
 /sq give <yourname> lumberjack
 ```
 
-This gives you the "Lumberjack" quest paper. Put it in your hand, chop some oak logs, then right-click the paper when the task is done.
+Chop oak logs with the paper in your inventory. When the lore says you are done, right-click the paper.
 
-**Option 2: Browse quests through the GUI**
+**Browse quests in-game**
 
 ```
 /sq browse
 ```
 
-This opens the quest browser where you can see all available quests and click one to receive the paper.
+Pick a quest from the GUI to receive the paper.
 
-**Option 3: Give yourself a paper from the console or the editor**
+**Admins:** `/sq give <player> <questid>` or `/sq editor` (Premium only).
 
-If you have admin permissions, you can use `/sq give <player> <questid>` or open the quest editor with `/sq editor` (Premium) to manage quests directly.
+## Default example quests
 
----
-
-## The Default Quests
-
-The plugin ships with these example quests to get you started:
-
-| Quest ID | What It Tasks Players With |
-|----------|---------------------------|
+| Quest ID | Task |
+|----------|------|
 | lumberjack | Chop 20 oak logs |
 | zombie_slayer | Kill 15 zombies |
 | gone_fishing | Catch 10 fish |
-| iron_miner | Mine 30 iron ore and smelt 20 ingots |
-| mob_hunter | Kill 20 zombies, 15 skeletons, and 10 spiders |
-| baker | Break 30 wheat and craft 10 bread |
+| iron_miner | Mine 30 iron ore, smelt 20 ingots |
+| mob_hunter | Kill zombies, skeletons, spiders |
+| baker | Harvest wheat, craft bread |
 | shepherd | Shear 15 sheep |
-| diamond_rush | Mine 10 diamond ore and craft a diamond pickaxe |
-| nether_explorer | Kill 25 blazes, collect nether wart, brew potions (requires level 15) |
-| master_builder | Place cobblestone, craft stone bricks, place stone bricks, craft glass panes (sequential) |
+| diamond_rush | Mine diamond ore, craft diamond pickaxe |
+| nether_explorer | Blazes, nether wart, brew (needs level 15) |
+| master_builder | Sequential build quest |
 
-You can edit or remove these as you like. All quests are defined in `plugins/SoapsQuest/quests.yml`.
+Edit or delete these in `plugins/SoapsQuest/quests.yml`.
 
----
+## What players see
 
-## How Players Experience Quests
+1. They get a quest paper (command, GUI, loot, etc.)
+2. The paper stays in inventory; any slot counts
+3. Progress shows in chat/action bar and on the paper lore
+4. When finished, the paper glows and chat says to right-click
+5. Right-click to get rewards; the paper is removed
 
-Here is what a player goes through from start to finish:
+## Paper states
 
-1. They receive a quest paper, either from a command, a chest drop, or a mob drop.
-2. The paper sits in their inventory. They do not need to hold it or do anything special.
-3. As they complete the tasks, progress updates appear above the hotbar.
-4. When all tasks are done, the paper starts glowing and a message tells them to right-click it.
-5. They hold the paper and right-click. Rewards are delivered and the paper is removed.
+| Look | Meaning |
+|------|---------|
+| Normal | Active, in progress |
+| Enchanted glow | Done, ready to claim |
+| Locked (in browser) | Player does not meet conditions yet |
 
----
+## Useful commands
 
-## Quest Paper States
+| Command | What it does |
+|---------|----------------|
+| `/sq give <player> <questid>` | Give a quest paper |
+| `/sq browse` | Quest browser GUI |
+| `/sq list` | List quest IDs in chat |
+| `/sq reload` | Reload configs |
+| `/sq info` | Version and Free/Premium |
 
-Quest papers change appearance based on their current state:
+Full list: [Commands and Permissions](Commands-and-Permissions.md).
 
-| State | What It Means |
-|-------|---------------|
-| Normal paper | Quest is active and in progress |
-| Glowing paper | All tasks are done, player can claim rewards |
-| Locked paper | The quest has conditions the player has not met yet |
+## Config files
 
----
+| File | Purpose |
+|------|---------|
+| `config.yml` | General settings |
+| `quests.yml` | Your quests (+ showcase examples) |
+| `messages.yml` | Plugin messages |
+| `tiers.yml` | Tier names and colors |
+| `difficulties.yml` | Difficulty levels |
+| `gui.yml` | Browser GUI layout |
+| `daily.yml` | Daily/weekly (Premium) |
+| `quest-loot.yml` | Mob/chest loot (Premium) |
+| `random-generator.yml` | Generator (Premium) |
 
-## Key Commands for Getting Started
-
-| Command | What It Does |
-|---------|-------------|
-| `/sq give <player> <questid>` | Give a quest paper to a player |
-| `/sq browse` | Open the quest browser GUI |
-| `/sq list` | See all available quest IDs in chat |
-| `/sq reload` | Reload configs (shows how many quests loaded) |
-| `/sq info` | Plugin version and edition (Free or Premium) |
-
-See [Commands and Permissions](Commands-and-Permissions.md) for the full list.
-
----
-
-## Config Files
-
-After the first run, you will find these files in `plugins/SoapsQuest/`:
-
-| File | What It Controls |
-|------|-----------------|
-| `config.yml` | Core settings like progress display and autosave interval |
-| `quests.yml` | All your quests (includes `showcase_*` quests to test each objective type) |
-| `messages.yml` | Every message the plugin sends, fully customizable |
-| `tiers.yml` | Quest tier names, colors, and weights |
-| `difficulties.yml` | Quest difficulty levels and multipliers |
-| `gui.yml` | How the quest browser GUI looks |
-| `daily.yml` | Daily and weekly quest settings (Premium) |
-| `quest-loot.yml` | Mob drops and chest loot settings (Premium) |
-| `random-generator.yml` | Random quest generation settings (Premium) |
-
-See [Default Configs](Default-Configs.md) for the full default content of each file.
+Defaults are listed in [Default Configs](Default-Configs.md).

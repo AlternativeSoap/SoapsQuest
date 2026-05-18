@@ -1,107 +1,58 @@
 # SoapsQuest
 
-A quest plugin for Paper 1.21+ that uses physical quest papers in the player's inventory. **37 objective types**, flexible rewards, conditions, tiers, a Quest Browser GUI, PlaceholderAPI support, and more.
+Quest plugin for **Paper 1.21+**. Players keep quest papers in their inventory, see progress on the item, and right-click to claim rewards when finished.
 
-**Current version: 1.0.1**
-
----
+Current version: **1.0.1**
 
 ## Download
 
-Download SoapsQuest from one of these sites (do not build from source unless you are developing the plugin):
+Install **SoapsCommon** first, then grab SoapsQuest (Free or Premium):
 
-- **[SoapsUniverse.com](https://soapsuniverse.com)** — Free and Premium editions
-- **[MythicCraft.io](https://mythiccraft.io)** — plugin marketplace
+- https://soapsuniverse.com
+- https://mythiccraft.io
 
-| Edition | What you get |
-|---------|----------------|
-| **Free** | All core features and 37 objective types |
-| **Premium** | Everything in Free, plus random quest generator, daily/weekly quests, quest loot, and in-game editor |
+**Free** has all 37 objective types, physical quest papers, rewards, conditions, tiers, and the quest browser GUIs.
 
-Install **SoapsCommon** on your server first (required dependency, available from the same sources).
+**Premium** adds the random quest generator, daily/weekly quests, quest loot drops, and `/sq editor`.
 
----
+## Quick start
 
-## Features
-
-- **Physical Quest Papers** — quests are real items in inventory, showing progress on hover and claimed by right-click
-- **37 Objective Types** — kill mobs, break blocks, place blocks, craft items, fish, tame animals, brew potions, enchant gear, trade with villagers, explore biomes, gain levels, and many more
-- **Reward System** — commands, items, money (Vault), XP, and quest chains
-- **Condition System** — restrict quests by world, permission, biome, time, weather, level, and more
-- **Tiers and Difficulties** — organize quests into customizable categories
-- **Quest Browser GUI** — in-game menu where players browse and pick up quests
-- **Active Quests GUI** — players view their current quests in a GUI
-- **Sequential Objectives** — force players to complete objectives in order
-- **MiniMessage Formatting** — gradients, hex colors, hover/click events
-- **PlaceholderAPI Support** — expose quest data for scoreboards and other plugins
-- **MythicMobs Support** — use MythicMobs creatures as kill targets
-- **Statistics Tracking** — per-player quest completion stats
-
-### Premium Features
-
-- **Random Quest Generator** — generate quests from weighted templates
-- **Daily and Weekly Quests** — auto-rotating quests on a schedule
-- **Quest Loot System** — quest papers drop from mobs and spawn in chests
-- **In-Game Quest Editor** — create and edit quests from a GUI
-
----
-
-## Requirements
-
-- Paper 1.21+ (or a Paper fork like Purpur)
-- Java 21+
-
-### Optional
-
-- [Vault](https://www.spigotmc.org/resources/vault.34315/) — for money rewards
-- [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) — for placeholders and the `placeholder` objective
-- [MythicMobs](https://www.spigotmc.org/resources/mythicmobs.5702/) — for the `kill_mythicmob` objective
-
----
-
-## Quick Start
-
-1. Install **SoapsCommon**, then download **SoapsQuest** (Free or Premium) from [SoapsUniverse.com](https://soapsuniverse.com) or [MythicCraft.io](https://mythiccraft.io) and place the jar in your server's `plugins/` folder
-2. **Restart** the server (do not use `/reload` for first install)
-3. Edit `plugins/SoapsQuest/quests.yml` — try the built-in `showcase_*` quests to test each objective type
-4. Run `/sq reload` — you should see how many quests loaded
-5. Give a quest: `/sq give <player> <questid>` or open `/sq browse`
-
-See the [Getting Started](Getting-Started.md) guide for a full walkthrough.
-
----
+1. Drop both jars into `plugins/`.
+2. Restart the server (not `/reload` on first install).
+3. Edit `plugins/SoapsQuest/quests.yml`.
+4. Run `/sq reload`.
+5. Try `/sq give <player> lumberjack` or `/sq browse`.
 
 ## Documentation
 
-| Page | Description |
-|------|-------------|
-| [Introduction](Introduction.md) | Plugin overview, key concepts, and features |
-| [Getting Started](Getting-Started.md) | Installation and first quest setup |
-| [Creating Quests](Creating-Quests.md) | Quest YAML format and configuration |
-| [Objectives](Objectives.md) | All 37 objective types with examples |
-| [Rewards](Rewards.md) | Reward types and configuration |
-| [Conditions](Conditions.md) | Quest conditions reference |
-| [Commands and Permissions](Commands-and-Permissions.md) | Every command and permission |
-| [GUI System](GUI-System.md) | Quest Browser and Active Quests GUIs |
-| [Tiers and Difficulties](Tiers-and-Difficulties.md) | Tier and difficulty setup |
-| [Placeholders](Placeholders.md) | PlaceholderAPI placeholders |
-| [Daily and Weekly Quests](Daily-and-Weekly-Quests.md) | Rotating quest schedules *(Premium)* |
-| [Random Quest Generator](Random-Quest-Generator.md) | Random quest generation *(Premium)* |
-| [Quest Loot System](Quest-Loot-System.md) | Mob drops and chest loot *(Premium)* |
-| [Examples](Examples.md) | Copy-paste quest examples |
-| [FAQ](FAQ.md) | Common questions and answers |
-| [Default Configs](Default-Configs.md) | Default config file contents |
-| [Changelog](CHANGELOG.md) | Version history |
+| Page | What it covers |
+|------|----------------|
+| [Getting Started](docs/Getting-Started.md) | Install and first quest |
+| [Introduction](docs/Introduction.md) | How the plugin works |
+| [Creating Quests](docs/Creating-Quests.md) | Quest YAML format |
+| [Objectives](docs/Objectives.md) | All 37 objective types |
+| [Rewards](docs/Rewards.md) | Reward setup |
+| [Conditions](docs/Conditions.md) | Quest requirements |
+| [Commands and Permissions](docs/Commands-and-Permissions.md) | `/sq` commands |
+| [GUI System](docs/GUI-System.md) | Browser and active quest GUIs |
+| [Tiers and Difficulties](docs/Tiers-and-Difficulties.md) | Tiers and difficulty labels |
+| [Placeholders](docs/Placeholders.md) | PlaceholderAPI |
+| [Daily and Weekly Quests](docs/Daily-and-Weekly-Quests.md) | Premium rotating quests |
+| [Random Quest Generator](docs/Random-Quest-Generator.md) | Premium generator |
+| [Quest Loot System](docs/Quest-Loot-System.md) | Premium mob/chest loot |
+| [Examples](docs/Examples.md) | Ready-to-copy quests |
+| [FAQ](docs/FAQ.md) | Common questions |
+| [Default Configs](docs/Default-Configs.md) | Default YAML files |
+| [Changelog](docs/CHANGELOG.md) | Version history |
 
----
+## Requirements
 
-## Changelog
+- Paper 1.21+ (Purpur and other Paper forks work)
+- Java 21+
 
-See `V1.0.1 Changelog.txt` in the plugin release package, or the [1.0.1 release notes](https://github.com/AlternativeSoap/SoapsQuest/blob/main/docs/CHANGELOG.md) in this repo.
-
----
+Optional: Vault (money), PlaceholderAPI (placeholders + `placeholder` objective), MythicMobs (`kill_mythicmob` objective).
 
 ## Support
 
-- GitHub: [AlternativeSoap/SoapsQuest](https://github.com/AlternativeSoap/SoapsQuest)
-- Discord: [discord.gg/SoapsUniverse](https://discord.gg/SoapsUniverse)
+- Docs repo: https://github.com/AlternativeSoap/SoapsQuest
+- Discord: https://discord.gg/SoapsUniverse

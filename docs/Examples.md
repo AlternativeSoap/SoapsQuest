@@ -4,7 +4,7 @@ Copy-paste quest examples you can drop into your `quests.yml`. All examples go u
 
 ## Showcase quests (all objective types)
 
-The shipped `quests.yml` includes `showcase_<type>` quests — one minimal quest per objective type for testing:
+Default `quests.yml` includes `showcase_<type>` quests (one small quest per objective type for testing):
 
 ```bash
 /sq give <player> showcase_kill
@@ -82,7 +82,7 @@ quests:
 
 ## Sequential Quest
 
-Objectives must be completed in order — step 1 before step 2, and so on.
+Objectives must be completed in order (step 1, then step 2, and so on).
 
 ```yaml
 quests:
@@ -473,5 +473,5 @@ quests:
 - Use `/sq reload` after editing to apply changes
 - Use `/sq give <player> <questid>` to test quests
 - MiniMessage formatting works in `display`, `lore`, and item `name` fields
-- The `chance` field on item rewards is a percentage (1-100) — use 100 for guaranteed drops
+- The `chance` field on item rewards is a percentage (1-100); use 100 for guaranteed drops
 - `{player}` in command rewards is replaced with the completing player's name

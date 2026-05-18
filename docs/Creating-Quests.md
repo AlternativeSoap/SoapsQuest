@@ -129,7 +129,7 @@ objectives:
     amount: 5
 ```
 
-Each objective needs a `type` and usually `target` + `amount`. Some types use other fields (`command`, `placeholder`, `level`, `vehicle`, `text`) — see [Objectives](Objectives.md). Test quests: `showcase_<type>` entries in `quests.yml`.
+Each objective needs a `type` and usually `target` + `amount`. Some types use other fields (`command`, `placeholder`, `level`, `vehicle`, `text`); see [Objectives](Objectives.md). Test with `showcase_<type>` quests in `quests.yml`.
 
 ---
 

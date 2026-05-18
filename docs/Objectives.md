@@ -31,9 +31,9 @@ objectives:
     amount: 5
 ```
 
-If your quest has `sequential: true`, objectives are completed one at a time in the order you list them. This applies to all objective types, including `command`, `move`, `chat`, and `placeholder`.
+If `sequential: true` is set on the quest, players finish objectives in list order. That includes `command`, `move`, `chat`, and `placeholder`.
 
-> **Active vs queued:** Only the player's **active** quest papers gain progress (see `max-active-quests` in `config.yml`). Extra papers wait in the queue until a slot opens.
+Only **active** quest papers count toward progress (`max-active-quests` in `config.yml`). Extra papers sit in the queue until a slot opens.
 
 ---
 
@@ -53,9 +53,9 @@ The `target` is a Minecraft entity type name in uppercase (like `ZOMBIE`, `SKELE
 
 Special filters:
 
-- `ANY` — counts kills of any mob
-- `HOSTILE` — counts kills of hostile mobs only
-- `PASSIVE` — counts kills of passive mobs only
+- `ANY` counts any mob kill
+- `HOSTILE` counts hostile mobs only
+- `PASSIVE` counts passive mobs only
 
 ```yaml
 - type: kill
@@ -258,7 +258,7 @@ Harvest a fully grown crop.
   amount: 30
 ```
 
-This only counts crops that were fully grown when broken. Target is optional — omit it or use `ANY` to count any crop harvest.
+This only counts crops that were fully grown when broken. Target is optional; omit it or use `ANY` for any crop.
 
 ### breed
 
@@ -331,7 +331,7 @@ Regenerate a certain amount of health.
   amount: 20
 ```
 
-The `amount` is total health regenerated (in half-hearts). Target is optional — you can filter by heal reason or leave blank for any healing.
+The `amount` is total health regenerated (in half-hearts). Target is optional; filter by heal reason or leave blank for any healing.
 
 ### brew
 
@@ -389,7 +389,7 @@ Only elytra flight distance counts. The `amount` is in blocks.
 
 ### explore_biome
 
-Enter a specific biome (or discover any new biome). Progress triggers when you **walk into** a biome (same block column movement is ignored).
+Enter a biome or visit new biomes. Counts when the player walks into the biome (standing in one place does not count).
 
 ```yaml
 - type: explore_biome
@@ -397,7 +397,7 @@ Enter a specific biome (or discover any new biome). Progress triggers when you *
   amount: 3
 ```
 
-Use a biome id such as `plains`, `jungle`, `desert`, or `deep_ocean`. Uppercase names like `JUNGLE` still work. You can also use `minecraft:jungle`. Omit `target` or set `ANY` to count entering any **new** biome (distinct visits).
+Use names like `plains`, `jungle`, or `DEEP_OCEAN`. `JUNGLE` and `minecraft:jungle` work too. Leave out `target` or use `ANY` to count each new biome once.
 
 ---
 
