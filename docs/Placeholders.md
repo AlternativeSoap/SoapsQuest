@@ -4,6 +4,16 @@ SoapsQuest supports PlaceholderAPI, which lets you display quest data in other p
 
 > **Note:** PlaceholderAPI must be installed on your server for these to work. You can download it from [PlaceholderAPI's SpigotMC page](https://www.spigotmc.org/resources/placeholderapi.6245/).
 
+### Placeholder objective (quests)
+
+The `placeholder` **objective type** (see [Objectives](Objectives.md)) is separate from the `%soapsquest_*%` placeholders below. Objectives use PlaceholderAPI keys such as `player_level` in `quests.yml`:
+
+```yaml
+- type: placeholder
+  placeholder: player_level
+  amount: 30
+```
+
 ---
 
 ## Available Placeholders

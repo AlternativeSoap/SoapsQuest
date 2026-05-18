@@ -129,7 +129,7 @@ objectives:
     amount: 5
 ```
 
-Each objective needs a `type`, a `target`, and an `amount`. The full list of objective types is in [Objectives](Objectives.md).
+Each objective needs a `type` and usually `target` + `amount`. Some types use other fields (`command`, `placeholder`, `level`, `vehicle`, `text`) — see [Objectives](Objectives.md). Test quests: `showcase_<type>` entries in `quests.yml`.
 
 ---
 
@@ -171,22 +171,20 @@ See [Conditions](Conditions.md) for the full list.
 
 ---
 
-## Quest Types
+## Daily and Weekly Quests
 
-You can control what type of quest this is. The type affects how it works with the daily/weekly system.
+Daily and weekly assignment is configured in `daily.yml` by listing quest IDs in the `daily.quests` or `weekly.quests` pools. The plugin does **not** read a `type: daily` field on individual quests for scheduling.
 
-| Type | What It Means |
-|------|--------------|
-| `standard` | A regular one-time quest (default) |
-| `daily` | Counted as a daily quest (used with the daily system) |
-| `weekly` | Counted as a weekly quest (used with the weekly system) |
+You may add `type: daily` on a quest for your own notes or external tools; it does not change how SoapsQuest assigns recurring quests. See [Daily and Weekly Quests](Daily-and-Weekly-Quests.md).
 
-To set the type, add this to your quest:
+## Quest permission (root level)
+
+Separate from `conditions.permission` (browser unlock), you can gate **progress** on a quest:
 
 ```yaml
 my_quest:
-  display: "Daily Challenge"
-  type: daily
+  display: "VIP Quest"
+  permission: "soapsquest.vip"
   objectives:
     - type: kill
       target: ZOMBIE
@@ -194,6 +192,8 @@ my_quest:
   reward:
     xp: 100
 ```
+
+Players without this permission cannot make progress even if they hold the quest paper.
 
 ---
 

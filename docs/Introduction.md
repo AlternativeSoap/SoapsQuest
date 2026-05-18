@@ -91,3 +91,4 @@ Organize quests into tiers (like "Beginner", "Advanced") and assign difficulty l
 - [Examples](Examples.md)
 - [FAQ](FAQ.md)
 - [Default Configs](Default-Configs.md)
+- [Changelog](CHANGELOG.md)

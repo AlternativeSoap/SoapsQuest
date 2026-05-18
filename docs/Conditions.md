@@ -146,7 +146,18 @@ conditions:
     - "chapter_1"
 ```
 
-The player must have completed all listed quests before this one becomes available. This is another way to build quest chains where quests unlock in order.
+The player must have completed **all** listed quests before this one becomes available. This is another way to build quest chains where quests unlock in order.
+
+### Minimum Money (Balance)
+
+Require the player to have a minimum balance (not consumed on unlock):
+
+```yaml
+conditions:
+  min-money: 1000
+```
+
+> **Note:** Requires Vault. Unlike `cost`, this only checks balance and does not withdraw money.
 
 ---
 

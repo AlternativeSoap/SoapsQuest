@@ -98,20 +98,7 @@ The sound plays to the player at the same time as the notification.
 
 Any quest can be used as a daily or weekly quest. Just add its quest ID to the list in `daily.yml`.
 
-If you also want to mark the quest itself as a daily or weekly type (for display purposes or tracking), add the type to the quest in `quests.yml`:
-
-```yaml
-zombie_daily:
-  display: "Daily: Zombie Slayer"
-  type: daily
-  objectives:
-    - type: kill
-      target: ZOMBIE
-      amount: 10
-  reward:
-    xp: 150
-    money: 50
-```
+You may add `type: daily` on a quest in `quests.yml` for your own labeling, but **SoapsQuest does not read that field** for scheduling. Only the quest ID lists in `daily.yml` control which quests are given as dailies/weeklies.
 
 ---
 

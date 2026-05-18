@@ -21,12 +21,17 @@ Optional plugins that add extra features:
 
 ## Installation
 
-1. Download the SoapsQuest `.jar` file from [SoapsUniverse.com](https://SoapsUniverse.com) or the plugin page.
-2. Place the `.jar` file into your server `plugins` folder.
-3. Restart your server. Do not use `/reload`. A full restart is required.
-4. SoapsQuest will create a `SoapsQuest` folder inside `plugins` with all the config files.
+1. Install **SoapsCommon** (required dependency).
+2. Download the correct jar for your edition:
+   - **Premium:** `SoapsQuest-1.0.1-Premium.jar`
+   - **Free:** `SoapsQuest-1.0.1-Free.jar`
+3. Place the jar in your server `plugins` folder.
+4. **Restart** the server. Do not use `/reload` for the first install.
+5. SoapsQuest creates `plugins/SoapsQuest/` with default configs and example quests.
 
-That is it. The plugin is now running with a set of example quests included.
+> **Tip:** Use the `showcase_<type>` quests in `quests.yml` (for example `showcase_command`, `showcase_kill`) to test each objective type quickly with `/sq give <player> showcase_command`.
+
+That is it. The plugin is now running with example quests included.
 
 ---
 
@@ -108,7 +113,8 @@ Quest papers change appearance based on their current state:
 | `/sq give <player> <questid>` | Give a quest paper to a player |
 | `/sq browse` | Open the quest browser GUI |
 | `/sq list` | See all available quest IDs in chat |
-| `/sq reload` | Reload the plugin config files |
+| `/sq reload` | Reload configs (shows how many quests loaded) |
+| `/sq info` | Plugin version and edition (Free or Premium) |
 
 See [Commands and Permissions](Commands-and-Permissions.md) for the full list.
 
@@ -121,7 +127,7 @@ After the first run, you will find these files in `plugins/SoapsQuest/`:
 | File | What It Controls |
 |------|-----------------|
 | `config.yml` | Core settings like progress display and autosave interval |
-| `quests.yml` | All your quests |
+| `quests.yml` | All your quests (includes `showcase_*` quests to test each objective type) |
 | `messages.yml` | Every message the plugin sends, fully customizable |
 | `tiers.yml` | Quest tier names, colors, and weights |
 | `difficulties.yml` | Quest difficulty levels and multipliers |

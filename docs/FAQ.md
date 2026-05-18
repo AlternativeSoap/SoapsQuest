@@ -90,7 +90,7 @@ Add `milestones: [25, 50, 75]` to a quest. Players will get a message when they 
 - `xp:` — experience points
 - `money:` — Vault economy money (requires Vault)
 - `items:` — item rewards with optional enchantments and drop chance
-- `commands:` — server commands (use `{player}` for the player name)
+- `commands:` — server commands (use `{player}`, `<player>`, or `%player%` for the player name)
 - `quest:` — give another quest as a chain reward
 
 ### How do I add or remove rewards in-game?
@@ -173,10 +173,13 @@ The target name must match the MythicMobs mob name exactly (case-sensitive).
 
 ### My quest doesn't seem to be tracking progress
 
-- Check the console for config errors on reload — SoapsQuest validates quest configs and warns about issues
-- Make sure the objective type and target are correct (see [Objectives](Objectives.md))
-- Make sure the player has the quest paper in their inventory
-- Check if conditions are preventing progress (e.g. wrong world, wrong gamemode)
+- Run `/sq reload` and read the chat message — it reports how many quests loaded. Fix any errors shown before reload completes.
+- Check the console for validation warnings (wrong objective fields, missing `command` vs `target`, etc.)
+- Make sure the objective type and fields are correct (see [Objectives](Objectives.md))
+- The quest paper must be in the player's inventory (any slot)
+- Only **active** quests track progress. If the player has more papers than `max-active-quests`, extra papers are **queued** and will not progress until they become active.
+- Check if **conditions** block progress (wrong world, gamemode, permission, etc.)
+- For **sequential** quests, only the current objective in the list counts
 
 ### Players can't open the Quest Browser
 
@@ -185,6 +188,38 @@ Make sure they have the `soapsquest.gui.browser` permission. Check with `/sq deb
 ### The quest paper disappeared
 
 Quest papers are normal inventory items. If a player dies and doesn't recover their items, the paper is gone. An admin can re-give it with `/sq give <player> <questid>`. Consider using a keep-inventory plugin or the `lock-to-player` option.
+
+### The command objective does not progress
+
+- Use the `command` field (not `target`). Example: `command: help` with `amount: 5`, then run `/help` five times.
+- The quest must be **active** (not queued). Check `/sq active`.
+- Test with `/sq give <player> showcase_command`.
+
+### The placeholder objective does not progress
+
+- **PlaceholderAPI** must be installed.
+- The placeholder must return a **number** (SoapsQuest reads the numeric value until it reaches `amount`).
+- Use `placeholder: player_level` — with or without `%` wrappers.
+- Test with `/sq give <player> showcase_placeholder`.
+
+### explore_biome does not count
+
+- Walk into the biome (movement must change blocks). Standing still does not count.
+- Use biome names like `plains`, `jungle`, or `DEEP_OCEAN` (registry keys work; uppercase legacy names still work).
+- Test with `/sq give <player> showcase_explore_biome`.
+
+### What is the difference between Free and Premium?
+
+| Feature | Free | Premium |
+|---------|------|---------|
+| 37 objectives, papers, rewards, conditions | Yes | Yes |
+| Quest browser & active quests GUI | Yes | Yes |
+| Random quest generator | No | Yes |
+| Daily / weekly quests | No | Yes |
+| Quest loot (mob/chest drops) | No | Yes |
+| In-game quest editor (`/sq editor`) | No | Yes |
+
+Jar names: `SoapsQuest-1.0.1-Free.jar` and `SoapsQuest-1.0.1-Premium.jar`.
 
 ### Commands aren't working
 

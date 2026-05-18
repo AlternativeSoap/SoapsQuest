@@ -129,7 +129,7 @@ reward:
     - "lp user {player} permission set rank.adventurer true"
 ```
 
-Use `{player}` anywhere in the command and it will be replaced with the player name.
+Use `{player}`, `<player>`, or `%player%` anywhere in the command and it will be replaced with the player name.
 
 Commands run from the console (as if an admin typed them), so they can do anything a console command can do, including running other plugin commands.
 

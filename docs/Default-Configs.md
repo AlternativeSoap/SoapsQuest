@@ -83,7 +83,7 @@ prevent-workstation-placement: true     # Prevents placing the paper like a regu
 
 ## quests.yml
 
-This is where you define all the quests on your server. Each quest has a unique ID, a display name, objectives players must complete, and rewards they receive. The file ships with 10 example quests to help you get started.
+This is where you define all the quests on your server. Each quest has a unique ID, a display name, objectives players must complete, and rewards they receive. The file ships with gameplay example quests plus `showcase_<type>` entries (one per objective type) for testing.
 
 ```yaml
 # SoapsQuest - quests.yml

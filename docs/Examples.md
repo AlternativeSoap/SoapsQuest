@@ -2,6 +2,18 @@
 
 Copy-paste quest examples you can drop into your `quests.yml`. All examples go under the top-level `quests:` key.
 
+## Showcase quests (all objective types)
+
+The shipped `quests.yml` includes `showcase_<type>` quests — one minimal quest per objective type for testing:
+
+```bash
+/sq give <player> showcase_kill
+/sq give <player> showcase_command
+/sq list
+```
+
+See the `SHOWCASE` section at the bottom of `plugins/SoapsQuest/quests.yml` after `/sq reload`.
+
 ---
 
 ## Simple Kill Quest

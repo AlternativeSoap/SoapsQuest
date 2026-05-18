@@ -6,7 +6,11 @@ Objectives are the tasks players need to complete to finish a quest. Each quest 
 
 ## How to Add Objectives
 
-Objectives go in the `objectives` section of your quest, as a list. Each item in the list needs a `type`, a `target` (for most types), and an `amount`:
+Objectives go in the `objectives` section of your quest, as a list. Most types need `type`, `target`, and `amount`. Some types use different field names (see [Special field names](#special-field-names) below).
+
+Working examples for every type ship in `quests.yml` as `showcase_<type>` (for example `showcase_kill`, `showcase_command`).
+
+**Typical objective:**
 
 ```yaml
 objectives:
@@ -27,7 +31,9 @@ objectives:
     amount: 5
 ```
 
-If your quest has `sequential: true`, objectives are completed one at a time in the order you list them.
+If your quest has `sequential: true`, objectives are completed one at a time in the order you list them. This applies to all objective types, including `command`, `move`, `chat`, and `placeholder`.
+
+> **Active vs queued:** Only the player's **active** quest papers gain progress (see `max-active-quests` in `config.yml`). Extra papers wait in the queue until a slot opens.
 
 ---
 
@@ -360,11 +366,11 @@ Ride a vehicle or mount for a certain distance.
 
 ```yaml
 - type: vehicle
-  target: ANY
+  vehicle: ANY
   amount: 500
 ```
 
-Vehicles include horses, minecarts, boats, pigs, and striders. Use a specific entity type to limit it to one kind, or `ANY` to count all.
+Use the `vehicle` field (or `target` as an alias). Vehicles include horses, minecarts, boats, pigs, and striders. Use a specific entity type to limit it to one kind, or `ANY` to count all.
 
 ### elytra_fly
 
@@ -383,15 +389,15 @@ Only elytra flight distance counts. The `amount` is in blocks.
 
 ### explore_biome
 
-Enter a specific biome (or discover any new biome).
+Enter a specific biome (or discover any new biome). Progress triggers when you **walk into** a biome (same block column movement is ignored).
 
 ```yaml
 - type: explore_biome
-  target: JUNGLE
+  target: jungle
   amount: 3
 ```
 
-Use a specific biome name (uppercase, matching Minecraft biome names like `JUNGLE`, `DESERT`, `DEEP_OCEAN`) or omit the target / use `ANY` to count entering any biome.
+Use a biome id such as `plains`, `jungle`, `desert`, or `deep_ocean`. Uppercase names like `JUNGLE` still work. You can also use `minecraft:jungle`. Omit `target` or set `ANY` to count entering any **new** biome (distinct visits).
 
 ---
 
@@ -478,7 +484,13 @@ Send a certain number of chat messages.
   amount: 50
 ```
 
-You can optionally require a specific message text in the `target` field, or leave it blank for any chat message.
+You can optionally require a specific message in the `text` field (`target` is accepted as an alias), or leave it blank for any chat message.
+
+```yaml
+- type: chat
+  text: "hello"
+  amount: 5
+```
 
 ### command
 
@@ -486,11 +498,11 @@ Execute a specific command a certain number of times.
 
 ```yaml
 - type: command
-  command: "/help"
+  command: help
   amount: 5
 ```
 
-Note: this type uses `command` instead of `target` to specify which command to track.
+Note: use the `command` field (not `target`). With or without a leading `/` both work. Subcommands match as a prefix (`sq browse` matches `/sq browse 2`).
 
 ### placeholder
 
@@ -500,11 +512,11 @@ Check a PlaceholderAPI value.
 
 ```yaml
 - type: placeholder
-  placeholder: "%player_level%"
+  placeholder: player_level
   amount: 30
 ```
 
-Note: this type uses `placeholder` instead of `target`.
+Note: use the `placeholder` field without `%` wrappers (`player_level` or `%player_level%` both work). Progress tracks the numeric PlaceholderAPI value until it reaches `amount`. Requires PlaceholderAPI.
 
 ### firework
 
@@ -545,7 +557,7 @@ Launch firework rockets.
 | `heal` | Regenerate health | (optional) |
 | `brew` | Brew potions | `ANY` |
 | `move` | Travel any distance | (none needed) |
-| `vehicle` | Ride a mount or vehicle | `HORSE`, `MINECART`, `ANY` |
+| `vehicle` | Ride a mount or vehicle | uses `vehicle` field: `HORSE`, `MINECART`, `ANY` |
 | `elytra_fly` | Glide with an elytra | (none needed) |
 | `explore_biome` | Enter a biome | `JUNGLE`, `DESERT`, `ANY` (optional) |
 | `reachlevel` | Reach an XP level | uses `level` field |
@@ -554,7 +566,30 @@ Launch firework rockets.
 | `interact` | Interact with blocks | `LEVER`, `OAK_BUTTON`, `ANY` |
 | `trade` | Trade with villagers | `EMERALD`, `ANY` |
 | `jump` | Jump | (none needed) |
-| `chat` | Send chat messages | (optional text) |
+| `chat` | Send chat messages | optional `text` field |
 | `command` | Execute commands | uses `command` field |
 | `placeholder` | Check PAPI values | uses `placeholder` field |
 | `firework` | Launch fireworks | (none needed) |
+
+---
+
+## Special field names
+
+| Type | Required fields |
+|------|-----------------|
+| `reachlevel` | `level` |
+| `command` | `command`, `amount` |
+| `placeholder` | `placeholder`, `amount` |
+| `vehicle` | `vehicle` (or `target`), `amount` |
+| `chat` | `amount`; optional `text` |
+
+## Type aliases
+
+These YAML types work the same as their canonical name:
+
+| Alias | Same as |
+|-------|---------|
+| `shoot_bow` | `bowshoot` |
+| `launch_firework` | `firework` |
+| `ride_vehicle` | `vehicle` |
+| `level` | `gainlevel` |
