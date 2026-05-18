@@ -28,7 +28,7 @@ Every quest is a physical paper item in the player's inventory. Players can hove
 
 ### How do I install SoapsQuest?
 
-1. Drop `SoapsQuest.jar` into your server's `plugins/` folder
+1. Install **SoapsCommon**, then drop `SoapsQuest-1.0.1-Premium.jar` or `SoapsQuest-1.0.1-Free.jar` into your server's `plugins/` folder
 2. Start (or restart) the server
 3. Edit `plugins/SoapsQuest/quests.yml` to define quests
 4. Run `/sq reload`
