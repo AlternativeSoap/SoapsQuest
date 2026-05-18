@@ -2,23 +2,23 @@
 
 Quest plugin for **Paper 1.21+**. Players keep quest papers in their inventory, see progress on the item, and right-click to claim rewards when finished.
 
-Current version: **1.0.1**
+Version **1.0.1**
 
 ## Download
 
-Install **SoapsCommon** first, then grab SoapsQuest (Free or Premium):
+Install **SoapsCommon** first, then get SoapsQuest (Free or Premium):
 
 - https://soapsuniverse.com
 - https://mythiccraft.io
 
-**Free** has all 37 objective types, physical quest papers, rewards, conditions, tiers, and the quest browser GUIs.
+**Free** includes all 37 objective types, quest papers, rewards, conditions, and GUIs.
 
-**Premium** adds the random quest generator, daily/weekly quests, quest loot drops, and `/sq editor`.
+**Premium** adds the random quest generator, daily/weekly quests, loot drops, and `/sq editor`.
 
 ## Quick start
 
-1. Drop both jars into `plugins/`.
-2. Restart the server (not `/reload` on first install).
+1. Put both jars in `plugins/`.
+2. Restart the server.
 3. Edit `plugins/SoapsQuest/quests.yml`.
 4. Run `/sq reload`.
 5. Try `/sq give <player> lumberjack` or `/sq browse`.
@@ -27,32 +27,31 @@ Install **SoapsCommon** first, then grab SoapsQuest (Free or Premium):
 
 | Page | What it covers |
 |------|----------------|
-| [Getting Started](docs/Getting-Started.md) | Install and first quest |
-| [Introduction](docs/Introduction.md) | How the plugin works |
-| [Creating Quests](docs/Creating-Quests.md) | Quest YAML format |
-| [Objectives](docs/Objectives.md) | All 37 objective types |
-| [Rewards](docs/Rewards.md) | Reward setup |
-| [Conditions](docs/Conditions.md) | Quest requirements |
-| [Commands and Permissions](docs/Commands-and-Permissions.md) | `/sq` commands |
-| [GUI System](docs/GUI-System.md) | Browser and active quest GUIs |
-| [Tiers and Difficulties](docs/Tiers-and-Difficulties.md) | Tiers and difficulty labels |
-| [Placeholders](docs/Placeholders.md) | PlaceholderAPI |
-| [Daily and Weekly Quests](docs/Daily-and-Weekly-Quests.md) | Premium rotating quests |
-| [Random Quest Generator](docs/Random-Quest-Generator.md) | Premium generator |
-| [Quest Loot System](docs/Quest-Loot-System.md) | Premium mob/chest loot |
-| [Examples](docs/Examples.md) | Ready-to-copy quests |
-| [FAQ](docs/FAQ.md) | Common questions |
-| [Default Configs](docs/Default-Configs.md) | Default YAML files |
-| [Changelog](docs/CHANGELOG.md) | Version history |
+| [Getting Started](Getting-Started.md) | Install and first quest |
+| [Introduction](Introduction.md) | How the plugin works |
+| [Creating Quests](Creating-Quests.md) | Quest YAML format |
+| [Objectives](Objectives.md) | All 37 objective types |
+| [Rewards](Rewards.md) | Reward setup |
+| [Conditions](Conditions.md) | Quest requirements |
+| [Commands and Permissions](Commands-and-Permissions.md) | `/sq` commands |
+| [GUI System](GUI-System.md) | Browser and active quest GUIs |
+| [Tiers and Difficulties](Tiers-and-Difficulties.md) | Tiers and difficulty labels |
+| [Placeholders](Placeholders.md) | PlaceholderAPI |
+| [Daily and Weekly Quests](Daily-and-Weekly-Quests.md) | Premium rotating quests |
+| [Random Quest Generator](Random-Quest-Generator.md) | Premium generator |
+| [Quest Loot System](Quest-Loot-System.md) | Premium mob/chest loot |
+| [Examples](Examples.md) | Ready-to-copy quests |
+| [FAQ](FAQ.md) | Common questions |
+| [Default Configs](Default-Configs.md) | Default YAML files |
+| [Changelog](CHANGELOG.md) | Version history |
 
 ## Requirements
 
-- Paper 1.21+ (Purpur and other Paper forks work)
+- Paper 1.21+ (Purpur works)
 - Java 21+
 
-Optional: Vault (money), PlaceholderAPI (placeholders + `placeholder` objective), MythicMobs (`kill_mythicmob` objective).
+Optional: Vault (money), PlaceholderAPI (placeholders + `placeholder` objective), MythicMobs (`kill_mythicmob`).
 
 ## Support
 
-- Docs repo: https://github.com/AlternativeSoap/SoapsQuest
-- Discord: https://discord.gg/SoapsUniverse
+Discord: https://discord.gg/SoapsUniverse
