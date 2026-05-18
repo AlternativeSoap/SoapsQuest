@@ -6,16 +6,19 @@ A quest plugin for Paper 1.21+ that uses physical quest papers in the player's i
 
 ---
 
-## Downloads
+## Download
 
-| Edition | Jar name | Build command |
-|---------|----------|---------------|
-| **Premium** | `SoapsQuest-1.0.1-Premium.jar` | `mvn package` (default) |
-| **Free** | `SoapsQuest-1.0.1-Free.jar` | `mvn package -P free` |
+Download SoapsQuest from one of these sites (do not build from source unless you are developing the plugin):
 
-Premium includes the random quest generator, daily/weekly quests, quest loot system, and in-game quest editor. Free includes all core quest features and 37 objective types.
+- **[SoapsUniverse.com](https://soapsuniverse.com)** — Free and Premium editions
+- **[MythicCraft.io](https://mythiccraft.io)** — plugin marketplace
 
-You also need **SoapsCommon** on your server (listed as a dependency in `plugin.yml`).
+| Edition | What you get |
+|---------|----------------|
+| **Free** | All core features and 37 objective types |
+| **Premium** | Everything in Free, plus random quest generator, daily/weekly quests, quest loot, and in-game editor |
+
+Install **SoapsCommon** on your server first (required dependency, available from the same sources).
 
 ---
 
@@ -58,7 +61,7 @@ You also need **SoapsCommon** on your server (listed as a dependency in `plugin.
 
 ## Quick Start
 
-1. Install **SoapsCommon**, then drop `SoapsQuest-1.0.1-Premium.jar` or `SoapsQuest-1.0.1-Free.jar` into your server's `plugins/` folder
+1. Install **SoapsCommon**, then download **SoapsQuest** (Free or Premium) from [SoapsUniverse.com](https://soapsuniverse.com) or [MythicCraft.io](https://mythiccraft.io) and place the jar in your server's `plugins/` folder
 2. **Restart** the server (do not use `/reload` for first install)
 3. Edit `plugins/SoapsQuest/quests.yml` — try the built-in `showcase_*` quests to test each objective type
 4. Run `/sq reload` — you should see how many quests loaded

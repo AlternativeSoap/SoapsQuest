@@ -15,9 +15,8 @@
 - 37 `showcase_*` test quests in default `quests.yml`
 - `/sq reload` reports quest count; `/sq info` shows Free vs Premium
 
-### Builds
-- `SoapsQuest-1.0.1-Premium.jar` — `mvn package`
-- `SoapsQuest-1.0.1-Free.jar` — `mvn package -P free`
+### Download
+- **Free** and **Premium** from [SoapsUniverse.com](https://soapsuniverse.com) and [MythicCraft.io](https://mythiccraft.io)
 
 ---
 

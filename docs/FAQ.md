@@ -28,7 +28,7 @@ Every quest is a physical paper item in the player's inventory. Players can hove
 
 ### How do I install SoapsQuest?
 
-1. Install **SoapsCommon**, then drop `SoapsQuest-1.0.1-Premium.jar` or `SoapsQuest-1.0.1-Free.jar` into your server's `plugins/` folder
+1. Install **SoapsCommon**, then download SoapsQuest (Free or Premium) from [SoapsUniverse.com](https://soapsuniverse.com) or [MythicCraft.io](https://mythiccraft.io) and place the jar in your server's `plugins/` folder
 2. Start (or restart) the server
 3. Edit `plugins/SoapsQuest/quests.yml` to define quests
 4. Run `/sq reload`
@@ -219,7 +219,7 @@ Quest papers are normal inventory items. If a player dies and doesn't recover th
 | Quest loot (mob/chest drops) | No | Yes |
 | In-game quest editor (`/sq editor`) | No | Yes |
 
-Jar names: `SoapsQuest-1.0.1-Free.jar` and `SoapsQuest-1.0.1-Premium.jar`.
+Download the edition you need from [SoapsUniverse.com](https://soapsuniverse.com) or [MythicCraft.io](https://mythiccraft.io).
 
 ### Commands aren't working
 

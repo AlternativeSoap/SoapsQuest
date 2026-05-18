@@ -21,11 +21,9 @@ Optional plugins that add extra features:
 
 ## Installation
 
-1. Install **SoapsCommon** (required dependency).
-2. Download the correct jar for your edition:
-   - **Premium:** `SoapsQuest-1.0.1-Premium.jar`
-   - **Free:** `SoapsQuest-1.0.1-Free.jar`
-3. Place the jar in your server `plugins` folder.
+1. Install **SoapsCommon** (required dependency — get it from [SoapsUniverse.com](https://soapsuniverse.com) or [MythicCraft.io](https://mythiccraft.io)).
+2. Download **SoapsQuest** (Free or Premium edition) from the same place. Choose Premium if you want the random generator, daily/weekly quests, loot system, and in-game editor.
+3. Place the SoapsQuest jar in your server `plugins` folder.
 4. **Restart** the server. Do not use `/reload` for the first install.
 5. SoapsQuest creates `plugins/SoapsQuest/` with default configs and example quests.
 
