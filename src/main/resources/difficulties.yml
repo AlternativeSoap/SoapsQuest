@@ -1,0 +1,76 @@
+# ##############################################################
+# #                                                            #
+# #                      SoapsQuest                            #
+# #                                                            #
+# #           Created by: AlternativeSoap                      #
+# #           Website:    www.SoapsUniverse.com                #
+# #           Support:    https://discord.gg/mawAzwFq          #
+# #                                                            #
+# ##############################################################
+
+# ════════════════════════════════════════════════════════════════════════════
+# SoapsQuest - Difficulty System
+# ════════════════════════════════════════════════════════════════════════════
+#
+# Difficulties scale quest objectives and rewards. You can add, remove, or
+# rename difficulties freely — the plugin loads them in the order listed here.
+#
+# Fields per difficulty:
+#   display   — Name shown to players (supports & color codes and MiniMessage)
+#   color     — Base color code used in generic difficulty text / placeholders
+#   weight    — Relative spawn weight (higher = more common). Must be > 0.
+#   description — Shown in tooltips / GUIs (supports & color codes)
+#   multiplier:
+#     objective-amount — Scales the required amount on all objectives
+#                        (0.75 = 25% fewer targets, 2.0 = double targets)
+#     reward          — Scales all quest rewards by this factor
+#                        (0.75 = 25% less loot, 2.0 = double loot)
+#
+# Tip: Order matters — difficulties are displayed in GUIs exactly as listed here.
+# ════════════════════════════════════════════════════════════════════════════
+
+difficulties:
+  easy:
+    display: "&aEasy"
+    color: "&a"
+    weight: 50
+    description: "&aGreat for beginners — reduced objectives, lighter rewards."
+    multiplier:
+      objective-amount: 0.75
+      reward: 0.75
+
+  normal:
+    display: "&eNormal"
+    color: "&e"
+    weight: 35
+    description: "&eThe standard experience — balanced objectives and rewards."
+    multiplier:
+      objective-amount: 1.0
+      reward: 1.0
+
+  hard:
+    display: "&cHard"
+    color: "&c"
+    weight: 20
+    description: "&cMore demanding objectives with noticeably better rewards."
+    multiplier:
+      objective-amount: 1.5
+      reward: 1.5
+
+  expert:
+    display: "&6Expert"
+    color: "&6"
+    weight: 10
+    description: "&6Only for seasoned players — double the challenge, double the spoils."
+    multiplier:
+      objective-amount: 2.0
+      reward: 2.0
+
+  nightmare:
+    display: "&4&lNightmare"
+    color: "&4"
+    weight: 5
+    description: "&4&lPushing the limits — extreme objectives, extreme rewards."
+    multiplier:
+      objective-amount: 2.5
+      reward: 2.5

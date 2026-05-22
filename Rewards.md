@@ -12,6 +12,7 @@ Rewards go in the `reward` section of a quest. You can include one type or combi
 reward:
   xp: 200
   money: 100
+  sigils: 30
   items:
     - material: DIAMOND
       amount: 3
@@ -45,13 +46,32 @@ This gives 500 XP 75% of the time and nothing 25% of the time.
 
 ## Money
 
-Give the player in-game currency.
+Give the player in-game money through Vault.
 
 > **Note:** Money rewards require the **Vault** plugin. If Vault is not installed, money rewards are ignored.
 
 ```yaml
 reward:
   money: 250
+```
+
+---
+
+## Sigils
+
+Give the player SoapsQuest Sigils.
+
+```yaml
+reward:
+  sigils: 75
+```
+
+You can also configure a chance:
+
+```yaml
+reward:
+  sigils: 75
+  sigils-chance: 60
 ```
 
 ---
@@ -177,7 +197,7 @@ You can add or remove rewards from existing quests using commands, without editi
 | Command | What It Does |
 |---------|-------------|
 | `/sq listreward <questid>` | Lists all current rewards on a quest |
-| `/sq addreward <questid> <type> <value>` | Adds a reward (type: xp, money, command, item) |
+| `/sq addreward <questid> <type> <value>` | Adds a reward (type: xp, money, sigils, command, item) |
 | `/sq removereward <questid> <type>` | Removes a reward by type |
 
 ---

@@ -1,0 +1,340 @@
+# ##############################################################
+# #                                                            #
+# #                      SoapsQuest                            #
+# #                                                            #
+# #           Created by: AlternativeSoap                      #
+# #           Website:    www.SoapsUniverse.com                #
+# #           Support:    https://discord.gg/mawAzwFq          #
+# #                                                            #
+# ##############################################################
+
+# ══════════════════════════════════════════════════════════════════════
+# SoapsQuest GUI Configuration
+# All inventory menus are configured here
+# ══════════════════════════════════════════════════════════════════════
+#
+# Suite GUI: config.yml -> gui.enabled is the master kill-switch for this plugin's
+# inventory UIs. This file defines menu layout (titles, sizes, items). Text may use
+# MiniMessage; legacy & and § are accepted where documented.
+# SoapsAdmin uses a gui/ folder for many menus (advanced suite layout).
+#
+
+# Quest Browser GUI - Browse and receive quest papers
+quest-browser:
+  title: "&6&lSoapsQuest &7| Quest Browser"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  next-page:
+    material: LIME_DYE
+    name: "&aNext Page"
+    lore:
+      - "&7Click to view next page"
+    slot: 53
+  prev-page:
+    material: RED_DYE
+    name: "&cPrevious Page"
+    lore:
+      - "&7Click to view previous page"
+    slot: 45
+  close-button:
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close"
+    slot: 49
+  editor-button:
+    material: BOOKSHELF
+    name: "&dQuest Editor"
+    lore:
+      - "&7Open the Quest Editor GUI"
+      - ""
+    slot: 50
+  quest-item:
+    default-icon: WRITABLE_BOOK
+    display: "&e<quest_display>"
+    lore:
+      - "&7<quest_description>"
+      - ""
+      - "&8Type: &f<quest_type>"
+      - "&8Difficulty: &f<quest_difficulty>"
+      - "&8Tier: &f<quest_tier>"
+      - ""
+      - "&7Objectives: &f<quest_objective_count>"
+      - "&7Conditions: &f<quest_condition_count>"
+      - "&7Rewards: &f<quest_reward_count>"
+      - "&7Origin: &f<quest_origin>"
+      - ""
+      - "&aClick to receive quest paper"
+  layout:
+    quest-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
+
+# Quest Editor Main Menu - Edit existing quests
+quest-editor:
+  title: "&6&lSoapsQuest &7| Quest Editor"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&e&l← Back to Quest Browser"
+    lore:
+      - "&7Return to the quest list"
+    slot: 45
+  prev-page:
+    material: RED_DYE
+    name: "&cPrevious Page"
+    lore:
+      - "&7Click to view previous page"
+    slot: 46
+  close-button:
+    material: BARRIER
+    name: "&cClose"
+    slot: 49
+  next-page:
+    material: LIME_DYE
+    name: "&aNext Page"
+    lore:
+      - "&7Click to view next page"
+    slot: 52
+  add-quest:
+    enabled: true
+    material: EMERALD_BLOCK
+    name: "&aCreate New Quest"
+    lore:
+      - "&7Start a new quest wizard"
+    slot: 48
+  layout:
+    quest-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
+
+# Quest Details Editor - Edit specific quest
+quest-details:
+  title: "&6&lSoapsQuest &7| Edit: <quest_name>"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Back"
+    lore:
+      - "&7Return to quest editor"
+    slot: 45
+  save-button:
+    material: EMERALD
+    name: "&a✓ Close"
+    lore:
+      - "&7Changes are saved instantly!"
+      - "&7Click to see summary and close"
+    slot: 53
+  edit-display:
+    material: NAME_TAG
+    name: "&eEdit Display Name"
+    lore:
+      - "&7Current: &f<quest_display>"
+      - ""
+      - "&aClick to change"
+    slot: 11
+  edit-description:
+    material: WRITABLE_BOOK
+    name: "&eEdit Description"
+    lore:
+      - "&7Current: &f<quest_description>"
+      - ""
+      - "&aClick to change"
+    slot: 13
+  edit-type:
+    material: COMPASS
+    name: "&eEdit Type"
+    lore:
+      - "&7Current: &f<quest_type>"
+      - ""
+      - "&aClick to change"
+    slot: 15
+  edit-difficulty:
+    material: IRON_SWORD
+    name: "&eEdit Difficulty"
+    lore:
+      - "&7Current: &f<quest_difficulty>"
+      - ""
+      - "&aClick to cycle"
+    slot: 20
+  edit-tier:
+    material: DIAMOND
+    name: "&eEdit Tier"
+    lore:
+      - "&7Current: &f<quest_tier>"
+      - ""
+      - "&aClick to cycle"
+    slot: 22
+  toggle-lock:
+    material: TRIPWIRE_HOOK
+    name: "&eLock-to-Player Toggle"
+    lore:
+      - "&7Status: &f<lock_status>"
+      - ""
+      - "&7When enabled, quest paper is"
+      - "&7bound to specific player"
+      - ""
+      - "&aClick to toggle"
+    slot: 24
+  edit-material:
+    material: ITEM_FRAME
+    name: "&eEdit Material"
+    lore:
+      - "&7Change the material used for this quest's physical item."
+      - "&7Current: &f<quest_material>"
+      - "&7Default: PAPER"
+      - ""
+      - "&eClick to enter a new material name."
+      - "&7Example: 'BOOK', 'DIAMOND', or 'HAND'"
+    slot: 29
+  edit-objectives:
+    material: TARGET
+    name: "&eEdit Objectives"
+    lore:
+      - "&7Objectives: &f<quest_objective_count>"
+      - ""
+      - "&aClick to edit"
+    slot: 31
+  edit-conditions:
+    material: REDSTONE_TORCH
+    name: "&eEdit Conditions"
+    lore:
+      - "&7Conditions: &f<quest_condition_count>"
+      - ""
+      - "&aClick to edit"
+    slot: 33
+  edit-rewards:
+    material: CHEST
+    name: "&eEdit Rewards"
+    lore:
+      - "&7Rewards: &f<quest_reward_count>"
+      - ""
+      - "&aClick to edit"
+    slot: 40
+  delete-quest:
+    material: BARRIER
+    name: "&cDelete Quest"
+    lore:
+      - "&7Permanently removes this quest"
+      - "&7from quests.yml"
+      - ""
+      - "&c⚠ This cannot be undone!"
+      - ""
+      - "&eClick to delete"
+      - "&7Type 'confirm' in chat to proceed"
+    slot: 49
+
+# Objective Editor - Manage quest objectives
+objective-editor:
+  title: "&6&lSoapsQuest &7| Objectives: <quest_name>"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Back"
+    slot: 45
+  add-objective:
+    material: LIME_DYE
+    name: "&a+ Add Objective"
+    lore:
+      - "&7Click to add a new objective"
+    slot: 49
+  layout:
+    objective-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
+
+# Condition Editor - Manage quest conditions
+condition-editor:
+  title: "&6&lSoapsQuest &7| Conditions: <quest_name>"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Back"
+    slot: 45
+  add-condition:
+    material: LIME_DYE
+    name: "&a+ Add Condition"
+    lore:
+      - "&7Click to add a new condition"
+    slot: 49
+  layout:
+    condition-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
+
+# Reward Editor - Manage quest rewards
+reward-editor:
+  title: "&6&lSoapsQuest &7| Rewards: <quest_name>"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Back"
+    slot: 45
+  add-reward:
+    material: LIME_DYE
+    name: "&a+ Add Reward"
+    lore:
+      - "&7Click to add a new reward"
+    slot: 49
+  layout:
+    reward-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
+
+# Objective Type Selector
+objective-type-selector:
+  title: "&6&lSoapsQuest &7| Select Objective Type"
+  size: 54
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Cancel"
+    slot: 49
+  layout:
+    type-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34,37,38,39,40,41,42,43]
+
+# Condition Type Selector
+condition-type-selector:
+  title: "&6&lSoapsQuest &7| Select Condition Type"
+  size: 45
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Cancel"
+    slot: 40
+  layout:
+    type-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
+
+# Reward Type Selector
+reward-type-selector:
+  title: "&6&lSoapsQuest &7| Select Reward Type"
+  size: 45
+  fill-empty: true
+  filler-item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: "&7"
+  back-button:
+    material: ARROW
+    name: "&7← Cancel"
+    slot: 40
+  layout:
+    type-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]

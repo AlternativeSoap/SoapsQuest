@@ -1,0 +1,102 @@
+# ##############################################################
+# #                                                            #
+# #                      SoapsQuest                            #
+# #                                                            #
+# #           Created by: AlternativeSoap                      #
+# #           Website:    www.SoapsUniverse.com                #
+# #           Support:    https://discord.gg/mawAzwFq          #
+# #                                                            #
+# ##############################################################
+
+# ════════════════════════════════════════════════════════════════════════════
+# SoapsQuest — Daily & Weekly Recurring Quests
+# ════════════════════════════════════════════════════════════════════════════
+#
+# Recurring quests are distributed automatically to online players when a
+# cycle resets, and to players who join mid-cycle (so they don't miss out).
+# Each player receives the quests once per cycle; the record clears on reset.
+#
+# Quest IDs must match keys defined under "quests:" in quests.yml.
+# If a quest has a "permission" field set, only players with that permission
+# will receive it — ideal for donor ranks or event-specific quests.
+#
+# ─── SIMPLE ASSIGNMENT ────────────────────────────────────────────────────
+#   Add quest IDs under daily.quests / weekly.quests.
+#   The selection block controls whether players receive a random subset.
+#
+# ─── HOW RESETS WORK ─────────────────────────────────────────────────────
+#   Daily  : resets every day at 'reset-time' (server timezone)
+#   Weekly : resets on 'reset-day' of each week at 'reset-time'
+#   Players who join after a reset automatically receive any quests they
+#   have not yet been given in the current cycle.
+#
+# ════════════════════════════════════════════════════════════════════════════
+
+# ─── DAILY QUESTS ────────────────────────────────────────────────────────────
+daily:
+  enabled: false                       # Enable the daily quest system
+
+  # Quest IDs from quests.yml to include in the daily pool.
+  # Players will receive 'count' of these each day.
+  quests:
+    []
+    # - zombie_slayer
+    # - lumberjack
+    # - gone_fishing
+
+  reset-time: "06:00"                  # Reset time (HH:mm, 24-hour, server timezone)
+  selection:
+    random: true                       # true = random subset from the quest list
+    count: 1                           # Number of quests to assign each cycle
+
+  completion-bonus:
+    enabled: false
+    reward:
+      xp: 150
+      sigils: 25
+      money: 100
+
+# ─── WEEKLY QUESTS ───────────────────────────────────────────────────────────
+weekly:
+  enabled: false                       # Enable the weekly quest system
+
+  # Quest IDs from quests.yml to include in the weekly pool.
+  # Players will receive 'count' of these each week.
+  quests:
+    []
+    # - iron_miner
+    # - mob_hunter
+
+  # Day of week the cycle resets. Valid values:
+  #   MONDAY  TUESDAY  WEDNESDAY  THURSDAY  FRIDAY  SATURDAY  SUNDAY
+  reset-day: "MONDAY"
+
+  reset-time: "06:00"                  # Reset time (HH:mm, 24-hour, server timezone)
+  selection:
+    random: true                       # true = random subset from the quest list
+    count: 1                           # Number of quests to assign each cycle
+
+  completion-bonus:
+    enabled: false
+    reward:
+      xp: 600
+      sigils: 100
+      money: 400
+
+# ─── RESET NOTIFICATIONS ─────────────────────────────────────────────────────
+# When a cycle resets, all online players are notified. Notification text is
+# defined in messages.yml under the "recurring-quest-reset-*" keys.
+notifications:
+  # How to display the reset message. Valid values:
+  #   actionbar  — appears above the hotbar (brief, unobtrusive)
+  #   chat       — sent as a chat message
+  #   title      — full title/subtitle overlay (keys: recurring-quest-reset-*-title/subtitle)
+  #   bossbar    — shown as a coloured boss bar for ~5 seconds
+  #   none       — silent reset, no message displayed
+  mode: "actionbar"
+
+  sound:
+    enabled: true                      # Play a sound on quest cycle reset
+    type: "ENTITY_PLAYER_LEVELUP"      # Sound registry name (use Minecraft's UPPER_CASE format)
+    volume: 1.0                        # Volume (0.0 – 2.0; 1.0 = default)
+    pitch: 1.0                         # Pitch  (0.5 – 2.0; 1.0 = normal, <1 = lower, >1 = higher)

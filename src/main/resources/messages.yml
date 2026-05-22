@@ -1,0 +1,392 @@
+# ##############################################################
+# #                                                            #
+# #                      SoapsQuest                            #
+# #                                                            #
+# #           Created by: AlternativeSoap                      #
+# #           Website:    www.SoapsUniverse.com                #
+# #           Support:    https://discord.gg/mawAzwFq          #
+# #                                                            #
+# ##############################################################
+
+# ╔════════════════════════════════════════════════════════════════════════════╗
+# ║                        SoapsQuest Messages                                 ║
+# ║  All plugin messages, notifications, and player communication             ║
+# ║  Uses consistent color palette and formatting across all features         ║
+# ║  See README.md for placeholders and detailed documentation                ║
+# ╚════════════════════════════════════════════════════════════════════════════╝
+
+prefix: "<dark_gray>[<gradient:#FF8C00:#FFD700>SoapsQuest</gradient><dark_gray>]"
+
+# ════════════════════════════════════════════════════════════════════════════
+# GENERAL MESSAGES
+# ════════════════════════════════════════════════════════════════════════════
+no-permission: "<prefix> <#FF5555>You don't have permission to do that."
+premium-only: "<prefix> <#FF5555>✗ This feature is only available in <gradient:#FF8C00:#FFD700>SoapsQuest Premium</gradient><#FF5555>. Upgrade at <#FFFFFF>www.SoapsUniverse.com<#FF5555>."
+player-not-found: "<prefix> <#FF5555>Player '<#FFFFFF><player><#FF5555>' not found."
+quest-not-found: "<prefix> <#FF5555>Quest '<#FFFFFF><quest><#FF5555>' not found."
+player-only: "<prefix> <#FF5555>This command can only be used by players."
+config-reloaded: "<prefix> <gradient:#55FFFF:#55FF55>Reload complete.</gradient> <#AAAAAA><count> quests loaded."
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST RECEIVING & ACTIVATION
+# ════════════════════════════════════════════════════════════════════════════
+
+# Quest received (active)
+quest-received: "<prefix> <#55FF55>✓ <gradient:#55FF55:#55FFFF>New Quest:</gradient> <#FFFFFF><quest><#55FF55>."
+
+# Quest queued (behind active quest)
+quest-received-queued: "<prefix> <#FFD700>📋 Quest Queued: <#FFFFFF><quest> <#AAAAAA>(will activate after current quest)."
+
+# Quest replacement
+quest-received-replaced: "<prefix> <#55FF55>New Quest: <#FFFFFF><quest> <#AAAAAA>(replaced previous)."
+
+# Already has this quest
+quest-already-active: "<prefix> <#FF5555>You already have this quest active."
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST INTERACTION (Right-Click Paper)
+# ════════════════════════════════════════════════════════════════════════════
+
+# Progress check (incomplete quest)
+quest-progress-display: |
+  <prefix> <gradient:#555555:#333333><st>━━━━━━━━━━━━━━━━━━━━━━</st></gradient>
+  <gradient:#FFD700:#FFAA00>Quest:</gradient> <#FFFFFF><quest>
+  <objective>
+  <prefix> <gradient:#555555:#333333><st>━━━━━━━━━━━━━━━━━━━━━━</st></gradient>
+
+# Completion (redeeming rewards)
+quest-completion-redeemed: |
+  <prefix> <gradient:#55FF55:#00FF88><st>━━━━━━━━━━━━━━━━━━━━━━</st></gradient>
+  <#55FF55>✓ <gradient:#55FF55:#55FFFF>Quest Complete:</gradient> <#FFFFFF><quest>
+  <gradient:#FFD700:#FFAA00>Rewards have been claimed.</gradient>
+  <prefix> <gradient:#55FF55:#00FF88><st>━━━━━━━━━━━━━━━━━━━━━━</st></gradient>
+
+# Already completed
+quest-already-redeemed: "<prefix> <#AAAAAA>This quest has already been completed."
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST OWNERSHIP (Lock-to-Player System)
+# ════════════════════════════════════════════════════════════════════════════
+# When lock-to-player: true, quest binds to first player who makes progress
+
+quest-not-yours: "<prefix> <#FF5555>⚠ This quest is bound to another player."
+quest-locked-to-other: "<prefix> <#FF5555>This quest belongs to <#FFFFFF><player><#FF5555>."
+quest-bound-to-you: "<prefix> <#55FF55>✓ Quest '<#FFFFFF><quest><#55FF55>' is now bound to you."
+quest-activated: "<prefix> <#FFD700>Quest '<#FFFFFF><quest><#FFD700>' is now active."
+quest-abandoned: "<prefix> <#FF5555>✗ Quest '<#FFFFFF><quest><#FF5555>' abandoned."
+quest-abandon-not-found: "<prefix> <#AAAAAA>You don't have quest '<#FFFFFF><quest><#AAAAAA>' in your inventory."
+quest-dropped: "<prefix> <#FF5555>✗ You dropped '<#FFFFFF><quest><#FF5555>'. Quest progress abandoned."
+quest-picked-up: "<prefix> <#55FF55>✓ You picked up a quest: '<#FFFFFF><quest><#55FF55>'!"
+quest-stored-in-container: "<prefix> <#FF5555>✗ You stored '<#FFFFFF><quest><#FF5555>' in a container. Quest progress abandoned."
+quest-completed-pickup: "<prefix> <#FFD700>★ You picked up a completed quest: '<#FFFFFF><quest><#FFD700>'! Right-click to claim rewards."
+quest-cannot-place-workstation: "<prefix> <#FF5555>✗ Quest papers cannot be placed in workstations."
+
+# ════════════════════════════════════════════════════════════════════════════
+# PERMISSION SYSTEM
+# ════════════════════════════════════════════════════════════════════════════
+
+quest-no-permission: "<prefix> <#FF5555>You don't have permission for this quest."
+quest-give-no-permission: "<prefix> <#FF5555>Player <#FFFFFF><player> <#FF5555>lacks permission for quest '<#FFFFFF><quest><#FF5555>'."
+quest-requires-permission: "<prefix> <#FF5555>Requires permission: <#FFFFFF><permission><#FF5555>."
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST CONDITIONS & REQUIREMENTS
+# ════════════════════════════════════════════════════════════════════════════
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST LOCK/UNLOCK SYSTEM
+# ════════════════════════════════════════════════════════════════════════════
+
+quest-locked-lore:
+  - "<gradient:#FF5555:#FF0000><st>━━━━━━━━━━━━━━━━━━━━</st></gradient>"
+  - "<gradient:#FF5555:#FF0000>⚠ QUEST LOCKED ⚠</gradient>"
+  - "<gradient:#FF5555:#FF0000><st>━━━━━━━━━━━━━━━━━━━━</st></gradient>"
+  - ""
+  - "<#AAAAAA>This quest requires payment"
+  - "<#AAAAAA>or items to unlock."
+  - ""
+  - "<#FFD700>→ Right-click to unlock!"
+  - ""
+  - "<#AAAAAA>Requirements:"
+  - "<requirements>"
+  - ""
+  - "<gradient:#555555:#AAAAAA:#555555><st>━━━━━━━━━━━━━━━━━━━━</st></gradient>"
+
+quest-unlocked: "<prefix> <#55FF55>✓ <gradient:#55FF55:#55FFFF>Quest unlocked successfully.</gradient> <#AAAAAA>Start making progress!"
+quest-already-unlocked: "<prefix> <#AAAAAA>This quest is already unlocked."
+quest-unlock-failed: "<prefix> <#FF5555>✗ Cannot unlock quest: <#FFFFFF><reason><#FF5555>."
+
+# ════════════════════════════════════════════════════════════════════════════
+# PROGRESS DISPLAY SYSTEM
+# ════════════════════════════════════════════════════════════════════════════
+# Configured in config.yml: progress-display.mode
+
+# Chat mode (interval-based)
+quest-progress-updated: "<prefix> <#FFD700><objective><#AAAAAA>: <#55FF55><progress><#AAAAAA>/<#55FF55><amount> <#AAAAAA>[<#55FF55>+1<#AAAAAA>]"
+
+# Actionbar mode (compact, above hotbar)
+quest-progress-actionbar: "<#FFFFFF><quest><#AAAAAA>: <#55FF55><progress><#AAAAAA>/<#55FF55><amount> <#555555>• <#FFD700><objective>"
+
+# Bossbar mode (top of screen)
+quest-progress-bossbar: "<#FFFFFF><quest><#AAAAAA>: <#55FF55><progress><#AAAAAA>/<#55FF55><amount> <#555555>• <#FFD700><objective>"
+
+# Completion notification
+quest-complete: "<prefix> <#55FF55>✓ <gradient:#55FF55:#55FFFF>Quest Complete:</gradient> <#FFFFFF><quest><#55FF55>!"
+
+# Quest claimable 
+quest-claimable: "<prefix> <#55FF55>✓ <gradient:#55FF55:#55FFFF>Quest Complete!</gradient> '<#FFFFFF><quest><#55FF55>' <#FFD700>Right-click to claim rewards."
+
+# ════════════════════════════════════════════════════════════════════════════
+# MILESTONE NOTIFICATIONS
+# ════════════════════════════════════════════════════════════════════════════
+
+quest-milestone: "<prefix> <gradient:#FFAA00:#FFD700>★ Milestone:</gradient> <#FFFFFF><quest> <#AAAAAA>— <gradient:#FFAA00:#FFD700><milestone>% complete</gradient>"
+
+# ════════════════════════════════════════════════════════════════════════════
+# REWARD CHANCES
+# ════════════════════════════════════════════════════════════════════════════
+
+reward-chance-failed: "<#AAAAAA><italic>(Some rewards not received due to chance.)</italic>"
+reward-chance-received: "<#55FF55>✓ Reward received."
+
+# ════════════════════════════════════════════════════════════════════════════
+# MULTI-OBJECTIVE SYSTEM
+# ════════════════════════════════════════════════════════════════════════════
+objective-progress: "<#AAAAAA>Progress: <#FFD700><progress>"
+
+# Single objective completed
+objective-complete: "<#55FF55>✓ Objective complete."
+
+# All objectives completed (quest ready to redeem)
+all-objectives-complete: "<#55FF55>✓ Quest complete! <#AAAAAA>Right-click to claim rewards."
+
+# Objective-specific messages
+objective-craft-progress: "<#AAAAAA>Crafted: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-craft-complete: "<#55FF55>✓ Crafting objective complete."
+objective-smelt-progress: "<#AAAAAA>Smelted: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-smelt-complete: "<#55FF55>✓ Smelting objective complete."
+objective-fish-progress: "<#AAAAAA>Caught: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-fish-complete: "<#55FF55>✓ Fishing objective complete."
+objective-enchant-progress: "<#AAAAAA>Enchanted: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-enchant-complete: "<#55FF55>✓ Enchanting objective complete."
+objective-consume-progress: "<#AAAAAA>Consumed: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-consume-complete: "<#55FF55>✓ Consumption objective complete."
+objective-tame-progress: "<#AAAAAA>Tamed: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><entity>"
+objective-tame-complete: "<#55FF55>✓ Taming objective complete."
+objective-trade-progress: "<#AAAAAA>Traded: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-trade-complete: "<#55FF55>✓ Trading objective complete."
+objective-brew-progress: "<#AAAAAA>Brewed: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><item>"
+objective-brew-complete: "<#55FF55>✓ Brewing objective complete."
+objective-shear-progress: "<#AAAAAA>Sheared: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><entity>"
+objective-shear-complete: "<#55FF55>✓ Shearing objective complete."
+objective-sleep-progress: "<#AAAAAA>Slept: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>times"
+objective-sleep-complete: "<#55FF55>✓ Sleeping objective complete."
+objective-heal-progress: "<#AAAAAA>Healed: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>HP"
+objective-heal-complete: "<#55FF55>✓ Healing objective complete."
+objective-drop-progress: "<#AAAAAA>Dropped: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA><item>"
+objective-drop-complete: "<#55FF55>✓ Dropping objective complete."
+objective-damage-progress: "<#AAAAAA>Dealt: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>damage"
+objective-damage-complete: "<#55FF55>✓ Damage objective complete."
+objective-death-progress: "<#AAAAAA>Died: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>times"
+objective-death-complete: "<#55FF55>✓ Death objective complete."
+objective-reachlevel-progress: "<#AAAAAA>Level: <#FFD700><progress><#AAAAAA>/<#FFD700><amount>"
+objective-reachlevel-complete: "<#55FF55>✓ Level objective complete."
+objective-gainlevel-progress: "<#AAAAAA>Gained: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>levels"
+objective-gainlevel-complete: "<#55FF55>✓ Level gain objective complete."
+objective-move-progress: "<#AAAAAA>Traveled: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>blocks"
+objective-move-complete: "<#55FF55>✓ Movement objective complete."
+objective-jump-progress: "<#AAAAAA>Jumped: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>times"
+objective-jump-complete: "<#55FF55>✓ Jumping objective complete."
+objective-chat-progress: "<#AAAAAA>Sent: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>messages"
+objective-chat-complete: "<#55FF55>✓ Chat objective complete."
+objective-interact-progress: "<#AAAAAA>Interacted: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>times"
+objective-interact-complete: "<#55FF55>✓ Interaction objective complete."
+objective-bowshoot-progress: "<#AAAAAA>Shot: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>arrows"
+objective-bowshoot-complete: "<#55FF55>✓ Bow shooting objective complete."
+objective-projectile-progress: "<#AAAAAA>Launched: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>projectiles"
+objective-projectile-complete: "<#55FF55>✓ Projectile objective complete."
+objective-firework-progress: "<#AAAAAA>Launched: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>fireworks"
+objective-firework-complete: "<#55FF55>✓ Firework objective complete."
+objective-vehicle-progress: "<#AAAAAA>Traveled: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#AAAAAA>blocks"
+objective-vehicle-complete: "<#55FF55>✓ Vehicle travel objective complete."
+objective-killmythicmob-progress: "<#AAAAAA>Killed: <#FFD700><progress><#AAAAAA>/<#FFD700><amount> <#FFFFFF><name>"
+objective-killmythicmob-complete: "<#55FF55>✓ MythicMob objective complete."
+
+# ════════════════════════════════════════════════════════════════════════════
+# SEQUENTIAL QUEST MESSAGES
+# ════════════════════════════════════════════════════════════════════════════
+
+objective-sequential-progress: "<#AAAAAA>Current Step: <#FFD700><objective> <#AAAAAA>(<#55FF55><progress><#AAAAAA>/<#55FF55><amount><#AAAAAA>)"
+objective-sequential-complete: "<#55FF55>✓ Step complete. <#AAAAAA>→ <#FFD700>Next objective unlocked."
+all-sequential-complete: "<#55FF55>✓ All steps complete! <#AAAAAA>Right-click to claim rewards."
+
+# ════════════════════════════════════════════════════════════════════════════
+# COMMAND SYSTEM
+# ════════════════════════════════════════════════════════════════════════════
+
+# Usage errors
+usage-main: "<prefix> <#AAAAAA>Unknown command. Use <#55FF55>/sq help <#AAAAAA>for a list of commands."
+usage-debug: "<prefix> <#AAAAAA>Usage: <#55FF55>/sq debug toggle"
+usage-give: "<prefix> <#AAAAAA>Usage: <#55FF55>/sq give <player> <quest><#AAAAAA>."
+usage-addreward: "<prefix> <#AAAAAA>Usage: <#55FF55>/sq addreward <quest> <type> [args...]<#AAAAAA>."
+usage-removereward: "<prefix> <#AAAAAA>Usage: <#55FF55>/sq removereward <quest> <index><#AAAAAA>."
+usage-listreward: "<prefix> <#AAAAAA>Usage: <#55FF55>/sq listreward <quest><#AAAAAA>."
+invalid-page-number: "<prefix> <#FF5555>Invalid page number."
+
+# ════════════════════════════════════════════════════════════════════════════
+# HELP MENU
+# ════════════════════════════════════════════════════════════════════════════
+help-header: "<#AAAAAA><st>━━━━━━━</st> <gradient:#FFD700:#FF8C00>SoapsQuest Help</gradient> <#AAAAAA><st>━━━━━━━</st>"
+help-footer: "<gradient:#FF8C00:#FFD700:#FF8C00><st>━━━━━━━━━━━━━━━━━━━━━━━━━</st></gradient>"
+help-quest-command: "<#FFAA00>▶ <#FFD700>/sq browse <#555555>• <#AAAAAA>Open quest browser"
+help-quest-list: "<#FFAA00>▶ <#FFD700>/sq list <#555555>• <#AAAAAA>View all quests"
+help-quest-abandon: "<#FFAA00>▶ <#FFD700>/sq abandon <questId> <#555555>• <#AAAAAA>Abandon a quest you hold"
+help-generate-command: "<#FFAA00>▶ <#FFD700>/sq generate [type] [count] <#555555>• <#AAAAAA>Generate quest(s) from a template"
+help-give: "  <#55FF55>/sq give <player> <quest> <#AAAAAA>→ Give quest to player"
+help-list: "  <#55FF55>/sq list [page] <#AAAAAA>→ List all quests (paginated)"
+help-browse: "  <#55FF55>/sq browse <#AAAAAA>→ Open quest browser GUI"
+help-editor: "  <#55FF55>/sq editor <#AAAAAA>→ Open quest editor GUI"
+help-statistic: "  <#55FF55>/sq statistic [player] <#AAAAAA>→ View quest statistics"
+help-leaderboard: ""
+help-generate: "  <#55FF55>/sq generate [type] [count] <#AAAAAA>→ Generate random quest(s)"
+help-reload: "  <#55FF55>/sq reload <#AAAAAA>→ Reload configuration"
+help-listreward: "  <#55FF55>/sq listreward <quest> <#AAAAAA>→ List quest rewards"
+help-addreward: "  <#55FF55>/sq addreward <quest> <type> <#AAAAAA>→ Add reward"
+help-removereward: "  <#55FF55>/sq removereward <quest> <index> <#AAAAAA>→ Remove reward"
+help-debug: "  <#55FF55>/sq debug toggle <#AAAAAA>→ Toggle debug logging"
+help-remove: "  <#55FF55>/sq remove <questId> <#AAAAAA>→ Remove quest from config"
+help-abandon: "  <#55FF55>/sq abandon <questId> <#AAAAAA>→ Abandon a quest you hold"
+help-copy: "  <#55FF55>/sq copy <sourceId> <newId> <#AAAAAA>→ Copy a quest to a new ID"
+help-reset: "  <#55FF55>/sq reset <player> <questId> <#AAAAAA>→ Reset a player's quest progress"
+help-complete: "  <#55FF55>/sq complete <player> <questId> <#AAAAAA>→ Force-complete a player's quest"
+help-active: "  <#55FF55>/sq active [player] <#AAAAAA>→ View active quest papers GUI"
+help-sigils: "  <#55FF55>/sq sigils <action> <player> [amount] <#AAAAAA>→ Manage SoapsQuest Sigils"
+help-drop: "  <#55FF55>/sq drop <questId> ... <#AAAAAA>→ Drop quest paper in the world"
+help-info: "  <#55FF55>/sq info <#AAAAAA>→ Show plugin information"
+help-help: "  <#55FF55>/sq help <#AAAAAA>→ Show this menu"
+
+# Plugin info
+info-header-premium: "<prefix> <gradient:#FF8C00:#FFD700><bold>SoapsQuest Premium</bold></gradient>"
+info-header-free: "<prefix> <gradient:#55FFFF:#55FF55><bold>SoapsQuest</bold></gradient> <#AAAAAA>(Free edition)"
+info-version: "  <#AAAAAA>Version: <#FFFFFF><version>"
+info-description: "  <#AAAAAA>Physical quest papers · <#FFFFFF>37 <#AAAAAA>objective types"
+info-premium-hint: "  <#AAAAAA>Premium adds random generator, daily/weekly quests, loot drops, and in-game editor."
+
+# Quest list
+quest-list-header: "<prefix> <gradient:#FFD700:#FFAA00><bold>Available Quests</bold></gradient> <#AAAAAA>(Page <#FFD700><page><#AAAAAA>/<#FFD700><total_pages><#AAAAAA>)"
+quest-list-entry: "  <#555555>• <tier_prefix> <tier_color><quest> <#555555>| <#AAAAAA><type> <#555555>[<difficulty>]"
+quest-list-empty: "<prefix> <#AAAAAA>No quests configured yet."
+quest-list-regular-header: "<gradient:#FFD700:#FFAA00><bold>Regular Quests</bold></gradient>"
+quest-list-generated-header: "<gradient:#FF55FF:#AA55FF><bold>Generated Quests</bold></gradient>"
+quest-list-navigation: "<#AAAAAA>Page <#FFD700><page><#AAAAAA>/<#FFD700><total_pages><#AAAAAA><previous><next>"
+
+# ════════════════════════════════════════════════════════════════════════════
+# REWARD MANAGEMENT
+# ════════════════════════════════════════════════════════════════════════════
+
+reward-added: "<prefix> <#55FF55>✓ Reward added to quest '<#FFFFFF><quest><#55FF55>'."
+reward-removed: "<prefix> <#55FF55>✓ Reward removed from quest '<#FFFFFF><quest><#55FF55>'."
+reward-index-invalid: "<prefix> <#FF5555>✗ Invalid reward index."
+must-hold-item: "<prefix> <#FF5555>✗ Hold an item to add as reward."
+
+# Quest give feedback (to sender)
+quest-give-sender-activated: "<prefix> <#55FF55>✓ Quest given to <#FFFFFF><player><#55FF55>: <#FFFFFF><quest><#55FF55>."
+quest-give-sender-queued: "<prefix> <#FFD700>📋 Quest queued for <#FFFFFF><player><#FFD700>: <#FFFFFF><quest><#FFD700>."
+quest-give-sender-replaced: "<prefix> <#55FF55>✓ Quest given to <#FFFFFF><player><#55FF55>: <#FFFFFF><quest> <#AAAAAA>(replaced previous)."
+quest-give-sender-already-active: "<prefix> <#FF5555>Player <#FFFFFF><player> <#FF5555>already has this quest active."
+
+# Reward listing
+rewards-header: "<prefix> <gradient:#FFD700:#FFAA00>━━━ Rewards for '<#FFFFFF><quest><gradient:#FFD700:#FFAA00>' ━━━</gradient>"
+rewards-empty: "<prefix> <#AAAAAA>No rewards configured for quest '<#FFFFFF><quest><#AAAAAA>'."
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST PAPER TEMPLATES
+# ════════════════════════════════════════════════════════════════════════════
+# Default lore when quest doesn't specify custom lore
+
+quest-default-lore:
+  - "<#AAAAAA><st>                    </st>"
+  - "<#AAAAAA>Quest Type: <#FFFFFF><type>"
+  - "<#AAAAAA>Progress: <#55FF55><progress><#AAAAAA>/<#55FF55><amount><progress_unit>"
+  - "<#AAAAAA><st>                    </st>"
+
+# Internal lore elements
+paper-lore-complete: "<gradient:#55FF55:#55FFFF><bold>✓ COMPLETE!</bold></gradient>"
+
+# ════════════════════════════════════════════════════════════════════════════
+# RANDOM QUEST GENERATOR
+# ════════════════════════════════════════════════════════════════════════════
+
+random-generator-disabled: "<prefix> <#FF5555>Random quest generation is disabled."
+random-generator-success: "<prefix> <#55FF55>✓ Quest generated: <#FFFFFF><quest><#55FF55>."
+random-generator-batch-success: "<prefix> <#55FF55>✓ Generated <#FFFFFF><count> <#55FF55><type> quest(s). <#AAAAAA>(<#FFFFFF><failed> <#AAAAAA>failed)"
+random-generator-batch-complete: "<prefix> <#55FF55>✓ Successfully generated <#FFFFFF><count> <#55FF55><type> quest(s)."
+random-generator-batch-too-many: "<prefix> <#FF5555>Cannot generate more than <#FFFFFF><max> <#FF5555>quests at once."
+random-generator-batch-invalid-count: "<prefix> <#FF5555>Invalid count. Must be a number between <#FFFFFF>1 <#FF5555>and <#FFFFFF><max><#FF5555>."
+random-generator-error: "<prefix> <#FF5555>✗ Failed to generate quest."
+
+# ════════════════════════════════════════════════════════════════════════════
+# STATISTICS SYSTEM
+# ════════════════════════════════════════════════════════════════════════════
+
+# Statistics Display
+statistic-header: "<gradient:#FFAA00:#555555><st>━━━━</st></gradient> <gradient:#FFD700:#FF8C00>SoapsQuest Statistics</gradient> <#AAAAAA>for <#FFFFFF><player> <gradient:#555555:#FFAA00><st>━━━━</st></gradient>"
+statistic-total: "<#AAAAAA>Total Quests Completed: <gradient:#55FF55:#55FFFF><total></gradient>"
+statistic-rewards: "<#AAAAAA>Rewards Claimed: <gradient:#55FF55:#55FFFF><claimed></gradient>"
+statistic-footer: "<gradient:#FFAA00:#555555:#FFAA00><st>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</st></gradient>"
+statistic-no-data: "<prefix> <#AAAAAA>No statistics found for player '<#FFFFFF><player><#AAAAAA>'."
+statistic-other-no-permission: "<prefix> <#FF5555>You don't have permission to view other players' statistics."
+
+# ════════════════════════════════════════════════════════════════════════════
+# RECURRING QUESTS (DAILY/WEEKLY)
+# ════════════════════════════════════════════════════════════════════════════
+
+# Reset notifications
+recurring-quest-reset-daily: "<#55FF55>✓ <gradient:#55FF55:#00FF88>Daily quests have been reset. New quests are available!</gradient>"
+recurring-quest-reset-weekly: "<#FFAA00>✓ <gradient:#FFAA00:#FF8C00>Weekly quests have been reset. New challenges await!</gradient>"
+
+# Title notifications (if using title mode)
+recurring-quest-reset-daily-title: "<gradient:#55FF55:#00FF88><bold>Daily Quests Reset</bold></gradient>"
+recurring-quest-reset-daily-subtitle: "<gradient:#AAAAAA:#CCCCCC>New quests are available</gradient>"
+recurring-quest-reset-weekly-title: "<gradient:#FFAA00:#FF8C00><bold>Weekly Quests Reset</bold></gradient>"
+recurring-quest-reset-weekly-subtitle: "<gradient:#AAAAAA:#CCCCCC>New challenges await</gradient>"
+
+# Quest received messages
+recurring-quest-received-daily: "<prefix> <#55FF55>✓ Received <count> daily quest(s)."
+recurring-quest-received-weekly: "<prefix> <#FFAA00>✓ Received <count> weekly quest(s)."
+recurring-quest-daily-bonus: "<prefix> <#55FF55>★ Daily completion bonus claimed!"
+recurring-quest-weekly-bonus: "<prefix> <#FFAA00>★ Weekly completion bonus claimed!"
+
+# No eligible quests
+recurring-quest-no-daily: "<prefix> <#AAAAAA>You have already received all available daily quests."
+recurring-quest-no-weekly: "<prefix> <#AAAAAA>You have already received all available weekly quests."
+
+# VIP required
+recurring-quest-vip-required: "<prefix> <#FF5555>This recurring quest requires VIP access."
+
+# Debug Mode Messages
+debug-mode-enabled: "<prefix> <gradient:#55FFFF:#55FF55>Debug mode enabled.</gradient> <#AAAAAA>Console will now show detailed debug messages."
+debug-mode-disabled: "<prefix> <gradient:#55FFFF:#55FF55>Debug mode disabled.</gradient> <#AAAAAA>Console debug messages are now hidden."
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST TYPE LABELS
+# ════════════════════════════════════════════════════════════════════════════
+
+quest-type-sequential: "<gradient:#FFD700:#FFA500>Sequential</gradient> <#AAAAAA>(Complete in order)"
+quest-type-single: "<gradient:#55FF55:#00FF55>Single</gradient> <#AAAAAA>(One objective)"
+quest-type-multi: "<gradient:#55FFFF:#5599FF>Multi</gradient> <#AAAAAA>(Any order)"
+
+# Objective list headers
+objectives-header-sequential: "<gradient:#FFD700:#FFA500>Objectives</gradient> <#AAAAAA>(Complete in order):"
+objectives-header-multi: "<gradient:#55FFFF:#5599FF>Objectives</gradient> <#AAAAAA>(Any order):"
+objectives-divider: "<#AAAAAA><st>                    </st>"
+
+# ════════════════════════════════════════════════════════════════════════════
+# QUEST REWARD MESSAGES (Quest as Reward)
+# ════════════════════════════════════════════════════════════════════════════
+
+reward-quest-failed-unknown: "<prefix> <#FF5555><bold>✗</bold> <#FF5555>Reward failed: <#AAAAAA>Unknown quest <#FFFFFF><quest>"
+reward-quest-failed-creation: "<prefix> <#FF5555><bold>✗</bold> <#FF5555>Reward failed: <#AAAAAA>Could not create quest paper"
+reward-quest-inventory-full: "<prefix> <#FFD700><bold>⚠</bold> <#AAAAAA>Your inventory is full! Quest paper dropped at your feet."
+reward-quest-received: "<prefix> <#55FF55><bold>✓</bold> <#55FF55>You received a new quest: <#FFFFFF><quest>"
+

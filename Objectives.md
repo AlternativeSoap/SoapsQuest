@@ -33,7 +33,7 @@ objectives:
 
 If `sequential: true` is set on the quest, players finish objectives in list order. That includes `command`, `move`, `chat`, and `placeholder`.
 
-Only **active** quest papers count toward progress (`max-active-quests` in `config.yml`). Extra papers sit in the queue until a slot opens.
+Only **Active** quest papers count toward progress. If a player holds multiple copies of the **same quest ID**, extras are **Queued** until the active copy is claimed. **Different quest IDs** can each be Active at the same time.
 
 ---
 

@@ -23,6 +23,8 @@ The `placeholder` **objective type** (see [Objectives](Objectives.md)) is separa
 | Placeholder | What It Shows |
 |------------|--------------|
 | `%soapsquest_player_quests%` | Total number of quests the player has completed |
+| `%soapsquest_player_sigils%` | Player custom SoapsQuest Sigils (2 decimals) |
+| `%soapsquest_player_sigils_raw%` | Player custom SoapsQuest Sigils (raw value) |
 
 ### By Tier
 

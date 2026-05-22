@@ -40,6 +40,11 @@ These commands require operator level or the specific permission listed.
 | `/sq reset <player> <questid>` | `soapsquest.reset` | Resets quest progress for a player |
 | `/sq complete <player> <questid>` | `soapsquest.complete` | Marks a quest as complete for a player and gives the rewards |
 | `/sq debug toggle` | `soapsquest.debug` | Toggles verbose debug logging on or off |
+| `/sq sigils balance <player>` | `soapsquest.sigils` | Shows a player's SoapsQuest Sigils balance **(Premium)** |
+| `/sq sigils give|take|set <player> <amount>` | `soapsquest.sigils` | Changes a player's SoapsQuest Sigils balance **(Premium)** |
+| `/sq sigils reset <player>` | `soapsquest.sigils` | Resets a player's SoapsQuest Sigils balance to 0 **(Premium)** |
+| `/sq drop <questid> [x y z [world]]` | `soapsquest.drop` | Drops an unbound quest paper in the world **(Premium)** |
+| `/sq drop entity <entity|uuid> <questid>` | `soapsquest.drop` | Drops a quest paper at an entity's location **(Premium)** |
 | `/sq editor` | `soapsquest.gui.editor` | Opens the in-game quest editor GUI **(Premium)** |
 | `/sq editor <questid>` | `soapsquest.gui.editor` | Opens the editor directly on a specific quest **(Premium)** |
 
@@ -49,6 +54,7 @@ These commands require operator level or the specific permission listed.
 |---------|-----------|-------------|
 | `/sq addreward <questid> xp <amount>` | `soapsquest.addreward` | Adds an XP reward to a quest |
 | `/sq addreward <questid> money <amount>` | `soapsquest.addreward` | Adds a money reward to a quest |
+| `/sq addreward <questid> sigils <amount>` | `soapsquest.addreward` | Adds a custom Sigils reward to a quest **(Premium)** |
 | `/sq addreward <questid> command <cmd>` | `soapsquest.addreward` | Adds a command reward to a quest |
 | `/sq addreward <questid> item` | `soapsquest.addreward` | Adds the item you are holding as a reward |
 | `/sq listreward <questid>` | `soapsquest.listreward` | Lists all rewards on a quest |
@@ -107,6 +113,8 @@ These commands require operator level or the specific permission listed.
 | `soapsquest.debug` | Toggle debug mode | OP only |
 | `soapsquest.gui.editor` | Open the in-game quest editor **(Premium)** | OP only |
 | `soapsquest.generate` | Use the random quest generator commands **(Premium)** | OP only |
+| `soapsquest.sigils` | Manage custom Sigils balances **(Premium)** | OP only |
+| `soapsquest.drop` | Drop quest papers into the world **(Premium)** | OP only |
 
 ### Wildcard
 

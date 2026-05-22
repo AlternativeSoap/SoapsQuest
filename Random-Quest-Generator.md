@@ -29,6 +29,35 @@ The maximum number of quests you can generate at once is set in `config.yml` und
 
 ---
 
+## New Premium Features
+
+- `random-generator.temporary-quests: true` makes generated quests one-time definitions that are deleted after claim.
+- `reward-pool.templates` now supports the exact same `reward:` format used in `quests.yml`, including `xp`, `money`, `sigils`, `items`, `commands`, and `quest`.
+- You can now copy a manual quest reward block directly into a random reward template without rewriting keys.
+
+Example:
+
+```yaml
+reward-pool:
+  templates:
+    - weight: 20
+      tiers: [rare, epic]
+      min-difficulty: normal
+      reward:
+        xp: [150, 300]
+        money: [80, 200]
+        sigils: [25, 60]
+        items:
+          - material: DIAMOND
+            amount: [1, 3]
+            chance: 100
+        commands:
+          - "say {player} completed a generated quest!"
+        command-chance: 40
+```
+
+---
+
 ## Configuration Overview
 
 All generator settings live in `plugins/SoapsQuest/random-generator.yml`. The file has several sections:

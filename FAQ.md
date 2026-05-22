@@ -48,7 +48,11 @@ Yes. MiniMessage works in names and lore, for example `<#FF5555>Red` or `<gradie
 
 ### Can players hold multiple quests at once?
 
-Yes, up to `max-active-quests` in `config.yml`. Extra papers wait in a queue until a slot is free. Only **active** papers gain progress.
+Yes. Players can carry many quest papers at once. **Different quest types** can all be **Active** at the same time and progress together.
+
+If a player has **more than one paper for the same quest ID**, only one copy is **Active**; the rest are **Queued** until the active copy is claimed or removed. Only **Active** papers gain progress for that quest type.
+
+To cap how many quest **types** a player may progress at once, use `conditions.active-limit` on a quest (see [Conditions](Conditions.md)).
 
 ### Can I chain quests?
 
@@ -144,7 +148,7 @@ objectives:
 - Check the console for validation warnings on objectives
 - Confirm the objective `type` and fields match [Objectives](Objectives.md) (`command` uses `command:`, not `target`)
 - Paper must be in inventory
-- Quest must be **active**, not queued (see `max-active-quests`)
+- Quest must be **Active**, not **Queued** (same quest ID: only one active copy; lore shows `[Active]` vs `[Queued]`)
 - Conditions (world, gamemode, permission) can block progress
 - With `sequential: true`, only the current step counts
 

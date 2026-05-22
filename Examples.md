@@ -170,7 +170,7 @@ quests:
       item: "DIAMOND:5"            # Costs 5 diamonds to start
       consume-item: true           # Whether the item cost is consumed
       gamemode: ["SURVIVAL"]       # Player must be in survival
-      active-limit: 1              # Max concurrent active quests of this type
+      active-limit: 1              # Max quest types Active at once (extra copies of same ID queue)
 ```
 
 ---

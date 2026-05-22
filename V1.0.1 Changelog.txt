@@ -1,0 +1,53 @@
+SoapsQuest V1.0.1 Changelog
+============================
+
+Release date: May 2026
+
+Overview
+--------
+Bug fixes, tracking improvements, documentation updates, and clearer Free vs Premium builds.
+
+Objective fixes
+---------------
+- command: Fixed objectives not progressing; commands are matched without leading slash (subcommands supported).
+- placeholder: Fixed objectives not updating; polls PlaceholderAPI every second when installed.
+- explore_biome: Biome matching uses registry keys (works on Paper 1.21+); supports names like plains, jungle, or JUNGLE.
+- Progress path: Objectives that increment internally (fish, craft, etc.) no longer double-count on the standard event path.
+
+Quest tracking
+--------------
+- Direct objectives (command, move, chat, vehicle, etc.) now respect active quest queue, conditions, and sequential order.
+- Placeholder objectives use the same guards as other objectives (active paper, conditions, sequential).
+- Queued (inactive) quest papers no longer gain progress until they become active.
+
+Rewards & conditions
+--------------------
+- Command rewards support {player}, <player>, and %player% placeholders.
+- completed-quests condition accepts a flat list in quest YAML.
+
+Configuration & quests
+----------------------
+- quests.yml: 37 showcase_<type> quests for testing every objective type.
+- quests.yml header documents all objective types and special fields.
+- baker example uses harvest on wheat instead of break.
+- config.yml references 37 objective types.
+
+Download
+--------
+- Free and Premium from https://soapsuniverse.com and https://mythiccraft.io
+
+Documentation
+-------------
+- All docs/ pages updated for 1.0.1 behavior, Free vs Premium jars, and troubleshooting.
+- Published to: https://github.com/AlternativeSoap/SoapsQuest
+
+Quality of life
+---------------
+- /sq reload reports how many quests loaded.
+- /sq info shows Free or Premium edition and 37 objective types.
+- Improved help and reload messages in messages.yml.
+
+Requirements (unchanged)
+--------------------------
+- Paper 1.21+, Java 21+, SoapsCommon
+- Optional: Vault, PlaceholderAPI, MythicMobs
