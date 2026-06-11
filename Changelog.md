@@ -1,28 +1,67 @@
 # Changelog
 
+## 1.0.4
+
+Release date: May 2026
+
+### Stability
+
+- Fixed shutdown task scheduling race on server stop
+- Safer autosave and batch save paths
+- Improved recurring task shutdown handling
+
+### Objectives
+
+- Fixed random/manual chat objectives in edge cases
+- Improved jump objective detection
+- Fixed craft objective alias handling (e.g. BANNER resolves correctly)
+- Smelt target validation prevents invalid/no-recipe targets
+
+### Rewards and completion
+
+- Multiline completion reward placeholder: `<quest_rewards>`
+- Unified completion messaging (no duplicate notifications)
+- Hardened quest list reward display with SIGILS support
+- Clearer workstation placement denial messages
+
+### Anti-cheat
+
+- Placed-block tracking for relevant objective types
+- Prevents place-then-break farming by default
+- Toggle: `anti-cheat.enabled: true` in config.yml
+
+### PlaceholderAPI
+
+- Improved expansion registration feedback
+- Safer placeholder request handling
+- External PlaceholderAPI pass-through in message processing
+
+### Loot and generator (Premium)
+
+- Loot-table source filtering via `allowed-loot-tables`
+- Batch generation path for random quest generator
+- Canonical mode: `generated-quest-mode: persistent | temporary | session`
+
+---
+
 ## 1.0.3
 
 Release date: 2026
 
 ### Overview
 
-Current documented release. Physical quest papers, 37 objective types, Free and Premium builds, and full `quests.yml` showcase set.
+Physical quest papers, 37 objective types, Free and Premium builds, full `quests.yml` showcase set.
 
 ### Features
 
-- 37 objective types with `showcase_<type>` test quests in default `quests.yml`
+- 37 objective types with `showcase_<type>` test quests
 - Active/Queued paper system for duplicate quest IDs
-- Sigils currency in rewards and conditions (Free and Premium)
-- Anti-cheat placed-block tracking (`anti-cheat.enabled` in `config.yml`)
-- Smelt target validation (must have furnace recipe output)
-- Craft material alias resolution (e.g. `BANNER` to `WHITE_BANNER`)
+- Sigils currency in rewards and conditions
+- Anti-cheat placed-block tracking
+- Smelt target validation and craft material alias resolution
 - PlaceholderAPI expansion for completions, tiers, difficulties, and sigils
 - Progress display modes: actionbar, chat, bossbar, none
 - Premium: random generator, daily/weekly quests, quest loot, in-game editor
-
-### Documentation
-
-- Server owner wiki in `docs/` verified against `plugin.yml`, command handlers, PlaceholderAPI expansion, and `ObjectiveRegistry`
 
 ---
 
@@ -40,16 +79,11 @@ Release date: May 2026
 ### Logging
 
 - Claim messages no longer spam console by default
-- `log-quest-completions` and `log-admin-actions` in `config.yml` (default false)
+- `log-quest-completions` and `log-admin-actions` in config.yml (default false)
 
 ### Conditions
 
 - `active-limit` counts Active quest types in the queue, not all papers in playerdata
-
-### Quality of life
-
-- Removed dead queue branches from `/sq give` and GUI give paths
-- FAQ and Objectives docs updated for Active/Queued behavior
 
 ---
 
@@ -86,7 +120,3 @@ Release date: May 2026
 
 - Paper 1.21+, Java 21+, SoapsCommon
 - Optional: Vault, PlaceholderAPI, MythicMobs
-
----
-
-*Current wiki version: 1.0.3*
