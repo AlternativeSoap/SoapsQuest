@@ -1,207 +1,193 @@
 # Creating Quests
 
-There are two ways to create quests in SoapsQuest. You can use the in-game Quest Editor GUI (Premium), or you can edit the `quests.yml` file directly. Both methods produce the same result.
+Quests live in `plugins/SoapsQuest/quests.yml` under the top-level `quests:` key. Each quest needs a **unique ID**, a **display** name, at least one **objective**, and at least one **reward**.
 
 ---
 
-## Method 1: In-Game Quest Editor (Premium)
-
-> **[PREMIUM]** The Quest Editor requires the SoapsQuest Premium version. Get it at [SoapsUniverse.com](https://SoapsUniverse.com)
-
-The quest editor is a point-and-click interface that lets you build quests without touching any files.
-
-**How to use it:**
-
-1. Run `/sq editor` to open the quest editor. You need the `soapsquest.gui.editor` permission.
-2. Click **Create New Quest** (the green emerald block).
-3. Type the quest ID in chat when prompted. This is the internal name used in commands, like `my_quest`. Use lowercase letters and underscores only.
-4. The editor opens a details screen. Click each button to set the quest name, difficulty, tier, objectives, rewards, and conditions.
-5. Changes save automatically. Close the editor when you are done.
-
-All quests made in the editor are saved to `quests.yml` automatically.
-
----
-
-## Method 2: Edit quests.yml
-
-Open the file at `plugins/SoapsQuest/quests.yml` with a text editor. Add your quest using the format below, then run `/sq reload` to apply the changes.
-
-### Minimal Quest
-
-This is the smallest valid quest. It has one objective and one reward:
+## Minimal quest
 
 ```yaml
 quests:
-  my_quest:
-    display: "My Quest"
+  my_first_quest:
+    display: "<#55FF55>My First Quest"
     objectives:
       - type: kill
         target: ZOMBIE
-        amount: 10
+        amount: 5
     reward:
-      xp: 100
+      xp: 50
 ```
 
-### Full Quest Example
+Reload with `/sq reload`, then distribute:
 
-This shows every available option:
-
-```yaml
-quests:
-  my_full_quest:
-    display: "<gradient:#55FF55:#00CC44>My Quest</gradient>"
-    material: PAPER
-    tier: rare
-    difficulty: hard
-    sequential: false
-    lock-to-player: false
-    milestones: [25, 50, 75]
-    lore:
-      - "<#AAAAAA>A description of the quest."
-      - "<#AAAAAA>More lore text here."
-    objectives:
-      - type: kill
-        target: ZOMBIE
-        amount: 20
-      - type: craft
-        target: IRON_SWORD
-        amount: 1
-    reward:
-      xp: 500
-      money: 250
-      items:
-        - material: DIAMOND
-          amount: 3
-          chance: 100
-      commands:
-        - "broadcast {player} finished My Quest!"
-    conditions:
-      min-level: 10
-      permission: "rank.member"
+```
+/sq give <player> my_first_quest
 ```
 
 ---
 
-## Quest Properties Explained
+## Quest ID rules
 
-### Basic Info
-
-| Property | What It Does | Required? |
-|----------|-------------|-----------|
-| `display` | The quest name shown to players. Supports color codes. | Yes |
-| `material` | The Minecraft item that represents the quest paper. Default is `PAPER`. | No |
-| `tier` | The rarity tier of the quest. Must match a tier defined in `tiers.yml`. | No |
-| `difficulty` | The difficulty level. Must match a difficulty in `difficulties.yml`. | No |
-
-### How It Works
-
-| Property | What It Does | Default |
-|----------|-------------|---------|
-| `sequential` | If true, objectives must be completed one at a time in order. | `false` |
-| `lock-to-player` | If true, only the first player to pick up the paper can use it. | `false` |
-| `milestones` | A list of progress percentages where a milestone notification is sent. Example: `[25, 50, 75]` | None |
-
-### Lore (Item Description)
-
-The `lore` section lets you add custom text lines to the item tooltip. These appear below the quest name when hovering over the paper.
-
-```yaml
-lore:
-  - "<#AAAAAA>Complete this to earn great rewards."
-  - "<#FF5555>Danger level: High"
-```
-
-You can use MiniMessage formatting or legacy color codes (`&a`, `&c`, etc.).
+- Use lowercase letters, numbers, and underscores.
+- The ID is internal. Players see `display` instead.
+- Generated quests use IDs like `generated_*` (Premium).
 
 ---
 
-## Objectives
+## Full field reference
 
-Every quest needs at least one objective. Objectives go under the `objectives` section as a list:
+| Field | Required | Description |
+|-------|----------|-------------|
+| `display` | Yes | Name on the quest paper. Supports MiniMessage and legacy `&` colors |
+| `objectives` | Yes | List of objective blocks. See [Objectives](Objectives.md) |
+| `reward` | Yes | Reward block. See [Rewards](Rewards.md) |
+| `material` | No | Icon material for browser GUI and default paper icon |
+| `tier` | No | Tier ID from `tiers.yml` (default from `config.yml`) |
+| `difficulty` | No | Difficulty ID from `difficulties.yml` |
+| `sequential` | No | `true` = objectives must finish in list order |
+| `milestones` | No | Progress percentages for milestone messages, e.g. `[25, 50, 75]` |
+| `lock-to-player` | No | `true` = paper binds to the first player who receives it |
+| `lore` | No | Custom lore lines on the quest paper |
+| `quest_paper` | No | Override paper material, name, and glow |
+| `conditions` | No | Unlock requirements. See [Conditions](Conditions.md) |
+| `permission` | No | Root-level permission that gates **progress** (not browser lock) |
+
+### `quest_paper` block
+
+```yaml
+quest_paper:
+  material: BOOK
+  name: "<#FFD700>Custom Paper Name"
+  glowing: false
+```
+
+### Root `permission` vs `conditions.permission`
+
+- `conditions.permission` blocks picking up the quest in the browser when the player lacks the node.
+- Root `permission` on the quest blocks **progress** even if the player already holds the paper.
+
+---
+
+## Objectives section
+
+Each objective is a list item with at least `type` and the fields that type requires:
 
 ```yaml
 objectives:
+  - type: break
+    target: OAK_LOG
+    amount: 20
   - type: kill
     target: ZOMBIE
     amount: 10
-  - type: break
-    target: DIAMOND_ORE
-    amount: 5
 ```
 
-Each objective needs a `type` and usually `target` + `amount`. Some types use other fields (`command`, `placeholder`, `level`, `vehicle`, `text`); see [Objectives](Objectives.md). Test with `showcase_<type>` quests in `quests.yml`.
+Optional per objective:
+
+| Field | Description |
+|-------|-------------|
+| `milestones` | Override quest-level milestones for this objective only |
+
+Special field names (not `target`):
+
+| Type | Fields |
+|------|--------|
+| `reachlevel` | `level` |
+| `command` | `command`, `amount` |
+| `placeholder` | `placeholder`, `amount` |
+| `vehicle` | `vehicle` (or `target`), `amount` or `distance` |
+| `chat` | `text` (or `target`), `amount` |
+| `move` | `amount` or `distance` |
+
+Type aliases: `shoot_bow`, `launch_firework`, `ride_vehicle`, `level` (same as `gainlevel`).
 
 ---
 
-## Rewards
+## Reward section
 
-Quests need at least one type of reward. You can combine as many types as you like:
+At least one reward key is required:
 
 ```yaml
 reward:
-  xp: 200
-  money: 100
+  xp: 100
+  money: 50
+  sigils: 25
   items:
     - material: DIAMOND
       amount: 3
       chance: 100
   commands:
-    - "give {player} golden_apple 1"
-  quest: "next_quest_id"
+    - "broadcast {player} finished a quest!"
+  quest:
+    quest-id: next_quest_id
+    chance: 100
 ```
 
-The `quest` reward gives the player a specific quest paper as a reward, which is how you create quest chains. See [Rewards](Rewards.md) for full details.
+See [Rewards](Rewards.md) for every field.
 
 ---
 
-## Conditions
+## Conditions section
 
-Conditions are optional requirements a player must meet before they can start the quest. If conditions are not met, the quest paper appears locked in the browser:
+Flat keys under `conditions:` (not a nested list):
 
 ```yaml
 conditions:
   min-level: 10
+  max-level: 50
+  min-money: 100
   cost: 500
-  permission: "rank.vip"
+  min-sigils: 50
+  sigil-cost: 25
   world: ["world", "world_nether"]
+  permission: "rank.vip"
+  completed-quests: ["starter_quest"]
+  item: "DIAMOND:5"
+  consume-item: true
   gamemode: ["SURVIVAL"]
+  active-limit: 2
+  time: "DAY"
+  placeholder: "%player_level% >= 30"
 ```
 
-See [Conditions](Conditions.md) for the full list.
+See [Conditions](Conditions.md) for behavior and consumable costs.
 
 ---
 
-## Daily and Weekly Quests
+## Validation on reload
 
-Daily and weekly assignment is configured in `daily.yml` by listing quest IDs in the `daily.quests` or `weekly.quests` pools. The plugin does **not** read a `type: daily` field on individual quests for scheduling.
+`/sq reload` checks every quest for:
 
-You may add `type: daily` on a quest for your own notes or external tools; it does not change how SoapsQuest assigns recurring quests. See [Daily and Weekly Quests](Daily-and-Weekly-Quests.md).
+- Valid YAML syntax
+- Presence of `display` and `objectives`
+- Registered objective types and required fields
 
-## Quest permission (root level)
-
-Separate from `conditions.permission` (browser unlock), you can gate **progress** on a quest:
-
-```yaml
-my_quest:
-  display: "VIP Quest"
-  permission: "soapsquest.vip"
-  objectives:
-    - type: kill
-      target: ZOMBIE
-      amount: 5
-  reward:
-    xp: 100
-```
-
-Players without this permission cannot make progress even if they hold the quest paper.
+Invalid quests abort the reload and keep the previous config active.
 
 ---
 
-## After Creating a Quest
+## Testing new quests
 
-After adding a quest to `quests.yml`:
+1. Add the quest block to `quests.yml`.
+2. `/sq reload`
+3. `/sq give <player> <quest_id>`
+4. Complete objectives and right-click the paper to claim.
 
-1. Run `/sq reload` to apply the changes.
-2. Run `/sq list` to confirm the quest shows up.
-3. Run `/sq give <yourname> <questid>` to test it yourself.
-4. Check the browser with `/sq browse` to make sure it appears correctly.
+Use `showcase_<type>` quests in the default `quests.yml` as templates for each objective type.
+
+---
+
+## In-game editor (Premium)
+
+Premium servers can create and edit quests without hand-editing YAML:
+
+```
+/sq editor
+/sq editor <quest_id>
+```
+
+Requires `soapsquest.gui.editor`. Changes save to `quests.yml` or `generated.yml`. Run `/sq reload` to refresh papers already in player inventories.
+
+---
+
+*Version 1.0.3*

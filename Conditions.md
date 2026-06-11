@@ -1,186 +1,133 @@
 # Conditions
 
-Conditions are optional requirements that players must meet before they can start a quest. If a player does not meet the conditions, the quest paper appears as a locked item in the quest browser. The player can see which quest it is but cannot pick it up until they qualify.
+Conditions control **when** a player can accept or start a quest. They are defined as flat keys under `conditions:` on each quest in `quests.yml`.
+
+When a condition fails, the player sees a message and cannot receive the quest from the browser (or cannot progress, for some checks at pickup time).
 
 ---
 
-## How Locking Works
+## Flat condition keys (quests.yml)
 
-1. The player opens the quest browser with `/sq browse`.
-2. Any quest they do not qualify for shows up as a locked paper item.
-3. The item tooltip lists the requirements they have not met.
-4. Once they meet all the requirements, they can click the quest to receive the paper normally.
+These keys are read directly from the `conditions:` section:
 
-Conditions check automatically. Players do not need to do anything to "unlock" a quest; it happens as soon as they meet the criteria.
+| Key | Requires | Description |
+|-----|----------|-------------|
+| `min-level` | Nothing | Player XP level must be at least this value |
+| `max-level` | Nothing | Player XP level must be at most this value |
+| `min-money` | Vault | Player balance must meet minimum (not consumed) |
+| `cost` | Vault | Money deducted on accept when `consumeResources` runs |
+| `min-sigils` | Nothing | Minimum Sigil balance (not consumed) |
+| `sigil-cost` | Nothing | Sigils deducted on accept |
+| `permission` | Nothing | Player must have this permission node |
+| `world` | Nothing | List of allowed world names |
+| `active-limit` | Nothing | Max number of **active quest types** in the player's queue |
+| `item` | Nothing | Format `MATERIAL:amount` required in inventory |
+| `consume-item` | Nothing | `true` removes items when the quest is accepted |
+| `time` | Nothing | `DAY` or `NIGHT` (Minecraft world time) |
+| `gamemode` | Nothing | List of allowed gamemodes, e.g. `["SURVIVAL"]` |
+| `placeholder` | PlaceholderAPI | Expression such as `%player_level% >= 30` |
+| `completed-quests` | Nothing | List of quest IDs the player must have completed before |
 
----
-
-## Adding Conditions to a Quest
-
-Conditions go in the `conditions` section of your quest:
+### Example
 
 ```yaml
-my_quest:
-  display: "Expert Quest"
+sigil_master_contract:
+  display: "<#55FFFF>Sigil Contract"
+  conditions:
+    min-sigils: 15
+    sigil-cost: 10
   objectives:
     - type: kill
-      target: ENDER_DRAGON
-      amount: 1
+      target: ZOMBIE
+      amount: 20
   reward:
-    xp: 5000
-  conditions:
-    min-level: 30
-    permission: "rank.veteran"
+    sigils: 50
+    money: 120
 ```
-
-You can combine as many conditions as you like. The player must meet **all** of them to start the quest.
 
 ---
 
-## All Condition Types
+## `active-limit` behavior
 
-### Minimum Level
-
-Require the player to be at a certain experience level or above.
+Counts **active quest types** in the player's queue, not total papers. Multiple copies of the same quest ID share one type slot. Queued copies of the same ID do not count toward the limit.
 
 ```yaml
 conditions:
-  min-level: 20
+  active-limit: 2
 ```
 
-The player must be at least level 20.
+---
 
-### Maximum Level
+## `completed-quests`
 
-The player must be at or below a certain level. Useful for quests meant for early-game players.
-
-```yaml
-conditions:
-  max-level: 10
-```
-
-### Money Cost
-
-Require the player to pay an amount of money to start the quest.
-
-> **Note:** This requires the **Vault** plugin. If Vault is not installed, this condition is ignored.
-
-```yaml
-conditions:
-  cost: 500
-```
-
-The money is taken from the player when they pick up the quest paper. If they cannot afford it, the quest stays locked.
-
-### Item Cost
-
-Require the player to have a specific item in their inventory.
-
-```yaml
-conditions:
-  item: "DIAMOND:5"
-```
-
-This requires the player to have 5 diamonds.
-
-By default, the item is taken from the player when they start the quest. If you want the player to keep the item and just prove they have it, add `consume-item: false`:
-
-```yaml
-conditions:
-  item: "DIAMOND:5"
-  consume-item: false
-```
-
-### Permission
-
-Require the player to have a specific permission node. Use this with a permissions plugin like LuckPerms.
-
-```yaml
-conditions:
-  permission: "rank.vip"
-```
-
-Players without this permission see the quest as locked.
-
-### World
-
-Require the player to be in a specific world when they pick up the quest.
-
-```yaml
-conditions:
-  world: ["world", "world_nether"]
-```
-
-The player must be in one of the listed worlds at the time they try to start the quest.
-
-### Gamemode
-
-Require the player to be in a specific game mode.
-
-```yaml
-conditions:
-  gamemode: ["SURVIVAL"]
-```
-
-Options are `SURVIVAL`, `CREATIVE`, `ADVENTURE`, and `SPECTATOR`. Use a list to allow multiple game modes.
-
-### Active Quest Limit
-
-Limit how many active quests a player can have at once.
-
-```yaml
-conditions:
-  active-limit: 1
-```
-
-If the player already has this many active quests (or more), they cannot pick up this one. Setting it to `1` means they can only work on one quest at a time.
-
-### Completed Quests Required
-
-Require the player to have already completed certain quests.
+Requires the player to have **claimed** (finished) specific quests before:
 
 ```yaml
 conditions:
   completed-quests:
-    - "starter_quest"
-    - "chapter_1"
+    - lumberjack
+    - zombie_slayer
 ```
-
-The player must have completed **all** listed quests before this one becomes available. This is another way to build quest chains where quests unlock in order.
-
-### Minimum Money (Balance)
-
-Require the player to have a minimum balance (not consumed on unlock):
-
-```yaml
-conditions:
-  min-money: 1000
-```
-
-> **Note:** Requires Vault. Unlike `cost`, this only checks balance and does not withdraw money.
 
 ---
 
-## Combining Conditions
+## Placeholder conditions
 
-You can use multiple conditions together. The player must meet every single one:
+Requires PlaceholderAPI. The value is resolved for the player, then compared:
 
 ```yaml
 conditions:
-  min-level: 25
-  cost: 1000
-  permission: "rank.member"
-  world: ["world"]
-  gamemode: ["SURVIVAL"]
-  active-limit: 1
+  placeholder: "%vault_eco_balance% >= 1000"
 ```
 
-In this example, a player needs to be at least level 25, able to pay 1000 coins, have the `rank.member` permission, be in the `world` world, be in survival mode, and not already have an active quest.
+Supported operators: `>=`, `<=`, `==`, `!=`, `>`, `<`.
+
+Install required expansions first, for example:
+
+```
+/papi ecloud download Player
+/papi reload
+```
 
 ---
 
-## How Locked Papers Look
+## Editor condition types (Premium GUI)
 
-When a quest is locked, the quest paper item in the browser shows a lock icon or color change with the unmet conditions listed in the tooltip. Players can read exactly what they need to do to unlock it.
+The in-game condition editor uses typed entries with a `type:` field. Registered types:
 
-The exact appearance of locked papers can be customized in `messages.yml`.
+| Type | Purpose |
+|------|---------|
+| `level` | Minimum level |
+| `max-level` | Maximum level |
+| `money` | Minimum balance |
+| `money-cost` | Deduct money on unlock |
+| `sigils` | Minimum Sigils |
+| `sigil-cost` | Deduct Sigils on unlock |
+| `permission` | Permission node |
+| `world` | Allowed worlds |
+| `active-limit` | Active quest type cap |
+| `item` | Required items (not consumed) |
+| `item-cost` | Required items (consumed) |
+| `time` | `DAY` or `NIGHT` |
+| `gamemode` | Allowed gamemodes |
+| `placeholder` | PlaceholderAPI expression |
+| `require-completed-quests` | Minimum total completions count |
+| `require-quest-completed` | Specific quest IDs completed |
+
+The flat keys in `quests.yml` map to the same logic as these editor types.
+
+---
+
+## Random generator conditions (Premium)
+
+`random-generator.yml` can randomly attach conditions to generated quests with per-tier values and chance percentages. See [Random Quest Generator](Random-Quest-Generator.md).
+
+---
+
+## Root `permission` field
+
+Separate from `conditions.permission`, a quest-level `permission:` field gates **progress** on the paper after pickup. Use `conditions.permission` to lock the browser entry.
+
+---
+
+*Version 1.0.3*

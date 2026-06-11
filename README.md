@@ -1,57 +1,73 @@
-# SoapsQuest
+# SoapsQuest Wiki
 
-Quest plugin for **Paper 1.21+**. Players keep quest papers in their inventory, see progress on the item, and right-click to claim rewards when finished.
+SoapsQuest is a physical quest paper system for Paper servers. Players carry quest items in their inventory, complete objectives in the world, and claim rewards by using the paper.
 
-Version **1.0.1**
+Version **1.0.3**
 
-## Download
+---
 
-Install **SoapsCommon** first, then get SoapsQuest (Free or Premium):
+## Quick Links
 
-- https://soapsuniverse.com
-- https://mythiccraft.io
-
-**Free** includes all 37 objective types, quest papers, rewards, conditions, and GUIs.
-
-**Premium** adds the random quest generator, daily/weekly quests, loot drops, and `/sq editor`.
-
-## Quick start
-
-1. Put both jars in `plugins/`.
-2. Restart the server.
-3. Edit `plugins/SoapsQuest/quests.yml`.
-4. Run `/sq reload`.
-5. Try `/sq give <player> lumberjack` or `/sq browse`.
-
-## Documentation
-
-| Page | What it covers |
-|------|----------------|
-| [Getting Started](Getting-Started.md) | Install and first quest |
-| [Introduction](Introduction.md) | How the plugin works |
-| [Creating Quests](Creating-Quests.md) | Quest YAML format |
+| Page | Description |
+|------|-------------|
+| [Introduction](Introduction.md) | What SoapsQuest does and Free vs Premium |
+| [Getting Started](Getting-Started.md) | Install, verify, and first reload |
+| [Creating Quests](Creating-Quests.md) | `quests.yml` structure and fields |
 | [Objectives](Objectives.md) | All 37 objective types |
-| [Rewards](Rewards.md) | Reward setup |
-| [Conditions](Conditions.md) | Quest requirements |
-| [Commands and Permissions](Commands-and-Permissions.md) | `/sq` commands |
-| [GUI System](GUI-System.md) | Browser and active quest GUIs |
-| [Tiers and Difficulties](Tiers-and-Difficulties.md) | Tiers and difficulty labels |
-| [Placeholders](Placeholders.md) | PlaceholderAPI |
-| [Daily and Weekly Quests](Daily-and-Weekly-Quests.md) | Premium rotating quests |
-| [Random Quest Generator](Random-Quest-Generator.md) | Premium generator |
-| [Quest Loot System](Quest-Loot-System.md) | Premium mob/chest loot |
-| [Examples](Examples.md) | Ready-to-copy quests |
-| [FAQ](FAQ.md) | Common questions |
-| [Default Configs](Default-Configs.md) | Default YAML files |
-| [Changelog](CHANGELOG.md) | Version history |
+| [Rewards](Rewards.md) | XP, money, items, commands, sigils, quest chains |
+| [Conditions](Conditions.md) | Unlock requirements and costs |
+| [Tiers and Difficulties](Tiers-and-Difficulties.md) | Rarity and scaling |
+| [GUI System](GUI-System.md) | Browser, editor, and active quest menus |
+| [Daily and Weekly Quests](Daily-and-Weekly-Quests.md) | Recurring quest schedules **(Premium)** |
+| [Random Quest Generator](Random-Quest-Generator.md) | `/sq generate` **(Premium)** |
+| [Quest Loot System](Quest-Loot-System.md) | Chest and mob drops **(Premium)** |
+| [Commands and Permissions](Commands-and-Permissions.md) | Full command reference |
+| [Placeholders](Placeholders.md) | PlaceholderAPI expansion |
+| [Default Configs](Default-Configs.md) | Every config file explained |
+| [Examples](Examples.md) | Copy-paste quest examples |
+| [FAQ](FAQ.md) | Common server owner questions |
+| [Changelog](Changelog.md) | Version history |
+
+---
 
 ## Requirements
 
-- Paper 1.21+ (Purpur works)
-- Java 21+
+| Requirement | Details |
+|-------------|---------|
+| Server | Paper **1.21+** (or a Paper fork such as Purpur) |
+| Java | **21** or newer |
+| Required plugin | [SoapsCommon](https://www.soapsuniverse.com) |
+| Optional | Vault (economy), PlaceholderAPI, MythicMobs |
 
-Optional: Vault (money), PlaceholderAPI (placeholders + `placeholder` objective), MythicMobs (`kill_mythicmob`).
+---
 
-## Support
+## Free vs Premium (summary)
 
-Discord: https://discord.gg/SoapsUniverse
+| Feature | Free | Premium |
+|---------|:----:|:-------:|
+| Physical quest papers | Yes | Yes |
+| 37 objective types | Yes | Yes |
+| Quest browser GUI | Yes | Yes |
+| Active quests GUI (`/sq active`) | Yes | Yes |
+| Manual quests in `quests.yml` | Yes | Yes |
+| Tiers and difficulties | Yes | Yes |
+| Sigils as rewards and conditions | Yes | Yes |
+| In-game quest editor GUI | No | Yes |
+| Random quest generator | No | Yes |
+| Daily and weekly quests | No | Yes |
+| Quest loot (chests and mobs) | No | Yes |
+| `/sq sigils` admin commands | No | Yes |
+| `/sq drop` world placement | No | Yes |
+
+See [Introduction](Introduction.md) for the full matrix.
+
+---
+
+## Links
+
+- Website: [SoapsUniverse.com](https://www.soapsuniverse.com)
+- Discord: [discord.gg/mawAzwFq](https://discord.gg/mawAzwFq)
+
+---
+
+*Created by AlternativeSoap*

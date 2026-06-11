@@ -113,6 +113,8 @@ items:
 
 `soapsquest.gui.myquests` for `/sq active`.
 
+There is no `/sq progress` command. Progress appears on quest paper lore and in the Active Quests GUI. Staff need `soapsquest.progress.others` for `/sq active <player>`.
+
 ### Admin access
 
 `soapsquest.admin` for give, remove, reset, reload, and similar commands.
@@ -169,6 +171,9 @@ Quest papers are normal items. Death without keep-inventory can lose them. Re-gi
 ### Placeholder objective stuck
 
 - PlaceholderAPI must be installed
+- Some placeholders require eCloud expansions (example for `%player_level%`):
+  - `/papi ecloud download Player`
+  - `/papi reload`
 - The placeholder must return a **number**
 - Example: `placeholder: player_level` (with or without `%`)
 - Test: `showcase_placeholder`
@@ -199,3 +204,7 @@ Use `/sq` (alias). Check permissions. Run `/sq help`.
 ### Plugin version
 
 `/sq info`
+
+---
+
+*Version 1.0.3*

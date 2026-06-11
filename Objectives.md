@@ -509,6 +509,9 @@ Note: use the `command` field (not `target`). With or without a leading `/` both
 Check a PlaceholderAPI value.
 
 > **Note:** This objective requires PlaceholderAPI to be installed on your server.
+> Some placeholders also require installing their eCloud expansion first (for example `%player_level%` needs `Player`):
+> `/papi ecloud download Player`
+> `/papi reload`
 
 ```yaml
 - type: placeholder
@@ -593,3 +596,7 @@ These YAML types work the same as their canonical name:
 | `launch_firework` | `firework` |
 | `ride_vehicle` | `vehicle` |
 | `level` | `gainlevel` |
+
+---
+
+*Version 1.0.3 - 37 objective types verified against ObjectiveRegistry*

@@ -1,170 +1,109 @@
 # GUI System
 
-SoapsQuest has two GUI screens: the Quest Browser and the Quest Editor. Players use the browser to find and pick up quests. Admins use the editor to create and manage quests directly in-game.
+SoapsQuest provides inventory menus for browsing quests, editing quests (Premium), and viewing active progress. Layouts are defined in `gui.yml`. The master switch is `gui.enabled` in `config.yml`.
+
+If `gui.enabled` is `false`, all quest GUIs are blocked and players see a config message.
 
 ---
 
-## Quest Browser
+## Quest Browser (`/sq browse`)
 
-The quest browser is available to all players. It shows every quest available on the server in a scrollable grid.
+**Permission:** `soapsquest.gui.browser`  
+**Aliases:** `/sq gui`, `/sq browser`
 
-**How to open it:**
+Players browse available quests and click to receive a quest paper. Locked quests (failed conditions) show as unavailable.
+
+Configured under `gui.yml` -> `quest-browser`:
+
+| Setting | Purpose |
+|---------|---------|
+| `title`, `size` | Menu title and rows (multiples of 9) |
+| `quest-slots` | Slot indices for quest icons |
+| `quest-item` | Lore template with placeholders |
+| `next-page` / `prev-page` | Pagination controls |
+| `editor-button` | Opens editor (Premium, needs `soapsquest.gui.editor`) |
+| `close-button` | Close menu |
+
+Quest item placeholders include `<quest_display>`, `<quest_tier>`, `<quest_difficulty>`, `<quest_objective_count>`, `<quest_reward_count>`, and `<quest_origin>`.
+
+---
+
+## Active Quests (`/sq active`)
+
+**Permission:** `soapsquest.gui.myquests` (listed in `plugin.yml`)  
+**Aliases:** `/sq myquests`, `/sq quests`
+
+Shows quest papers currently in the target player's inventory with per-objective progress.
 
 ```
-/sq browse
+/sq active              # Your own quests
+/sq active <player>     # Another player (needs soapsquest.progress.others)
 ```
 
-Permission required: `soapsquest.browse` (given to all players by default)
-
-**What players see:**
-
-Each quest appears as an item in the grid. Hovering over it shows the quest details: name, type, difficulty, tier, number of objectives, number of conditions, and number of rewards. Players click a quest to receive the paper.
-
-If a quest is locked (the player does not meet the conditions), it shows up with a different appearance and the unmet requirements are listed in the tooltip.
-
-**Browser layout:**
-
-The quest browser is a 54-slot inventory (a 6-row chest). Quests fill most of the slots. Along the bottom row, there are navigation buttons:
-
-| Slot | Button | What It Does |
-|------|--------|-------------|
-| 45 | Previous Page | Go to the previous page of quests |
-| 49 | Close | Close the browser |
-| 50 | Quest Editor | Opens the quest editor (only visible to admins) |
-| 53 | Next Page | Go to the next page of quests |
-
-Any empty slots are filled with a glass pane spacer item.
+There is **no** `/sq progress` command. Progress is shown on the paper lore and in this GUI. Staff viewing other players requires `soapsquest.progress.others`, not `soapsquest.progress`.
 
 ---
 
 ## Quest Editor (Premium)
 
-> **[PREMIUM]** The Quest Editor requires the SoapsQuest Premium version. Get it at [SoapsUniverse.com](https://SoapsUniverse.com)
-
-The quest editor lets admins create and modify quests through the game interface instead of editing files. Everything done in the editor is saved to `quests.yml` immediately.
-
-**How to open it:**
+**Permission:** `soapsquest.gui.editor`
 
 ```
 /sq editor
+/sq editor <quest_id>
 ```
 
-Permission required: `soapsquest.gui.editor`
+Opens the in-game quest authoring workflow:
 
-You can also reach the editor by clicking the "Quest Editor" button in the bottom row of the quest browser.
+1. **Quest Editor** main menu: list quests, create new, pagination
+2. **Quest Details**: edit display, tier, difficulty, sequential flag, lore
+3. **Objective Editor**: add objectives by type with guided prompts
+4. **Condition Editor**: add unlock requirements
+5. **Reward Editor**: add XP, money, items, commands, quest rewards
 
-### Creating a New Quest
+Free edition shows a premium-only message if a player runs `/sq editor`.
 
-1. Open the editor with `/sq editor`.
-2. Click the green **Create New Quest** button.
-3. Type the quest ID in chat (like `my_epic_quest`). Use lowercase and underscores only.
-4. The quest is created and the details editor opens automatically.
+GUI sections in `gui.yml`:
 
-### Editing a Quest
-
-In the editor, each quest in the grid can be clicked to open its details screen. The details screen has buttons for every part of the quest:
-
-| Button | What You Can Change |
-|--------|-------------------|
-| Edit Display Name | The quest name players see |
-| Edit Description | A short description (used in browser tooltip) |
-| Edit Type | Standard, daily, or weekly |
-| Edit Difficulty | Easy, normal, hard, expert, nightmare |
-| Edit Tier | Common, uncommon, rare, epic, legendary, mythic |
-| Lock-to-Player Toggle | Whether the paper binds to the first person who picks it up |
-| Edit Material | The item that represents the quest paper |
-| Edit Objectives | Add, remove, or change objectives |
-| Edit Conditions | Add, remove, or change conditions |
-| Edit Rewards | Add, remove, or change rewards |
-| Delete Quest | Permanently removes the quest |
-
-Changes are saved automatically as you make them. You do not need to click a save button.
-
-### Adding Objectives in the Editor
-
-1. Open a quest and click **Edit Objectives**.
-2. Click **Add Objective** (the green dye button).
-3. Follow the click-through menus to choose the objective type, target, and amount.
-4. The objective is added and you are returned to the objective list.
-
-### Adding Rewards in the Editor
-
-1. Open a quest and click **Edit Rewards**.
-2. Click **Add Reward** (the green dye button).
-3. Choose the reward type (XP, Money, Item, Command, or Quest Chain).
-4. Enter the amount or details when prompted.
-
-### Adding Conditions in the Editor
-
-1. Open a quest and click **Edit Conditions**.
-2. Click **Add Condition** (the green dye button).
-3. Choose the condition type and fill in the required values.
+- `quest-editor`
+- `quest-details`
+- `objective-editor`
+- `condition-editor`
+- `reward-editor`
 
 ---
 
-## Customizing the GUI (gui.yml)
-
-You can change how both the browser and editor look by editing `plugins/SoapsQuest/gui.yml`.
-
-**Things you can change:**
-
-- The title text shown at the top of the inventory
-- The filler item (what fills empty slots)
-- The material and name of the navigation buttons
-- Which slots the quest items appear in
-- The layout of the quest item tooltip in the browser
-
-**Example: Changing the browser title**
+## Disabling GUIs
 
 ```yaml
-quest-browser:
-  title: "&6&lMy Server Quests"
+# config.yml
+gui:
+  enabled: false
 ```
 
-**Example: Changing the filler item**
+This blocks browser, editor, and active quest menus. Commands still work (`/sq give`, `/sq list`, etc.).
 
-```yaml
-quest-browser:
-  filler-item:
-    material: BLACK_STAINED_GLASS_PANE
-    name: "&7"
+---
+
+## Text formatting
+
+GUI titles and item text support:
+
+- Legacy `&` color codes
+- MiniMessage tags where noted in `gui.yml` comments
+
+SoapsCommon handles rendering when the suite GUI integration is active.
+
+---
+
+## Reloading GUI config
+
+```
+/sq reload
 ```
 
-**Example: Changing which slots quests appear in**
+Reloads `gui.yml` along with other configs. Open menus may need to be closed and reopened.
 
-```yaml
-quest-browser:
-  layout:
-    quest-slots: [10,11,12,13,14,15,16,19,20,21,22,23,24,25,28,29,30,31,32,33,34]
-```
+---
 
-Slot numbers follow the standard Minecraft inventory grid numbering (0 to 53 for a 6-row chest).
-
-**Example: Changing what the quest item tooltip shows**
-
-```yaml
-quest-browser:
-  quest-item:
-    display: "&e<quest_display>"
-    lore:
-      - "&7<quest_description>"
-      - ""
-      - "&8Difficulty: &f<quest_difficulty>"
-      - "&8Tier: &f<quest_tier>"
-      - ""
-      - "&aClick to receive"
-```
-
-Available placeholders for quest items in the browser:
-
-| Placeholder | What It Shows |
-|------------|--------------|
-| `<quest_display>` | The quest display name |
-| `<quest_description>` | The quest description |
-| `<quest_type>` | Standard, daily, or weekly |
-| `<quest_difficulty>` | The difficulty label |
-| `<quest_tier>` | The tier label |
-| `<quest_objective_count>` | Number of objectives |
-| `<quest_condition_count>` | Number of conditions |
-| `<quest_reward_count>` | Number of rewards |
-| `<quest_origin>` | Whether this was hand-made or randomly generated |
+*Version 1.0.3*

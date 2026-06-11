@@ -1,110 +1,106 @@
-# Daily and Weekly Quests
+# Daily and Weekly Quests (Premium)
 
-> **[PREMIUM]** Daily and weekly quests require the SoapsQuest Premium version. Get it at [SoapsUniverse.com](https://SoapsUniverse.com)
-
-Daily and weekly quests are quests that the plugin gives out automatically on a schedule. Daily quests reset every day. Weekly quests reset once a week. Players receive their quest papers automatically without needing to browse or ask an admin.
+Recurring quests automatically give players quest papers on a schedule. Configure `plugins/SoapsQuest/daily.yml`. This file is **Premium only** and is not included in the Free JAR.
 
 ---
 
-## How It Works
+## Overview
 
-1. You enable daily or weekly quests in `daily.yml` and list which quests to give.
-2. At the reset time you configure, the plugin distributes new quest papers to all online players.
-3. Players who are offline when the reset happens will receive their papers the next time they log in.
-4. The same player will not receive the same quest twice in a row until the full quest pool has cycled through.
+- **Daily** quests reset every day at `reset-time` (server timezone).
+- **Weekly** quests reset on `reset-day` at `reset-time`.
+- Online players are notified on reset. Players who join mid-cycle receive any quests they have not yet gotten this cycle.
+- Quest IDs must exist under `quests:` in `quests.yml`.
+- If a quest has `conditions.permission`, only players with that permission receive it.
 
 ---
 
-## Setting Up Daily Quests
-
-Open `plugins/SoapsQuest/daily.yml` and edit the `daily` section:
+## Enable daily quests
 
 ```yaml
 daily:
   enabled: true
   quests:
-    - "zombie_slayer"
-    - "gone_fishing"
-    - "lumberjack"
+    - zombie_slayer
+    - lumberjack
+    - gone_fishing
   reset-time: "06:00"
-  randomize: false
-  count: 1
+  selection:
+    random: true
+    count: 1
+  completion-bonus:
+    enabled: false
+    reward:
+      xp: 150
+      sigils: 25
+      money: 100
 ```
 
-**Options:**
-
-| Option | What It Does |
-|--------|-------------|
-| `enabled` | Set to `true` to turn on daily quests. `false` to disable. |
-| `quests` | A list of quest IDs to give out as daily quests. |
-| `reset-time` | The time of day to reset and give new quests. Use 24-hour format like `06:00` or `22:30`. |
-| `randomize` | If `true`, a random subset of quests from the list is chosen each day. If `false`, it cycles through the list in order. |
-| `count` | How many quests from the list to give each player per reset. |
+| Field | Description |
+|-------|-------------|
+| `enabled` | Master toggle for daily cycle |
+| `quests` | Pool of quest IDs to assign |
+| `reset-time` | `HH:mm` 24-hour format |
+| `selection.random` | `true` = pick random subset from pool |
+| `selection.count` | How many quests to give per cycle |
+| `completion-bonus` | Optional extra reward when all daily quests are finished |
 
 ---
 
-## Setting Up Weekly Quests
-
-Edit the `weekly` section in the same `daily.yml` file:
+## Enable weekly quests
 
 ```yaml
 weekly:
   enabled: true
   quests:
-    - "diamond_rush"
-    - "nether_explorer"
-    - "master_builder"
+    - iron_miner
+    - mob_hunter
   reset-day: "MONDAY"
   reset-time: "06:00"
-  randomize: true
-  count: 1
+  selection:
+    random: true
+    count: 1
+  completion-bonus:
+    enabled: false
+    reward:
+      xp: 600
+      sigils: 100
+      money: 400
 ```
 
-**Options:**
-
-The weekly section has all the same options as daily, plus one more:
-
-| Option | What It Does |
-|--------|-------------|
-| `reset-day` | The day of the week the weekly quests reset. Options: `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`. |
+Valid `reset-day` values: `MONDAY` through `SUNDAY`.
 
 ---
 
-## Reset Notifications
-
-When the reset happens, online players receive a notification. You can control how this notification is shown:
+## Reset notifications
 
 ```yaml
 notifications:
-  mode: "actionbar"
+  mode: "actionbar"   # actionbar | chat | title | bossbar | none
   sound:
     enabled: true
     type: "ENTITY_PLAYER_LEVELUP"
+    volume: 1.0
+    pitch: 1.0
 ```
 
-**Notification modes:**
-
-| Mode | Where the Message Shows |
-|------|------------------------|
-| `actionbar` | Above the hotbar (quick, non-intrusive) |
-| `chat` | In the chat box |
-| `none` | No notification (the quest papers are still given) |
-
-The sound plays to the player at the same time as the notification.
+Message text is in `messages.yml` under `recurring-quest-reset-*` keys.
 
 ---
 
-## Marking Quests as Daily or Weekly
+## How papers behave
 
-Any quest can be used as a daily or weekly quest. Just add its quest ID to the list in `daily.yml`.
-
-You may add `type: daily` on a quest in `quests.yml` for your own labeling, but **SoapsQuest does not read that field** for scheduling. Only the quest ID lists in `daily.yml` control which quests are given as dailies/weeklies.
+Recurring quest papers use the same Active/Queued rules as `/sq give` papers. Progress is tracked in `playerdata.yml`. When a cycle resets, assignment records clear and eligible players receive fresh papers.
 
 ---
 
-## Tips
+## Setup checklist
 
-- You can list as many quests as you want in each pool. If you have 7 quests in the daily pool and `count: 1`, each day a different quest from the pool is given until the list runs out, then it cycles again.
-- Setting `randomize: true` and `count: 3` is a popular setup for giving players 3 random daily quests each day.
-- Players who are offline at reset time will get their new papers delivered on their next login. They will not miss a reset.
-- If a player already has an active daily quest from this cycle, they are not given a duplicate.
+1. Confirm Premium JAR is installed.
+2. Add quest IDs to `daily.quests` or `weekly.quests`.
+3. Set `enabled: true` on the cycle you want.
+4. `/sq reload`
+5. Test with a short quest pool and one player online across a reset time.
+
+---
+
+*Version 1.0.3 - Premium*

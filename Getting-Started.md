@@ -1,107 +1,130 @@
 # Getting Started
 
-How to install SoapsQuest and run your first quest.
+This guide walks through a clean SoapsQuest install on a Paper 1.21+ server.
 
-## Requirements
+---
 
-- **Paper 1.21+** (Purpur is fine; Spigot/CraftBukkit are not supported)
-- **Java 21+**
+## 1. Install dependencies
 
-Optional:
+1. Install **SoapsCommon** (required). See the [SoapsCommon wiki](https://github.com/AlternativeSoap/SoapsCommon) if needed.
+2. Download **SoapsQuest** (Free or Premium) from [SoapsUniverse.com](https://www.soapsuniverse.com) or your marketplace source.
+3. Optional but recommended: **Vault** (economy), **PlaceholderAPI**, **MythicMobs** (only if you use `kill_mythicmob` objectives).
 
-- **Vault** for money rewards
-- **PlaceholderAPI** for placeholders and the `placeholder` objective
-- **MythicMobs** for `kill_mythicmob`
+---
 
-## Installation
+## 2. Add the plugin
 
-1. Install **SoapsCommon** from https://soapsuniverse.com or https://mythiccraft.io
-2. Download **SoapsQuest** (Free or Premium) from the same site
-3. Put both jars in your `plugins` folder
-4. **Restart** the server (skip `/reload` on first install)
-5. Check `plugins/SoapsQuest/` for the default configs and example quests
+1. Place `SoapsQuest-1.0.3-Free.jar` or `SoapsQuest-1.0.3-Premium.jar` in your server's `plugins/` folder.
+2. Start or restart the server.
+3. Confirm the console shows SoapsQuest enabled without errors.
 
-**Premium** adds the random generator, daily/weekly quests, loot drops, and `/sq editor`. **Free** has everything else, including all 37 objectives.
+Premium servers should see:
 
-**Tip:** In `quests.yml` there are `showcase_*` quests (e.g. `showcase_kill`, `showcase_command`) you can give with `/sq give <player> showcase_kill` to test one objective type at a time.
+```
+Premium features unlocked
+```
 
-## Your first quest
+Free servers will note that the generator, daily/weekly quests, loot system, and editor GUI are not included.
 
-**Give a quest by command**
+---
+
+## 3. Verify the install
+
+Run these commands in-game or from console where applicable:
+
+| Command | Expected result |
+|---------|-----------------|
+| `/sq info` | Shows version **1.0.3** and Free or Premium edition |
+| `/sq list` | Lists quest IDs from `quests.yml` |
+| `/sq browse` | Opens the quest browser (players only) |
+
+Give yourself a test quest:
 
 ```
 /sq give <yourname> lumberjack
 ```
 
-Chop oak logs with the paper in your inventory. When the lore says you are done, right-click the paper.
+You should receive a quest paper. Break oak logs to see progress update (action bar by default).
 
-**Browse quests in-game**
+---
 
-```
-/sq browse
-```
+## 4. Configure quests
 
-Pick a quest from the GUI to receive the paper.
-
-**Admins:** `/sq give <player> <questid>` or `/sq editor` (Premium only).
-
-## Default example quests
-
-| Quest ID | Task |
-|----------|------|
-| lumberjack | Chop 20 oak logs |
-| zombie_slayer | Kill 15 zombies |
-| gone_fishing | Catch 10 fish |
-| iron_miner | Mine 30 iron ore, smelt 20 ingots |
-| mob_hunter | Kill zombies, skeletons, spiders |
-| baker | Harvest wheat, craft bread |
-| shepherd | Shear 15 sheep |
-| diamond_rush | Mine diamond ore, craft diamond pickaxe |
-| nether_explorer | Blazes, nether wart, brew (needs level 15) |
-| master_builder | Sequential build quest |
-
-Edit or delete these in `plugins/SoapsQuest/quests.yml`.
-
-## What players see
-
-1. They get a quest paper (command, GUI, loot, etc.)
-2. The paper stays in inventory; any slot counts
-3. Progress shows in chat/action bar and on the paper lore
-4. When finished, the paper glows and chat says to right-click
-5. Right-click to get rewards; the paper is removed
-
-## Paper states
-
-| Look | Meaning |
-|------|---------|
-| Normal | Active, in progress |
-| Enchanted glow | Done, ready to claim |
-| Locked (in browser) | Player does not meet conditions yet |
-
-## Useful commands
-
-| Command | What it does |
-|---------|----------------|
-| `/sq give <player> <questid>` | Give a quest paper |
-| `/sq browse` | Quest browser GUI |
-| `/sq list` | List quest IDs in chat |
-| `/sq reload` | Reload configs |
-| `/sq info` | Version and Free/Premium |
-
-Full list: [Commands and Permissions](Commands-and-Permissions.md).
-
-## Config files
+Default files are created in `plugins/SoapsQuest/`:
 
 | File | Purpose |
 |------|---------|
-| `config.yml` | General settings |
-| `quests.yml` | Your quests (+ showcase examples) |
-| `messages.yml` | Plugin messages |
-| `tiers.yml` | Tier names and colors |
-| `difficulties.yml` | Difficulty levels |
-| `gui.yml` | Browser GUI layout |
-| `daily.yml` | Daily/weekly (Premium) |
-| `quest-loot.yml` | Mob/chest loot (Premium) |
-| `random-generator.yml` | Generator (Premium) |
+| `config.yml` | Core settings, progress display, sounds |
+| `quests.yml` | Your quest definitions |
+| `messages.yml` | Player-facing text |
+| `gui.yml` | Menu layouts |
+| `tiers.yml` | Rarity tiers |
+| `difficulties.yml` | Difficulty scaling |
+| `playerdata.yml` | Player progress (auto-managed) |
+| `statistics.yml` | Completion counts (auto-managed) |
+| `sigils.yml` | Sigil balances (auto-managed) |
 
-Defaults are listed in [Default Configs](Default-Configs.md).
+Premium also extracts `daily.yml`, `random-generator.yml`, and `quest-loot.yml`.
+
+Edit `quests.yml`, then reload:
+
+```
+/sq reload
+```
+
+Reload validates YAML before applying. If `quests.yml` has errors, the old config stays active until you fix them.
+
+---
+
+## 5. Set permissions
+
+Default permissions are listed in [Commands and Permissions](Commands-and-Permissions.md). A typical survival setup:
+
+- Give all players `soapsquest.use`, `soapsquest.gui.browser`, `soapsquest.gui.myquests`, `soapsquest.list`, `soapsquest.abandon`.
+- Keep admin commands (`give`, `reload`, `editor`, `generate`) for staff groups.
+
+**Note:** There is no `/sq progress` command. Players view progress on the quest paper lore and in the Active Quests GUI (`/sq active`). Staff use `soapsquest.progress.others` to open `/sq active <player>` for another player.
+
+---
+
+## 6. Test objective types
+
+`quests.yml` includes `showcase_<type>` quests for every objective type. Quick test:
+
+```
+/sq give <player> showcase_kill
+/sq give <player> showcase_break
+```
+
+See [Objectives](Objectives.md) for the full list of 37 types.
+
+---
+
+## 7. Optional: enable Premium features
+
+If you run Premium:
+
+1. **Random generator:** set `random-generator.enabled: true` in `random-generator.yml`, then `/sq generate`.
+2. **Daily/weekly:** configure `daily.yml`, set `daily.enabled: true` or `weekly.enabled: true`.
+3. **Quest loot:** set `quest-loot.enabled: true` in `quest-loot.yml`.
+4. **Editor:** `/sq editor` (requires `soapsquest.gui.editor`).
+
+Reload after config changes: `/sq reload`.
+
+---
+
+## Troubleshooting a fresh install
+
+| Problem | Check |
+|---------|-------|
+| Plugin does not load | SoapsCommon installed? Java 21? Paper 1.21+? |
+| No quests in `/sq list` | Syntax errors in `quests.yml`? Run `/sq reload` and read errors |
+| Money rewards fail | Vault installed with an economy provider? |
+| Placeholder objectives stuck | PlaceholderAPI installed? Required expansion downloaded? |
+| Premium features say unavailable | Premium JAR installed, not Free? |
+
+More answers in [FAQ](FAQ.md).
+
+---
+
+*Version 1.0.3*

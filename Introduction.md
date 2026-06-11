@@ -1,75 +1,92 @@
 # Introduction
 
-SoapsQuest is a quest plugin for Paper 1.21+ servers. Progress is tracked on **quest papers** in the player's inventory. No NPC quest givers and no separate quest menu. Players hold the paper, do the tasks, and right-click to claim rewards.
+SoapsQuest turns quests into physical items. Each quest is a **quest paper** in the player's inventory. Lore updates as objectives are completed. When everything is done, the player right-clicks the paper to claim rewards.
 
-## Key concepts
+This wiki is written for **server owners** configuring SoapsQuest on a live network.
 
-### Quest papers
+---
 
-Each quest is a paper item. Players can read progress in the lore and right-click when everything is done. If someone loses the paper, an admin can run `/sq give <player> <questid>` and progress is kept.
+## Core concepts
 
-### Objectives
+**Quest papers**  
+A quest paper is a normal inventory item with custom name and lore. Progress is stored per paper instance, not only per player name.
 
-Objectives are the tasks on the quest (kill mobs, mine blocks, run a command, etc.). There are **37 types**. See [Objectives](Objectives.md).
+**Objectives**  
+Tasks defined in YAML (kill mobs, break blocks, travel distance, and 34 more types). See [Objectives](Objectives.md).
 
-### Rewards
+**Active vs Queued**  
+If a player holds multiple papers for the **same quest ID**, only one copy is **Active** and gains progress. Extra copies are **Queued** until the active copy is claimed or removed. **Different quest IDs** can all be Active at the same time.
 
-After all objectives are done, the player right-clicks the paper to get rewards: items, XP, money (Vault), commands, or another quest. See [Rewards](Rewards.md).
+**Conditions**  
+Optional gates before a player can pick up or start a quest (level, money, completed quests, permissions, and more). See [Conditions](Conditions.md).
 
-### Conditions
+**Tiers and difficulties**  
+Cosmetic rarity labels plus scaling for generated content. See [Tiers and Difficulties](Tiers-and-Difficulties.md).
 
-You can require a level, permission, world, money, completed quests, and more before a player can pick up a quest. See [Conditions](Conditions.md).
+**Sigils**  
+SoapsQuest's built-in currency stored in `sigils.yml`. Used in rewards and unlock conditions on both Free and Premium.
 
-### Tiers and difficulties
+---
 
-Tiers group quests (e.g. Beginner, Expert). Difficulties change how quests show in lists and GUIs. See [Tiers and Difficulties](Tiers-and-Difficulties.md).
+## Editions: Free and Premium
 
-## What is included
+SoapsQuest ships as two JAR builds from the same codebase:
 
-### Free
+- **SoapsQuest-1.0.3-Free.jar** excludes Premium-only code and config templates.
+- **SoapsQuest-1.0.3-Premium.jar** includes the full feature set.
 
-- 37 objective types (kill, break, craft, fish, move, command, placeholder, and more)
-- Physical quest papers with live progress on the item
-- Rewards, conditions, tiers, difficulties
-- Quest browser and active quests GUI
-- Sequential objectives (one step at a time)
-- MiniMessage colors and gradients
-- PlaceholderAPI placeholders
-- MythicMobs kill objectives
-- Vault money rewards
-- Admin commands (give, reset, reload, etc.)
+On startup, Premium logs `Premium features unlocked`. Free logs which features are unavailable.
 
-### Premium
+### Feature matrix
 
-Everything in Free, plus:
+| Feature | Free | Premium |
+|---------|:----:|:-------:|
+| Quest papers and progress tracking | Yes | Yes |
+| All 37 objective types | Yes | Yes |
+| `quests.yml` manual authoring | Yes | Yes |
+| Showcase quests (`showcase_*`) | Yes | Yes |
+| Quest browser GUI (`/sq browse`) | Yes | Yes |
+| Active quests GUI (`/sq active`) | Yes | Yes |
+| Chat, action bar, or boss bar progress display | Yes | Yes |
+| Tiers (`tiers.yml`) | Yes | Yes |
+| Difficulties (`difficulties.yml`) | Yes | Yes |
+| Conditions (level, money, sigils, items, etc.) | Yes | Yes |
+| Sigil rewards in `quests.yml` | Yes | Yes |
+| Sigil conditions (`min-sigils`, `sigil-cost`) | Yes | Yes |
+| Vault money rewards | Yes | Yes |
+| PlaceholderAPI expansion | Yes | Yes |
+| MythicMobs `kill_mythicmob` objective | Yes* | Yes* |
+| Anti-cheat (placed-block tracking) | Yes | Yes |
+| In-game quest editor (`/sq editor`) | No | Yes |
+| Random quest generator (`/sq generate`) | No | Yes |
+| `random-generator.yml` and `generated.yml` | No | Yes |
+| Daily and weekly recurring quests (`daily.yml`) | No | Yes |
+| Quest loot in chests and mob drops (`quest-loot.yml`) | No | Yes |
+| `/sq sigils` balance management | No | Yes |
+| `/sq drop` to place unbound papers in the world | No | Yes |
+| `/sq addreward ... sigils` command | No | Yes |
 
-- Random quest generator
-- Daily and weekly quests
-- Quest papers from mob kills and chest loot
-- In-game quest editor (`/sq editor`)
+\*Requires MythicMobs installed on the server.
 
-## Requirements
+---
 
-- Paper 1.21+ (Purpur works)
-- Java 21+
+## Optional integrations
 
-Optional:
+| Plugin | Used for |
+|--------|----------|
+| **Vault** | Money rewards and `cost` / `min-money` conditions |
+| **PlaceholderAPI** | `placeholder` objectives, condition expressions, message placeholders |
+| **MythicMobs** | `kill_mythicmob` objective |
+| **SoapsCommon** | Shared GUI framework and startup checks (required) |
 
-- **Vault** for money rewards
-- **PlaceholderAPI** for placeholders and the `placeholder` objective
-- **MythicMobs** for `kill_mythicmob`
+---
 
-## More reading
+## What to read next
 
-- [Getting Started](Getting-Started.md)
-- [Creating Quests](Creating-Quests.md)
-- [Objectives](Objectives.md)
-- [Rewards](Rewards.md)
-- [Conditions](Conditions.md)
-- [Commands and Permissions](Commands-and-Permissions.md)
-- [GUI System](GUI-System.md)
-- [Examples](Examples.md)
-- [FAQ](FAQ.md)
-- [Changelog](CHANGELOG.md)
+1. [Getting Started](Getting-Started.md) if you are installing for the first time.
+2. [Creating Quests](Creating-Quests.md) to author your first quest.
+3. [Commands and Permissions](Commands-and-Permissions.md) before handing commands to staff.
 
-Premium guides: [Daily and Weekly Quests](Daily-and-Weekly-Quests.md), [Random Quest Generator](Random-Quest-Generator.md), [Quest Loot System](Quest-Loot-System.md).
+---
+
+*Version 1.0.3*

@@ -1,12 +1,73 @@
 # Placeholders
 
-SoapsQuest supports PlaceholderAPI, which lets you display quest data in other plugins like scoreboards, holograms, tab lists, and chat formatting plugins.
+SoapsQuest registers a PlaceholderAPI expansion with identifier `soapsquest`. Requires PlaceholderAPI on the server.
 
-> **Note:** PlaceholderAPI must be installed on your server for these to work. You can download it from [PlaceholderAPI's SpigotMC page](https://www.spigotmc.org/resources/placeholderapi.6245/).
+Test with:
 
-### Placeholder objective (quests)
+```
+/papi parse <player> %soapsquest_quests%
+```
 
-The `placeholder` **objective type** (see [Objectives](Objectives.md)) is separate from the `%soapsquest_*%` placeholders below. Objectives use PlaceholderAPI keys such as `player_level` in `quests.yml`:
+Both `%soapsquest_<id>%` and `%soapsquest_player_<id>%` work (the expansion strips an optional `player_` prefix).
+
+---
+
+## Completion statistics
+
+| Placeholder | Returns |
+|-------------|---------|
+| `%soapsquest_quests%` | Total quests completed |
+| `%soapsquest_player_quests%` | Same (alternate form) |
+
+---
+
+## Sigils
+
+| Placeholder | Returns |
+|-------------|---------|
+| `%soapsquest_sigils%` | Sigil balance (2 decimal places) |
+| `%soapsquest_sigils_raw%` | Sigil balance (raw number) |
+| `%soapsquest_player_sigils%` | Same as sigils |
+| `%soapsquest_player_sigils_raw%` | Same as sigils_raw |
+
+Sigils work on Free and Premium. Returns `0` if data is unavailable.
+
+---
+
+## By tier
+
+Completions per tier ID from `tiers.yml`:
+
+| Placeholder | Example tier |
+|-------------|--------------|
+| `%soapsquest_tier_common%` | common |
+| `%soapsquest_tier_uncommon%` | uncommon |
+| `%soapsquest_tier_rare%` | rare |
+| `%soapsquest_tier_epic%` | epic |
+| `%soapsquest_tier_legendary%` | legendary |
+| `%soapsquest_tier_mythic%` | mythic |
+
+Custom tiers use `%soapsquest_tier_<tierid>%`.
+
+---
+
+## By difficulty
+
+Completions per difficulty ID from `difficulties.yml`:
+
+| Placeholder | Example |
+|-------------|---------|
+| `%soapsquest_difficulty_easy%` | easy |
+| `%soapsquest_difficulty_normal%` | normal |
+| `%soapsquest_difficulty_hard%` | hard |
+| `%soapsquest_difficulty_expert%` | expert |
+| `%soapsquest_difficulty_nightmare%` | nightmare |
+
+---
+
+## Placeholder objective (quests)
+
+Separate from the expansion above. Use the `placeholder` **objective type** in `quests.yml`:
 
 ```yaml
 - type: placeholder
@@ -14,84 +75,39 @@ The `placeholder` **objective type** (see [Objectives](Objectives.md)) is separa
   amount: 30
 ```
 
----
+Requires PlaceholderAPI. Some placeholders need eCloud expansions:
 
-## Available Placeholders
+```
+/papi ecloud download Player
+/papi reload
+```
 
-### Player Quest Count
-
-| Placeholder | What It Shows |
-|------------|--------------|
-| `%soapsquest_player_quests%` | Total number of quests the player has completed |
-| `%soapsquest_player_sigils%` | Player custom SoapsQuest Sigils (2 decimals) |
-| `%soapsquest_player_sigils_raw%` | Player custom SoapsQuest Sigils (raw value) |
-
-### By Tier
-
-These show how many quests the player has completed in each tier:
-
-| Placeholder | What It Shows |
-|------------|--------------|
-| `%soapsquest_player_quests_common%` | Completed common quests |
-| `%soapsquest_player_quests_uncommon%` | Completed uncommon quests |
-| `%soapsquest_player_quests_rare%` | Completed rare quests |
-| `%soapsquest_player_quests_epic%` | Completed epic quests |
-| `%soapsquest_player_quests_legendary%` | Completed legendary quests |
-| `%soapsquest_player_quests_mythic%` | Completed mythic quests |
-
-If you add custom tiers in `tiers.yml`, placeholders for those tiers follow the same format: `%soapsquest_player_quests_<tiername>%`
-
-### By Difficulty
-
-These show how many quests the player has completed at each difficulty:
-
-| Placeholder | What It Shows |
-|------------|--------------|
-| `%soapsquest_player_quests_easy%` | Completed easy quests |
-| `%soapsquest_player_quests_normal%` | Completed normal quests |
-| `%soapsquest_player_quests_hard%` | Completed hard quests |
-| `%soapsquest_player_quests_expert%` | Completed expert quests |
-| `%soapsquest_player_quests_nightmare%` | Completed nightmare quests |
+See [Objectives](Objectives.md).
 
 ---
 
-## Usage Examples
+## Message placeholders
 
-**Scoreboard (using a plugin like AnimatedScoreboard or FastBoard):**
-
-```
-Quests Completed: %soapsquest_player_quests%
-Legendary Quests: %soapsquest_player_quests_legendary%
-```
-
-**Tab List (using a plugin like TAB):**
-
-```
-Quests: %soapsquest_player_quests%
-```
-
-**Hologram (using a plugin like HolographicDisplays or DecentHolograms):**
-
-```
-/holo addline <name> Total Quests: %soapsquest_player_quests%
-```
-
-**Chat Formatting (using a plugin like EssentialsX Chat or ChatControl):**
-
-```
-{%soapsquest_player_quests% quests completed}
-```
-
-The exact syntax depends on which plugins you are using. Refer to those plugins documentation for the exact format to use placeholders.
+`messages.yml` and quest lore support internal placeholders such as `<quest_display>`, `<tier>`, `<progress>`, and `<quest_rewards>`. External PlaceholderAPI tags can pass through in messages when PAPI is installed.
 
 ---
 
-## Testing Placeholders
+## Usage examples
 
-You can test that a placeholder works by using the PlaceholderAPI command:
+**Scoreboard:**
 
 ```
-/papi parse <player> %soapsquest_player_quests%
+Quests: %soapsquest_quests%
+Legendary: %soapsquest_tier_legendary%
+Sigils: %soapsquest_sigils%
 ```
 
-This shows what the placeholder outputs for a specific player.
+**TAB header:**
+
+```
+%player_name% | %soapsquest_quests% quests
+```
+
+---
+
+*Version 1.0.3 - verified against SoapsQuestPlaceholderExpansion*

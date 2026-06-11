@@ -1,148 +1,126 @@
 # Commands and Permissions
 
-This page lists every command in SoapsQuest, what it does, and who can use it.
+Main command: `/soapsquest` (alias `/sq`). Both are identical.
 
-The main command is `/soapsquest`. You can also use `/sq` as a shortcut. Both work the same.
-
----
-
-## Player Commands
-
-These commands are available to all players by default.
-
-| Command | Permission | What It Does |
-|---------|-----------|-------------|
-| `/sq browse` | `soapsquest.gui.browser` | Opens the quest browser GUI so players can see and pick up available quests |
-| `/sq active` | `soapsquest.gui.myquests` | Opens a GUI showing your currently active quests |
-| `/sq statistic` | `soapsquest.statistic` | Shows how many quests you have completed |
-| `/sq statistic <player>` | `soapsquest.statistic` | Shows how many quests another player has completed |
-| `/sq list` | `soapsquest.list` | Lists all quest IDs currently loaded (paginated) |
-| `/sq list <page>` | `soapsquest.list` | View a specific page of the quest list |
-| `/sq abandon <questid>` | `soapsquest.abandon` | Abandons a quest you are currently carrying and removes the paper |
-| `/sq help` | `soapsquest.use` | Shows all available commands |
-| `/sq info` | `soapsquest.use` | Shows plugin version and information |
+**Important:** `plugin.yml` lists `progress` in the usage string, but there is **no** `/sq progress` subcommand. View progress on quest paper lore or with `/sq active`. Use `soapsquest.progress.others` for `/sq active <player>`.
 
 ---
 
-## Admin Commands
+## Player commands
 
-These commands require operator level or the specific permission listed.
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/sq help` | `soapsquest.use` | Command list |
+| `/sq info` | `soapsquest.use` | Version and edition (Free/Premium) |
+| `/sq browse` | `soapsquest.gui.browser` | Quest browser GUI |
+| `/sq gui` | `soapsquest.gui.browser` | Same as browse |
+| `/sq active` | `soapsquest.gui.myquests` | Your active quests GUI |
+| `/sq active <player>` | `soapsquest.progress.others` | Another player's active quests |
+| `/sq myquests` | `soapsquest.gui.myquests` | Alias for active |
+| `/sq quests` | `soapsquest.gui.myquests` | Alias for active |
+| `/sq list` | `soapsquest.list` | Paginated quest ID list |
+| `/sq list <page>` | `soapsquest.list` | Specific page |
+| `/sq statistic` | `soapsquest.statistic` | Your completion stats |
+| `/sq abandon <questid>` | `soapsquest.abandon` | Remove a quest paper you hold |
 
-### General Management
-
-| Command | Permission | What It Does |
-|---------|-----------|-------------|
-| `/sq reload` | `soapsquest.reload` | Reloads all config files without restarting the server. Validates quests.yml before applying. |
-| `/sq give <player> <questid>` | `soapsquest.give` | Gives a quest paper to a player |
-| `/sq give <questid>` | `soapsquest.give` | Gives a quest paper to yourself |
-| `/sq remove <questid>` | `soapsquest.remove` | Permanently removes a quest from the config |
-| `/sq copy <questid> <newid>` | `soapsquest.copy` | Duplicates an existing quest under a new ID |
-| `/sq reset <player> <questid>` | `soapsquest.reset` | Resets quest progress for a player |
-| `/sq complete <player> <questid>` | `soapsquest.complete` | Marks a quest as complete for a player and gives the rewards |
-| `/sq debug toggle` | `soapsquest.debug` | Toggles verbose debug logging on or off |
-| `/sq sigils balance <player>` | `soapsquest.sigils` | Shows a player's SoapsQuest Sigils balance **(Premium)** |
-| `/sq sigils give|take|set <player> <amount>` | `soapsquest.sigils` | Changes a player's SoapsQuest Sigils balance **(Premium)** |
-| `/sq sigils reset <player>` | `soapsquest.sigils` | Resets a player's SoapsQuest Sigils balance to 0 **(Premium)** |
-| `/sq drop <questid> [x y z [world]]` | `soapsquest.drop` | Drops an unbound quest paper in the world **(Premium)** |
-| `/sq drop entity <entity|uuid> <questid>` | `soapsquest.drop` | Drops a quest paper at an entity's location **(Premium)** |
-| `/sq editor` | `soapsquest.gui.editor` | Opens the in-game quest editor GUI **(Premium)** |
-| `/sq editor <questid>` | `soapsquest.gui.editor` | Opens the editor directly on a specific quest **(Premium)** |
-
-### Quest Reward Commands
-
-| Command | Permission | What It Does |
-|---------|-----------|-------------|
-| `/sq addreward <questid> xp <amount>` | `soapsquest.addreward` | Adds an XP reward to a quest |
-| `/sq addreward <questid> money <amount>` | `soapsquest.addreward` | Adds a money reward to a quest |
-| `/sq addreward <questid> sigils <amount>` | `soapsquest.addreward` | Adds a custom Sigils reward to a quest **(Premium)** |
-| `/sq addreward <questid> command <cmd>` | `soapsquest.addreward` | Adds a command reward to a quest |
-| `/sq addreward <questid> item` | `soapsquest.addreward` | Adds the item you are holding as a reward |
-| `/sq listreward <questid>` | `soapsquest.listreward` | Lists all rewards on a quest |
-| `/sq removereward <questid> <index>` | `soapsquest.removereward` | Removes a reward from a quest by its number in the list |
-
-### Random Quest Generator (Premium)
-
-> **[PREMIUM]** These commands require the SoapsQuest Premium version.
-
-| Command | Permission | What It Does |
-|---------|-----------|-------------|
-| `/sq generate` | `soapsquest.generate` | Generates a single random quest |
-| `/sq generate <type>` | `soapsquest.generate` | Generates a random quest of a specific type (kill, break, fish, etc.) |
-| `/sq generate <type> <count>` | `soapsquest.generate` | Generates multiple random quests at once (max configurable, default 25) |
+`/sq abandon` has no extra permission check in code beyond being a player command.
 
 ---
 
-## Command Aliases
+## Admin commands
 
-| Alias | Same As |
-|-------|---------|
-| `/sq` | `/soapsquest` |
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/sq reload` | `soapsquest.reload` | Reload configs (validates `quests.yml` first) |
+| `/sq give [player] <questid>` | `soapsquest.give` | Give quest paper |
+| `/sq remove <questid>` | `soapsquest.remove` | Remove quest from config |
+| `/sq copy <source> <newid>` | `soapsquest.admin` | Duplicate a quest |
+| `/sq reset <player> <questid>` | `soapsquest.admin` | Reset progress on held paper |
+| `/sq complete <player> <questid>` | `soapsquest.admin` | Force-complete held paper |
+| `/sq debug toggle` | `soapsquest.debug` | Toggle debug logging |
+| `/sq statistic <player>` | `soapsquest.admin` | View another player's stats |
+
+### Reward commands
+
+| Command | Permission |
+|---------|------------|
+| `/sq addreward <quest> xp <amount>` | `soapsquest.addreward` |
+| `/sq addreward <quest> money <amount>` | `soapsquest.addreward` |
+| `/sq addreward <quest> sigils <amount>` | `soapsquest.addreward` (Premium) |
+| `/sq addreward <quest> command <cmd>` | `soapsquest.addreward` |
+| `/sq addreward <quest> item` | `soapsquest.addreward` (held item) |
+| `/sq listreward <quest>` | `soapsquest.listreward` |
+| `/sq removereward <quest> <index>` | `soapsquest.removereward` |
+
+### Premium commands
+
+| Command | Permission | Description |
+|---------|------------|-------------|
+| `/sq editor [questid]` | `soapsquest.gui.editor` | In-game quest editor |
+| `/sq generate [type] [count]` | `soapsquest.generate` | Random quest generator |
+| `/sq sigils balance <player>` | `soapsquest.sigils` | Show Sigil balance |
+| `/sq sigils give\|take\|set <player> <amount>` | `soapsquest.sigils` | Modify Sigils |
+| `/sq sigils reset <player>` | `soapsquest.sigils` | Reset Sigils to 0 |
+| `/sq drop <questid> [x y z [world]]` | `soapsquest.drop` | Drop unbound paper |
+| `/sq drop entity <entity\|uuid> <questid>` | `soapsquest.drop` | Drop at entity |
+
+Generator cooldown bypass: `soapsquest.generate.bypass-cooldown`
 
 ---
 
-## Permissions Reference
+## Permissions reference
 
-### Player Permissions
+### Player defaults
 
-| Permission | What It Allows | Default |
-|-----------|---------------|---------|
-| `soapsquest.use` | Basic permission to use quest commands | Everyone |
-| `soapsquest.gui.browser` | Open the quest browser GUI | Everyone |
-| `soapsquest.gui.myquests` | Open the active quests GUI | Everyone |
-| `soapsquest.list` | List all available quests | Everyone |
-| `soapsquest.list.click` | Click to claim quests from the `/sq list` output | Everyone |
-| `soapsquest.statistic` | View quest statistics | Everyone |
-| `soapsquest.progress` | Check your own quest progress | Everyone |
-| `soapsquest.abandon` | Abandon an active quest | Everyone |
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `soapsquest.use` | Base command access | Everyone |
+| `soapsquest.gui.browser` | Quest browser | Everyone |
+| `soapsquest.gui.myquests` | Active quests GUI | Everyone |
+| `soapsquest.list` | Quest list command | Everyone |
+| `soapsquest.list.click` | Click quests in `/sq list` output | Everyone |
+| `soapsquest.statistic` | Own statistics | Everyone |
+| `soapsquest.progress` | Documented for own progress (no `/sq progress` command) | Everyone |
+| `soapsquest.abandon` | Abandon quests | Everyone |
 
-### Admin Permissions
+### Staff defaults
 
-| Permission | What It Allows | Default |
-|-----------|---------------|---------|
-| `soapsquest.admin` | Access to admin commands and viewing other players' statistics | OP only |
-| `soapsquest.give` | Give quest papers to players | OP only |
-| `soapsquest.reload` | Reload plugin configuration | OP only |
-| `soapsquest.remove` | Remove quests from configuration | OP only |
-| `soapsquest.copy` | Duplicate quests | OP only |
-| `soapsquest.reset` | Reset player quest progress | OP only |
-| `soapsquest.complete` | Force-complete quests for players | OP only |
-| `soapsquest.addreward` | Add rewards to quests via commands | OP only |
-| `soapsquest.removereward` | Remove rewards from quests via commands | OP only |
-| `soapsquest.listreward` | View reward lists for quests | OP only |
-| `soapsquest.progress.others` | Check other players' quest progress | OP only |
-| `soapsquest.debug` | Toggle debug mode | OP only |
-| `soapsquest.gui.editor` | Open the in-game quest editor **(Premium)** | OP only |
-| `soapsquest.generate` | Use the random quest generator commands **(Premium)** | OP only |
-| `soapsquest.sigils` | Manage custom Sigils balances **(Premium)** | OP only |
-| `soapsquest.drop` | Drop quest papers into the world **(Premium)** | OP only |
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `soapsquest.admin` | Copy, reset, complete, others' statistics | OP |
+| `soapsquest.give` | Give papers | OP |
+| `soapsquest.reload` | Reload | OP |
+| `soapsquest.remove` | Remove quests | OP |
+| `soapsquest.copy` | Listed in plugin.yml (copy uses `admin` in code) | OP |
+| `soapsquest.reset` | Listed in plugin.yml (reset uses `admin` in code) | OP |
+| `soapsquest.complete` | Listed in plugin.yml (complete uses `admin` in code) | OP |
+| `soapsquest.addreward` | Add rewards via command | OP |
+| `soapsquest.removereward` | Remove rewards | OP |
+| `soapsquest.listreward` | List rewards | OP |
+| `soapsquest.progress.others` | `/sq active <player>` | OP |
+| `soapsquest.debug` | Debug toggle | OP |
+| `soapsquest.gui.editor` | Editor GUI (Premium) | OP |
+| `soapsquest.generate` | Generator (Premium) | OP |
+| `soapsquest.sigils` | Sigil admin (Premium) | OP |
+| `soapsquest.drop` | World drop (Premium) | OP |
 
 ### Wildcard
 
-| Permission | What It Gives |
-|-----------|--------------|
-| `soapsquest.*` | All SoapsQuest permissions at once |
+`soapsquest.*` grants all nodes above.
 
 ---
 
-## Per-Quest Permissions
+## Per-quest permission
 
-You can restrict individual quests to players who have a certain permission. This is done using the `conditions` section in the quest config, not a dedicated permission node.
-
-For example, to make a quest only available to VIP players:
+Use `conditions.permission` on a quest to lock browser pickup:
 
 ```yaml
-my_vip_quest:
-  display: "VIP Quest"
-  objectives:
-    - type: kill
-      target: ZOMBIE
-      amount: 10
-  reward:
-    xp: 500
-  conditions:
-    permission: "rank.vip"
+conditions:
+  permission: "rank.vip"
 ```
 
-Players without the `rank.vip` permission will see the quest as locked in the browser.
+Root-level `permission:` on the quest gates progress after pickup. See [Conditions](Conditions.md).
 
-See [Conditions](Conditions.md) for more details on restricting quests.
+---
+
+*Version 1.0.3*
